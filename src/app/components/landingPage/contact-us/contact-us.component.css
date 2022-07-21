@@ -460,7 +460,7 @@ header {
 }
 
 .contact-form {
-  background-color: #222;
+  background-color: #3D75F0;
   position: relative;
 }
 
@@ -469,7 +469,7 @@ header {
   position: absolute;
   width: 26px;
   height: 26px;
-  background-color: #222;
+  background-color: #3D75F0;
   transform: rotate(45deg);
   top: 50px;
   left: -13px;
@@ -538,8 +538,8 @@ textarea.input {
 
 .btnContact {
   padding: 0.6rem 1.3rem;
-  background-color: #1975e6;
-  border: 2px solid #1975e6;
+  background-color: #222;
+  border: 2px solid #222;
   font-size: 0.95rem;
   color: #fff;
   line-height: 1;
@@ -552,7 +552,7 @@ textarea.input {
 
 .btnContact:hover {
   background-color: transparent;
-  color: #fff;
+  color: #222;
 }
 
 .contact-info {
@@ -603,7 +603,7 @@ textarea.input {
   width: 35px;
   height: 35px;
   border-radius: 5px;
-  background: linear-gradient(45deg, #222, #333);
+  background: linear-gradient(45deg, #3D75F0, #3D75F0);
   color: #fff;
   text-align: center;
   line-height: 35px;
