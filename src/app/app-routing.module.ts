@@ -8,7 +8,6 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
 import { NavbarComponent } from './components/landingPage/navbar/navbar.component';
 import { LandingPageComponent } from './components/landingPage/landing-page/landing-page.component';
 import { AboutUsComponent } from './components/landingPage/about-us/about-us.component';
-import { RegisterComponent } from './components/landingPage/register/register.component';
 import { ContactUsComponent } from './components/landingPage/contact-us/contact-us.component';
 import { HotelComponent } from './components/landingPage/hotel/hotel.component';
 import { HotelAdminComponent } from './components/admin/hotel-admin/hotel-admin.component';
@@ -25,7 +24,6 @@ const routes: Routes =
       {path: 'contactUs', component: ContactUsComponent},
       {path: 'hotels', component: HotelComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'register', component: RegisterComponent},
       {path: 'viewHotel', component: HotelViewComponent},
     ]
   },

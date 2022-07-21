@@ -1,67 +1,94 @@
-
-<section>
-  <div class="row g-0">
-    <div class="col-lg-7 d-none d-lg-block" style="height:100vh">
-      <div style="height:100%" id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></li>
-          <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></li>
-          <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 0"></li>
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item img-2 min-vh-100 active">
-            <div class="carousel-caption d-none d-md-block">
-              <h5 class="font-weight-bold">View the Most Hotels</h5>
-              <a class="color text-decoration-none">Hotels Manager</a>
-            </div>
+<div class="login-container">
+  <div class="forms-container">
+    <div class="signin-signup">
+      <form action="#" class="sign-in-form">
+        <h2 class="title">Sign in</h2>
+        <form (ngSubmit)="login()">
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input [(ngModel)]="user.identifier" name="identifier" type="text" placeholder="Username" />
           </div>
-          <div class="carousel-item img-1 min-vh-100">
-            <div class="carousel-caption d-none d-md-block">
-              <h5 class="font-weight-bold">Make Your Reservations</h5>
-              <a class="color text-decoration-none">Hotels Manager</a>
-            </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input [(ngModel)]='user.password' name="password" type="password" placeholder="Password" />
           </div>
-          <div class="carousel-item img-3 min-vh-100">
-            <div class="carousel-caption d-none d-md-block">
-              <h5 class="font-weight-bold">Control of Rooms</h5>
-              <a class="color text-decoration-none">Hotels Manager</a>
-            </div>
-          </div>
-        </div>
-        <a class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-    <div class="col-lg-5 bg-dark d-flex flex-column align-items-end min-vh-100">
-      <div class="div mr-2 w-100 mt-5">
-        <img src="../../../assets/images/login/Logo.png" class="mt-5 img-fluid logo" />
-      </div>
-      <div class="align-self-center w-100 px-lg-5 py-lg-4 p-4">
-        <h1 class="font-weight-bold mb-4 letras">Sign In</h1>
-        <form (ngSubmit)="login()" class="mb-5">
-          <div class="mb-4">
-            <label for="exampleInputEmail1" class="form-label font-weight-bold">Username</label>
-            <input [(ngModel)]="user.username" name="username" type="text" class="form-control bg-dark-x border-2"
-              id="login" placeholder="Insert your Username" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-4">
-            <label for="exampleInputPassword1" class="form-label font-weight-bold">Password</label>
-            <input [(ngModel)]="user.password" name="password" type="password" id="password"
-              class="form-control bg-dark-x border-2 mb-2" placeholder="Insert your Password">
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Log In</button>
+          <input type="submit" value="Login" class="btn solid" />
         </form>
-      </div>
-      <div class="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 mt-3 w-100">
-        <p class=" letras d-inline-block mb-0">You still do not have an account?</p> <a routerLink="/register"
-          class="text-light font-weight-bold text-decoration-none"><strong> Create one now</strong> </a>
-      </div>
+        <p class="social-text">Or Sign in with social platforms</p>
+        <div class="social-media">
+          <a href="#" class="social-icon">
+            <i class="fab fa-google"></i>
+          </a>
+        </div>
+      </form>
+
+      <form (ngSubmit)="register()" class="sign-up-form mt-5" >
+        <h2 class="title">Sign up</h2>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input [(ngModel)]="user.name" name="name" type="text" placeholder="Nombre y Apellido" />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input [(ngModel)]="user.username" name="username" type="text" placeholder="Nombre de usuario" />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-envelope"></i>
+          <input [(ngModel)]="user.email" name="email" type="email" placeholder="Email" />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input [(ngModel)]="user.phone" name="phone" type="text" placeholder="Teléfono" />
+        </div>
+        <div class="input-field">
+          <i class="fas fa-lock"></i>
+          <input [(ngModel)]="user.password" type="password" name="password" placeholder="Contraseña" />
+        </div>
+        <div class="text-inside">
+          <mat-form-field class="example-full-width">
+            <mat-label>Género</mat-label>
+            <mat-select [(ngModel)]="user.gender" name="gender">
+              <mat-option value="MALE">Hombre</mat-option>
+              <mat-option value="FEMALE">Mujer</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <input type="submit" class="btn" value="Sign up" />
+        <p class="social-text">Or Sign up with social platforms</p>
+        <div class="social-media">
+          <a href="#" class="social-icon">
+            <i class="fab fa-google"></i>
+          </a>
+        </div>
+      </form>
     </div>
   </div>
-</section>
+
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <h3>¿ Nuevo aquí ?</h3>
+        <p>
+          Registrate para obtener acceso a todas nuestras a funciones
+        </p>
+        <button class="btn transparent" id="sign-up-btn">
+          Sign up
+        </button>
+      </div>
+      <img src="img/log.svg" class="image" alt="" />
+    </div>
+    <div class="panel right-panel">
+      <div class="content">
+        <h3>One of us ?</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+          laboriosam ad deleniti.
+        </p>
+        <button class="btn transparent" id="sign-in-btn">
+          Sign in
+        </button>
+      </div>
+      <img src="img/register.svg" class="image" alt="" />
+    </div>
+  </div>
+</div>

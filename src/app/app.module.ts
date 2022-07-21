@@ -67,7 +67,6 @@ import { NotFoundPageComponent } from './components/not-found-page/not-found-pag
 import { NavbarComponent } from './components/landingPage/navbar/navbar.component';
 import { LandingPageComponent } from './components/landingPage/landing-page/landing-page.component';
 import { AboutUsComponent } from './components/landingPage/about-us/about-us.component';
-import { RegisterComponent } from './components/landingPage/register/register.component';
 import { ContactUsComponent } from './components/landingPage/contact-us/contact-us.component';
 import { HotelComponent } from './components/landingPage/hotel/hotel.component';
 import { SearchHotelPipe } from './pipes/searchHotelPipe/search-hotel.pipe';
@@ -100,14 +99,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         NavbarComponent,
         LandingPageComponent,
         AboutUsComponent,
-        RegisterComponent,
         ContactUsComponent,
         HotelComponent,
         SearchHotelPipe,
         EventsAdminComponent,
         HotelViewComponent,
         SearchHotelTablePipe,
-        SearchEventPipe
+        SearchEventPipe,
     ],
     imports: [
         FormsModule,
