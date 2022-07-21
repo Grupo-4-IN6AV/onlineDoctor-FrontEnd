@@ -9,8 +9,11 @@ const routes: Routes =
     component: HomeAdminComponent
   },
   {
-    path: 'user',
+    path: 'patients',
     component: AdminUserComponent
+  },
+  {
+    path: 'doctors',
   }
 ];
 @NgModule({
