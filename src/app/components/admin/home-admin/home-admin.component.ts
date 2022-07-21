@@ -17,7 +17,7 @@ import {
 
 import { EChartsOption } from 'echarts';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
-import { HotelRestService } from 'src/app/services/hotelRest/hotel-rest.service';
+import {ProductRestService} from 'src/app/services/productRest/product-rest.service'
 
 export type SparklineChartOptions = {
   series: ApexAxisChartSeries;
@@ -60,16 +60,16 @@ export class HomeAdminComponent implements OnInit
 
   users: any;
   totalUsers: any;
-  totalAdminsHotels: any;
-  totalClients: any;
-
-  hotels: any;
-  totalHotels:any
+  totalDoctors: any;
+  totalPatients: any;
+  totalProduct: any;
+  totalSells: any;
+  products: any;
 
   ngOnInit(): void
   {
     this.getUsers();
-    this.getHotels();
+    this.getProducts();
   }
 
   getUsers()
@@ -79,24 +79,24 @@ export class HomeAdminComponent implements OnInit
       {
         this.users = res.users
         this.totalUsers = this.users.length;
-        var arrayAdmins = [];
+        var arrayDoctor = [];
         var arrayClients = [];
         for(let user of this.users)
         {
-          if(user.role === 'ADMIN HOTEL')
-            arrayAdmins.push(user);
-          else if(user.role === 'CLIENT')
+          if(user.role === 'DOCTOR')
+            arrayDoctor.push(user);
+          else if(user.role === 'PATIENT')
             arrayClients.push(user);
         }
-        this.totalAdminsHotels = arrayAdmins.length;
-        this.totalClients = arrayClients.length
+        this.totalDoctors = arrayDoctor.length;
+        this.totalPatients = arrayClients.length
         //DATA A LA GRAFICA//
         this.donut_chart.series[0].data.push(
           {
-            value: this.totalAdminsHotels, name:'ADMIN HOTELS'
+            value: this.totalDoctors, name:'DOCTOR'
           },
           {
-            value: this.totalClients, name:'CLIENTS'
+            value: this.totalPatients, name:'PATIENT'
           }
           )
       },
@@ -104,13 +104,14 @@ export class HomeAdminComponent implements OnInit
     })
   }
 
-  getHotels()
+  getProducts()
   {
-    this.hotelRest.getHotels().subscribe({
+    this.productRest.getProducts().subscribe({
       next: (res: any) =>
       {
-        this.hotels = res.hotels
-        this.totalHotels = this.hotels.length;
+        this.products = res.products
+        this.totalProduct = this.products.length;
+        this.totalSells = this.products.sell.length;
       },
       error: (err) => console.log(err)
     })
@@ -127,7 +128,7 @@ export class HomeAdminComponent implements OnInit
     legend:
     {
       show: true,
-      data: ['Admins Hotels', 'Clients'],
+      data: ['Doctors', 'Patients'],
       textStyle:
       {
         color: '#9aa0ac',
@@ -156,6 +157,7 @@ export class HomeAdminComponent implements OnInit
   };
 
   @ViewChild('chart') chart: ChartComponent;
+  
   // sparkline chart start
   public commonBarSparklineOptions: Partial<SparklineChartOptions> = {
     chart: {
@@ -196,11 +198,11 @@ export class HomeAdminComponent implements OnInit
   public areaChartOptions: Partial<areaChartOptions> = {
     series: [
       {
-        name: 'New Customers',
+        name: 'Cuantity Products',
         data: [31, 40, 28, 51, 42, 85, 77],
       },
       {
-        name: 'Old Customers',
+        name: 'Total Sells',
         data: [11, 32, 45, 32, 34, 52, 41],
       },
     ],
@@ -248,7 +250,7 @@ export class HomeAdminComponent implements OnInit
 
   constructor
   (
-    private hotelRest: HotelRestService,
+    private productRest: ProductRestService,
     private userRest: UserRestService
   )
   {

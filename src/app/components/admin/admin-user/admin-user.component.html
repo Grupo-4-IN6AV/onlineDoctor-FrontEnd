@@ -156,20 +156,32 @@
             <form (ngSubmit)="saveUser(addUserForm)" #addUserForm="ngForm">
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Name</mat-label>
+                  <mat-label>Name and Surname</mat-label>
                   <input autocomplete="off" [(ngModel)]="user.name" name="name" matInput />
-                </mat-form-field>
-              </div>
-              <div class="text-inside">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Surname</mat-label>
-                  <input autocomplete="off" [(ngModel)]="user.surname" name="surname" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Username</mat-label>
                   <input autocomplete="off" [(ngModel)]="user.username" name="username" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>DPI</mat-label>
+                  <input autocomplete="off" [(ngModel)]="user.DPI" name="DPI" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>NIT</mat-label>
+                  <input autocomplete="off" [(ngModel)]="user.NIT" name="NIT" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Age</mat-label>
+                  <input autocomplete="off" [(ngModel)]="user.age" name="age" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
@@ -192,10 +204,10 @@
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Role</mat-label>
-                  <mat-select [(ngModel)]="user.role" name="role">
-                    <mat-option value="ADMIN HOTEL">ADMIN HOTEL</mat-option>
-                    <mat-option value="CLIENT">CLIENT</mat-option>
+                  <mat-label>Gender</mat-label>
+                  <mat-select [(ngModel)]="user.gender" name="gender">
+                    <mat-option value="MALE">MALE</mat-option>
+                    <mat-option value="FEMALE">FEMALE</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>

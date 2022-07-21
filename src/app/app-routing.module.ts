@@ -31,9 +31,9 @@ const routes: Routes =
     path: 'admin', component:LayoutAdminComponent,children:
     [
       {path: 'home', component: HomeAdminComponent},
-      {path: 'user', component: AdminUserComponent},
-      {path: 'hotel', component: HotelAdminComponent},
-      {path: 'event', component: EventsAdminComponent},
+      {path: 'patients', component: AdminUserComponent},
+      {path: 'doctors', component: HotelAdminComponent},
+      {path: 'products', component: EventsAdminComponent},
     ]
   },
   { path: '**', component: NotFoundPageComponent}
