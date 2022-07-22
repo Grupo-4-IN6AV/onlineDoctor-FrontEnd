@@ -74,6 +74,7 @@ import { EventsAdminComponent } from './components/admin/event-admin/event-admin
 import { HotelViewComponent } from './components/landingPage/hotel-view/hotel-view.component';
 import { SearchHotelTablePipe } from './pipes/searchHotelTable/search-hotel-table.pipe';
 import { SearchEventPipe } from './pipes/searchEventPipe/search-event.pipe';
+import { TypeLaboratoryAdminComponent } from './components/admin/type-laboratory-admin/type-laboratory-admin.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -106,6 +107,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HotelViewComponent,
         SearchHotelTablePipe,
         SearchEventPipe,
+        TypeLaboratoryAdminComponent,
     ],
     imports: [
         FormsModule,

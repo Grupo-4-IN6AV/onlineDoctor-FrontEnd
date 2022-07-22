@@ -48,4 +48,16 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
+  {
+    path: 'typeLaboratory',
+    title: 'Type Laboratory',
+    moduleName: 'admin',
+    iconType: 'material-icons-two-tone',
+    icon: 'science',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
 ];
