@@ -15,7 +15,7 @@ import { EventsAdminComponent } from './components/admin/event-admin/event-admin
 import { HotelViewComponent } from './components/landingPage/hotel-view/hotel-view.component';
 import { TypeLaboratoryAdminComponent } from './components/admin/type-laboratory-admin/type-laboratory-admin.component';
 import { TypeMedicamentAdminComponent } from './components/admin/type-medicament-admin/type-medicament-admin.component';
-
+import { SpecialityAdminComponent} from './components/admin/speciality-admin/speciality-admin.component';
 const routes: Routes =
 [
   {
@@ -38,6 +38,7 @@ const routes: Routes =
       {path: 'products', component: EventsAdminComponent},
       {path: 'typeLaboratory', component: TypeLaboratoryAdminComponent},
       {path: 'typeMedicament', component: TypeMedicamentAdminComponent},
+      {path: 'speciality', component: SpecialityAdminComponent},
     ]
   },
   { path: '**', component: NotFoundPageComponent}
