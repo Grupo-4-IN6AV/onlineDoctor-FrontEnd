@@ -60,4 +60,16 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
+  {
+    path: 'typeMedicament',
+    title: 'Type Medicament',
+    moduleName: 'admin',
+    iconType: 'material-icons-two-tone',
+    icon: 'medication_liquid',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
 ];
