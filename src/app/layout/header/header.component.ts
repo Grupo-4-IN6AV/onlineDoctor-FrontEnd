@@ -181,6 +181,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   logOut()
   {
     localStorage.clear();
-    window.location.replace('/login')
+    window.location.replace('/')
   }
 }
