@@ -36,6 +36,7 @@
 }
 
 form {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -372,7 +373,7 @@ form.sign-in-form {
   }
 }
 
-@media (max-width: 570px) {
+@media (max-width: 870px) {
   form {
     padding: 0 1.5rem;
   }
