@@ -77,6 +77,7 @@ import { SearchEventPipe } from './pipes/searchEventPipe/search-event.pipe';
 import { TypeLaboratoryAdminComponent } from './components/admin/type-laboratory-admin/type-laboratory-admin.component';
 import { TypeMedicamentAdminComponent } from './components/admin/type-medicament-admin/type-medicament-admin.component';
 import { SpecialityAdminComponent } from './components/admin/speciality-admin/speciality-admin.component';
+import { MedicamentAdminComponent } from './components/admin/medicament-admin/medicament-admin.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -111,8 +112,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SearchEventPipe,
         TypeLaboratoryAdminComponent,
         TypeMedicamentAdminComponent,
-        SpecialityAdminComponent
-        
+        SpecialityAdminComponent,
+        MedicamentAdminComponent
     ],
     imports: [
         FormsModule,
