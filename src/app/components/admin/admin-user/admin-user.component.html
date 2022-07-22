@@ -34,8 +34,8 @@
           <h5 class="card-title">{{ user.name }} {{ user.surname }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ user.username }}</h6>
           <p class="card-text">{{ user.role }}</p>
-          <button (click)="getUser(user._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateUser"
-            class="btn btn-warning m-2">
+          <button (click)="getUser(user._id)" class="btn btn-success m-3" data-bs-toggle="modal"
+            data-bs-target="#updateUser" class="btn btn-warning m-2">
             <i class="fa fa-pencil" aria-hidden="true"> </i> Update
           </button>
           <button (click)="deleteUser(user._id)" class="btn btn-danger">
@@ -141,7 +141,7 @@
       </div>
     </div>
 
-  <!--ADD USER-->
+    <!--ADD USER-->
     <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -156,8 +156,14 @@
             <form (ngSubmit)="saveUser(addUserForm)" #addUserForm="ngForm">
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Name and Surname</mat-label>
+                  <mat-label>Name</mat-label>
                   <input autocomplete="off" [(ngModel)]="user.name" name="name" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Surname</mat-label>
+                  <input autocomplete="off" [(ngModel)]="user.surname" name="surname" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
@@ -208,6 +214,15 @@
                   <mat-select [(ngModel)]="user.gender" name="gender">
                     <mat-option value="MALE">MALE</mat-option>
                     <mat-option value="FEMALE">FEMALE</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Role</mat-label>
+                  <mat-select [(ngModel)]="user.role" name="role">
+                    <mat-option value="ADMIN">ADMIN</mat-option>
+                    <mat-option value="PACIENTE">PACIENT</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -387,8 +402,9 @@
               <tbody>
                 <tr *ngFor="let user of users | searchUserPipe: searchUser">
                   <td (click)="getUser(user._id)">
-                    <mat-checkbox *ngIf="user.checked==true || controloClick==0"
-                     #check="matCheckbox" (click)="showButtonActions(user._id, check); getUser(user._id)" class="example-margin" color="primary">
+                    <mat-checkbox *ngIf="user.checked==true || controloClick==0" #check="matCheckbox"
+                      (click)="showButtonActions(user._id, check); getUser(user._id)" class="example-margin"
+                      color="primary">
                     </mat-checkbox>
                     <mat-checkbox disabled="" *ngIf="user.checked==false" class="example-margin" color="primary">
                     </mat-checkbox>
@@ -398,15 +414,21 @@
                     <img src="assets/images/user/user8.jpg" alt="" />
                   </td>
                   <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.name }}</td>
-                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.surname }}</td>
-                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.username }}</td>
-                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.email }}</td>
-                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.phone }}</td>
-                  <td (click)="getUser(user._id)"data-bs-toggle="modal" data-bs-target="#viewUser" align="center">
-                    <div *ngIf="user.role === 'ADMIN HOTEL'" data-bs-toggle="modal" data-bs-target="#viewUser" class="badge col-blue">
+                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.surname }}
+                  </td>
+                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.username }}
+                  </td>
+                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.email }}
+                  </td>
+                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.phone }}
+                  </td>
+                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser" align="center">
+                    <div *ngIf="user.role === 'ADMIN HOTEL'" data-bs-toggle="modal" data-bs-target="#viewUser"
+                      class="badge col-blue">
                       {{ user.role }}
                     </div>
-                    <div *ngIf="user.role === 'CLIENT'" data-bs-toggle="modal" data-bs-target="#viewUser" class="badge col-yellow">
+                    <div *ngIf="user.role === 'CLIENT'" data-bs-toggle="modal" data-bs-target="#viewUser"
+                      class="badge col-yellow">
                       {{ user.role }}
                     </div>
                   </td>
