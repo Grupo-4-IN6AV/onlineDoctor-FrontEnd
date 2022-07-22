@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit
     )
     {
     
-    this.user = new UserModel('', '', '', '', '', '', '', '', true, '','');
+    this.user = new UserModel('', '', '', '', '', '', '', '', '','','','',true,'');
     _ScriptsLogin.Carga(["app"]);
   }
 

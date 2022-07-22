@@ -7,9 +7,9 @@
 
     <div class="text-center mt-2 mb-2">
         <button type="button" data-bs-toggle="modal" data-bs-target="#addMedicament"
-            class="ms-3 btn btn-event btn-success">
+            class="ms-3 btn btn-event btn-success" (click)="getTypesMedicaments()">
             Add Medicament
-            <span class="btn-icon-end"><i class="fa-solid fa-vial-virus"></i> </span>
+            <span class="btn-icon-end"><i class="fa-solid fa-prescription-bottle-medical"></i></span>
         </button>
         <button *ngIf="!showTableMedicament" (click)="showTable()" type="button"
             class="ms-3 btn btn-event btn-secondary">
@@ -35,8 +35,8 @@
                 <div *ngFor="let medicament of medicaments" class="product" data-name="p-1">
                     <h5 class="card-title">{{ medicament.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ medicament.description }}</h6>
-                    <button (click)="getMedicament(medicament._id)" class="btn btn-success m-3" data-bs-toggle="modal"
-                        data-bs-target="#updateMedicament" class="btn btn-warning m-2">
+                    <button (click)="getMedicament(medicament._id); getTypesMedicaments()" class="btn btn-success m-3"
+                        data-bs-toggle="modal" data-bs-target="#updateMedicament" class="btn btn-warning m-2">
                         <i class="fa fa-pencil" aria-hidden="true"> </i> Update
                     </button>
                     <button (click)="deleteMedicament(medicament._id)" class="btn btn-danger">
@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <!--View Type Laboratory-->
+    <!--View Medicament-->
     <div>
         <div class="modal fade" id="viewMedicament" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -98,6 +98,47 @@
                                     <div class="box">
                                         <p>{{ medicamentView.description }}</p>
                                     </div>
+
+                                    <div class="box">
+                                        <h3>Type Medicament</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ medicamentView.typeMedicament.name }}</p>
+                                    </div>
+
+                                    <div class="box">
+                                        <h3>Price</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ medicamentView.price }}</p>
+                                    </div>
+
+                                    <div class="box">
+                                        <h3>Stock</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ medicamentView.stock }}</p>
+                                    </div>
+
+                                    <div class="box">
+                                        <h3>Sales</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ medicamentView.sales }}</p>
+                                    </div>
+
+                                    <div class="box">
+                                        <h3>Availibility</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p *ngIf="medicamentView.availibility === true">Available</p>
+                                        <p *ngIf="medicamentView.availibility === false">Not Available</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +147,7 @@
             </div>
         </div>
 
-        <!--ADD Type Laboratory-->
+        <!--ADD Medicament-->
         <div class="modal fade" id="addMedicament" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -131,6 +172,15 @@
                                     <mat-label>Description</mat-label>
                                     <input autocomplete="off" [(ngModel)]="medicament.description" name="description"
                                         matInput />
+                                </mat-form-field>
+                            </div>
+                            <div class="text-inside">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Type Medicament</mat-label>
+                                    <mat-select [(ngModel)]="medicament.typeMedicament" name="typeMedicament">
+                                        <mat-option *ngFor="let typeMedicament of typesMedicament"
+                                            value={{typeMedicament._id}}>{{typeMedicament.name}}</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                             <div class="text-inside">
@@ -191,6 +241,28 @@
                                     matInput />
                             </mat-form-field>
                         </div>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Type Medicament</mat-label>
+                                <mat-select [(ngModel)]="medicamentUpdate.typeMedicament._id" name="typeMedicament">
+                                    <mat-option *ngFor="let typeMedicament of typesMedicament"
+                                        value={{typeMedicament._id}}>{{typeMedicament.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Price</mat-label>
+                                <input autocomplete="off" [(ngModel)]="medicamentUpdate.price" name="price" matInput />
+                            </mat-form-field>
+                        </div>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Stock</mat-label>
+                                <input autocomplete="off" [(ngModel)]="medicamentUpdate.stock" name="stock" matInput />
+                            </mat-form-field>
+                        </div>
                         <hr />
                         <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
@@ -228,7 +300,7 @@
                                 </li>
                                 <li *ngIf="buttonActions">
                                     <div class="icon-button-demo m-l-10">
-                                        <button (click)="deleteMedicament(typeLaboratoryDelete._id)" mat-mini-fab
+                                        <button (click)="deleteMedicament(medicamentDelete._id)" mat-mini-fab
                                             color="warn">
                                             <mat-icon class="col-white">delete
                                             </mat-icon>
@@ -238,7 +310,7 @@
                                 <li *ngIf="buttonActions">
                                     <div class="icon-button-demo m-l-10">
                                         <button data-bs-toggle="modal" data-bs-target="#updateMedicament" mat-mini-fab
-                                            class="colorUpdate">
+                                            class="colorUpdate" (click)="getTypesMedicaments()">
                                             <mat-icon class="col-white">edit
                                             </mat-icon>
                                         </button>
@@ -259,6 +331,11 @@
                                     <th>Photo</th>
                                     <th>Name</th>
                                     <th>Description</th>
+                                    <th>Type Medicament</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Sales</th>
+                                    <th>Availibility</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -272,7 +349,7 @@
                                         <mat-checkbox disabled="" *ngIf="medicament.checked==false"
                                             class="example-margin" color="primary">
                                         </mat-checkbox>
-                                        {{ medicament.indexOf(medicament) + 1 }}
+                                        {{ medicaments.indexOf(medicament) + 1 }}
                                     </td>
                                     <td (click)="getMedicament(medicament._id)" class="table-img">
                                         <img src="assets/images/user/user8.jpg" alt="" />
@@ -281,6 +358,18 @@
                                         data-bs-target="#viewTypeLaboratory">{{ medicament.name }}</td>
                                     <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewTypeLaboratory">{{ medicament.description }}</td>
+                                    <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewTypeLaboratory">{{ medicament.typeMedicament.name }}</td>
+                                    <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewTypeLaboratory">{{ medicament.price }}</td>
+                                    <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewTypeLaboratory">{{ medicament.stock }}</td>
+                                    <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewTypeLaboratory">{{ medicament.sales }}</td>
+                                    <td *ngIf="medicament.availibility === false" (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewTypeLaboratory">Not Available</td>
+                                    <td *ngIf="medicament.availibility === true"  (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewTypeLaboratory">Available</td>
                                 </tr>
                                 <tr rowspan="9" *ngIf="notFound === true">
                                     <td colspan="9" class="text-center">Not Medicaments Found</td>

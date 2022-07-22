@@ -3,8 +3,11 @@ export class MedicamentModel {
         public id: string,
         public name: string,
         public description: string,
-        public price: string,
-        public stock: string,
+        public typeMedicament: string,
+        public price: number,
+        public stock: number,
+        public sales: number,
+        public availibility: boolean,
         public checked: boolean
     ){}
 }

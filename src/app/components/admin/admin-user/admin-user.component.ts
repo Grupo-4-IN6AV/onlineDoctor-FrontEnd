@@ -26,7 +26,7 @@ export class AdminUserComponent implements OnInit {
     private modalService: NgbModal,
     private userRest: UserRestService,
   ) {
-    this.user = new UserModel('', '', '', '', '', '', '', '', true,'','');
+    this.user = new UserModel('', '', '', '', '', '', '', '', '','','','',true,'');
   }
 
   public ngOnInit(): void

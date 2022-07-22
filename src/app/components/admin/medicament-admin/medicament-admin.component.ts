@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MedicamentRestService } from '../../../services/medicamentRest/medicament-rest.service'
+import { TypeMedicamentRestService } from 'src/app/services/typeMedicamentRest/type-medicament-rest.service';
 import { MedicamentModel } from '../../../models/medicament.model'
 import Swal from 'sweetalert2';
 
@@ -20,17 +21,19 @@ export class MedicamentAdminComponent implements OnInit {
   medicamentDelete: any;
   showTableMedicament: boolean = false;
   reset: any;
+  typesMedicament:any;
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
-  controloClick : number = 0
+  controloClick: number = 0
 
   constructor(
     public dialog: MatDialog,
     private modalService: NgbModal,
     private medicamentRest: MedicamentRestService,
-  ) { 
-    this.medicament = new MedicamentModel('', '', '', '', '', true);
+    private typeMedicamentRest: TypeMedicamentRestService,
+  ) {
+    this.medicament = new MedicamentModel('', '', '', '', 0, 0, 0, undefined, true);
   }
 
   ngOnInit(): void {
@@ -39,7 +42,14 @@ export class MedicamentAdminComponent implements OnInit {
 
   getMedicaments() {
     this.medicamentRest.getMedicaments().subscribe({
-      next: (res: any) => {this.medicaments = res.medicaments},
+      next: (res: any) => { this.medicaments = res.medicaments },
+      error: (err) => console.log(err)
+    })
+  }
+
+  getTypesMedicaments() {
+    this.typeMedicamentRest.getTypeMedicaments().subscribe({
+      next: (res: any) => this.typesMedicament = res.typeMedicaments,
       error: (err) => console.log(err)
     })
   }
@@ -66,7 +76,7 @@ export class MedicamentAdminComponent implements OnInit {
           addMedicamentForm.reset();
         },
       })
-      addMedicamentForm.reset();
+    addMedicamentForm.reset();
   }
 
   getMedicament(id: string) {
@@ -74,9 +84,16 @@ export class MedicamentAdminComponent implements OnInit {
       next: (res: any) => {
         this.medicamentView = res.medicament;
         this.medicamentUpdate = res.medicament;
-        this.medicamentDelete = res.medicament
+        this.medicamentDelete = res.medicament;
+        console.log(res.medicament)
       },
-      error: (err) => { alert(err.error.message) }
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message || err.error,
+          confirmButtonColor: '#E74C3C'
+        });
+      }
     })
   }
 
@@ -89,7 +106,7 @@ export class MedicamentAdminComponent implements OnInit {
           confirmButtonColor: '#28B463'
         });
         this.getMedicaments();
-        this.showButtonActions(this.medicamentUpdate._id,false)
+        this.showButtonActions(this.medicamentUpdate._id, false)
       },
       error: (err) => {
         Swal.fire({
@@ -121,7 +138,7 @@ export class MedicamentAdminComponent implements OnInit {
               timer: 2000
             });
             this.getMedicaments();
-            this.showButtonActions(id,false)
+            this.showButtonActions(id, false)
           },
           error: (err) => Swal.fire({
             title: err.error.message,
@@ -137,11 +154,9 @@ export class MedicamentAdminComponent implements OnInit {
     })
   }
 
-  showTable()
-  {
-    this.showTableMedicament =! this.showTableMedicament;
-    for(let medicament of this.medicaments)
-    {
+  showTable() {
+    this.showTableMedicament = !this.showTableMedicament;
+    for (let medicament of this.medicaments) {
       medicament.checked = true
     }
   }
@@ -151,38 +166,30 @@ export class MedicamentAdminComponent implements OnInit {
     this.searchMedicament = this.reset;
   }
 
-  showButtonActions(typeLaboratoryID:any, check:any)
-  {
+  showButtonActions(MedicamentID: any, check: any) {
     this.controloClick += 1
-    let controlCheck =! check.checked
-    if(this.controloClick == 1)
-    {
-      for(let medicament of this.medicaments)
-      {
-        if(typeLaboratoryID != medicament._id)
-        {
-          medicament.checked =! controlCheck
+    let controlCheck = !check.checked
+    if (this.controloClick == 1) {
+      for (let medicament of this.medicaments) {
+        if (MedicamentID != medicament._id) {
+          medicament.checked = !controlCheck
         }
-        else if(typeLaboratoryID == medicament._id)
-        {
+        else if (MedicamentID == medicament._id) {
           medicament.checked = controlCheck
         }
       }
     }
-    else if(this.controloClick == 2)
-    {
-      for(let medicament of this.medicaments)
-      {
+    else if (this.controloClick == 2) {
+      for (let medicament of this.medicaments) {
         medicament.checked = true;
       }
       this.controloClick = 0;
     }
-    this.buttonActions =! this.buttonActions;
+    this.buttonActions = !this.buttonActions;
     console.log(this.controloClick)
   }
 
-  closeDialog(): void
-  {
+  closeDialog(): void {
     this.dialog.closeAll();
   }
 
