@@ -1,0 +1,358 @@
+<section class="content">
+    <h1 style="margin-top: 4rem">
+        &nbsp;<i class="fa-solid fa-calendar-day"></i>
+        Appointment
+    </h1>
+    <hr />
+
+    <div class="text-center mt-2 mb-2">
+        <button type="button" data-bs-toggle="modal" data-bs-target="#addAppointment"
+            class="ms-3 btn btn-event btn-success" (click)="getUsers(); getDoctors()">
+            Add Appointment
+            <span class="btn-icon-end"><i class="fa-solid fa-calendar-day"></i></span>
+        </button>
+        <button *ngIf="!showTableAppointment" (click)="showTable()" type="button"
+            class="ms-3 btn btn-event btn-secondary">
+            Table Appointment
+            <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
+        </button>
+        <button *ngIf="showTableAppointment" (click)="showTable(); cleanTable()" type="button"
+            class="ms-3 btn btn-event btn-secondary">
+            Return Cards
+            <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
+        </button>
+        <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
+            Back Home
+            <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
+        </button>
+    </div>
+    <hr />
+
+    <!--CARDS DE USERS-->
+    <div *ngIf="!showTableAppointment">
+        <div class="container">
+            <div class="products-container">
+                <div *ngFor="let appointment of appointments" class="product" data-name="p-1">
+                    <h5 class="card-title">{{ appointment.pacient.name }} | {{ appointment.doctor.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ appointment.date }}</h6>
+                    <button (click)="getAppointment(appointment._id); getUsers(); getDoctors()" class="btn btn-success m-3"
+                        data-bs-toggle="modal" data-bs-target="#updateAppointment" class="btn btn-warning m-2">
+                        <i class="fa fa-pencil" aria-hidden="true"> </i> Update
+                    </button>
+                    <button (click)="deleteAppointment(appointment._id)" class="btn btn-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete
+                    </button>
+                    <button (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
+                        data-bs-target="#viewAppointment" class="btn btn-secondary ms-2">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        View
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--View Medicament-->
+    <div>
+        <div class="modal fade" id="viewAppointment" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="addContainer">
+                        <div class="contact-details">
+                            <div class="modalHeader">
+                                <div class="editRowModal">
+                                    <div *ngIf="appointmentView" class="modalHeader clearfix">
+                                        <div class="modal-about contact-header">
+                                            <div class="contact-details-img">
+                                                <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
+                                            </div>
+                                            <div class="contact-details-heading">
+                                                <div class="contact-details-name mb-2">
+                                                    {{ appointmentView.modality }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                            <hr />
+                            <div *ngIf="appointmentView" class="descripcion">
+                                <div class="count-container">
+                                    <div class="box">
+                                        <h3>Pacient:</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ appointmentView.pacient.name }}</p>
+                                    </div>
+
+                                    <div class="box">
+                                        <h3>Doctor:</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ appointmentView.doctor.name }}</p>
+                                    </div>
+
+                                    <div class="box">
+                                        <h3>Date:</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ appointmentView.date }}</p>
+                                    </div>
+
+                                    <div class="box">
+                                        <h3>Modality:</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ appointmentView.modality }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--ADD Medicament-->
+        <div class="modal fade" id="addAppointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="modal-basic-title">
+                            <i class="fa-solid fa-calendar-day"></i>
+                            &nbsp;Add Appointment
+                        </h3>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form (ngSubmit)="saveAppointment(addAppointmentForm)" #addAppointmentForm="ngForm">
+                            <div class="text-inside">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Pacient</mat-label>
+                                    <mat-select [(ngModel)]="appointment.pacient" name="pacient">
+                                        <div *ngFor="let user of users">
+                                            <mat-option *ngIf="user.role == 'PACIENTE'"
+                                            value={{user._id}}>{{user.name}}</mat-option>
+                                        </div>
+                                        
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="text-inside">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Doctor</mat-label>
+                                    <mat-select [(ngModel)]="appointment.doctor" name="doctor">
+                                        <div *ngFor="let doctor of doctors">
+                                            <mat-option value={{doctor._id}}>{{doctor.name}}</mat-option>
+                                        </div>
+                                        
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="text-inside">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Date</mat-label>
+                                    <input autocomplete="off" type="date" [(ngModel)]="appointment.date" name="date" matInput />
+                                </mat-form-field>
+                            </div>
+                            
+                            <div class="text-inside">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Modality</mat-label>
+                                    <mat-select [(ngModel)]="appointment.modality" name="state">
+                                        <mat-option value="VIRTUAL">Virtual</mat-option>
+                                        <mat-option value="PRESENCIAL">Presencial</mat-option>
+                                      </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <hr />
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
+                                    Save
+                                </button>
+                                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Save Appointment
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--UPDATE USER-->
+    <div class="modal fade" id="updateAppointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-basic-title">
+                        <i class="fas fa-pencil" aria-hidden="true"></i>
+                        &nbsp;Update Appointment
+                    </h3>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="updateAppointment()" *ngIf="appointmentUpdate">
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Pacient</mat-label>
+                                <mat-select disabled [(ngModel)]="appointmentUpdate.pacient._id" name="pacient">
+                                    <div *ngFor="let user of users">
+                                        <mat-option *ngIf="user.role === 'PACIENTE'"
+                                        value={{user._id}}>{{user.name}}</mat-option>
+                                    </div>
+                                    
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Doctor</mat-label>
+                                <mat-select [(ngModel)]="appointmentUpdate.doctor._id" name="doctor">
+                                    <div *ngFor="let doctor of doctors">
+                                        <mat-option value={{doctor._id}}>{{doctor.name}}</mat-option>
+                                    </div>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Date</mat-label>
+                                <input autocomplete="off" type="date" [(ngModel)]="appointmentUpdate.date" name="date" matInput />
+                            </mat-form-field>
+                        </div>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Modaility</mat-label>
+                                <mat-select [(ngModel)]="appointmentUpdate.modality" name="state">
+                                    <mat-option value="VIRTUAL">Virtual</mat-option>
+                                    <mat-option value="PRESENCIAL">Presencial</mat-option>
+                                  </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <hr />
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update
+                            </button>
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Update Appointment
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--TABLE USERS-->
+    <div *ngIf="showTableAppointment" class="row clearfix mt-5">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="materialTableHeader mb-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <ul class="header-buttons-left ml-0">
+                                <li class="dropdown">
+                                    <div class="header">
+                                        <h2>Table Appointment</h2>
+                                    </div>
+                                </li>
+                                <li class="dropdown m-l-20">
+                                    <label for="search-input">
+                                        <i class="material-icons search-icon">search</i>
+                                    </label>
+                                    <input [(ngModel)]="searchAppointment" placeholder="Search.." type="text" #filter
+                                        class="browser-default search-field" aria-label="Search box" />
+                                </li>
+                                <li *ngIf="buttonActions">
+                                    <div class="icon-button-demo m-l-10">
+                                        <button (click)="deleteAppointment(appointmentDelete._id)" mat-mini-fab
+                                            color="warn">
+                                            <mat-icon class="col-white">delete
+                                            </mat-icon>
+                                        </button>
+                                    </div>
+                                </li>
+                                <li *ngIf="buttonActions">
+                                    <div class="icon-button-demo m-l-10">
+                                        <button data-bs-toggle="modal" data-bs-target="#updateAppointment" mat-mini-fab
+                                            class="colorUpdate" (click)="getUsers(); getDoctors()">
+                                            <mat-icon class="col-white">edit
+                                            </mat-icon>
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="tableBody">
+                    <div class="table-responsive">
+                        <i *ngIf="" (click)="cleanTable()" class="fa fa-times-circle closeFilter" aria-hidden="true">
+                        </i>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Photo</th>
+                                    <th>Pacient</th>
+                                    <th>Doctor</th>
+                                    <th>Date</th>
+                                    <th>Modality</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let appointment of appointments">
+                                    <td (click)="getAppointment(appointment._id)">
+                                        <mat-checkbox *ngIf="appointment.checked==true || controloClick==0"
+                                            #check="matCheckbox"
+                                            (click)="showButtonActions(appointment._id, check); getAppointment(appointment._id)"
+                                            class="example-margin" color="primary">
+                                        </mat-checkbox>
+                                        <mat-checkbox disabled="" *ngIf="appointment.checked==false"
+                                            class="example-margin" color="primary">
+                                        </mat-checkbox>
+                                        {{ appointments.indexOf(appointment) + 1 }}
+                                    </td>
+                                    <td (click)="getAppointment(appointment._id)" class="table-img">
+                                        <img src="assets/images/user/user8.jpg" alt="" />
+                                    </td>
+                                    <td (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewAppointment">{{ appointment.pacient.name }}</td>
+                                    <td (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewAppointment">{{ appointment.doctor.name }}</td>
+                                    <td (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewAppointment">{{ appointment.date }}</td>
+                                    <td (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewAppointment">{{ appointment.modality }}</td>
+                                </tr>
+                                <tr rowspan="9" *ngIf="notFound === true">
+                                    <td colspan="9" class="text-center">Not Appointment Found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 *ngIf="notFound === true && showTableAppointment === false" class="text-center">
+        Not Appointment Found
+    </h1>
+</section>
