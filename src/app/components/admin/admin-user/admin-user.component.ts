@@ -161,6 +161,9 @@ export class AdminUserComponent implements OnInit {
             timer: 3000
           }),
           this.userDeletePassword = "";
+          if (this.showTableUsers === true) {
+            this.showButtonActions(this.userUpdate._id, false)
+          };
         }
           
         })

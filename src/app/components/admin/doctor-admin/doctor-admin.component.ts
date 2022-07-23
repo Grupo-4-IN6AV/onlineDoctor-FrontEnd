@@ -71,7 +71,7 @@ export class DoctorAdminComponent implements OnInit {
           addDoctorForm.reset();
         },
       })
-      addDoctorForm.reset();
+    addDoctorForm.reset();
   }
 
   getDoctor(id: string) {
@@ -145,7 +145,10 @@ export class DoctorAdminComponent implements OnInit {
               position: 'center',
               timer: 3000
             }),
-              this.doctorDeletePassword = "";
+            this.doctorDeletePassword = "";
+            if (this.showTableDoctors === true) {
+              this.showButtonActions(this.doctorUpdate._id, false)
+            };
           }
 
         })

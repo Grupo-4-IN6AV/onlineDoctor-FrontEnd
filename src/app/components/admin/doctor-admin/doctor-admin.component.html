@@ -64,14 +64,14 @@
                     <div *ngIf="doctorView" class="modalHeader clearfix">
                       <div class="modal-about contact-header">
                         <div class="contact-details-img">
-                          <img src="../../../../assets/images/doctor/usrbig2.jpg" alt="avatar" />
+                          <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
                         </div>
                         <div class="contact-details-heading">
                           <div class="contact-details-name mb-2">
-                            {{ doctorView.name }}
+                            {{ doctorView.name }} {{doctorView.surname}}
                           </div>
                           <div class="badge col-yellow">
-                            PACIENTES
+                            DOCTOR
                           </div>
                         </div>
                       </div>
@@ -120,16 +120,6 @@
                     </div>
   
                     <div class="box">
-                      <h3>NIT:</h3>
-                    </div>
-                    <div *ngIf="doctorView.NIT" class="box">
-                      <p>{{ doctorView.NIT }}</p>
-                    </div>
-                    <div *ngIf="!doctorView.NIT" class="box">
-                      <p>-Sin NIT-</p>
-                    </div>
-  
-                    <div class="box">
                       <h3>Email:</h3>
                     </div>
                     <div class="box">
@@ -159,8 +149,11 @@
                     <div class="box">
                       <h3>Gender</h3>
                     </div>
-                    <div class="box">
-                      <p>{{ doctorView.gender }}</p>
+                    <div *ngIf="doctorView.gender == 'MALE'" class="box">
+                      <p>Hombre</p>
+                    </div>
+                    <div *ngIf="doctorView.gender == 'FEMALE'" class="box">
+                      <p>Mujer</p>
                     </div>
                   </div>
                 </div>
@@ -274,7 +267,6 @@
               <i class="fas fa-pencil" aria-hidden="true"></i>
               &nbsp;Update Doctor
             </h3>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <form (ngSubmit)="updateDoctor()" *ngIf="doctorUpdate">
@@ -298,6 +290,12 @@
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>DPI</mat-label>
+                  <input autocomplete="off" [(ngModel)]="doctorUpdate.DPI" name="username" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Email</mat-label>
                   <input autocomplete="off" [(ngModel)]="doctorUpdate.email" name="email" matInput />
                 </mat-form-field>
@@ -306,12 +304,6 @@
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Phone</mat-label>
                   <input autocomplete="off" [(ngModel)]="doctorUpdate.phone" name="phone" type="text" matInput />
-                </mat-form-field>
-              </div>
-              <div class="text-inside">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>DPI</mat-label>
-                  <input autocomplete="off" [(ngModel)]="doctorUpdate.DPI" name="DPI" type="text" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
@@ -355,14 +347,14 @@
                   <div *ngIf="doctorDeleteModal" class="modalHeader clearfix">
                     <div class="modal-about contact-header">
                       <div class="contact-details-img">
-                        <img src="../../../../assets/images/doctor/usrbig2.jpg" alt="avatar" />
+                        <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
                       </div>
                       <div class="contact-details-heading">
                         <div class="contact-details-name mb-2">
                           {{ doctorDeleteModal.name }}
                         </div>
                         <div class="badge col-yellow">
-                          PACIENTES
+                          DOCTOR
                         </div>
                       </div>
                     </div>
@@ -437,7 +429,7 @@
                 <ul class="header-buttons-left ml-0">
                   <li class="dropdown">
                     <div class="header">
-                      <h2>Table Users</h2>
+                      <h2>Table Doctors</h2>
                     </div>
                   </li>
                   <li class="dropdown m-l-20">
@@ -470,9 +462,7 @@
           </div>
           <div class="tableBody">
             <div class="table-responsive">
-              <i *ngIf="
-                  userNameUp || userNameDown || userSurnameUp || userSurnameDown
-                " (click)="cleanTable()" class="fa fa-times-circle closeFilter" aria-hidden="true">
+              <i (click)="cleanTable()" class="closeFilter" aria-hidden="true">
               </i>
               <table class="table table-bordered table-hover">
                 <thead>
@@ -483,15 +473,15 @@
                     <th>Surname</th>
                     <th>Username</th>
                     <th>DPI</th>
-                    <th>NIT</th>
                     <th>Email</th>
-                    <th>Role</th>
                     <th>Phone</th>
+                    <th>Age</th>
                     <th>Gender</th>
+                    <th>Role</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let doctor of doctors | searchUserPipe: searchDoctor">
+                  <tr *ngFor="let doctor of doctors">
                     <td (click)="getDoctor(doctor._id)">
                       <mat-checkbox *ngIf="doctor.checked==true || controloClick==0" #check="matCheckbox"
                         (click)="showButtonActions(doctor._id, check); getDoctor(doctor._id)" class="example-margin"
@@ -502,7 +492,7 @@
                       {{ doctors.indexOf(doctor) + 1 }}
                     </td>
                     <td (click)="getDoctor(doctor._id)" class="table-img">
-                      <img src="assets/images/doctor/user8.jpg" alt="" />
+                      <img src="assets/images/user/user8.jpg" alt="" />
                     </td>
                     <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.name }}</td>
                     <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.surname }}
@@ -511,19 +501,19 @@
                     </td>
                     <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.DPI }}
                     </td>
-                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.NIT }}
-                    </td>
                     <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.email }}
-                    </td>
-                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser" align="center">
-                      <div *ngIf="doctor.role === 'PACIENTE'" data-bs-toggle="modal" data-bs-target="#viewUser"
-                        class="badge col-yellow">
-                        {{ doctor.role }}
-                      </div>
                     </td>
                     <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.phone }}
                     </td>
+                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.age }}
+                    </td>
                     <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.gender }}
+                    </td>
+                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser" align="center">
+                      <div *ngIf="doctor.role === 'DOCTOR'" data-bs-toggle="modal" data-bs-target="#viewUser"
+                        class="badge col-yellow">
+                        {{ doctor.role }}
+                      </div>
                     </td>
                   </tr>
                   <tr rowspan="9" *ngIf="notFound === true">
