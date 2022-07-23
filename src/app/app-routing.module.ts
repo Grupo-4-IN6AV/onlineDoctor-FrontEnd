@@ -17,6 +17,8 @@ import { TypeLaboratoryAdminComponent } from './components/admin/type-laboratory
 import { TypeMedicamentAdminComponent } from './components/admin/type-medicament-admin/type-medicament-admin.component';
 import { SpecialityAdminComponent } from './components/admin/speciality-admin/speciality-admin.component';
 import { MedicamentAdminComponent } from './components/admin/medicament-admin/medicament-admin.component';
+import { PharmacyComponent } from './components/landingPage/pharmacy/pharmacy.component';
+import { PharmacyViewComponent } from './components/landingPage/pharmacy-view/pharmacy-view.component';
 
 
 const routes: Routes =
@@ -27,9 +29,9 @@ const routes: Routes =
       {path: '', component: LandingPageComponent},
       {path: 'aboutUs', component: AboutUsComponent},
       {path: 'contactUs', component: ContactUsComponent},
-      {path: 'hotels', component: HotelComponent},
       {path: 'login', component: LoginComponent},
-      {path: 'viewHotel', component: HotelViewComponent},
+      {path: 'pharmacy', component: PharmacyComponent},
+      {path: 'viewMedicament', component: PharmacyViewComponent},
     ]
   },
   {

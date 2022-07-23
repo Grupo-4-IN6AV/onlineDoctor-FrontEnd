@@ -17,7 +17,7 @@ import {
 
 import { EChartsOption } from 'echarts';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
-import {ProductRestService} from 'src/app/services/productRest/product-rest.service'
+import {MedicamentRestService} from 'src/app/services/medicamentRest/medicament-rest.service'
 
 export type SparklineChartOptions = {
   series: ApexAxisChartSeries;
@@ -62,14 +62,14 @@ export class HomeAdminComponent implements OnInit
   totalUsers: any;
   totalDoctors: any;
   totalPatients: any;
-  totalProduct: any;
+  totalMedicaments: any;
   totalSells: any;
-  products: any;
+  medicaments: any;
 
   ngOnInit(): void
   {
     this.getUsers();
-    this.getProducts();
+    this.getMedicaments();
   }
 
   getUsers()
@@ -85,7 +85,7 @@ export class HomeAdminComponent implements OnInit
         {
           if(user.role === 'DOCTOR')
             arrayDoctor.push(user);
-          else if(user.role === 'PATIENT')
+          else if(user.role === 'PACIENTE')
             arrayClients.push(user);
         }
         this.totalDoctors = arrayDoctor.length;
@@ -93,10 +93,10 @@ export class HomeAdminComponent implements OnInit
         //DATA A LA GRAFICA//
         this.donut_chart.series[0].data.push(
           {
-            value: this.totalDoctors, name:'DOCTOR'
+            value: this.totalDoctors, name:'DOCTORES'
           },
           {
-            value: this.totalPatients, name:'PATIENT'
+            value: this.totalPatients, name:'PACIENTES'
           }
           )
       },
@@ -104,14 +104,14 @@ export class HomeAdminComponent implements OnInit
     })
   }
 
-  getProducts()
+  getMedicaments()
   {
-    this.productRest.getProducts().subscribe({
+    this.medicamentRest.getMedicaments().subscribe({
       next: (res: any) =>
       {
-        this.products = res.products
-        this.totalProduct = this.products.length;
-        this.totalSells = this.products.sell.length;
+        this.medicaments = res.medicaments
+        this.totalMedicaments = this.medicaments.length;
+        this.totalSells = this.medicaments.sell.length;
       },
       error: (err) => console.log(err)
     })
@@ -128,7 +128,7 @@ export class HomeAdminComponent implements OnInit
     legend:
     {
       show: true,
-      data: ['Doctors', 'Patients'],
+      data: ['DOCTORES', 'PACIENTES'],
       textStyle:
       {
         color: '#9aa0ac',
@@ -153,7 +153,7 @@ export class HomeAdminComponent implements OnInit
         data:[],
       },
     ],
-    color: ['#0D6EFD', '#FFC107'],
+    color: ['#FFC107', '#0D6EFD'],
   };
 
   @ViewChild('chart') chart: ChartComponent;
@@ -198,7 +198,7 @@ export class HomeAdminComponent implements OnInit
   public areaChartOptions: Partial<areaChartOptions> = {
     series: [
       {
-        name: 'Cuantity Products',
+        name: 'Cuantity medicaments',
         data: [31, 40, 28, 51, 42, 85, 77],
       },
       {
@@ -250,7 +250,7 @@ export class HomeAdminComponent implements OnInit
 
   constructor
   (
-    private productRest: ProductRestService,
+    private medicamentRest: MedicamentRestService,
     private userRest: UserRestService
   )
   {

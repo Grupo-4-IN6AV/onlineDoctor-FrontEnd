@@ -25,7 +25,7 @@ export class MedicamentRestService {
 
   saveMedicament(params:{})
   {
-    return this.http.post(environment.baseURI + 'medicament/saveMedicament', params, { headers: this.httpOptions });
+    return this.http.post(environment.baseURI + 'medicament/saveMedicament', params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getMedicament(id:string)
@@ -41,5 +41,10 @@ export class MedicamentRestService {
   deleteMedicament(id:string)
   {
     return this.http.delete(environment.baseURI + 'medicament/deleteMedicament/' + id, { headers: this.httpOptions });
+  }
+
+  getMedicamentName(params:{})
+  {
+    return this.http.post(environment.baseURI + 'medicament/getMedicamentByName/', params, { headers: this.httpOptions });
   }
 }

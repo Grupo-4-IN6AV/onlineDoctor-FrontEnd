@@ -1,0 +1,119 @@
+<body>
+
+    <div class="header">
+        <div class="container-fluid theme-container">
+            <div class="top-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="header-search">
+                            <div class="search-content">
+                                <div class="search-product d-none">
+                                    <div *ngFor="let medicament of medicaments | searchMedicament: searchMedicament" class="product list-view">
+                                        <a routerLink="/viewMedicament" class="product-img">
+                                            <img src="../../../../assets/pharmacy/assets/img/principal.png" class="" alt="">
+                                        </a>
+                                        <div class="product-info">
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <div class="review-count">4.5 (2,213)</div>
+                                            </div>
+                                            <h3>
+                                                <a routerLink="/viewMedicament">{{medicament.name}}</a>
+                                            </h3>
+                                            <div class="product-value">
+                                                <div class="d-flex">
+                                                    <small class="regular-price">MRP <del>₹2540.99</del></small>
+                                                    <div class="off-price">23% off</div>
+                                                </div>
+                                                <div class="current-price">{{medicament.price}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="product-actions">
+                                            <a href="#" class="btn btn-soft-primary">
+                                                <i class="ti-heart"></i>
+                                                Add to Wishlist
+                                            </a>
+                                            <a href="#" class="btn btn-primary">
+                                                <i class="ti-shopping-cart"></i>
+                                                Add to cart
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section class="pt-5 pt-md-7">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-md-8 order-md-2">
+                        <div class="row shop-header align-items-center">
+                            <div class="col-lg-6">
+                                <div class="grid-icons">
+                                    <button class="three-column active"></button>
+                                    <button class="list-view"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div *ngFor="let medicament of medicaments | searchMedicament: searchMedicament" class="col-md-4 col-sm-6 col-12 mt-4" >
+                                <div class="product">
+                                    <a routerLink="/viewMedicament" class="product-img">
+                                        <img src="../../../../assets/pharmacy/assets/img/principal.png" class="" alt="">
+                                    </a>
+                                    <div class="product-info">
+                                        <div class="product-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-half-o"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </div>
+                                        <h3>
+                                            <a routerLink="/viewMedicament"> {{medicament.name}}</a>
+                                        </h3>
+                                        <div class="product-value">
+                                            <div class="d-flex">
+                                                <small class="regular-price">{{medicament.description}}</small>
+                                            </div>
+                                            <div class="current-price">Q.{{medicament.price}}.00</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 order-md-1">
+                        <div class="sidebar-wrapper mt-5 mt-md-0">
+                            <div class="sidebar-widget widget_categories">
+                                <h6 class="widget-title">Buscar:</h6>
+                                <ul class="widget-list widget-filter-list list-unstyled pt-1" style="max-height: 11rem;"
+                                    data-simplebar data-simplebar-auto-hide="false">
+                                    <li
+                                        class="widget-filter-item d-flex justify-content-between align-items-center mb-1">
+                                        <div class="form-check">
+                                            <div class="form-input">
+                                                <input [(ngModel)]="searchMedicament" placeholder="Search...">
+                                                <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
