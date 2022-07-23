@@ -29,7 +29,7 @@ export const ROUTES: RouteInfo[] = [
     title: 'Doctor',
     moduleName: 'admin',
     iconType: 'material-icons-two-tone',
-    icon: 'sick',
+    icon: 'masks',
     class: '',
     groupTitle: false,
     badge: '',
