@@ -14,12 +14,11 @@ import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import { CredentialsRestService } from 'src/app/services/credentialsRest/credentials-rest.service';
 
 @Component({
-  selector: 'app-sidebar-admin',
-  templateUrl: './sidebar-admin.component.html',
-  styleUrls: ['./sidebar-admin.component.sass']
+  selector: 'app-sidebar-doctor',
+  templateUrl: './sidebar-doctor.component.html',
+  styleUrls: ['./sidebar-doctor.component.sass']
 })
-export class SidebarAdminComponent implements OnInit
-{
+export class SidebarDoctorComponent implements OnInit {
 
   user: any;
 
@@ -43,7 +42,7 @@ export class SidebarAdminComponent implements OnInit
     public elementRef: ElementRef,
     private router: Router,
     private userRest: UserRestService,
-    private credentialRest : CredentialsRestService,
+    private credentialRest: CredentialsRestService,
   ) {
     const body = this.elementRef.nativeElement.closest('body');
     this.routerObj = this.router.events.subscribe((event) => {
@@ -96,8 +95,7 @@ export class SidebarAdminComponent implements OnInit
       this.level3Menu = element;
     }
   }
-  ngOnInit()
-  {
+  ngOnInit() {
     this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
     this.userLogin();
     this.initLeftSidebar();
@@ -143,13 +141,12 @@ export class SidebarAdminComponent implements OnInit
     }
   }
 
-  userLogin()
-  {
+  userLogin() {
     this.userRest.getUser(this.credentialRest.getIdentity()._id).subscribe({
       next: (res: any) => {
         this.user = res.user;
       },
-      error: (err) => {alert(err.error.message)}
+      error: (err) => { alert(err.error.message) }
     })
   }
 
@@ -157,6 +154,4 @@ export class SidebarAdminComponent implements OnInit
     localStorage.clear();
     window.location.replace('/')
   }
-
-
 }

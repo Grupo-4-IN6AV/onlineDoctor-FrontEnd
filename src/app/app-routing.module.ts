@@ -19,6 +19,9 @@ import { SpecialityAdminComponent } from './components/admin/speciality-admin/sp
 import { MedicamentAdminComponent } from './components/admin/medicament-admin/medicament-admin.component';
 import { PharmacyComponent } from './components/landingPage/pharmacy/pharmacy.component';
 import { PharmacyViewComponent } from './components/landingPage/pharmacy-view/pharmacy-view.component';
+import { LayoutDoctorComponent } from './components/doctor/layout-doctor/layout-doctor.component';
+import { HomeDoctorComponent } from './components/doctor/home-doctor/home-doctor.component';
+import { DoctorAdminComponent } from './components/admin/doctor-admin/doctor-admin.component';
 
 
 const routes: Routes =
@@ -45,6 +48,13 @@ const routes: Routes =
       {path: 'typeMedicament', component: TypeMedicamentAdminComponent},
       {path: 'speciality', component: SpecialityAdminComponent},
       {path: 'medicament', component: MedicamentAdminComponent},
+      {path: 'doctor', component: DoctorAdminComponent},
+    ]
+  },
+  {
+    path: 'doctor', component:LayoutDoctorComponent,children:
+    [
+      {path: 'home', component: HomeDoctorComponent},
     ]
   },
   { path: '**', component: NotFoundPageComponent}

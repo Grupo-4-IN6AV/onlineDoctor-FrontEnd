@@ -44,6 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
+import { HeaderDoctorComponent } from './layout/header-doctor/header-doctor.component';
 import { PageLoaderComponent } from './layout/page-loader/page-loader.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { RightSidebarComponent } from './layout/right-sidebar/right-sidebar.component';
@@ -82,6 +83,11 @@ import { PharmacyComponent } from './components/landingPage/pharmacy/pharmacy.co
 import { SearchMedicamentPipe } from './pipes/searchMedicament/search-medicament.pipe';
 import { PharmacyViewComponent } from './components/landingPage/pharmacy-view/pharmacy-view.component';
 import { SwiperModule } from 'swiper/angular';
+import { LayoutDoctorComponent } from './components/doctor/layout-doctor/layout-doctor.component';
+import { SidebarDoctorComponent } from './components/doctor/sidebar-doctor/sidebar-doctor.component';
+import { SidebarrightDoctorComponent } from './components/doctor/sidebarright-doctor/sidebarright-doctor.component';
+import { HomeDoctorComponent } from './components/doctor/home-doctor/home-doctor.component';
+import { DoctorAdminComponent } from './components/admin/doctor-admin/doctor-admin.component';
 
 
 
@@ -123,6 +129,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         PharmacyComponent,
         SearchMedicamentPipe,
         PharmacyViewComponent,
+        LayoutDoctorComponent,
+        SidebarDoctorComponent,
+        SidebarrightDoctorComponent,
+        HeaderDoctorComponent,
+        HomeDoctorComponent,
+        DoctorAdminComponent
     ],
     imports: [
         FormsModule,
