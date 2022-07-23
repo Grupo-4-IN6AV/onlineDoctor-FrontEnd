@@ -78,6 +78,12 @@ import { TypeLaboratoryAdminComponent } from './components/admin/type-laboratory
 import { TypeMedicamentAdminComponent } from './components/admin/type-medicament-admin/type-medicament-admin.component';
 import { SpecialityAdminComponent } from './components/admin/speciality-admin/speciality-admin.component';
 import { MedicamentAdminComponent } from './components/admin/medicament-admin/medicament-admin.component';
+import { PharmacyComponent } from './components/landingPage/pharmacy/pharmacy.component';
+import { SearchMedicamentPipe } from './pipes/searchMedicament/search-medicament.pipe';
+import { PharmacyViewComponent } from './components/landingPage/pharmacy-view/pharmacy-view.component';
+import { SwiperModule } from 'swiper/angular';
+
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -113,7 +119,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         TypeLaboratoryAdminComponent,
         TypeMedicamentAdminComponent,
         SpecialityAdminComponent,
-        MedicamentAdminComponent
+        MedicamentAdminComponent,
+        PharmacyComponent,
+        SearchMedicamentPipe,
+        PharmacyViewComponent,
     ],
     imports: [
         FormsModule,
@@ -154,7 +163,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         MatIconModule,
         MatSelectModule,
         NgApexchartsModule,
-        FullCalendarModule, // register FullCalendar with you app
+        FullCalendarModule,
+        SwiperModule, // register FullCalendar with you app
         NgxEchartsModule.forRoot({
           echarts: () => import('echarts'),
         }),

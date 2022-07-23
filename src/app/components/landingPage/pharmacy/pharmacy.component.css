@@ -1,0 +1,33 @@
+@import url('../../../../assets/pharmacy/assets/css/theme.css');
+
+.form-input {
+	display: flex;
+	align-items: center;
+	height: 36px;
+}
+.form-input input {
+	flex-grow: 1;
+	padding: 0 16px;
+	height: 100%;
+	border: none;
+	border-radius: 36px 0 0 36px;
+	outline: none;
+	width: 100%;
+	color: black;
+   background-color: #eceded;
+}
+
+.form-input button {
+	width: 36px;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #1975e6;
+	color: white;
+	font-size: 18px;
+	border: none;
+	outline: none;
+	border-radius: 0 36px 36px 0;
+	cursor: pointer;
+}
