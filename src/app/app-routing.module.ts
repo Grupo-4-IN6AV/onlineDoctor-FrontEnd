@@ -22,6 +22,7 @@ import { PharmacyViewComponent } from './components/landingPage/pharmacy-view/ph
 import { LayoutDoctorComponent } from './components/doctor/layout-doctor/layout-doctor.component';
 import { HomeDoctorComponent } from './components/doctor/home-doctor/home-doctor.component';
 import { DoctorAdminComponent } from './components/admin/doctor-admin/doctor-admin.component';
+import { AppointmentAdminComponent } from './components/admin/appointment-admin/appointment-admin.component';
 
 
 const routes: Routes =
@@ -49,6 +50,7 @@ const routes: Routes =
       {path: 'speciality', component: SpecialityAdminComponent},
       {path: 'medicament', component: MedicamentAdminComponent},
       {path: 'doctor', component: DoctorAdminComponent},
+      {path: 'appointment', component: AppointmentAdminComponent},
     ]
   },
   {
