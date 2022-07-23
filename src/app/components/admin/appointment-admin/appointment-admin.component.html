@@ -1,6 +1,6 @@
 <section class="content">
     <h1 style="margin-top: 4rem">
-        &nbsp;<i class="fa-solid fa-prescription-bottle-medical"></i>
+        &nbsp;<i class="fa-solid fa-calendar-day"></i>
         Appointment
     </h1>
     <hr />
@@ -9,7 +9,7 @@
         <button type="button" data-bs-toggle="modal" data-bs-target="#addAppointment"
             class="ms-3 btn btn-event btn-success" (click)="getUsers(); getDoctors()">
             Add Appointment
-            <span class="btn-icon-end"><i class="fa-solid fa-prescription-bottle-medical"></i></span>
+            <span class="btn-icon-end"><i class="fa-solid fa-calendar-day"></i></span>
         </button>
         <button *ngIf="!showTableAppointment" (click)="showTable()" type="button"
             class="ms-3 btn btn-event btn-secondary">
@@ -128,7 +128,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="modal-basic-title">
-                            <i class="fa-solid fa-vial-virus"></i>
+                            <i class="fa-solid fa-calendar-day"></i>
                             &nbsp;Add Appointment
                         </h3>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
@@ -141,7 +141,7 @@
                                     <mat-label>Pacient</mat-label>
                                     <mat-select [(ngModel)]="appointment.pacient" name="pacient">
                                         <div *ngFor="let user of users">
-                                            <mat-option *ngIf="user.role === 'PACIENT'"
+                                            <mat-option *ngIf="user.role == 'PACIENTE'"
                                             value={{user._id}}>{{user.name}}</mat-option>
                                         </div>
                                         
@@ -162,13 +162,17 @@
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <mat-label>Date</mat-label>
-                                    <input autocomplete="off" [(ngModel)]="appointment.date" name="date" matInput />
+                                    <input autocomplete="off" type="date" [(ngModel)]="appointment.date" name="date" matInput />
                                 </mat-form-field>
                             </div>
+                            
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <mat-label>Modality</mat-label>
-                                    <input autocomplete="off" [(ngModel)]="appointment.modality" name="modality" matInput />
+                                    <mat-select [(ngModel)]="appointment.modality" name="state">
+                                        <mat-option value="VIRTUAL">Virtual</mat-option>
+                                        <mat-option value="PRESENCIAL">Presencial</mat-option>
+                                      </mat-select>
                                 </mat-form-field>
                             </div>
                             <hr />
@@ -207,9 +211,9 @@
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Pacient</mat-label>
-                                <mat-select [(ngModel)]="appointmentUpdate.pacient._id" name="pacient">
+                                <mat-select disabled [(ngModel)]="appointmentUpdate.pacient._id" name="pacient">
                                     <div *ngFor="let user of users">
-                                        <mat-option *ngIf="user.role === 'PACIENT'"
+                                        <mat-option *ngIf="user.role === 'PACIENTE'"
                                         value={{user._id}}>{{user.name}}</mat-option>
                                     </div>
                                     
@@ -229,13 +233,16 @@
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Date</mat-label>
-                                <input autocomplete="off" [(ngModel)]="appointmentUpdate.date" name="date" matInput />
+                                <input autocomplete="off" type="date" [(ngModel)]="appointmentUpdate.date" name="date" matInput />
                             </mat-form-field>
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Modaility</mat-label>
-                                <input autocomplete="off" [(ngModel)]="appointmentUpdate.modality" name="modality" matInput />
+                                <mat-select [(ngModel)]="appointmentUpdate.modality" name="state">
+                                    <mat-option value="VIRTUAL">Virtual</mat-option>
+                                    <mat-option value="PRESENCIAL">Presencial</mat-option>
+                                  </mat-select>
                             </mat-form-field>
                         </div>
                         <hr />

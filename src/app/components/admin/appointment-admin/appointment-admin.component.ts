@@ -28,6 +28,8 @@ export class AppointmentAdminComponent implements OnInit {
   buttonActions: boolean = false;
   checked: boolean = true;
   controloClick: number = 0
+
+  
   
   
   constructor(
@@ -46,7 +48,9 @@ export class AppointmentAdminComponent implements OnInit {
 
   getAppointments() {
     this.appointmentRest.getAppointments().subscribe({
-      next: (res: any) => { this.appointments = res.appointments },
+      next: (res: any) => {
+        this.appointments = res.appointmentsExist;
+      },
       error: (err) => console.log(err)
     })
   }
@@ -60,7 +64,7 @@ export class AppointmentAdminComponent implements OnInit {
 
   getDoctors() {
     this.doctorRest.getDoctors().subscribe({
-      next: (res: any) => this.users = res.doctors,
+      next: (res: any) => this.doctors = res.doctors,
       error: (err) => console.log(err)
     })
   }
