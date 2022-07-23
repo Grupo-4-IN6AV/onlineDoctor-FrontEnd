@@ -1,17 +1,17 @@
 <section class="content">
   <h1 style="margin-top: 4rem">
     &nbsp;<i class="fa fa-users" aria-hidden="true"> </i>
-    Users
+    Patients
   </h1>
   <hr />
 
   <div class="text-center mt-2 mb-2">
     <button type="button" data-bs-toggle="modal" data-bs-target="#addUser" class="ms-3 btn btn-event btn-success">
-      Add User
+      Add Patients
       <span class="btn-icon-end"><i class="fas fa-user"></i> </span>
     </button>
     <button *ngIf="!showTableUsers" (click)="showTable()" type="button" class="ms-3 btn btn-event btn-secondary">
-      Table Users
+      Table Patients
       <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
     </button>
     <button *ngIf="showTableUsers" (click)="showTable(); cleanTable()" type="button"
@@ -38,7 +38,8 @@
             data-bs-target="#updateUser" class="btn btn-warning m-2">
             <i class="fa fa-pencil" aria-hidden="true"> </i> Update
           </button>
-          <button (click)="deleteUser(user._id)" class="btn btn-danger">
+          <button (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#deleteUser"
+            class="btn btn-danger">
             <i class="fa fa-trash" aria-hidden="true"></i>
             Delete
           </button>
@@ -69,11 +70,8 @@
                         <div class="contact-details-name mb-2">
                           {{ userView.name }}
                         </div>
-                        <div *ngIf="userView.role === 'ADMIN HOTEL'" class="badge col-blue">
-                          {{ userView.role }}
-                        </div>
-                        <div *ngIf="userView.role === 'CLIENT'" class="badge col-yellow">
-                          {{ userView.role }}
+                        <div class="badge col-yellow">
+                          PACIENTES
                         </div>
                       </div>
                     </div>
@@ -86,10 +84,10 @@
               <hr />
               <div *ngIf="userView" class="descripcion">
                 <div class="count-container">
+
                   <div class="box">
                     <h3>Name:</h3>
                   </div>
-
                   <div class="box">
                     <p>{{ userView.name }}</p>
                   </div>
@@ -97,23 +95,43 @@
                   <div class="box">
                     <h3>Surname:</h3>
                   </div>
-
-                  <div class="box">
+                  <div *ngIf="userView.surname" class="box">
                     <p>{{ userView.surname }}</p>
+                  </div>
+                  <div *ngIf="!userView.surname" class="box">
+                    <p>-Sin apellido-</p>
                   </div>
 
                   <div class="box">
                     <h3>Username:</h3>
                   </div>
-
                   <div class="box">
                     <p>{{ userView.username }}</p>
                   </div>
 
                   <div class="box">
-                    <h3>Email:</h3>
+                    <h3>DPI:</h3>
+                  </div>
+                  <div *ngIf="userView.DPI" class="box">
+                    <p>{{ userView.DPI }}</p>
+                  </div>
+                  <div *ngIf="!userView.DPI" class="box">
+                    <p>-Sin DPI-</p>
                   </div>
 
+                  <div class="box">
+                    <h3>NIT:</h3>
+                  </div>
+                  <div *ngIf="userView.NIT" class="box">
+                    <p>{{ userView.NIT }}</p>
+                  </div>
+                  <div *ngIf="!userView.NIT" class="box">
+                    <p>-Sin NIT-</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Email:</h3>
+                  </div>
                   <div class="box">
                     <p>{{ userView.email }}</p>
                   </div>
@@ -121,17 +139,28 @@
                   <div class="box">
                     <h3>Phone:</h3>
                   </div>
-
-                  <div class="box">
+                  <div *ngIf="userView.phone" class="box">
                     <p>{{ userView.phone }}</p>
                   </div>
-
-                  <div class="box">
-                    <h3>Role</h3>
+                  <div *ngIf="!userView.phone" class="box">
+                    <p>-Sin Telefono-</p>
                   </div>
 
                   <div class="box">
-                    <p>{{ userView.role }}</p>
+                    <h3>Age</h3>
+                  </div>
+                  <div *ngIf="userView.age" class="box">
+                    <p>{{ userView.age }}</p>
+                  </div>
+                  <div *ngIf="!userView.age" class="box">
+                    <p>-Sin Edad-</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Gender</h3>
+                  </div>
+                  <div class="box">
+                    <p>{{ userView.gender }}</p>
                   </div>
                 </div>
               </div>
@@ -143,7 +172,7 @@
 
     <!--ADD USER-->
     <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title" id="modal-basic-title">
@@ -217,15 +246,6 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="text-inside">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Role</mat-label>
-                  <mat-select [(ngModel)]="user.role" name="role">
-                    <mat-option value="ADMIN">ADMIN</mat-option>
-                    <mat-option value="PACIENTE">PACIENT</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
               <hr />
               <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
@@ -247,7 +267,7 @@
 
   <!--UPDATE USER-->
   <div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title" id="modal-basic-title">
@@ -290,10 +310,28 @@
             </div>
             <div class="text-inside">
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Role</mat-label>
-                <mat-select [(ngModel)]="userUpdate.role" name="role">
-                  <mat-option value="ADMIN HOTEL">ADMIN HOTEL</mat-option>
-                  <mat-option value="CLIENT">CLIENT</mat-option>
+                <mat-label>DPI</mat-label>
+                <input autocomplete="off" [(ngModel)]="userUpdate.DPI" name="DPI" type="text" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>NIT</mat-label>
+                <input autocomplete="off" [(ngModel)]="userUpdate.NIT" name="NIT" type="text" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Age</mat-label>
+                <input autocomplete="off" [(ngModel)]="userUpdate.age" name="age" type="text" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Gender</mat-label>
+                <mat-select [(ngModel)]="userUpdate.gender" name="gender">
+                  <mat-option value="MALE">MALE</mat-option>
+                  <mat-option value="FEMALE">FEMALE</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -307,6 +345,89 @@
               </button>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Eliminar User -->
+  <div class="modal fade" id="deleteUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="addContainer">
+          <div class="contact-details">
+            <div class="modalHeader">
+              <div class="editRowModal">
+                <div *ngIf="userDeleteModal" class="modalHeader clearfix">
+                  <div class="modal-about contact-header">
+                    <div class="contact-details-img">
+                      <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
+                    </div>
+                    <div class="contact-details-heading">
+                      <div class="contact-details-name mb-2">
+                        {{ userDeleteModal.name }}
+                      </div>
+                      <div class="badge col-yellow">
+                        PACIENTES
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <hr />
+            <div *ngIf="userDeleteModal" class="descripcion">
+              <div class="count-container">
+
+                <div class="box">
+                  <h3>Name:</h3>
+                </div>
+                <div class="box">
+                  <p>{{ userDeleteModal.name }}</p>
+                </div>
+
+                <div class="box">
+                  <h3>Surname:</h3>
+                </div>
+                <div *ngIf="userDeleteModal.surname" class="box">
+                  <p>{{ userDelete.surname }}</p>
+                </div>
+                <div *ngIf="!userDeleteModal.surname" class="box">
+                  <p>-Sin apellido-</p>
+                </div>
+
+                <div class="box">
+                  <h3>Username:</h3>
+                </div>
+                <div class="box">
+                  <p>{{ userDeleteModal.username }}</p>
+                </div>
+
+                <form style="width:100%">
+                  <div class="text-inside">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Tu Contraseña</mat-label>
+                      <input type="password" autocomplete="off" [(ngModel)]="userDeletePassword" name="password"
+                        matInput />
+                    </mat-form-field>
+                  </div>
+                  <div class="modal-footer justify-content-center">
+                    <button (click)="showPassword()" type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                      <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
+                      Delete
+                    </button>
+                    <button (click)="deleteUser(userDeleteModal._id, userDeletePassword)" type="submit"
+                      class="btn btn-success" data-bs-dismiss="modal">
+                      <i class="fa fa-floppy-o" aria-hidden="true"></i> Siguiente
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -334,7 +455,8 @@
                 </li>
                 <li *ngIf="buttonActions">
                   <div class="icon-button-demo m-l-10">
-                    <button (click)="deleteUser(userDelete._id)" mat-mini-fab color="warn">
+                    <button (click)="getUser(userDelete._id)" data-bs-toggle="modal" data-bs-target="#deleteUser"
+                      mat-mini-fab color="warn">
                       <mat-icon class="col-white">delete
                       </mat-icon>
                     </button>
@@ -363,40 +485,15 @@
                 <tr>
                   <th class="text-center">#</th>
                   <th>Photo</th>
-                  <th class="cursor" *ngIf="!userNameUp && !userNameDown" (click)="getUsersByUp()">
-                    Name
-                    <i class="fa fa-sort-alpha-asc text-gray-400 ms-2" aria-hidden="true"></i>
-                    <i class="fa fa-sort-alpha-desc text-gray-400 ms-2"></i>
-                  </th>
-                  <th class="cursor" *ngIf="userNameUp && !userNameDown" (click)="getUsersByDown()">
-                    Name
-                    <i class="fa fa-sort-alpha-asc ms-2" aria-hidden="true"></i>
-                    <i class="fa fa-sort-alpha-desc text-gray-400 ms-2"></i>
-                  </th>
-                  <th class="cursor" *ngIf="userNameDown" (click)="getUsersByUp()">
-                    Name
-                    <i class="fa fa-sort-alpha-asc text-gray-400 ms-2" aria-hidden="true"></i>
-                    <i class="fa fa-sort-alpha-desc ms-2"></i>
-                  </th>
-                  <th class="cursor" *ngIf="!userSurnameUp && !userSurnameDown" (click)="getUsersSurnameByUp()">
-                    Surname
-                    <i class="fa fa-sort-alpha-asc text-gray-400 ms-2" aria-hidden="true"></i>
-                    <i class="fa fa-sort-alpha-desc text-gray-400 ms-2"></i>
-                  </th>
-                  <th class="cursor" *ngIf="userSurnameUp && !userSurnameDown" (click)="getUsersSurnameByDown()">
-                    Surname
-                    <i class="fa fa-sort-alpha-asc ms-2" aria-hidden="true"></i>
-                    <i class="fa fa-sort-alpha-desc text-gray-400 ms-2"></i>
-                  </th>
-                  <th class="cursor" *ngIf="userSurnameDown" (click)="getUsersSurnameByUp()">
-                    Surname
-                    <i class="fa fa-sort-alpha-asc text-gray-400 ms-2" aria-hidden="true"></i>
-                    <i class="fa fa-sort-alpha-desc ms-2"></i>
-                  </th>
+                  <th>Name</th>
+                  <th>Surname</th>
                   <th>Username</th>
+                  <th>DPI</th>
+                  <th>NIT</th>
                   <th>Email</th>
-                  <th>Phone</th>
                   <th>Role</th>
+                  <th>Phone</th>
+                  <th>Gender</th>
                 </tr>
               </thead>
               <tbody>
@@ -418,19 +515,21 @@
                   </td>
                   <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.username }}
                   </td>
+                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.DPI }}
+                  </td>
+                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.NIT }}
+                  </td>
                   <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.email }}
                   </td>
-                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.phone }}
-                  </td>
                   <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser" align="center">
-                    <div *ngIf="user.role === 'ADMIN HOTEL'" data-bs-toggle="modal" data-bs-target="#viewUser"
-                      class="badge col-blue">
-                      {{ user.role }}
-                    </div>
-                    <div *ngIf="user.role === 'CLIENT'" data-bs-toggle="modal" data-bs-target="#viewUser"
+                    <div *ngIf="user.role === 'PACIENTE'" data-bs-toggle="modal" data-bs-target="#viewUser"
                       class="badge col-yellow">
                       {{ user.role }}
                     </div>
+                  </td>
+                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.phone }}
+                  </td>
+                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.gender }}
                   </td>
                 </tr>
                 <tr rowspan="9" *ngIf="notFound === true">
@@ -446,4 +545,8 @@
   <h1 *ngIf="notFound === true && showTableUsers === false" class="text-center">
     Not Users Found
   </h1>
+
+
+
+
 </section>

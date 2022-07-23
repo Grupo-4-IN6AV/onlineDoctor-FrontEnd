@@ -105,9 +105,9 @@
   background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("../../../../assets/images/aboutUs/imgAbout.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
+  background-position: 50% 80%;
   color: #fff;
-  padding-top: 550px;
+  padding-top: 12rem;
   padding-bottom: 110px;
 }
 

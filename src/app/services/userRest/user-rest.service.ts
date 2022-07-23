@@ -78,9 +78,9 @@ export class UserRestService
     return this.http.get(environment.baseURI + 'user/getUsersAdminHotel', { headers: this.httpOptions });
   }
 
-  deleteUser(id:string)
+  deleteUser(id:string, params:{})
   {
-    return this.http.delete(environment.baseURI + 'user/deleteUser/' + id, { headers: this.httpOptions });
+    return this.http.post(environment.baseURI + 'user/deleteUser/' + id, params, { headers: this.httpOptions });
   }
 
 }

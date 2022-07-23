@@ -50,6 +50,9 @@ export class LoginComponent implements OnInit
         //VERIFICA A DONDE LLEVARME//
         if(verificarAdmin == 'ADMIN')
          {this.router.navigate(['/admin/home']);}
+        
+        if(verificarAdmin == 'DOCTOR')
+         {this.router.navigate(['/doctor/home'])}
       },
       error: (err: any) => {
         Swal.fire({

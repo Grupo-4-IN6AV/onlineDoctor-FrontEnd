@@ -21,15 +21,12 @@
               [matTooltipPosition]="'above'">
               <i class="material-icons-two-tone">account_circle</i>
             </a>
-            <a mat-icon-button disabled routerLink="email/inbox" matTooltip="Email" [matTooltipPosition]="'above'">
-              <i class="material-icons-two-tone">mark_email_unread</i>
-            </a>
             <a mat-icon-button disabled routerLink="calendar" matTooltip="Calendar" [matTooltipPosition]="'above'">
               <i class="material-icons-two-tone">event</i>
             </a>
-            <a mat-icon-button disabled routerLink="authentication/locked" matTooltip="Lock"
+            <a mat-icon-button disabled (click)="logOut()" matTooltip="LogOut"
               [matTooltipPosition]="'above'">
-              <i class="material-icons-two-tone">lock</i>
+              <i class="material-icons-two-tone">power_settings_new</i>
             </a>
           </div>
         </li>

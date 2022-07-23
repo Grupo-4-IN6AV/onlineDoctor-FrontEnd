@@ -26,11 +26,10 @@ export class AdminUserComponent implements OnInit {
     private modalService: NgbModal,
     private userRest: UserRestService,
   ) {
-    this.user = new UserModel('', '', '', '', '', '', '', '', '','','','',true,'');
+    this.user = new UserModel('', '', '', '', '', '', '', '', '', '', '', 'PACIENTE', true, '');
   }
 
-  public ngOnInit(): void
-  {
+  public ngOnInit(): void {
     this.getUsers();
   }
 
@@ -41,6 +40,8 @@ export class AdminUserComponent implements OnInit {
   userView: any;
   userUpdate: any;
   userDelete: any;
+  userDeleteModal: any;
+  userDeletePassword: any;
   showTableUsers: boolean = false;
   userNameUp: any;
   userNameDown: any;
@@ -50,8 +51,8 @@ export class AdminUserComponent implements OnInit {
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
-  userCheck : any;
-  controloClick : number = 0
+  userCheck: any;
+  controloClick: number = 0
 
   //METÓDOS DEL CRUD DE USERS//
   getUsers() {
@@ -91,7 +92,9 @@ export class AdminUserComponent implements OnInit {
       next: (res: any) => {
         this.userView = res.user;
         this.userUpdate = res.user;
-        this.userDelete = res.user
+        this.userDelete = res.user;
+        this.userDeleteModal = res.user;
+        console.log(this.userView)
       },
       error: (err) => { alert(err.error.message) }
     })
@@ -107,7 +110,9 @@ export class AdminUserComponent implements OnInit {
           confirmButtonColor: '#28B463'
         });
         this.getUsers();
-        this.showButtonActions(this.userUpdate._id,false)
+        if (this.showTableUsers === true) {
+          this.showButtonActions(this.userUpdate._id, false)
+        }
       },
       error: (err) => {
         Swal.fire({
@@ -119,7 +124,7 @@ export class AdminUserComponent implements OnInit {
     })
   }
 
-  deleteUser(id: string) {
+  deleteUser(id: string, password: string) {
     Swal.fire({
       title: 'Do you want to delete this User?',
       showDenyButton: true,
@@ -129,7 +134,11 @@ export class AdminUserComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.userRest.deleteUser(id).subscribe({
+        const params = {
+          password: password
+        }
+        console.log(params)
+        this.userRest.deleteUser(id, params).subscribe({
           next: (res: any) => {
             Swal.fire({
               title: res.message,
@@ -139,27 +148,38 @@ export class AdminUserComponent implements OnInit {
               timer: 2000
             });
             this.getUsers();
-            this.showButtonActions(id,false)
+            if (this.showTableUsers === true) {
+              this.showButtonActions(this.userUpdate._id, false)
+            }
+            this.userDeletePassword = "";
           },
-          error: (err) => Swal.fire({
-            title: err.error.message,
+          error: (err) => {
+          Swal.fire({
+            title: err.error.message||err.error,
             icon: 'error',
             position: 'center',
             timer: 3000
-          })
+          }),
+          this.userDeletePassword = "";
+        }
+          
         })
         this.getUsers();
       } else if (result.isDenied) {
         Swal.fire('User Not Deleted', '', 'info')
+        this.userDeletePassword = "";
       }
     })
+    this.userDeletePassword = "";
   }
 
-  showTable()
-  {
-    this.showTableUsers =! this.showTableUsers;
-    for(let user of this.users)
-    {
+  showPassword(){
+    this.userDeletePassword = "";
+  }
+
+  showTable() {
+    this.showTableUsers = !this.showTableUsers;
+    for (let user of this.users) {
       user.checked = true
     }
   }
@@ -251,38 +271,30 @@ export class AdminUserComponent implements OnInit {
     this.searchUser = this.reset;
   }
 
-  showButtonActions(userID:any, check:any)
-  {
+  showButtonActions(userID: any, check: any) {
     this.controloClick += 1
-    let controlCheck =! check.checked
-    if(this.controloClick == 1)
-    {
-      for(let user of this.users)
-      {
-        if(userID != user._id)
-        {
-          user.checked =! controlCheck
+    let controlCheck = !check.checked
+    if (this.controloClick == 1) {
+      for (let user of this.users) {
+        if (userID != user._id) {
+          user.checked = !controlCheck
         }
-        else if(userID == user._id)
-        {
+        else if (userID == user._id) {
           user.checked = controlCheck
         }
       }
     }
-    else if(this.controloClick == 2)
-    {
-      for(let user of this.users)
-      {
+    else if (this.controloClick == 2) {
+      for (let user of this.users) {
         user.checked = true;
       }
       this.controloClick = 0;
     }
-    this.buttonActions =! this.buttonActions;
+    this.buttonActions = !this.buttonActions;
     console.log(this.controloClick)
   }
 
-  closeDialog(): void
-  {
+  closeDialog(): void {
     this.dialog.closeAll();
   }
 }

@@ -1,0 +1,78 @@
+//Función para guardar un Appointment//
+exports.saveAppointmentADMIN = async (req, res) => {
+    try {
+        const params = req.body;
+
+        const finishDateEntry = new Date(params.date);
+
+        //VERIFICAR FECHAS VALIDAS//
+
+        //Verificar con Fecha Actual//
+        /*PARAMETRO DE ENTRADA DATA*/
+        const dateLocalOne = new Date();
+        const dateLocal = (dateLocalOne).toLocaleString('UTC', { timeZone: 'America/Guatemala' });
+        const splitDate = dateLocal.split(' ');
+        const splitDateOne = splitDate[0].split('/');
+        if (splitDateOne[0] < 10) {
+            splitDateOne[0] = '0' + splitDateOne[0];
+        }
+        if (splitDateOne[1] < 10) {
+            splitDateOne[1] = '0' + splitDateOne[1];
+        }
+        const setDate = splitDateOne[2] + '-' + splitDateOne[1] + '-' + splitDateOne[0];
+        const dateNow = new Date(setDate);
+
+
+        const data = {
+            pacient: params.pacient,
+            doctor: params.doctor,
+            date: finishDateEntry,
+            modality: params.modality,
+        };
+        
+
+        const msg = validateData(data);
+        if (!msg) {
+            const user = await User.findOne({ _id: params.pacient });
+            if (!user) return res.send({ message: 'Paciente no encontrado.' });
+
+            const doctor = await Doctor.findOne({ _id: params.doctor });
+            if (!doctor) return res.send({ message: 'Doctor no encontrado.' });
+
+            const appoAlready = await Appointment.findOne({
+                $and: [
+                    { pacient: data.pacient },
+                    { doctor: data.doctor }
+                ]
+            });
+
+            if (appoAlready) return res.send({ message: 'Cita ya creada con este Doctor.' });
+
+            const dateAlready = await Appointment.findOne({
+                $and: [
+                    { date: finishDateEntry },
+                    { pacient: data.pacient }
+                ]
+            });
+
+            if (dateAlready) return res.send({ message: 'Cita ya creada en esta fecha.' });
+
+            const appointment = new Appointment(data);
+            await appointment.save();
+
+            if (appointment) {
+                const registerAppointmentUser = await User.findOneAndUpdate({ _id: user._id }, { $push: { appointment: { appointment: appointment._id, done: false } } }, { new: true });
+                if (!registerAppointmentUser) return res.status(400).send({ message: 'Cita no creada' });
+
+                const registerAppointmentDoctor = await Doctor.findOneAndUpdate({ _id: doctor._id }, { $push: { appointment: { appointment: appointment._id, done: false } } }, { new: true });
+                if (!registerAppointmentDoctor) return res.status(400).send({ message: 'Cita no creada' });
+
+            } else return res.status(400).send({ message: 'Cita no creada' });
+
+            return res.send({ message: 'Cita Guardada Exitosamente.', appointment });
+        } else return res.status(400).send(msg);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({ err, message: 'Error al Guardar una cita.' });
+    }
+}
