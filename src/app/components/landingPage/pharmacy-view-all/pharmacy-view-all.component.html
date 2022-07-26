@@ -1,0 +1,27 @@
+<swiper #swiperRef [slidesPerView]="3" [centeredSlides]="true" [spaceBetween]="30" [navigation]="true" [virtual]="true" class="mySwiper-Two">
+    <ng-template swiperSlide *ngFor="let medicament of medicaments">
+        <div class="product">
+            <a href="product-single.html" class="product-img">
+                <img src="../../../../assets/pharmacy/assets/img/principal.png" class="" alt="">
+            </a>
+            <div class="product-info">
+                <div class="product-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <h3>
+                    <a href="product-single.html"> {{medicament.name}}</a>
+                </h3>
+                <div class="product-value">
+                    <div class="d-flex">
+                        <small class="regular-price">{{medicament.description}}</small>
+                    </div>
+                    <div class="current-price">{{medicament.price}}</div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</swiper>

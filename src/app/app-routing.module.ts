@@ -9,10 +9,8 @@ import { NavbarComponent } from './components/landingPage/navbar/navbar.componen
 import { LandingPageComponent } from './components/landingPage/landing-page/landing-page.component';
 import { AboutUsComponent } from './components/landingPage/about-us/about-us.component';
 import { ContactUsComponent } from './components/landingPage/contact-us/contact-us.component';
-import { HotelComponent } from './components/landingPage/hotel/hotel.component';
 import { HotelAdminComponent } from './components/admin/hotel-admin/hotel-admin.component';
 import { EventsAdminComponent } from './components/admin/event-admin/event-admin.component';
-import { HotelViewComponent } from './components/landingPage/hotel-view/hotel-view.component';
 import { TypeLaboratoryAdminComponent } from './components/admin/type-laboratory-admin/type-laboratory-admin.component';
 import { TypeMedicamentAdminComponent } from './components/admin/type-medicament-admin/type-medicament-admin.component';
 import { SpecialityAdminComponent } from './components/admin/speciality-admin/speciality-admin.component';
@@ -23,7 +21,6 @@ import { LayoutDoctorComponent } from './components/doctor/layout-doctor/layout-
 import { HomeDoctorComponent } from './components/doctor/home-doctor/home-doctor.component';
 import { DoctorAdminComponent } from './components/admin/doctor-admin/doctor-admin.component';
 import { AppointmentAdminComponent } from './components/admin/appointment-admin/appointment-admin.component';
-
 
 const routes: Routes =
 [
