@@ -1,31 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import {ScriptsBundleService} from '../../../services/cargarScripts/scripts-bundle.service';
-import {ScriptsPharmacyService} from '../../../services/cargarScripts/scripts-pharmacy.service';
-import {ScriptsPharmasyGlobalService} from '../../../services/cargarScripts/scripts-pharmasy-global.service'
-import { ScriptSwiperService } from 'src/app/services/cargarScripts/script-swiper.service';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
+import { SwiperComponent } from "swiper/angular";
+import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
+
+SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
 @Component({
   selector: 'app-pharmacy-view',
   templateUrl: './pharmacy-view.component.html',
-  styleUrls: ['./pharmacy-view.component.css']
+  styleUrls: ['./pharmacy-view.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PharmacyViewComponent implements OnInit {
-
+  thumbsSwiper: any
   constructor(
-    private _ScriptsSwiper: ScriptSwiperService,
-    private _ScriptsBundle: ScriptsBundleService,
-    private _ScriptsPharmacyGlobal: ScriptsPharmasyGlobalService,
-    private _ScriptsPharmacy: ScriptsPharmacyService,
+
   ) {
-    
-    _ScriptsPharmacyGlobal.Carga(["gulpfile"]);
-    
-    _ScriptsPharmacy.Carga(["jquery-2.2.4.min"]);
-    _ScriptsPharmacy.Carga(["plugins.bundle"]);
-    _ScriptsPharmacy.Carga(["theme"]);
+
    }
 
   ngOnInit(): void {
+  
   }
 
 }
