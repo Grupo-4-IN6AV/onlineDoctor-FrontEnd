@@ -89,6 +89,7 @@ import { SidebarrightDoctorComponent } from './components/doctor/sidebarright-do
 import { HomeDoctorComponent } from './components/doctor/home-doctor/home-doctor.component';
 import { DoctorAdminComponent } from './components/admin/doctor-admin/doctor-admin.component';
 import { AppointmentAdminComponent } from './components/admin/appointment-admin/appointment-admin.component';
+import { LaboratoryAdminComponent } from './components/admin/laboratory-admin/laboratory-admin.component';
 
 
 
@@ -136,7 +137,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HeaderDoctorComponent,
         HomeDoctorComponent,
         DoctorAdminComponent,
-        AppointmentAdminComponent
+        AppointmentAdminComponent,
+        LaboratoryAdminComponent
     ],
     imports: [
         FormsModule,
