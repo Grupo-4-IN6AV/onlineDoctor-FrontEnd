@@ -21,6 +21,8 @@ import { LayoutDoctorComponent } from './components/doctor/layout-doctor/layout-
 import { HomeDoctorComponent } from './components/doctor/home-doctor/home-doctor.component';
 import { DoctorAdminComponent } from './components/admin/doctor-admin/doctor-admin.component';
 import { AppointmentAdminComponent } from './components/admin/appointment-admin/appointment-admin.component';
+import { LaboratoryAdminComponent } from './components/admin/laboratory-admin/laboratory-admin.component';
+
 import { MeetingComponent } from './components/admin/meeting/meeting.component';
 import { CallComponent } from './components/admin/call/call.component';
 
@@ -50,6 +52,7 @@ const routes: Routes =
       {path: 'medicament', component: MedicamentAdminComponent},
       {path: 'doctor', component: DoctorAdminComponent},
       {path: 'appointment', component: AppointmentAdminComponent},
+      {path: 'laboratory', component: LaboratoryAdminComponent},
       {path: 'call', component: CallComponent},
       {path: 'meeting', component: MeetingComponent},
     ]

@@ -1,0 +1,352 @@
+<section class="content">
+    <h1 style="margin-top: 4rem">
+        &nbsp;<i class="fa-solid fa-microscope"></i>
+        Laboratory
+    </h1>
+    <hr />
+
+    <div class="text-center mt-2 mb-2">
+        <button type="button" data-bs-toggle="modal" data-bs-target="#addLaboratory"
+            class="ms-3 btn btn-event btn-success" (click)="getUsers(); getTypesLaboratory()">
+            Add Laboratory
+            <span class="btn-icon-end"><i class="fa-solid fa-microscope"></i></span>
+        </button>
+        <button *ngIf="!showTableLaboratory" (click)="showTable()" type="button"
+            class="ms-3 btn btn-event btn-secondary">
+            Table Laboratory
+            <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
+        </button>
+        <button *ngIf="showTableLaboratory" (click)="showTable(); cleanTable()" type="button"
+            class="ms-3 btn btn-event btn-secondary">
+            Return Cards
+            <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
+        </button>
+        <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
+            Back Home
+            <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
+        </button>
+    </div>
+    <hr />
+
+    <!--CARDS DE USERS-->
+    <div *ngIf="!showTableLaboratory">
+        <div class="container">
+            <div class="products-container">
+                <div *ngFor="let laboratory of laboratories" class="product" data-name="p-1">
+                    <h5 class="card-title">{{ laboratory.pacient.name }} | {{ laboratory.typeLaboratory.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ laboratory.date }}</h6>
+                    <button (click)="getLaboratory(laboratory._id); getUsers(); getTypesLaboratory()" class="btn btn-success m-3"
+                        data-bs-toggle="modal" data-bs-target="#updateLaboratory" class="btn btn-warning m-2">
+                        <i class="fa fa-pencil" aria-hidden="true"> </i> Update
+                    </button>
+                    <button (click)="deleteLaboratory(laboratory._id)" class="btn btn-danger">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        Delete
+                    </button>
+                    <button (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
+                        data-bs-target="#viewLaboratory" class="btn btn-secondary ms-2">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        View
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--View Medicament-->
+    <div>
+        <div class="modal fade" id="viewLaboratory" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="addContainer">
+                        <div class="contact-details">
+                            <div class="modalHeader">
+                                <div class="editRowModal">
+                                    <div *ngIf="laboratoryView" class="modalHeader clearfix">
+                                        <div class="modal-about contact-header">
+                                            <div class="contact-details-img">
+                                                <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
+                                            </div>
+                                            <div class="contact-details-heading">
+                                                <div class="contact-details-name mb-2">
+                                                    {{ laboratoryView.pacient.name }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </div>
+                            <hr />
+                            <div *ngIf="laboratoryView" class="descripcion">
+                                <div class="count-container">
+                                    <div class="box">
+                                        <h3>Pacient:</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ laboratoryView.pacient.name }}</p>
+                                    </div>
+
+                                    <div class="box">
+                                        <h3>Type Laboratory:</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ laboratoryView.typeLaboratory.name }}</p>
+                                    </div>
+
+                                    <div class="box">
+                                        <h3>Date:</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ laboratoryView.date }}</p>
+                                    </div>
+
+                                    <div class="box">
+                                        <h3>Specification:</h3>
+                                    </div>
+
+                                    <div class="box">
+                                        <p>{{ laboratoryView.specifications }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--ADD Medicament-->
+        <div class="modal fade" id="addLaboratory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="modal-basic-title">
+                            <i class="fa-solid fa-microscope"></i>
+                            &nbsp;Add Laboratory
+                        </h3>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form (ngSubmit)="saveLaboratory(addLaboratoryForm)" #addLaboratoryForm="ngForm">
+                            <div class="text-inside">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Pacient</mat-label>
+                                    <mat-select [(ngModel)]="laboratory.pacient" name="pacient">
+                                        <div *ngFor="let user of users">
+                                            <mat-option *ngIf="user.role == 'PACIENTE'"
+                                            value={{user._id}}>{{user.name}}</mat-option>
+                                        </div>
+                                        
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="text-inside">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Type Laboratory</mat-label>
+                                    <mat-select [(ngModel)]="laboratory.typeLaboratory " name="typeLaboratory">
+                                        <div *ngFor="let typeLaboratory of typesLaboratory">
+                                            <mat-option value={{typeLaboratory._id}}>{{typeLaboratory.name}}</mat-option>
+                                        </div>
+                                        
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="text-inside">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Date</mat-label>
+                                    <input autocomplete="off" type="date" [(ngModel)]="laboratory.date" name="date" matInput />
+                                </mat-form-field>
+                            </div>
+                            
+                            <div class="text-inside">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                    <mat-label>Specifications</mat-label>
+                                    <input autocomplete="off" [(ngModel)]="laboratory.specifications" name="specifications" matInput />
+                                </mat-form-field>
+                            </div>
+                            <hr />
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
+                                    Save
+                                </button>
+                                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Save Laboratory
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--UPDATE USER-->
+    <div class="modal fade" id="updateLaboratory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-basic-title">
+                        <i class="fas fa-pencil" aria-hidden="true"></i>
+                        &nbsp;Update Laboratory
+                    </h3>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="updateLaboratory()" *ngIf="laboratoryUpdate">
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Pacient</mat-label>
+                                <mat-select disabled [(ngModel)]="laboratoryUpdate.pacient._id" name="pacient">
+                                    <div *ngFor="let user of users">
+                                        <mat-option *ngIf="user.role === 'PACIENTE'"
+                                        value={{user._id}}>{{user.name}}</mat-option>
+                                    </div>
+                                    
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Type Laboratory</mat-label>
+                                <mat-select [(ngModel)]="laboratoryUpdate.typeLaboratory._id" name="typeLaboratory">
+                                    <div *ngFor="let typeLaboratory of typesLaboratory">
+                                        <mat-option value={{typeLaboratory._id}}>{{typeLaboratory.name}}</mat-option>
+                                    </div>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Date</mat-label>
+                                <input autocomplete="off" type="date" [(ngModel)]="laboratoryUpdate.date" name="date" matInput />
+                            </mat-form-field>
+                        </div>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Specifications</mat-label>
+                                <input autocomplete="off" [(ngModel)]="laboratoryUpdate.specifications" name="specifications" matInput />
+                            </mat-form-field>
+                        </div>
+                        <hr />
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update
+                            </button>
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Update Laboratory
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--TABLE USERS-->
+    <div *ngIf="showTableLaboratory" class="row clearfix mt-5">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="materialTableHeader mb-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <ul class="header-buttons-left ml-0">
+                                <li class="dropdown">
+                                    <div class="header">
+                                        <h2>Table Laboratory</h2>
+                                    </div>
+                                </li>
+                                <li class="dropdown m-l-20">
+                                    <label for="search-input">
+                                        <i class="material-icons search-icon">search</i>
+                                    </label>
+                                    <input [(ngModel)]="searchLaboratory" placeholder="Search.." type="text" #filter
+                                        class="browser-default search-field" aria-label="Search box" />
+                                </li>
+                                <li *ngIf="buttonActions">
+                                    <div class="icon-button-demo m-l-10">
+                                        <button (click)="deleteLaboratory(laboratoryDelete._id)" mat-mini-fab
+                                            color="warn">
+                                            <mat-icon class="col-white">delete
+                                            </mat-icon>
+                                        </button>
+                                    </div>
+                                </li>
+                                <li *ngIf="buttonActions">
+                                    <div class="icon-button-demo m-l-10">
+                                        <button data-bs-toggle="modal" data-bs-target="#updateLaboratory" mat-mini-fab
+                                            class="colorUpdate" (click)="getUsers(); getTypesLaboratory()">
+                                            <mat-icon class="col-white">edit
+                                            </mat-icon>
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="tableBody">
+                    <div class="table-responsive">
+                        <i *ngIf="" (click)="cleanTable()" class="fa fa-times-circle closeFilter" aria-hidden="true">
+                        </i>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th>Photo</th>
+                                    <th>Pacient</th>
+                                    <th>Type Laboratory</th>
+                                    <th>Date</th>
+                                    <th>Specifications</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let laboratory of laboratories">
+                                    <td (click)="getLaboratory(laboratory._id)">
+                                        <mat-checkbox *ngIf="laboratory.checked==true || controloClick==0"
+                                            #check="matCheckbox"
+                                            (click)="showButtonActions(laboratory._id, check); getLaboratory(laboratory._id)"
+                                            class="example-margin" color="primary">
+                                        </mat-checkbox>
+                                        <mat-checkbox disabled="" *ngIf="laboratory.checked==false"
+                                            class="example-margin" color="primary">
+                                        </mat-checkbox>
+                                        {{ laboratories.indexOf(laboratory) + 1 }}
+                                    </td>
+                                    <td (click)="getLaboratory(laboratory._id)" class="table-img">
+                                        <img src="assets/images/user/user8.jpg" alt="" />
+                                    </td>
+                                    <td (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewLaboratory">{{ laboratory.pacient.name }}</td>
+                                    <td (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewLaboratory">{{ laboratory.typeLaboratory.name }}</td>
+                                    <td (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewLaboratory">{{ laboratory.date }}</td>
+                                    <td (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewLaboratory">{{ laboratory.specifications }}</td>
+                                </tr>
+                                <tr rowspan="9" *ngIf="notFound === true">
+                                    <td colspan="9" class="text-center">Not Laboratory Found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 *ngIf="notFound === true && showTableLaboratory === false" class="text-center">
+        Not Laboratory Found
+    </h1>
+</section>

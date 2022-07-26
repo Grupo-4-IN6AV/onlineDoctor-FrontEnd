@@ -96,4 +96,16 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
+  {
+    path: 'laboratory',
+    title: 'Laboratory',
+    moduleName: 'admin',
+    iconType: 'material-icons-two-tone',
+    icon: 'biotech',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
 ];
