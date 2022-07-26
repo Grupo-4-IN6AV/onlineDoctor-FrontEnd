@@ -141,7 +141,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DoctorAdminComponent,
         AppointmentAdminComponent,
         MeetingComponent,
-        CallComponent
+        CallComponent,
         PharmacyViewAllComponent,
     ],
     imports: [
