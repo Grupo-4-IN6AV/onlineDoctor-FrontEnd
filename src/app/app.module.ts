@@ -80,8 +80,8 @@ import { TypeMedicamentAdminComponent } from './components/admin/type-medicament
 import { SpecialityAdminComponent } from './components/admin/speciality-admin/speciality-admin.component';
 import { MedicamentAdminComponent } from './components/admin/medicament-admin/medicament-admin.component';
 import { PharmacyComponent } from './components/landingPage/pharmacy/pharmacy.component';
-import { SearchMedicamentPipe } from './pipes/searchMedicament/search-medicament.pipe';
 import { PharmacyViewComponent } from './components/landingPage/pharmacy-view/pharmacy-view.component';
+import { SearchMedicamentPipe } from './pipes/searchMedicament/search-medicament.pipe';
 import { SwiperModule } from 'swiper/angular';
 import { LayoutDoctorComponent } from './components/doctor/layout-doctor/layout-doctor.component';
 import { SidebarDoctorComponent } from './components/doctor/sidebar-doctor/sidebar-doctor.component';
@@ -89,6 +89,7 @@ import { SidebarrightDoctorComponent } from './components/doctor/sidebarright-do
 import { HomeDoctorComponent } from './components/doctor/home-doctor/home-doctor.component';
 import { DoctorAdminComponent } from './components/admin/doctor-admin/doctor-admin.component';
 import { AppointmentAdminComponent } from './components/admin/appointment-admin/appointment-admin.component';
+import { PharmacyViewAllComponent } from './components/landingPage/pharmacy-view-all/pharmacy-view-all.component';
 
 
 
@@ -136,7 +137,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         HeaderDoctorComponent,
         HomeDoctorComponent,
         DoctorAdminComponent,
-        AppointmentAdminComponent
+        AppointmentAdminComponent,
+        PharmacyViewAllComponent,
     ],
     imports: [
         FormsModule,
