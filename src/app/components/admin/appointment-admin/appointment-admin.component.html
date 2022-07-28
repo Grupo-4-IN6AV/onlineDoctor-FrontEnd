@@ -48,6 +48,12 @@
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         View
                     </button>
+                    <br>
+                    <button *ngIf="appointment.modality == 'VIRTUAL'" data-bs-toggle="modal"
+                    [routerLink]="['/admin/meeting/' + appointment._id]" class="btn btn-success ms-2">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        Join the meeting
+                    </button>
                 </div>
             </div>
         </div>

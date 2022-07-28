@@ -1,5 +1,11 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AppointmentModel } from 'src/app/models/appointment.model'
+import { AppointmentRestService } from 'src/app/services/appointmentRest/appointment-rest.service';
+import { UserRestService } from 'src/app/services/userRest/user-rest.service';
+import { DoctorRestService } from 'src/app/services/doctorRest/doctor-rest.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { CredentialsRestService } from '../../../services/credentialsRest/credentials-rest.service';
 declare var JitsiMeetExternalAPI: any;
 
 @Component({
@@ -13,48 +19,77 @@ export class MeetingComponent implements OnInit, AfterViewInit {
   options: any;
   api: any;
   user: any;
+  appointment: any;
+  users: any;
+  doctors: any;
+  idAppointment: any;
+  //appointmentGet:any;
 
   // For Custom Controls
   isAudioMuted = false;
   isVideoMuted = false;
 
   constructor(
-    private router: Router
+    public activatedRoute: ActivatedRoute,
+    private router: Router,
+    private appointmentRest: AppointmentRestService,
+    private credentialRest: CredentialsRestService,
   ) { }
 
   ngOnInit(): void {
-    this.room = 'bwb-bfqi-vmh'; // set your room name
-    this.user  = {
-      name: 'Akash Verma' // set your username
-    }
+
+    this.activatedRoute.paramMap.subscribe(ruta => {
+      this.idAppointment = ruta.get('id');
+    });
+
+
+
+  }
+
+  getAppoinment() {
+    this.appointmentRest.getAppointment(this.idAppointment).subscribe({
+      next: (res: any) => { this.appointment = res.appointment },
+      error: (err) => console.log(err)
+    })
   }
 
   ngAfterViewInit(): void {
-    this.options = {
-      roomName: this.room,
-      width: 900,
-      height: 500,
-      configOverwrite: { prejoinPageEnabled: false },
-      interfaceConfigOverwrite: {
-        // overwrite interface properties
+    this.appointmentRest.getAppointment(this.idAppointment).subscribe({
+      next: (res: any) => {
+        this.appointment = res.appointment 
+        let splitDate = this.appointment.date.split('T')
+        this.room = 'Dr.' + this.appointment.doctor.name + 'Pacient.' + this.appointment.pacient.name + splitDate[0]
+        this.options = {
+
+          roomName: this.room,
+          width: 900,
+          height: 500,
+          configOverwrite: { prejoinPageEnabled: false },
+          interfaceConfigOverwrite: {
+            // overwrite interface properties
+          },
+          parentNode: document.querySelector('#jitsi-iframe'),
+          userInfo: {
+            displayName: this.credentialRest.getIdentity().name
+          }
+        }
+    
+        this.api = new JitsiMeetExternalAPI(this.domain, this.options);
+    
+        this.api.addEventListeners({
+          readyToClose: this.handleClose,
+          participantLeft: this.handleParticipantLeft,
+          participantJoined: this.handleParticipantJoined,
+          videoConferenceJoined: this.handleVideoConferenceJoined,
+          videoConferenceLeft: this.handleVideoConferenceLeft,
+          audioMuteStatusChanged: this.handleMuteStatus,
+          videoMuteStatusChanged: this.handleVideoStatus
+        });
+   
       },
-      parentNode: document.querySelector('#jitsi-iframe'),
-      userInfo: {
-        displayName: this.user.name
-      }
-    }
-
-    this.api = new JitsiMeetExternalAPI(this.domain, this.options);
-
-    this.api.addEventListeners({
-      readyToClose: this.handleClose,
-      participantLeft: this.handleParticipantLeft,
-      participantJoined: this.handleParticipantJoined,
-      videoConferenceJoined: this.handleVideoConferenceJoined,
-      videoConferenceLeft: this.handleVideoConferenceLeft,
-      audioMuteStatusChanged: this.handleMuteStatus,
-      videoMuteStatusChanged: this.handleVideoStatus
-    });
+      error: (err) => console.log(err)
+    })
+    
   }
 
 
@@ -79,7 +114,7 @@ export class MeetingComponent implements OnInit, AfterViewInit {
 
   handleVideoConferenceLeft = () => {
     console.log("handleVideoConferenceLeft");
-    this.router.navigate(['/thank-you']);
+    this.router.navigate(['/admin/appointment']);
   }
 
   handleMuteStatus = (audio) => {
@@ -102,7 +137,7 @@ export class MeetingComponent implements OnInit, AfterViewInit {
   executeCommand(command: string) {
     this.api.executeCommand(command);;
     if (command == 'hangup') {
-      this.router.navigate(['/thank-you']);
+      this.router.navigate(['/admin/appointment']);
       return;
     }
 
