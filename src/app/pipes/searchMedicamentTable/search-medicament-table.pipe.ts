@@ -3,9 +3,9 @@ import {MedicamentRestService} from '../../services/medicamentRest/medicament-re
 import {MedicamentAdminComponent} from '../../components/admin/medicament-admin/medicament-admin.component'
 
 @Pipe({
-  name: 'searchMedicament'
+  name: 'searchMedicamentTable'
 })
-export class SearchMedicamentPipe implements PipeTransform {
+export class SearchMedicamentTablePipe implements PipeTransform {
 
   medicaments: any;
 

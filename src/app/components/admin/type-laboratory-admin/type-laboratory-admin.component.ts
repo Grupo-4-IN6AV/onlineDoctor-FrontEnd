@@ -19,7 +19,11 @@ export class TypeLaboratoryAdminComponent implements OnInit {
   typeLaboratoryUpdate: any;
   typeLaboratoryDelete: any;
   showTableTypeLaboratory: boolean = false;
+
+  typeLaboratoryNameUp: any;
+  typeLaboratoryNameDown: any;
   reset: any;
+
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
@@ -148,10 +152,34 @@ export class TypeLaboratoryAdminComponent implements OnInit {
     }
   }
 
-  cleanTable() {
-    this.getTypesLaboratory();
-    this.searchTypeLaboratory = this.reset;
-  }
+  getByUp() {
+      this.typeLaboratoryRest.getTypeLaboratorysByUp().subscribe({
+        next: (res: any) => {
+          this.typeLaboratoryNameDown = this.reset;
+          this.typeLaboratoryNameUp = res.TypeLaboratoryAtoZ
+          this.typesLaboratory = res.TypeLaboratoryAtoZ
+        },
+        error: (err) => console.log(err)
+      })
+    }
+  
+    getByDown() {
+      this.typeLaboratoryRest.getTypeLaboratorysByDown().subscribe({
+        next: (res: any) => {
+          this.typeLaboratoryNameUp = this.reset;
+          this.typeLaboratoryNameDown = res.typeLaboratoryZtoA;
+          this.typesLaboratory = res.typeLaboratoryZtoA
+        },
+        error: (err) => console.log(err)
+      })
+    }
+  
+    cleanTable() {
+      this.typeLaboratoryNameUp = this.reset
+      this.typeLaboratoryNameDown = this.reset
+      this.getTypesLaboratory();
+      this.searchTypeLaboratory = this.reset;
+    }
 
   showButtonActions(typeLaboratoryID:any, check:any)
   {

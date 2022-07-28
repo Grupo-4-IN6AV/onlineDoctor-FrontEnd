@@ -47,4 +47,14 @@ export class MedicamentRestService {
   {
     return this.http.post(environment.baseURI + 'medicament/getMedicamentByName', params, {headers: this.httpOptions});
   }
+
+  getMedicamentsByUp()
+  {
+    return this.http.get(environment.baseURI + 'medicament/getMedicamentAtoZ', { headers: this.httpOptions });
+  }
+
+  getMedicamentsByDown()
+  {
+    return this.http.get(environment.baseURI + 'medicament/getMedicamentZtoA', { headers: this.httpOptions });
+  }
 }

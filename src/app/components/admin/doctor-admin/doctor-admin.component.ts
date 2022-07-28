@@ -26,16 +26,21 @@ export class DoctorAdminComponent implements OnInit {
   }
 
   //Variables de TypeScript//
+
   doctors: any;
   doctor: DoctorModel;
-  searchDoctor: any
+  searchDoctor: any;
   doctorView: any;
   doctorUpdate: any;
   doctorDelete: any;
   doctorDeleteModal: any;
   doctorDeletePassword: any;
   showTableDoctors: boolean = false;
+
+  doctorNameUp: any;
+  doctorNameDown: any;
   reset: any;
+
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
@@ -172,7 +177,31 @@ export class DoctorAdminComponent implements OnInit {
     }
   }
 
+  getByUp() {
+    this.doctorRest.getDoctorsByUp().subscribe({
+      next: (res: any) => {
+        this.doctorNameDown = this.reset;
+        this.doctorNameUp = res.doctorAtoZ
+        this.doctors = res.doctorAtoZ
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
+  getByDown() {
+    this.doctorRest.getDoctorsByDown().subscribe({
+      next: (res: any) => {
+        this.doctorNameUp = this.reset;
+        this.doctorNameDown = res.doctorZtoA;
+        this.doctors = res.doctorZtoA
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
   cleanTable() {
+    this.doctorNameUp = this.reset
+    this.doctorNameDown = this.reset
     this.getDoctors();
     this.searchDoctor = this.reset;
   }

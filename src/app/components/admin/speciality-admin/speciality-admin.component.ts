@@ -19,7 +19,11 @@ export class SpecialityAdminComponent implements OnInit {
   specialityUpdate: any;
   specialityDelete: any;
   showTableSpeciality: boolean = false;
+
+  specialityNameUp: any;
+  specialityNameDown: any;
   reset: any;
+
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
@@ -148,10 +152,35 @@ export class SpecialityAdminComponent implements OnInit {
       }
     }
   
+    getByUp() {
+      this.specialityRest.getSpecialitiesByUp().subscribe({
+        next: (res: any) => {
+          this.specialityNameDown = this.reset;
+          this.specialityNameUp = res.SpecialityAtoZ
+          this.specialities = res.SpecialityAtoZ
+        },
+        error: (err) => console.log(err)
+      })
+    }
+  
+    getByDown() {
+      this.specialityRest.getSpecialitiesByDown().subscribe({
+        next: (res: any) => {
+          this.specialityNameUp = this.reset;
+          this.specialityNameDown = res.SpecialityZtoA;
+          this.specialities = res.SpecialityZtoA
+        },
+        error: (err) => console.log(err)
+      })
+    }
+  
     cleanTable() {
+      this.specialityNameUp = this.reset
+      this.specialityNameDown = this.reset
       this.getSpecialities();
       this.searchSpeciality = this.reset;
     }
+  
   
     showButtonActions(specialityID:any, check:any)
     {

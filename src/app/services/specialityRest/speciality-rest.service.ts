@@ -47,4 +47,14 @@ export class SpecialityRestService {
   {
     return this.http.post(environment.baseURI + 'speciality/getSpecialityByName', params, {headers: this.httpOptions});
   }
+
+  getSpecialitiesByUp()
+  {
+    return this.http.get(environment.baseURI + 'speciality/getSpecialityAtoZ', { headers: this.httpOptions });
+  }
+
+  getSpecialitiesByDown()
+  {
+    return this.http.get(environment.baseURI + 'speciality/getSpecialityZtoA', { headers: this.httpOptions });
+  }
 }

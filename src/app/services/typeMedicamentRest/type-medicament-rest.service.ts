@@ -47,4 +47,14 @@ export class TypeMedicamentRestService {
   {
     return this.http.post(environment.baseURI + 'typeMedicament/getTypeMedicamentByName', params, {headers: this.httpOptions});
   }
+
+  getTypeMedicamentsByUp()
+  {
+    return this.http.get(environment.baseURI + 'typeMedicament/getTypeMedicamentAtoZ', { headers: this.httpOptions });
+  }
+
+  getTypeMedicamentsByDown()
+  {
+    return this.http.get(environment.baseURI + 'typeMedicament/getTypeMedicamentZtoA', { headers: this.httpOptions });
+  }
 }

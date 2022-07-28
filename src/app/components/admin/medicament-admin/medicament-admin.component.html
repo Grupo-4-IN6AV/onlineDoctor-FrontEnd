@@ -32,7 +32,7 @@
     <div *ngIf="!showTableMedicament">
         <div class="container">
             <div class="products-container">
-                <div *ngFor="let medicament of medicaments" class="product" data-name="p-1">
+                <div *ngFor="let medicament of medicaments | searchMedicamentBar: searchMedicament" class="product" data-name="p-1">
                     <h5 class="card-title">{{ medicament.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ medicament.description }}</h6>
                     <button (click)="getMedicament(medicament._id); getTypesMedicaments()" class="btn btn-success m-3"
@@ -307,6 +307,27 @@
                                         </button>
                                     </div>
                                 </li>
+
+                                <li>
+                                    <i *ngIf="!medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()"></i>
+                                    <i *ngIf="!medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getUsersByDown()"></i>
+                                  </li>
+                              
+                                  <li>
+                                    <i *ngIf="medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()" style="color: #4a8af9;"></i>
+                                    <i *ngIf="medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-desc text-gray-400 ms-3" (click)="getByDown()"></i>
+                                  </li>
+                  
+                                  <li>
+                                    <i *ngIf="!medicamentNameUp && medicamentNameDown" class="fa fa-sort-alpha-asc text-gray-400 ms-3" (click)="getByUp()"></i>
+                                    <i *ngIf="!medicamentNameUp && medicamentNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()" style="color: #4a8af9;"></i>
+                                  </li>
+                  
+                                  <li>
+                                    <i *ngIf="medicamentNameUp || medicamentNameDown" (click)="cleanTable()"
+                                    class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
+                                  </li>
+
                                 <li *ngIf="buttonActions">
                                     <div class="icon-button-demo m-l-10">
                                         <button data-bs-toggle="modal" data-bs-target="#updateMedicament" mat-mini-fab
@@ -339,7 +360,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let medicament of medicaments">
+                                <tr *ngFor="let medicament of medicaments | searchMedicamentTable: searchMedicament">
                                     <td (click)="getMedicament(medicament._id)">
                                         <mat-checkbox *ngIf="medicament.checked==true || controloClick==0"
                                             #check="matCheckbox"

@@ -19,7 +19,11 @@ export class TypeMedicamentAdminComponent implements OnInit {
   typeMedicamentUpdate: any;
   typeMedicamentDelete: any;
   showTableTypeMedicament: boolean = false;
+
+  typeMedicamentNameUp: any;
+  typeMedicamentNameDown: any;
   reset: any;
+
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
@@ -147,7 +151,31 @@ export class TypeMedicamentAdminComponent implements OnInit {
     }
   }
 
+  getByUp() {
+    this.typeMedicamentRest.getTypeMedicamentsByUp().subscribe({
+      next: (res: any) => {
+        this.typeMedicamentNameDown = this.reset;
+        this.typeMedicamentNameUp = res.TypeMedicamentAtoZ
+        this.typeMedicaments = res.TypeMedicamentAtoZ
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
+  getByDown() {
+    this.typeMedicamentRest.getTypeMedicamentsByDown().subscribe({
+      next: (res: any) => {
+        this.typeMedicamentNameUp = this.reset;
+        this.typeMedicamentNameDown = res.TypeMedicamentZtoA;
+        this.typeMedicaments = res.TypeMedicamentZtoA
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
   cleanTable() {
+    this.typeMedicamentNameUp = this.reset
+    this.typeMedicamentNameDown = this.reset
     this.getTypeMedicaments();
     this.searchTypeMedicament = this.reset;
   }
