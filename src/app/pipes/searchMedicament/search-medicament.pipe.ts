@@ -3,7 +3,7 @@ import { PharmacyComponent } from 'src/app/components/landingPage/pharmacy/pharm
 import { MedicamentRestService } from 'src/app/services/medicamentRest/medicament-rest.service';
 
 @Pipe({
-  name: 'searchMedicament'
+  name: 'searchMedicamentPipe'
 })
 export class SearchMedicamentPipe implements PipeTransform {
 

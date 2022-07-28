@@ -36,7 +36,7 @@ const routes: Routes =
       {path: 'contactUs', component: ContactUsComponent},
       {path: 'login', component: LoginComponent},
       {path: 'pharmacy', component: PharmacyComponent},
-      {path: 'viewMedicament', component: PharmacyViewComponent},
+      {path: 'viewMedicament/:id', component: PharmacyViewComponent},
     ]
   },
   {

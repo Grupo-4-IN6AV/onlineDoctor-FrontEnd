@@ -5,39 +5,33 @@
         <h2 class="title">Sign in</h2>
         <form (ngSubmit)="login()">
           <div class="input-field">
-            <i class="fas fa-user"></i>
+            <i class="fa-solid fa-user"></i>
             <input [(ngModel)]="user.identifier" name="identifier" type="text" placeholder="Username" />
           </div>
           <div class="input-field">
-            <i class="fas fa-lock"></i>
+            <i class="fa-solid fa-lock"></i>
             <input [(ngModel)]='user.password' name="password" type="password" placeholder="Password"/>
           </div>
           <input type="submit" value="Login" class="btn solid" />
         </form>
-        <p class="social-text">Or Sign in with social platforms</p>
-        <div class="social-media">
-          <a href="#" class="social-icon">
-            <i class="fab fa-google"></i>
-          </a>
-        </div>
       </form>
 
       <form (ngSubmit)="register()" class="sign-up-form mt-5">
         <h2 class="title">Sign up</h2>
         <div class="input-field">
-          <i class="fas fa-user"></i>
+          <i class="fa-solid fa-user"></i>
           <input [(ngModel)]="user.name" name="name" type="text" placeholder="Nombre y Apellido" />
         </div>
         <div class="input-field">
-          <i class="fas fa-user"></i>
+          <i class="fa-solid fa-user"></i>
           <input [(ngModel)]="user.username" name="username" type="text" placeholder="Nombre de usuario" />
         </div>
         <div class="input-field">
-          <i class="fas fa-envelope"></i>
+          <i class="fa-solid fa-at"></i>
           <input [(ngModel)]="user.email" name="email" type="email" placeholder="Email" />
         </div>
         <div class="input-field">
-          <i class="fas fa-lock"></i>
+          <i class="fa-solid fa-lock"></i>
           <input [(ngModel)]="user.password" type="password" name="password" placeholder="Contraseña" />
         </div>
         <div class="text-inside">
@@ -50,12 +44,6 @@
           </mat-form-field>
         </div>
         <input type="submit" class="btn" value="Sign up" />
-        <p class="social-text">O ingresa con otra plataforma</p>
-        <div class="social-media">
-          <a href="#" class="social-icon">
-            <i class="fab fa-google"></i>
-          </a>
-        </div>
       </form>
     </div>
   </div>
@@ -71,7 +59,7 @@
           Registrarse
         </button>
       </div>
-      <img src="img/log.svg" class="image" alt="" />
+      <img src="../../../../assets/images/login/Register.png" class="image" alt="Register" />
     </div>
     <div class="panel right-panel">
       <div class="content">
@@ -83,7 +71,7 @@
           Iniciar Sesión
         </button>
       </div>
-      <img src="img/register.svg" class="image" alt="" />
+      <img src="../../../../assets/images/login/Login.png" class="image" alt="Login" />
     </div>
   </div>
 </div>

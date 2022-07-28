@@ -43,4 +43,9 @@ export class AppointmentRestService {
   {
     return this.http.delete(environment.baseURI + 'appointment/deleteAppointment/' + id, { headers: this.httpOptions });
   }
+
+  getAppointmentName(params:{})
+  {
+    return this.http.post(environment.baseURI + 'appointment/getAppointmentByName', params, {headers: this.httpOptions});
+  }
 }

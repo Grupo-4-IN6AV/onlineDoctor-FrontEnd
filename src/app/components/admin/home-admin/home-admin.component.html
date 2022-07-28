@@ -17,35 +17,12 @@
       <div class="col-lg-3 col-md-3 col-sm-12">
         <div class="card card-statistic-2">
           <div class="clearfix">
-            <div class="card-icon shadow-primary float-start bg-purple">
-              <i class="fa-solid fa-users"></i>
-            </div>
-            <div class="float-end m-4">
-              <div>
-                <h5 class="float-end">Total Users</h5>
-              </div>
-              <div class="card-body float-end">
-                {{totalUsers}}
-              </div>
-            </div>
-          </div>
-          <div class="card-content m-3">
-            <div class="progress skill-progress m-b-20 w-100">
-              <div class="progress-bar l-bg-purple width-per-45" role="progressbar" aria-valuenow="45" aria-valuemin="0"
-                aria-valuemax="100"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <div class="card card-statistic-2">
-          <div class="clearfix">
             <div class="card-icon shadow-primary float-start bg-orange">
               <i class="fa-solid fa-bed-pulse"></i>
             </div>
             <div class="float-end m-4">
               <div>
-                <h5 class="float-end">Total Patients</h5>
+                <h5 class="float-end">Usuarios Totales</h5>
               </div>
               <div class="card-body float-end">
                 {{totalPatients}}
@@ -60,6 +37,7 @@
           </div>
         </div>
       </div>
+
       <div class="col-lg-3 col-md-3 col-sm-12">
         <div class="card card-statistic-2">
           <div class="clearfix">
@@ -68,7 +46,7 @@
             </div>
             <div class="float-end m-4">
               <div>
-                <h5 class="float-end">Total Doctors</h5>
+                <h5 class="float-end">Doctores Totales</h5>
               </div>
               <div class="card-body float-end">
                 {{totalDoctors}}
@@ -83,6 +61,31 @@
           </div>
         </div>
       </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class="card card-statistic-2">
+          <div class="clearfix">
+            <div class="card-icon shadow-primary float-start bg-purple">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="float-end m-4">
+              <div>
+                <h5 class="float-end"> Citas Totales</h5>
+              </div>
+              <div class="card-body float-end">
+                {{totalAppo}}
+              </div>
+            </div>
+          </div>
+          <div class="card-content m-3">
+            <div class="progress skill-progress m-b-20 w-100">
+              <div class="progress-bar l-bg-purple width-per-45" role="progressbar" aria-valuenow="45" aria-valuemin="0"
+                aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="col-lg-3 col-md-3 col-sm-12">
         <div class="card card-statistic-2">
           <div class="clearfix">
@@ -91,7 +94,7 @@
             </div>
             <div class="float-end m-4">
               <div>
-                <h5 class="float-end">Total Products</h5>
+                <h5 class="float-end">Producs. Totales</h5>
               </div>
               <div class="card-body float-end">
                 {{totalMedicaments}}

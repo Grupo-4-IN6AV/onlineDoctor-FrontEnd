@@ -45,6 +45,6 @@ export class MedicamentRestService {
 
   getMedicamentName(params:{})
   {
-    return this.http.post(environment.baseURI + 'medicament/getMedicamentByName/', params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
+    return this.http.post(environment.baseURI + 'medicament/getMedicamentByName', params, {headers: this.httpOptions});
   }
 }
