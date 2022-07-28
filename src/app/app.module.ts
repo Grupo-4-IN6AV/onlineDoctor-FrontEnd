@@ -157,6 +157,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         SearchTypeLaboratoryTablePipe,
         SearchTypeMedicamentBarPipe,
         SearchTypeMedicamentTablePipe,
+        SearchUserBarPipe
     ],
     imports: [
         FormsModule,

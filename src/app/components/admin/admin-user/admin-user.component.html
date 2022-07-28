@@ -37,7 +37,7 @@
   <div *ngIf="!showTableUsers">
     <div class="container">
       <div class="products-container">
-        <div *ngFor="let user of users" class="product" data-name="p-1">
+        <div *ngFor="let user of users | searchUserPipe: searchUser" class="product" data-name="p-1">
           <h5 class="card-title">{{ user.name }} {{ user.surname }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ user.username }}</h6>
           <p class="card-text">{{ user.role }}</p>
