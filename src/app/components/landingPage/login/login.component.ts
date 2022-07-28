@@ -3,28 +3,26 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserModel } from 'src/app/models/user.model';
 import { CredentialsRestService } from 'src/app/services/credentialsRest/credentials-rest.service';
-import {ScriptsLoginService} from 'src/app/services/cargarScripts/scripts-login.service'
+import { ScriptsLoginService } from 'src/app/services/cargarScripts/scripts-login.service'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit
-{
-  user:  UserModel;
-  confirmPassword : string = '';
-  timer : any;
-  
+export class LoginComponent implements OnInit {
+  user: UserModel;
+  confirmPassword: string = '';
+  timer: any;
+
   constructor
-  (
-    private router: Router,
-    private userRest: CredentialsRestService,
-    private _ScriptsLogin: ScriptsLoginService
-    )
-    {
-    
-    this.user = new UserModel('', '', '', '', '', '', '', '', '','','','',true,'');
+    (
+      private router: Router,
+      private userRest: CredentialsRestService,
+      private _ScriptsLogin: ScriptsLoginService
+    ) {
+
+    this.user = new UserModel('', '', '', '', '', '', '', '', '', '', '', '', true, '');
     _ScriptsLogin.Carga(["app"]);
   }
 
@@ -32,27 +30,26 @@ export class LoginComponent implements OnInit
 
   }
 
-  login()
-  {
+  login() {
     this.userRest.login(this.user).subscribe({
-      next: (res:any)=>{
+      next: (res: any) => {
         localStorage.setItem('identity', JSON.stringify(res.userExist));
         localStorage.setItem('token', res.token);
 
         Swal.fire({
-          icon:'success',
+          icon: 'success',
           title: res.message,
-          html:'Welcome <b>'+ res.userExist.username+'</b>',
+          html: 'Welcome <b>' + res.userExist.username + '</b>',
           confirmButtonColor: '#28B463'
         })
 
         const verificarAdmin = res.userExist.role;
         //VERIFICA A DONDE LLEVARME//
-        if(verificarAdmin == 'ADMIN')
-         {this.router.navigate(['/admin/home']);}
-        
-        if(verificarAdmin == 'DOCTOR')
-         {this.router.navigate(['/doctor/home'])}
+        if (verificarAdmin == 'ADMIN') { this.router.navigate(['/admin/home']); }
+
+        if (verificarAdmin == 'DOCTOR') { this.router.navigate(['/doctor/home']) }
+
+        if (verificarAdmin == 'PACIENTE') { this.router.navigate(['/paciente/home']) }
       },
       error: (err: any) => {
         Swal.fire({
@@ -65,35 +62,29 @@ export class LoginComponent implements OnInit
   }
 
 
-  async checkPassword()
-  {
+  async checkPassword() {
     clearTimeout(this.timer);
-    this.timer = await setTimeout(()=>
-    {
-      if(this.user.password != '')
-      {
-        if (this.confirmPassword != this.user.password)
-        {
+    this.timer = await setTimeout(() => {
+      if (this.user.password != '') {
+        if (this.confirmPassword != this.user.password) {
           Swal.fire({
-            icon:'error',
+            icon: 'error',
             title: 'Password do not Match',
-            html:'Try Again',
+            html: 'Try Again',
             confirmButtonColor: '#E74C3C'
           })
         }
-        else
-        {
+        else {
           Swal.fire({
-            icon:'success',
+            icon: 'success',
             title: 'Passwords Match',
             confirmButtonColor: '#28B463'
           })
         }
       }
-      else
-      {
+      else {
         Swal.fire({
-          icon:'info',
+          icon: 'info',
           title: 'Set value in input Password',
           confirmButtonColor: '#0D6EFD'
         })
@@ -101,27 +92,25 @@ export class LoginComponent implements OnInit
     }, 800);
   }
 
-  register()
-  {
+  register() {
     this.userRest.register(this.user).subscribe
-    ({
+      ({
 
-      next : (res : any) =>
-      {
-        Swal.fire({
-          title: res.message,
-          html:'Already can Login now.',
-          confirmButtonColor: '#28B463'
-        })
-        this.router.navigateByUrl('/')
-      },
-      error: (err: any) => {
-        Swal.fire({
-          icon: 'error',
-          title: err.error.message || err.error,
-          confirmButtonColor: '#E74C3C'
-        });
-      },
-    });
+        next: (res: any) => {
+          Swal.fire({
+            title: res.message,
+            html: 'Already can Login now.',
+            confirmButtonColor: '#28B463'
+          })
+          this.router.navigateByUrl('/')
+        },
+        error: (err: any) => {
+          Swal.fire({
+            icon: 'error',
+            title: err.error.message || err.error,
+            confirmButtonColor: '#E74C3C'
+          });
+        },
+      });
   }
 }

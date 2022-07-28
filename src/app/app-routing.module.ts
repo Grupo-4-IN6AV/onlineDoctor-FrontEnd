@@ -23,6 +23,8 @@ import { LaboratoryAdminComponent } from './components/admin/laboratory-admin/la
 
 import { MeetingComponent } from './components/admin/meeting/meeting.component';
 import { CallComponent } from './components/admin/call/call.component';
+import { LayoutPacientComponent } from './components/pacient/layout-pacient/layout-pacient.component';
+import { HomePacientComponent } from './components/pacient/home-pacient/home-pacient.component';
 
 const routes: Routes =
 [
@@ -57,6 +59,12 @@ const routes: Routes =
     path: 'doctor', component:LayoutDoctorComponent,children:
     [
       {path: 'home', component: HomeDoctorComponent},
+    ]
+  },
+  {
+    path: 'paciente', component:LayoutPacientComponent,children:
+    [
+      {path: 'home', component: HomePacientComponent},
     ]
   },
   { path: '**', component: NotFoundPageComponent}

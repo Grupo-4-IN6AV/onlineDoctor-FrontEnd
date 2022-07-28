@@ -29,7 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import {  } from "@angular/material/snack-bar";
+import { } from "@angular/material/snack-bar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -45,6 +45,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { HeaderDoctorComponent } from './layout/header-doctor/header-doctor.component';
+import { HeaderPacientComponent } from './layout/header-pacient/header-pacient.component';
 import { PageLoaderComponent } from './layout/page-loader/page-loader.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { RightSidebarComponent } from './layout/right-sidebar/right-sidebar.component';
@@ -86,7 +87,7 @@ import { LaboratoryAdminComponent } from './components/admin/laboratory-admin/la
 import { MeetingComponent } from './components/admin/meeting/meeting.component';
 import { CallComponent } from './components/admin/call/call.component';
 import { PharmacyViewAllComponent } from './components/landingPage/pharmacy-view-all/pharmacy-view-all.component';
-import {SearchMedicamentTablePipe} from './pipes/searchMedicamentTable/search-medicament-table.pipe';
+import { SearchMedicamentTablePipe } from './pipes/searchMedicamentTable/search-medicament-table.pipe';
 import { SearchMedicamentBarPipe } from './pipes/searchMedicamentBar/search-medicament-bar.pipe';
 import { SearchUserBarPipe } from './pipes/searchUserBar/search-user-bar.pipe';
 import { SearchAppointmentTablePipe } from './pipes/searchAppointmentTable/search-appointment-table.pipe';
@@ -100,7 +101,10 @@ import { SearchTypeLaboratoryTablePipe } from './pipes/searchTypeLaboratoryTable
 import { SearchTypeMedicamentBarPipe } from './pipes/searchTypeMedicamentBar/search-type-medicament-bar.pipe';
 import { SearchTypeMedicamentTablePipe } from './pipes/searchTypeMedicamentTable/search-type-medicament-table.pipe';
 
-
+import { LayoutPacientComponent } from './components/pacient/layout-pacient/layout-pacient.component';
+import { SidebarPacientComponent } from './components/pacient/sidebar-pacient/sidebar-pacient.component';
+import { SidebarrightPacientComponent } from './components/pacient/sidebarright-pacient/sidebarright-pacient.component';
+import { HomePacientComponent } from './components/pacient/home-pacient/home-pacient.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -108,104 +112,109 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        PageLoaderComponent,
-        SidebarComponent,
-        RightSidebarComponent,
-        HomeAdminComponent,
-        AdminUserComponent,
-        SearchUserPipePipe,
-        SidebarAdminComponent,
-        SidebarrightAdminComponent,
-        LayoutAdminComponent,
-        LoginComponent,
-        NotFoundPageComponent,
-        NavbarComponent,
-        LandingPageComponent,
-        AboutUsComponent,
-        ContactUsComponent,
-        TypeLaboratoryAdminComponent,
-        TypeMedicamentAdminComponent,
-        SpecialityAdminComponent,
-        MedicamentAdminComponent,
-        PharmacyComponent,
-        SearchMedicamentPipe,
-        PharmacyViewComponent,
-        LayoutDoctorComponent,
-        SidebarDoctorComponent,
-        SidebarrightDoctorComponent,
-        HeaderDoctorComponent,
-        HomeDoctorComponent,
-        DoctorAdminComponent,
-        AppointmentAdminComponent,
-        LaboratoryAdminComponent,
-        MeetingComponent,
-        CallComponent,
-        PharmacyViewAllComponent,
-        SearchMedicamentBarPipe,
-        SearchMedicamentTablePipe,
-        SearchUserBarPipe,
-        SearchAppointmentTablePipe,
-        SearchAppointmentBarPipe,
-        SearchDoctorBarPipe,
-        SearchDoctorTablePipe,
-        SearchSpecialityBarPipe,
-        SearchSpecialityTablePipe,
-        SearchTypeLaboratoryBarPipe,
-        SearchTypeLaboratoryTablePipe,
-        SearchTypeMedicamentBarPipe,
-        SearchTypeMedicamentTablePipe,
-        SearchUserBarPipe
-    ],
-    imports: [
-        FormsModule,
-        CommonModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        AppRoutingModule,
-        HttpClientModule,
-        PerfectScrollbarModule,
-        ClickOutsideModule,
-        CoreModule,
-        SharedModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSnackBarModule,
-        MatButtonModule,
-        MatIconModule,
-        MatRadioModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        MatCardModule,
-        MatDatepickerModule,
-        MatDialogModule,
-        MatSortModule,
-        MatToolbarModule,
-        MatMenuModule,
-        MatProgressSpinnerModule,
-        ReactiveFormsModule,
-        NgxDatatableModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSnackBarModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSelectModule,
-        NgApexchartsModule,
-        FullCalendarModule,
-        SwiperModule, // register FullCalendar with you app
-        NgxEchartsModule.forRoot({
-          echarts: () => import('echarts'),
-        }),
-      ],
-    providers:[
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    PageLoaderComponent,
+    SidebarComponent,
+    RightSidebarComponent,
+    HomeAdminComponent,
+    AdminUserComponent,
+    SearchUserPipePipe,
+    SidebarAdminComponent,
+    SidebarrightAdminComponent,
+    LayoutAdminComponent,
+    LoginComponent,
+    NotFoundPageComponent,
+    NavbarComponent,
+    LandingPageComponent,
+    AboutUsComponent,
+    ContactUsComponent,
+    TypeLaboratoryAdminComponent,
+    TypeMedicamentAdminComponent,
+    SpecialityAdminComponent,
+    MedicamentAdminComponent,
+    PharmacyComponent,
+    SearchMedicamentPipe,
+    PharmacyViewComponent,
+    LayoutDoctorComponent,
+    SidebarDoctorComponent,
+    SidebarrightDoctorComponent,
+    HeaderDoctorComponent,
+    HomeDoctorComponent,
+    DoctorAdminComponent,
+    AppointmentAdminComponent,
+    LaboratoryAdminComponent,
+    MeetingComponent,
+    CallComponent,
+    PharmacyViewAllComponent,
+    SearchMedicamentBarPipe,
+    SearchMedicamentTablePipe,
+    SearchUserBarPipe,
+    SearchAppointmentTablePipe,
+    SearchAppointmentBarPipe,
+    SearchDoctorBarPipe,
+    SearchDoctorTablePipe,
+    SearchSpecialityBarPipe,
+    SearchSpecialityTablePipe,
+    SearchTypeLaboratoryBarPipe,
+    SearchTypeLaboratoryTablePipe,
+    SearchTypeMedicamentBarPipe,
+    SearchTypeMedicamentTablePipe,
+    SearchUserBarPipe,
+    HeaderPacientComponent,
+    LayoutPacientComponent,
+    SidebarPacientComponent,
+    SidebarrightPacientComponent,
+    HomePacientComponent,
+  ],
+  imports: [
+    FormsModule,
+    CommonModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    PerfectScrollbarModule,
+    ClickOutsideModule,
+    CoreModule,
+    SharedModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatSortModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    NgxDatatableModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
+    NgApexchartsModule,
+    FullCalendarModule,
+    SwiperModule, // register FullCalendar with you app
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
+  ],
+  providers: [
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
