@@ -57,7 +57,6 @@ import {
 import { ClickOutsideModule } from 'ng-click-outside';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminUserComponent } from './components/admin/admin-user/admin-user.component';
-import { HotelAdminComponent } from './components/admin/hotel-admin/hotel-admin.component';
 import { SearchUserPipePipe } from './pipes/searchUserPiper/search-user-pipe.pipe';
 import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
 import { SidebarAdminComponent } from './components/admin/sidebar-admin/sidebar-admin.component';
@@ -69,9 +68,6 @@ import { NavbarComponent } from './components/landingPage/navbar/navbar.componen
 import { LandingPageComponent } from './components/landingPage/landing-page/landing-page.component';
 import { AboutUsComponent } from './components/landingPage/about-us/about-us.component';
 import { ContactUsComponent } from './components/landingPage/contact-us/contact-us.component';
-import { HotelComponent } from './components/landingPage/hotel/hotel.component';
-import { EventsAdminComponent } from './components/admin/event-admin/event-admin.component';
-import { HotelViewComponent } from './components/landingPage/hotel-view/hotel-view.component';
 import { TypeLaboratoryAdminComponent } from './components/admin/type-laboratory-admin/type-laboratory-admin.component';
 import { TypeMedicamentAdminComponent } from './components/admin/type-medicament-admin/type-medicament-admin.component';
 import { SpecialityAdminComponent } from './components/admin/speciality-admin/speciality-admin.component';
@@ -119,7 +115,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         RightSidebarComponent,
         HomeAdminComponent,
         AdminUserComponent,
-        HotelAdminComponent,
         SearchUserPipePipe,
         SidebarAdminComponent,
         SidebarrightAdminComponent,
@@ -130,9 +125,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         LandingPageComponent,
         AboutUsComponent,
         ContactUsComponent,
-        HotelComponent,
-        EventsAdminComponent,
-        HotelViewComponent,
         TypeLaboratoryAdminComponent,
         TypeMedicamentAdminComponent,
         SpecialityAdminComponent,
