@@ -32,7 +32,7 @@
   <div *ngIf="!showTableTypeMedicament">
     <div class="container">
       <div class="products-container">
-        <div *ngFor="let typeMedicament of typeMedicaments" class="product" data-name="p-1">
+        <div *ngFor="let typeMedicament of typeMedicaments | searchTypeMedicamentBar: searhTypeMedicament" class="product" data-name="p-1">
           <h5 class="card-title">{{ typeMedicament.name }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ typeMedicament.description }}</h6>
           <button (click)="getTypeMedicament(typeMedicament._id)" class="btn btn-success m-3" data-bs-toggle="modal"
@@ -219,6 +219,27 @@
                     </button>
                   </div>
                 </li>
+
+                <li>
+                  <i *ngIf="!typeMedicamentNameUp && !typeMedicamentNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()"></i>
+                  <i *ngIf="!typeMedicamentNameUp && !typeMedicamentNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()"></i>
+                </li>
+            
+                <li>
+                  <i *ngIf="typeMedicamentNameUp && !typeMedicamentNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()" style="color: #4a8af9;"></i>
+                  <i *ngIf="typeMedicamentNameUp && !typeMedicamentNameDown" class="fa fa-sort-alpha-desc text-gray-400 ms-3" (click)="getByDown()"></i>
+                </li>
+
+                <li>
+                  <i *ngIf="!typeMedicamentNameUp && typeMedicamentNameDown" class="fa fa-sort-alpha-asc text-gray-400 ms-3" (click)="getByUp()"></i>
+                  <i *ngIf="!typeMedicamentNameUp && typeMedicamentNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()" style="color: #4a8af9;"></i>
+                </li>
+
+                <li>
+                  <i *ngIf="typeMedicamentNameUp || typeMedicamentNameDown" (click)="cleanTable()"
+                  class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
+                </li>
+
                 <li *ngIf="buttonActions">
                   <div class="icon-button-demo m-l-10">
                     <button data-bs-toggle="modal" data-bs-target="#updateTypeMedicament" mat-mini-fab
@@ -246,7 +267,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let typeMedicament of typeMedicaments">
+                <tr *ngFor="let typeMedicament of typeMedicaments | searchTypetypeMedicamentTable: searchTypeMedicament">
                   <td (click)="getTypeMedicament(typeMedicament._id)">
                     <mat-checkbox *ngIf="typeMedicament.checked==true || controloClick==0" #check="matCheckbox"
                       (click)="showButtonActions(typeMedicament._id, check); getTypeMedicament(typeMedicament._id)"

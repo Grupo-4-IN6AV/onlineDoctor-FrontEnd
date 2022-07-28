@@ -30,7 +30,7 @@
     <div *ngIf="!showTableTypeLaboratory">
       <div class="container">
         <div class="products-container">
-          <div *ngFor="let typeLaboratory of typesLaboratory" class="product" data-name="p-1">
+          <div *ngFor="let typeLaboratory of typesLaboratory | searchTypeLaboratoryBar: searchTypeMedicament" class="product" data-name="p-1">
             <h5 class="card-title">{{ typeLaboratory.name }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ typeLaboratory.description }}</h6>
             <button (click)="getTypeLaboratory(typeLaboratory._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateTypeLaboratory"
@@ -215,6 +215,27 @@
                       </button>
                     </div>
                   </li>
+
+                  <li>
+                    <i *ngIf="!typeLaboratoryNameUp && !typeLaboratoryNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()"></i>
+                    <i *ngIf="!typeLaboratoryNameUp && !typeLaboratoryNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()"></i>
+                  </li>
+              
+                  <li>
+                    <i *ngIf="typeLaboratoryNameUp && !typeLaboratoryNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()" style="color: #4a8af9;"></i>
+                    <i *ngIf="typeLaboratoryNameUp && !typeLaboratoryNameDown" class="fa fa-sort-alpha-desc text-gray-400 ms-3" (click)="getByDown()"></i>
+                  </li>
+  
+                  <li>
+                    <i *ngIf="!typeLaboratoryNameUp && typeLaboratoryNameDown" class="fa fa-sort-alpha-asc text-gray-400 ms-3" (click)="getByUp()"></i>
+                    <i *ngIf="!typeLaboratoryNameUp && typeLaboratoryNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()" style="color: #4a8af9;"></i>
+                  </li>
+  
+                  <li>
+                    <i *ngIf="typeLaboratoryNameUp || typeLaboratoryNameDown" (click)="cleanTable()"
+                    class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
+                  </li>
+
                   <li *ngIf="buttonActions">
                     <div class="icon-button-demo m-l-10">
                       <button data-bs-toggle="modal" data-bs-target="#updateTypeLaboratory" mat-mini-fab class="colorUpdate">
@@ -241,7 +262,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let typeLaboratory of typesLaboratory">
+                  <tr *ngFor="let typeLaboratory of typesLaboratory | searchTypeLaboratoryTable: searchTypeLaboratory">
                     <td (click)="getTypeLaboratory(typeLaboratory._id)">
                       <mat-checkbox *ngIf="typeLaboratory.checked==true || controloClick==0"
                        #check="matCheckbox" (click)="showButtonActions(typeLaboratory._id, check); getTypeLaboratory(typeLaboratory._id)" class="example-margin" color="primary">

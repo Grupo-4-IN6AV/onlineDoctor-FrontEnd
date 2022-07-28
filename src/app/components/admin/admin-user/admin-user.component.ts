@@ -42,17 +42,18 @@ export class AdminUserComponent implements OnInit {
   userDelete: any;
   userDeleteModal: any;
   userDeletePassword: any;
+
   showTableUsers: boolean = false;
   userNameUp: any;
   userNameDown: any;
-  userSurnameUp: any;
-  userSurnameDown: any;
   reset: any;
+
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
   userCheck: any;
   controloClick: number = 0
+
 
   //METÓDOS DEL CRUD DE USERS//
   getUsers() {
@@ -191,10 +192,8 @@ export class AdminUserComponent implements OnInit {
     this.userRest.getUsersByUp().subscribe({
       next: (res: any) => {
         this.userNameDown = this.reset;
-        this.userSurnameUp = this.reset;
-        this.userSurnameDown = this.reset;
-        this.userNameUp = res.users
-        this.users = res.users
+        this.userNameUp = res.UsuariosAtoZ
+        this.users = res.UsuariosAtoZ
       },
       error: (err) => console.log(err)
     })
@@ -204,62 +203,8 @@ export class AdminUserComponent implements OnInit {
     this.userRest.getUsersByDown().subscribe({
       next: (res: any) => {
         this.userNameUp = this.reset;
-        this.userSurnameUp = this.reset;
-        this.userSurnameDown = this.reset;
-        this.userNameDown = res.users;
-        this.users = res.users
-      },
-      error: (err) => console.log(err)
-    })
-  }
-
-  getUsersSurnameByUp() {
-    this.userRest.getUsersSurnameByUp().subscribe({
-      next: (res: any) => {
-        this.userNameDown = this.reset;
-        this.userSurnameDown = this.reset;
-        this.userNameUp = this.reset;
-        this.userSurnameUp = res.users;
-        this.users = res.users
-      },
-      error: (err) => console.log(err)
-    })
-  }
-
-  getUsersSurnameByDown() {
-    this.userRest.getUsersSurnameByDown().subscribe({
-      next: (res: any) => {
-        this.userNameDown = this.reset;
-        this.userSurnameUp = this.reset;
-        this.userNameUp = this.reset;
-        this.userSurnameDown = res.users;
-        this.users = res.users
-      },
-      error: (err) => console.log(err)
-    })
-  }
-
-  getUsersClient() {
-    this.userRest.getUsersClient().subscribe({
-      next: (res: any) => {
-        this.userNameDown = this.reset;
-        this.userSurnameUp = this.reset;
-        this.userNameUp = this.reset;
-        this.userSurnameDown = this.reset;
-        this.users = res.users
-      },
-      error: (err) => console.log(err)
-    })
-  }
-
-  getUsersAdminHotel() {
-    this.userRest.getUsersAdminHotel().subscribe({
-      next: (res: any) => {
-        this.userNameDown = this.reset;
-        this.userSurnameUp = this.reset;
-        this.userNameUp = this.reset;
-        this.userSurnameDown = this.reset;
-        this.users = res.users
+        this.userNameDown = res.UsuariosZtoA;
+        this.users = res.UsuariosZtoA
       },
       error: (err) => console.log(err)
     })
@@ -268,8 +213,6 @@ export class AdminUserComponent implements OnInit {
   cleanTable() {
     this.userNameUp = this.reset
     this.userNameDown = this.reset
-    this.userSurnameUp = this.reset
-    this.userSurnameDown = this.reset
     this.getUsers();
     this.searchUser = this.reset;
   }
