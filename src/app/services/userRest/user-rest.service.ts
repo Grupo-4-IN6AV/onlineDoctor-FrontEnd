@@ -45,42 +45,23 @@ export class UserRestService
 
   searchUser(params:{ })
   {
-    return this.http.post(environment.baseURI + 'user/searchUser/', params, { headers: this.httpOptions });
+    return this.http.post(environment.baseURI + 'user/getUsersByName', params, { headers: this.httpOptions });
   }
 
-  getUsersByUp()
-  {
-    return this.http.get(environment.baseURI + 'user/getUsersByUp', { headers: this.httpOptions });
-  }
-
-  getUsersByDown()
-  {
-    return this.http.get(environment.baseURI + 'user/getUsersByDown', { headers: this.httpOptions });
-  }
-
-  getUsersSurnameByUp()
-  {
-    return this.http.get(environment.baseURI + 'user/getUsersSurnameByUp', { headers: this.httpOptions });
-  }
-
-  getUsersSurnameByDown()
-  {
-    return this.http.get(environment.baseURI + 'user/getUsersSurnameByDown', { headers: this.httpOptions });
-  }
-
-  getUsersClient()
-  {
-    return this.http.get(environment.baseURI + 'user/getUsersClient', { headers: this.httpOptions });
-  }
-
-  getUsersAdminHotel()
-  {
-    return this.http.get(environment.baseURI + 'user/getUsersAdminHotel', { headers: this.httpOptions });
-  }
 
   deleteUser(id:string, params:{})
   {
     return this.http.post(environment.baseURI + 'user/deleteUser/' + id, params, { headers: this.httpOptions });
+  }
+
+  getUsersByUp()
+  {
+    return this.http.get(environment.baseURI + 'user/getUsersAtoZ', { headers: this.httpOptions });
+  }
+
+  getUsersByDown()
+  {
+    return this.http.get(environment.baseURI + 'user/getUsersZtoA', { headers: this.httpOptions });
   }
 
 }

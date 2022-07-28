@@ -32,7 +32,7 @@
     <div *ngIf="!showTableAppointment">
         <div class="container">
             <div class="products-container">
-                <div *ngFor="let appointment of appointments" class="product" data-name="p-1">
+                <div *ngFor="let appointment of appointments | searchAppointmentBar: searhApointment" class="product" data-name="p-1">
                     <h5 class="card-title">{{ appointment.pacient.name }} | {{ appointment.doctor.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ appointment.date }}</h6>
                     <button (click)="getAppointment(appointment._id); getUsers(); getDoctors()" class="btn btn-success m-3"
@@ -47,6 +47,12 @@
                         data-bs-target="#viewAppointment" class="btn btn-secondary ms-2">
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         Ver
+                    </button>
+                    <br>
+                    <button *ngIf="appointment.modality == 'VIRTUAL'" data-bs-toggle="modal"
+                    [routerLink]="['/admin/meeting/' + appointment._id]" class="btn btn-success ms-2">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        Join the meeting
                     </button>
                 </div>
             </div>
@@ -317,7 +323,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let appointment of appointments">
+                                <tr *ngFor="let appointment of appointments | searchAppointmentTable: searchAppointment">
                                     <td (click)="getAppointment(appointment._id)">
                                         <mat-checkbox *ngIf="appointment.checked==true || controloClick==0"
                                             #check="matCheckbox"

@@ -86,6 +86,7 @@ import { LaboratoryAdminComponent } from './components/admin/laboratory-admin/la
 import { MeetingComponent } from './components/admin/meeting/meeting.component';
 import { CallComponent } from './components/admin/call/call.component';
 import { PharmacyViewAllComponent } from './components/landingPage/pharmacy-view-all/pharmacy-view-all.component';
+import {SearchMedicamentTablePipe} from './pipes/searchMedicamentTable/search-medicament-table.pipe';
 import { SearchMedicamentBarPipe } from './pipes/searchMedicamentBar/search-medicament-bar.pipe';
 import { SearchUserBarPipe } from './pipes/searchUserBar/search-user-bar.pipe';
 import { SearchAppointmentTablePipe } from './pipes/searchAppointmentTable/search-appointment-table.pipe';
@@ -144,6 +145,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         CallComponent,
         PharmacyViewAllComponent,
         SearchMedicamentBarPipe,
+        SearchMedicamentTablePipe,
         SearchUserBarPipe,
         SearchAppointmentTablePipe,
         SearchAppointmentBarPipe,

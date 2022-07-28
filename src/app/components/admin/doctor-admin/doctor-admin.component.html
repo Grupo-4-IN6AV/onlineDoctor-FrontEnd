@@ -5,6 +5,13 @@
     </h1>
     <hr />
   
+    <div *ngIf="!showTableDoctors" class="row d-flex justify-content-center align-items-center">
+      <div class="form">
+        <i class="fa fa-search ms-2"></i>
+        <input [(ngModel)]="searchDoctos" type="text" class="form-control form-input" placeholder="Search User...">
+      </div>
+    </div>
+
     <div class="text-center mt-2 mb-2">
       <button type="button" data-bs-toggle="modal" data-bs-target="#addUser" class="ms-3 btn btn-event btn-success">
         Agregar Doctor
@@ -30,7 +37,7 @@
     <div *ngIf="!showTableDoctors">
       <div class="container">
         <div class="products-container">
-          <div *ngFor="let doctor of doctors" class="product" data-name="p-1">
+          <div *ngFor="let doctor of doctors | searchDoctorBar: searchDoctor" class="product" data-name="p-1">
             <h5 class="card-title">{{ doctor.name }} {{ doctor.surname }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ doctor.username }}</h6>
             <p class="card-text">{{ doctor.role }}</p>
@@ -437,6 +444,27 @@
                     <input [(ngModel)]="searchDoctor" placeholder="Search.." type="text" #filter
                       class="browser-default search-field" aria-label="Search box" />
                   </li>
+
+                  <li>
+                    <i *ngIf="!doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()"></i>
+                    <i *ngIf="!doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()"></i>
+                  </li>
+              
+                  <li>
+                    <i *ngIf="doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()" style="color: #4a8af9;"></i>
+                    <i *ngIf="doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-desc text-gray-400 ms-3" (click)="getByDown()"></i>
+                  </li>
+  
+                  <li>
+                    <i *ngIf="!doctorNameUp && doctorNameDown" class="fa fa-sort-alpha-asc text-gray-400 ms-3" (click)="getByUp()"></i>
+                    <i *ngIf="!doctorNameUp && doctorNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()" style="color: #4a8af9;"></i>
+                  </li>
+  
+                  <li>
+                    <i *ngIf="doctorNameUp || doctorNameDown" (click)="cleanTable()"
+                    class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
+                  </li>
+
                   <li *ngIf="buttonActions">
                     <div class="icon-button-demo m-l-10">
                       <button (click)="getDoctor(doctorDelete._id)" data-bs-toggle="modal" data-bs-target="#deleteDoctor"
@@ -479,7 +507,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let doctor of doctors">
+                  <tr *ngFor="let doctor of doctors | searchDoctorTable: searchDoctor">
                     <td (click)="getDoctor(doctor._id)">
                       <mat-checkbox *ngIf="doctor.checked==true || controloClick==0" #check="matCheckbox"
                         (click)="showButtonActions(doctor._id, check); getDoctor(doctor._id)" class="example-margin"

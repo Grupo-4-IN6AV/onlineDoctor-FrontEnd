@@ -20,7 +20,11 @@ export class MedicamentAdminComponent implements OnInit {
   medicamentUpdate: any;
   medicamentDelete: any;
   showTableMedicament: boolean = false;
+
+  medicamentNameUp: any;
+  medicamentNameDown: any;
   reset: any;
+
   typesMedicament:any;
   notFound: boolean = false;
   buttonActions: boolean = false;
@@ -161,7 +165,31 @@ export class MedicamentAdminComponent implements OnInit {
     }
   }
 
+  getByUp() {
+    this.medicamentRest.getMedicamentsByUp().subscribe({
+      next: (res: any) => {
+        this.medicamentNameDown = this.reset;
+        this.medicamentNameUp = res.medicamentsAtoZ
+        this.medicaments = res.medicamentsAtoZ
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
+  getByDown() {
+    this.medicamentRest.getMedicamentsByDown().subscribe({
+      next: (res: any) => {
+        this.medicamentNameUp = this.reset;
+        this.medicamentNameDown = res.medicamentsZtoA;
+        this.medicaments = res.medicamentsZtoA
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
   cleanTable() {
+    this.medicamentNameUp = this.reset
+    this.medicamentNameDown = this.reset
     this.getMedicaments();
     this.searchMedicament = this.reset;
   }

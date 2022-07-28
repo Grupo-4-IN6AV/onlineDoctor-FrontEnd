@@ -5,6 +5,13 @@
   </h1>
   <hr />
 
+  <div *ngIf="!showTableUsers" class="row d-flex justify-content-center align-items-center">
+    <div class="form">
+      <i class="fa fa-search ms-2"></i>
+      <input [(ngModel)]="searchUser" type="text" class="form-control form-input" placeholder="Search User...">
+    </div>
+  </div>
+  
   <div class="text-center mt-2 mb-2">
     <button type="button" data-bs-toggle="modal" data-bs-target="#addUser" class="ms-3 btn btn-event btn-success">
       Agregar Pacientes
@@ -451,6 +458,28 @@
                   <input [(ngModel)]="searchUser" placeholder="Search.." type="text" #filter
                     class="browser-default search-field" aria-label="Search box" />
                 </li>
+
+                  <li>
+                    <i *ngIf="!userNameUp && !userNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getUsersByUp()"></i>
+                    <i *ngIf="!userNameUp && !userNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getUsersByDown()"></i>
+                  </li>
+              
+                  <li>
+                    <i *ngIf="userNameUp && !userNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getUsersByUp()" style="color: #4a8af9;"></i>
+                    <i *ngIf="userNameUp && !userNameDown" class="fa fa-sort-alpha-desc text-gray-400 ms-3" (click)="getUsersByDown()"></i>
+                  </li>
+  
+                  <li>
+                    <i *ngIf="!userNameUp && userNameDown" class="fa fa-sort-alpha-asc text-gray-400 ms-3" (click)="getUsersByUp()"></i>
+                    <i *ngIf="!userNameUp && userNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getUsersByDown()" style="color: #4a8af9;"></i>
+                  </li>
+  
+                  <li>
+                    <i *ngIf="userNameUp || userNameDown" (click)="cleanTable()"
+                    class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
+                  </li>
+
+
                 <li *ngIf="buttonActions">
                   <div class="icon-button-demo m-l-10">
                     <button (click)="getUser(userDelete._id)" data-bs-toggle="modal" data-bs-target="#deleteUser"
@@ -474,10 +503,6 @@
         </div>
         <div class="tableBody">
           <div class="table-responsive">
-            <i *ngIf="
-                userNameUp || userNameDown || userSurnameUp || userSurnameDown
-              " (click)="cleanTable()" class="fa fa-times-circle closeFilter" aria-hidden="true">
-            </i>
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>

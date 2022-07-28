@@ -56,4 +56,14 @@ export class DoctorRestService {
   {
     return this.http.post(environment.baseURI + 'doctor/getDoctorByName', params, {headers: this.httpOptions});
   }
+
+  getDoctorsByUp()
+  {
+    return this.http.get(environment.baseURI + 'doctor/getDoctorAtoZ', { headers: this.httpOptions });
+  }
+
+  getDoctorsByDown()
+  {
+    return this.http.get(environment.baseURI + 'doctor/getDoctorZtoA', { headers: this.httpOptions });
+  }
 }

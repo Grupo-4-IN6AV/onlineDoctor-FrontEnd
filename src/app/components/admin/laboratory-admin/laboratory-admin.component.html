@@ -5,6 +5,13 @@
     </h1>
     <hr />
 
+    <div *ngIf="!showTableLaboratory" class="row d-flex justify-content-center align-items-center">
+        <div class="form">
+            <i class="fa fa-search ms-2"></i>
+            <input [(ngModel)]="searchLaboratory" type="text" class="form-control form-input" placeholder="Search User...">
+        </div>
+    </div>
+
     <div class="text-center mt-2 mb-2">
         <button type="button" data-bs-toggle="modal" data-bs-target="#addLaboratory"
             class="ms-3 btn btn-event btn-success" (click)="getUsers(); getTypesLaboratory()">
@@ -35,8 +42,9 @@
                 <div *ngFor="let laboratory of laboratories" class="product" data-name="p-1">
                     <h5 class="card-title">{{ laboratory.pacient.name }} | {{ laboratory.typeLaboratory.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ laboratory.date }}</h6>
-                    <button (click)="getLaboratory(laboratory._id); getUsers(); getTypesLaboratory()" class="btn btn-success m-3"
-                        data-bs-toggle="modal" data-bs-target="#updateLaboratory" class="btn btn-warning m-2">
+                    <button (click)="getLaboratory(laboratory._id); getUsers(); getTypesLaboratory()"
+                        class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateLaboratory"
+                        class="btn btn-warning m-2">
                         <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
                     </button>
                     <button (click)="deleteLaboratory(laboratory._id)" class="btn btn-danger">
@@ -141,10 +149,10 @@
                                     <mat-label>Paciente</mat-label>
                                     <mat-select [(ngModel)]="laboratory.pacient" name="pacient">
                                         <div *ngFor="let user of users">
-                                            <mat-option *ngIf="user.role == 'PACIENTE'"
-                                            value={{user._id}}>{{user.name}}</mat-option>
+                                            <mat-option *ngIf="user.role == 'PACIENTE'" value={{user._id}}>{{user.name}}
+                                            </mat-option>
                                         </div>
-                                        
+
                                     </mat-select>
                                 </mat-form-field>
                             </div>
@@ -153,23 +161,26 @@
                                     <mat-label>Tipo de Laboratorio</mat-label>
                                     <mat-select [(ngModel)]="laboratory.typeLaboratory " name="typeLaboratory">
                                         <div *ngFor="let typeLaboratory of typesLaboratory">
-                                            <mat-option value={{typeLaboratory._id}}>{{typeLaboratory.name}}</mat-option>
+                                            <mat-option value={{typeLaboratory._id}}>{{typeLaboratory.name}}
+                                            </mat-option>
                                         </div>
-                                        
+
                                     </mat-select>
                                 </mat-form-field>
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <mat-label>Fecha</mat-label>
-                                    <input autocomplete="off" type="date" [(ngModel)]="laboratory.date" name="date" matInput />
+                                    <input autocomplete="off" type="date" [(ngModel)]="laboratory.date" name="date"
+                                        matInput />
                                 </mat-form-field>
                             </div>
-                            
+
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <mat-label>Specifications</mat-label>
-                                    <input autocomplete="off" [(ngModel)]="laboratory.specifications" name="specifications" matInput />
+                                    <input autocomplete="off" [(ngModel)]="laboratory.specifications"
+                                        name="specifications" matInput />
                                 </mat-form-field>
                             </div>
                             <hr />
@@ -209,10 +220,10 @@
                                 <mat-label>Paciente</mat-label>
                                 <mat-select disabled [(ngModel)]="laboratoryUpdate.pacient._id" name="pacient">
                                     <div *ngFor="let user of users">
-                                        <mat-option *ngIf="user.role === 'PACIENTE'"
-                                        value={{user._id}}>{{user.name}}</mat-option>
+                                        <mat-option *ngIf="user.role === 'PACIENTE'" value={{user._id}}>{{user.name}}
+                                        </mat-option>
                                     </div>
-                                    
+
                                 </mat-select>
                             </mat-form-field>
                         </div>
@@ -229,13 +240,15 @@
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Fecha</mat-label>
-                                <input autocomplete="off" type="date" [(ngModel)]="laboratoryUpdate.date" name="date" matInput />
+                                <input autocomplete="off" type="date" [(ngModel)]="laboratoryUpdate.date" name="date"
+                                    matInput />
                             </mat-form-field>
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Specialidad</mat-label>
-                                <input autocomplete="off" [(ngModel)]="laboratoryUpdate.specifications" name="specifications" matInput />
+                                <mat-label>Especialidad</mat-label>
+                                <input autocomplete="off" [(ngModel)]="laboratoryUpdate.specifications"
+                                    name="specifications" matInput />
                             </mat-form-field>
                         </div>
                         <hr />
