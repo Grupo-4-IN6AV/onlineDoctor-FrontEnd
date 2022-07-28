@@ -9,8 +9,6 @@ import { NavbarComponent } from './components/landingPage/navbar/navbar.componen
 import { LandingPageComponent } from './components/landingPage/landing-page/landing-page.component';
 import { AboutUsComponent } from './components/landingPage/about-us/about-us.component';
 import { ContactUsComponent } from './components/landingPage/contact-us/contact-us.component';
-import { HotelAdminComponent } from './components/admin/hotel-admin/hotel-admin.component';
-import { EventsAdminComponent } from './components/admin/event-admin/event-admin.component';
 import { TypeLaboratoryAdminComponent } from './components/admin/type-laboratory-admin/type-laboratory-admin.component';
 import { TypeMedicamentAdminComponent } from './components/admin/type-medicament-admin/type-medicament-admin.component';
 import { SpecialityAdminComponent } from './components/admin/speciality-admin/speciality-admin.component';
@@ -44,8 +42,6 @@ const routes: Routes =
     [
       {path: 'home', component: HomeAdminComponent},
       {path: 'patients', component: AdminUserComponent},
-      {path: 'doctors', component: HotelAdminComponent},
-      {path: 'products', component: EventsAdminComponent},
       {path: 'typeLaboratory', component: TypeLaboratoryAdminComponent},
       {path: 'typeMedicament', component: TypeMedicamentAdminComponent},
       {path: 'speciality', component: SpecialityAdminComponent},
