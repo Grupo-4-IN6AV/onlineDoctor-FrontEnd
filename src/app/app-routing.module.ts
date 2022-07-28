@@ -50,7 +50,7 @@ const routes: Routes =
       {path: 'appointment', component: AppointmentAdminComponent},
       {path: 'laboratory', component: LaboratoryAdminComponent},
       {path: 'call', component: CallComponent},
-      {path: 'meeting', component: MeetingComponent},
+      {path: 'meeting/:id', component: MeetingComponent},
     ]
   },
   {
