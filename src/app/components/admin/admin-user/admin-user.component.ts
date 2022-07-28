@@ -37,6 +37,7 @@ export class AdminUserComponent implements OnInit {
   users: any;
   user: UserModel;
   searchUser: any
+  searchUserBar: any
   userView: any;
   userUpdate: any;
   userDelete: any;

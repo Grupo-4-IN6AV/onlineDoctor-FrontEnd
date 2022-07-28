@@ -39,7 +39,7 @@
   <div *ngIf="!showTableTypeLaboratory">
     <div class="container">
       <div class="products-container">
-        <div *ngFor="let typeLaboratory of typesLaboratory | searchTypeLaboratoryBar: searchTypeMedicament"
+        <div *ngFor="let typeLaboratory of typesLaboratory | searchTypeLaboratoryBar: searchTypeLaboratory"
           class="product" data-name="p-1">
           <h5 class="card-title">{{ typeLaboratory.name }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ typeLaboratory.description }}</h6>
