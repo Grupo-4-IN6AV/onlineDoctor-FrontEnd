@@ -1,7 +1,7 @@
 <section class="content">
     <h1 style="margin-top: 4rem">
         &nbsp;<i class="fa-solid fa-microscope"></i>
-        Laboratory
+        Laboratorio
     </h1>
     <hr />
 
@@ -15,21 +15,21 @@
     <div class="text-center mt-2 mb-2">
         <button type="button" data-bs-toggle="modal" data-bs-target="#addLaboratory"
             class="ms-3 btn btn-event btn-success" (click)="getUsers(); getTypesLaboratory()">
-            Add Laboratory
+            Agregar Laboratorio
             <span class="btn-icon-end"><i class="fa-solid fa-microscope"></i></span>
         </button>
         <button *ngIf="!showTableLaboratory" (click)="showTable()" type="button"
             class="ms-3 btn btn-event btn-secondary">
-            Table Laboratory
+            Tabla de Laboratorios
             <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
         </button>
         <button *ngIf="showTableLaboratory" (click)="showTable(); cleanTable()" type="button"
             class="ms-3 btn btn-event btn-secondary">
-            Return Cards
+            Ver por Cartas
             <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
         </button>
         <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
-            Back Home
+            Inicio
             <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
         </button>
     </div>
@@ -45,16 +45,16 @@
                     <button (click)="getLaboratory(laboratory._id); getUsers(); getTypesLaboratory()"
                         class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateLaboratory"
                         class="btn btn-warning m-2">
-                        <i class="fa fa-pencil" aria-hidden="true"> </i> Update
+                        <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
                     </button>
                     <button (click)="deleteLaboratory(laboratory._id)" class="btn btn-danger">
                         <i class="fa fa-trash" aria-hidden="true"></i>
-                        Delete
+                        Eliminar
                     </button>
                     <button (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
                         data-bs-target="#viewLaboratory" class="btn btn-secondary ms-2">
                         <i class="fa fa-eye" aria-hidden="true"></i>
-                        View
+                        Ver
                     </button>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                             <div *ngIf="laboratoryView" class="descripcion">
                                 <div class="count-container">
                                     <div class="box">
-                                        <h3>Pacient:</h3>
+                                        <h3>Pacientes:</h3>
                                     </div>
 
                                     <div class="box">
@@ -100,7 +100,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <h3>Type Laboratory:</h3>
+                                        <h3>Tipo de Laboratorio</h3>
                                     </div>
 
                                     <div class="box">
@@ -108,7 +108,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <h3>Date:</h3>
+                                        <h3>Fecha:</h3>
                                     </div>
 
                                     <div class="box">
@@ -116,7 +116,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <h3>Specification:</h3>
+                                        <h3>Especialidad:</h3>
                                     </div>
 
                                     <div class="box">
@@ -137,7 +137,7 @@
                     <div class="modal-header">
                         <h3 class="modal-title" id="modal-basic-title">
                             <i class="fa-solid fa-microscope"></i>
-                            &nbsp;Add Laboratory
+                            &nbsp;Agregar Laboratorio
                         </h3>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                             aria-label="Close"></button>
@@ -146,7 +146,7 @@
                         <form (ngSubmit)="saveLaboratory(addLaboratoryForm)" #addLaboratoryForm="ngForm">
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Pacient</mat-label>
+                                    <mat-label>Paciente</mat-label>
                                     <mat-select [(ngModel)]="laboratory.pacient" name="pacient">
                                         <div *ngFor="let user of users">
                                             <mat-option *ngIf="user.role == 'PACIENTE'" value={{user._id}}>{{user.name}}
@@ -158,7 +158,7 @@
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Type Laboratory</mat-label>
+                                    <mat-label>Tipo de Laboratorio</mat-label>
                                     <mat-select [(ngModel)]="laboratory.typeLaboratory " name="typeLaboratory">
                                         <div *ngFor="let typeLaboratory of typesLaboratory">
                                             <mat-option value={{typeLaboratory._id}}>{{typeLaboratory.name}}
@@ -170,7 +170,7 @@
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Date</mat-label>
+                                    <mat-label>Fecha</mat-label>
                                     <input autocomplete="off" type="date" [(ngModel)]="laboratory.date" name="date"
                                         matInput />
                                 </mat-form-field>
@@ -186,11 +186,10 @@
                             <hr />
                             <div class="modal-footer justify-content-center">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
-                                    Save
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                                 </button>
                                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Save Laboratory
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                                 </button>
                             </div>
                         </form>
@@ -209,7 +208,7 @@
                 <div class="modal-header">
                     <h3 class="modal-title" id="modal-basic-title">
                         <i class="fas fa-pencil" aria-hidden="true"></i>
-                        &nbsp;Update Laboratory
+                        &nbsp;Editar Laboratorio
                     </h3>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Close"></button>
@@ -218,7 +217,7 @@
                     <form (ngSubmit)="updateLaboratory()" *ngIf="laboratoryUpdate">
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Pacient</mat-label>
+                                <mat-label>Paciente</mat-label>
                                 <mat-select disabled [(ngModel)]="laboratoryUpdate.pacient._id" name="pacient">
                                     <div *ngFor="let user of users">
                                         <mat-option *ngIf="user.role === 'PACIENTE'" value={{user._id}}>{{user.name}}
@@ -230,7 +229,7 @@
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Type Laboratory</mat-label>
+                                <mat-label>Tipo de Laboratorio</mat-label>
                                 <mat-select [(ngModel)]="laboratoryUpdate.typeLaboratory._id" name="typeLaboratory">
                                     <div *ngFor="let typeLaboratory of typesLaboratory">
                                         <mat-option value={{typeLaboratory._id}}>{{typeLaboratory.name}}</mat-option>
@@ -240,14 +239,14 @@
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Date</mat-label>
+                                <mat-label>Fecha</mat-label>
                                 <input autocomplete="off" type="date" [(ngModel)]="laboratoryUpdate.date" name="date"
                                     matInput />
                             </mat-form-field>
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Specifications</mat-label>
+                                <mat-label>Especialidad</mat-label>
                                 <input autocomplete="off" [(ngModel)]="laboratoryUpdate.specifications"
                                     name="specifications" matInput />
                             </mat-form-field>
@@ -255,10 +254,10 @@
                         <hr />
                         <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update
+                                <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                             </button>
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Update Laboratory
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                             </button>
                         </div>
                     </form>
@@ -277,7 +276,7 @@
                             <ul class="header-buttons-left ml-0">
                                 <li class="dropdown">
                                     <div class="header">
-                                        <h2>Table Laboratory</h2>
+                                        <h2>Tabla de Laboratorios</h2>
                                     </div>
                                 </li>
                                 <li class="dropdown m-l-20">
@@ -317,11 +316,11 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Photo</th>
-                                    <th>Pacient</th>
-                                    <th>Type Laboratory</th>
-                                    <th>Date</th>
-                                    <th>Specifications</th>
+                                    <th>Foto</th>
+                                    <th>Paciente</th>
+                                    <th>Tipo de Laboratorio</th>
+                                    <th>Fecha</th>
+                                    <th>Specialidad</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -350,7 +349,7 @@
                                         data-bs-target="#viewLaboratory">{{ laboratory.specifications }}</td>
                                 </tr>
                                 <tr rowspan="9" *ngIf="notFound === true">
-                                    <td colspan="9" class="text-center">Not Laboratory Found</td>
+                                    <td colspan="9" class="text-center">Laboratorio no encontrado</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -360,6 +359,6 @@
         </div>
     </div>
     <h1 *ngIf="notFound === true && showTableLaboratory === false" class="text-center">
-        Not Laboratory Found
+        Laboratorio no encontrado
     </h1>
 </section>

@@ -1,7 +1,7 @@
 <section class="content">
   <h1 style="margin-top: 4rem">
     &nbsp;<i class="fa-solid fa-pills"></i>
-    Type Medicament
+    Tipo de Medicamento
   </h1>
   <hr />
 
@@ -15,21 +15,21 @@
   <div class="text-center mt-2 mb-2">
     <button type="button" data-bs-toggle="modal" data-bs-target="#addTypeMedicament"
       class="ms-3 btn btn-event btn-success">
-      Add Type Medicament
+      Agregar Tipo de Medicamento
       <span class="btn-icon-end"><i class="fa-solid fa-pills"></i> </span>
     </button>
     <button *ngIf="!showTableTypeMedicament" (click)="showTable()" type="button"
       class="ms-3 btn btn-event btn-secondary">
-      Table Type Medicament
+      Tabla de Tipos de Medicamento
       <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
     </button>
     <button *ngIf="showTableTypeMedicament" (click)="showTable(); cleanTable()" type="button"
       class="ms-3 btn btn-event btn-secondary">
-      Return Cards
+      Ver por Cartas
       <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
     </button>
     <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
-      Back Home
+      Inicio
       <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
     </button>
   </div>
@@ -44,16 +44,16 @@
           <h6 class="card-subtitle mb-2 text-muted">{{ typeMedicament.description }}</h6>
           <button (click)="getTypeMedicament(typeMedicament._id)" class="btn btn-success m-3" data-bs-toggle="modal"
             data-bs-target="#updateTypeMedicament" class="btn btn-warning m-2">
-            <i class="fa fa-pencil" aria-hidden="true"> </i> Update
+            <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
           </button>
           <button (click)="deleteTypeMedicament(typeMedicament._id)" class="btn btn-danger">
             <i class="fa fa-trash" aria-hidden="true"></i>
-            Delete
+            Eliminar
           </button>
           <button (click)="getTypeMedicament(typeMedicament._id)" data-bs-toggle="modal"
             data-bs-target="#viewTypeMedicament" class="btn btn-secondary ms-2">
             <i class="fa fa-eye" aria-hidden="true"></i>
-            View
+            Ver
           </button>
         </div>
       </div>
@@ -91,7 +91,7 @@
               <div *ngIf="typeMedicamentView" class="descripcion">
                 <div class="count-container">
                   <div class="box">
-                    <h3>Name:</h3>
+                    <h3>Nombre:</h3>
                   </div>
 
                   <div class="box">
@@ -99,7 +99,7 @@
                   </div>
 
                   <div class="box">
-                    <h3>Description:</h3>
+                    <h3>Descripción:</h3>
                   </div>
 
                   <div class="box">
@@ -120,7 +120,7 @@
           <div class="modal-header">
             <h3 class="modal-title" id="modal-basic-title">
               <i class="fa-solid fa-pills"></i>
-              &nbsp;Add Type Medicament
+              &nbsp;Agregar Tipo de Medicamento
             </h3>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -128,24 +128,23 @@
             <form (ngSubmit)="saveTypeMedicament(addTypeMedicamentForm)" #addTypeMedicamentForm="ngForm">
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Name</mat-label>
+                  <mat-label>Nombre</mat-label>
                   <input autocomplete="off" [(ngModel)]="typeMedicament.name" name="name" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Description</mat-label>
+                  <mat-label>Descripción</mat-label>
                   <input autocomplete="off" [(ngModel)]="typeMedicament.description" name="description" matInput />
                 </mat-form-field>
               </div>
               <hr />
               <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                  <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
-                  Save
+                  <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                 </button>
                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Save Type Medicament
+                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                 </button>
               </div>
             </form>
@@ -165,7 +164,7 @@
         <div class="modal-header">
           <h3 class="modal-title" id="modal-basic-title">
             <i class="fas fa-pencil" aria-hidden="true"></i>
-            &nbsp;Update Type Medicament
+            &nbsp;Editar Tipo de Medicamento
           </h3>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -173,23 +172,23 @@
           <form (ngSubmit)="updateTypeMedicament()" *ngIf="typeMedicamentUpdate">
             <div class="text-inside">
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Name</mat-label>
+                <mat-label>Nombre</mat-label>
                 <input autocomplete="off" [(ngModel)]="typeMedicamentUpdate.name" name="name" matInput />
               </mat-form-field>
             </div>
             <div class="text-inside">
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Description</mat-label>
+                <mat-label>Descripción</mat-label>
                 <input autocomplete="off" [(ngModel)]="typeMedicamentUpdate.description" name="description" matInput />
               </mat-form-field>
             </div>
             <hr />
             <div class="modal-footer justify-content-center">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update
+                <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
               </button>
               <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                <i class="fa fa-floppy-o" aria-hidden="true"></i> Update Type Medicament
+                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
               </button>
             </div>
           </form>
@@ -208,7 +207,7 @@
               <ul class="header-buttons-left ml-0">
                 <li class="dropdown">
                   <div class="header">
-                    <h2>Table Type Medicament </h2>
+                    <h2>Tabla de tipos de Medicamento </h2>
                   </div>
                 </li>
                 <li class="dropdown m-l-20">
@@ -268,9 +267,9 @@
               <thead>
                 <tr>
                   <th class="text-center">#</th>
-                  <th>Photo</th>
-                  <th>Name</th>
-                  <th>Description</th>
+                  <th>Foto</th>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
                 </tr>
               </thead>
               <tbody>
@@ -294,7 +293,7 @@
                     data-bs-target="#viewTypeMedicament">{{ typeMedicament.description }}</td>
                 </tr>
                 <tr rowspan="9" *ngIf="notFound === true">
-                  <td colspan="9" class="text-center">Not Types Medicament Found</td>
+                  <td colspan="9" class="text-center">Tipo de Medicamento no encontrado</td>
                 </tr>
               </tbody>
             </table>
@@ -304,6 +303,6 @@
     </div>
   </div>
   <h1 *ngIf="notFound === true && showTableTypeMedicament === false" class="text-center">
-    Not Types Medicament Found
+    Tipo de Medicamento no encontrado
   </h1>
 </section>
