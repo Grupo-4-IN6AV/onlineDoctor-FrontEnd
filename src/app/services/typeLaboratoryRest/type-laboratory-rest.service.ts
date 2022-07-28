@@ -42,4 +42,9 @@ export class TypeLaboratoryRestService {
   {
     return this.http.delete(environment.baseURI + 'typeLaboratory/deleteTypeLaboratory/' + id, { headers: this.httpOptions });
   }
+
+  getTypeLaboratoryName(params:{})
+  {
+    return this.http.post(environment.baseURI + 'typeLaboratory/getTypeLaboratoryByName', params, {headers: this.httpOptions});
+  }
 }

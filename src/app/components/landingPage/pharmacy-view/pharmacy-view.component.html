@@ -42,34 +42,34 @@
                             </swiper>
                             <swiper (swiper)="thumbsSwiper = $event" [loop]="true" [spaceBetween]="10"
                                 [slidesPerView]="3" [freeMode]="true" [watchSlidesProgress]="true" class="mySwiper">
-                                <ng-template swiperSlide><img
+                                <ng-template swiperSlide><img class="Img-Swiper-One"
                                         src="../../../../assets/pharmacy/assets/img/principal.png" />
                                 </ng-template>
-                                <ng-template swiperSlide><img
+                                <ng-template swiperSlide><img class="Img-Swiper-One"
                                         src="../../../../assets/pharmacy/assets/img/principal.png" />
                                 </ng-template>
-                                <ng-template swiperSlide><img
+                                <ng-template swiperSlide><img class="Img-Swiper-One"
                                         src="../../../../assets/pharmacy/assets/img/principal.png" />
                                 </ng-template>
-                                <ng-template swiperSlide><img
+                                <ng-template swiperSlide><img class="Img-Swiper-One"
                                         src="../../../../assets/pharmacy/assets/img/principal.png" />
                                 </ng-template>
-                                <ng-template swiperSlide><img
+                                <ng-template swiperSlide><img class="Img-Swiper-One"
                                         src="../../../../assets/pharmacy/assets/img/principal.png" />
                                 </ng-template>
-                                <ng-template swiperSlide><img
+                                <ng-template swiperSlide><img class="Img-Swiper-One"
                                         src="../../../../assets/pharmacy/assets/img/principal.png" />
                                 </ng-template>
-                                <ng-template swiperSlide><img
+                                <ng-template swiperSlide><img class="Img-Swiper-One"
                                         src="../../../../assets/pharmacy/assets/img/principal.png" />
                                 </ng-template>
-                                <ng-template swiperSlide><img
+                                <ng-template swiperSlide><img class="Img-Swiper-One"
                                         src="../../../../assets/pharmacy/assets/img/principal.png" />
                                 </ng-template>
-                                <ng-template swiperSlide><img
+                                <ng-template swiperSlide><img class="Img-Swiper-One"
                                         src="../../../../assets/pharmacy/assets/img/principal.png" />
                                 </ng-template>
-                                <ng-template swiperSlide><img
+                                <ng-template swiperSlide><img class="Img-Swiper-One"
                                         src="../../../../assets/pharmacy/assets/img/principal.png" />
                                 </ng-template>
                             </swiper>
@@ -77,40 +77,31 @@
                     </div>
                     <!--======= End of product details slider area =======-->
                 </div>
-                <div class="col-lg-8 mt-4">
+                <div class="col-lg-8 mt-5">
                     <div class="row pl-lg-3">
                         <div class="col-lg-7">
                             <div class="single-product-content-description">
-                                <p class="single-info">Brands <a href="category.html">BrandName</a> </p>
-                                <h4 class="product-title">BrandName Beginner's Protein, 2.2 lb, Cookies and Cream</h4>
+                                
+                                <h4 class="product-title" style="font-size: 2.5rem;">{{medicament.name}}</h4>
                                 <div class="rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star-half-o"></i>
                                     <i class="fa fa-star-o"></i>
-                                    <span class="review-count ml-3">4.5 (2,213)</span>
                                 </div>
-                                <p class="single-grid-product__price"><span class="discounted-price">₹999</span> <span
-                                        class="main-price discounted">₹1699</span></p>
+                                <p class="single-grid-product__price"><span class="discounted-price">Q.{{medicament.price.toFixed(2)}}</span></p>
 
                                 <div class="single-info">
-                                    <span class="d-block text-muted mb-2"><strong>SKU :</strong> MB5415</span>
-                                    <span class="d-block text-muted mb-2"><strong>Category :</strong> Sports
-                                        Nutrition</span>
+                                    <span class="d-block text-muted mb-2"><strong></strong>{{medicament.description}}</span>
+                                    <span class="d-block text-muted mb-2"><strong>Tipo de medicamento:</strong> {{medicament.typeMedicament.name}}</span>
 
-                                    <span class="d-block text-muted mb-2"><strong>Availability :</strong> In
-                                        Stock</span>
+                                    <span class="d-block text-muted mb-2"><strong>Availability: </strong> {{avality}} </span>
                                 </div>
 
 
-                                <div class="product-actions my-4 justify-content-between">
-                                    <!-- Quantity -->
-                                    <div class="qty-input btn">
-                                        <i class="less">-</i>
-                                        <input type="text" value="2" />
-                                        <i class="more">+</i>
-                                    </div>
+                                <div class="product-actions my-4 justify-content-center pt-5">
+
                                     <!-- End Quantity -->
                                     <div class="product-buttons ml-0 ml-md-3 mt-4 mt-md-0 text-md-left text-center">
                                         <a class="btn btn-rounded btn-soft-primary mr-2" href="wishlist.html"> <i
@@ -120,7 +111,7 @@
                                     </div>
 
                                 </div>
-                                <div class="mb-4">
+                                <div class="mb-4 mt-4">
                                     <a href="checkout.html"
                                         class="btn btn-block btn-primary btn-pill transition-3d-hover">Buy
                                         Now</a>
@@ -160,11 +151,11 @@
                 </div>
             </div>
         </div>
-        <div class="single-row-slider-area pt-7">
+        <div class="single-row-slider-area" style="margin-top: 100px;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12 text-center mb-4">
-                        <h2>Related Products</h2>
+                        <h2 style="margin-bottom: 55px;">Related Products</h2>
                     </div>
                 </div>
                 <div class="row">

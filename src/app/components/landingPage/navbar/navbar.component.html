@@ -4,7 +4,8 @@
     <input type="checkbox" name="" id="check">
 
     <div class="logo-container">
-      <h3 class="logo">ONLINE <span>DOCTOR</span></h3>
+      <img src="../../../../assets/images/navbar/MockUps.png" alt="Logo" style="max-height: 3.3rem; margin-right: 1.5rem; margin-top: -7px;">
+      <h3 class="logo"><span style="color: orange;">ONLINE </span> <span style="color: #1975e6;">DOCTOR</span></h3>
     </div>
 
     <div class="nav-btn">
@@ -28,10 +29,10 @@
           <li *ngIf="!contactUs" (click)="changeNavBar('contact')" class="nav-link" style="--i: 1.35s">
             <a routerLink="/contactUs">Contact Us</a>
           </li>
-          <li *ngIf="hotel === true" (click)="changeNavBar('pharmacy')" class="nav-link nav-link-active" style="--i: 1.35s">
+          <li *ngIf="pharmacy === true" (click)="changeNavBar('pharmacy')" class="nav-link nav-link-active" style="--i: 1.35s">
             <a routerLink="/pharmacy">Pharmacy</a>
           </li>
-          <li *ngIf="!hotel" (click)="changeNavBar('pharmacy')" class="nav-link" style="--i: 1.35s">
+          <li *ngIf="!pharmacy"(click)="changeNavBar('pharmacy')" class="nav-link" style="--i: 1.35s">
             <a routerLink="/pharmacy">Pharmacy</a>
           </li>
         </ul>

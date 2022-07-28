@@ -42,4 +42,9 @@ export class TypeMedicamentRestService {
   {
     return this.http.delete(environment.baseURI + 'typeMedicament/deleteTypeMedicament/' + id, { headers: this.httpOptions });
   }
+
+  getTypeMedicamentName(params:{})
+  {
+    return this.http.post(environment.baseURI + 'typeMedicament/getTypeMedicamentByName', params, {headers: this.httpOptions});
+  }
 }

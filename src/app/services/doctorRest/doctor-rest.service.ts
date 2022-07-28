@@ -51,4 +51,9 @@ export class DoctorRestService {
   {
     return this.http.post(environment.baseURI + 'doctor/deleteDoctorAdmin/' + id, params, { headers: this.httpOptions });
   }
+
+  getDoctorName(params:{})
+  {
+    return this.http.post(environment.baseURI + 'doctor/getDoctorByName', params, {headers: this.httpOptions});
+  }
 }

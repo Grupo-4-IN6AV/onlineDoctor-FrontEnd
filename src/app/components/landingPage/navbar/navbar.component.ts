@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit
   home: boolean = true;
   contactUs: boolean = false;
   aboutUs: boolean = false;
-  hotel: boolean = false;
+  pharmacy: boolean = false;
 
   constructor() { }
 
@@ -28,25 +28,25 @@ export class NavbarComponent implements OnInit
       this.home = true;
       this.contactUs = false;
       this.aboutUs = false;
-      this.hotel = false;
+      this.pharmacy = false;
     }
      if(id === 'about')
     {
       this.aboutUs = true;
       this.home = false;
       this.contactUs = false;
-      this.hotel = false;
+      this.pharmacy = false;
     }
      if (id === 'contact')
     {
       this.contactUs = true;
       this.aboutUs = false;
       this.home = false;
-      this.hotel = false;
+      this.pharmacy = false;
     }
-      if (id === 'hotel')
+      if (id === 'pharmacy')
     {
-      this.hotel = true;
+      this.pharmacy = true;
       this.contactUs = false;
       this.aboutUs = false;
       this.home = false;
@@ -56,7 +56,7 @@ export class NavbarComponent implements OnInit
       this.contactUs = false;
       this.aboutUs = false;
       this.home = false;
-      this.hotel = false;
+      this.pharmacy = false;
     }
 
   }

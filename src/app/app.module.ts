@@ -70,11 +70,8 @@ import { LandingPageComponent } from './components/landingPage/landing-page/land
 import { AboutUsComponent } from './components/landingPage/about-us/about-us.component';
 import { ContactUsComponent } from './components/landingPage/contact-us/contact-us.component';
 import { HotelComponent } from './components/landingPage/hotel/hotel.component';
-import { SearchHotelPipe } from './pipes/searchHotelPipe/search-hotel.pipe';
 import { EventsAdminComponent } from './components/admin/event-admin/event-admin.component';
 import { HotelViewComponent } from './components/landingPage/hotel-view/hotel-view.component';
-import { SearchHotelTablePipe } from './pipes/searchHotelTable/search-hotel-table.pipe';
-import { SearchEventPipe } from './pipes/searchEventPipe/search-event.pipe';
 import { TypeLaboratoryAdminComponent } from './components/admin/type-laboratory-admin/type-laboratory-admin.component';
 import { TypeMedicamentAdminComponent } from './components/admin/type-medicament-admin/type-medicament-admin.component';
 import { SpecialityAdminComponent } from './components/admin/speciality-admin/speciality-admin.component';
@@ -90,6 +87,18 @@ import { HomeDoctorComponent } from './components/doctor/home-doctor/home-doctor
 import { DoctorAdminComponent } from './components/admin/doctor-admin/doctor-admin.component';
 import { AppointmentAdminComponent } from './components/admin/appointment-admin/appointment-admin.component';
 import { PharmacyViewAllComponent } from './components/landingPage/pharmacy-view-all/pharmacy-view-all.component';
+import { SearchMedicamentBarPipe } from './pipes/searchMedicamentBar/search-medicament-bar.pipe';
+import { SearchUserBarPipe } from './pipes/searchUserBar/search-user-bar.pipe';
+import { SearchAppointmentTablePipe } from './pipes/searchAppointmentTable/search-appointment-table.pipe';
+import { SearchAppointmentBarPipe } from './pipes/searchAppointmentBar/search-appointment-bar.pipe';
+import { SearchDoctorBarPipe } from './pipes/searchDoctorBar/search-doctor-bar.pipe';
+import { SearchDoctorTablePipe } from './pipes/searchDoctorTable/search-doctor-table.pipe';
+import { SearchSpecialityBarPipe } from './pipes/searchSpecialityBar/search-speciality-bar.pipe';
+import { SearchSpecialityTablePipe } from './pipes/searchSpecialityTable/search-speciality-table.pipe';
+import { SearchTypeLaboratoryBarPipe } from './pipes/searchTypeLaboratoryBar/search-type-laboratory-bar.pipe';
+import { SearchTypeLaboratoryTablePipe } from './pipes/searchTypeLaboratoryTable/search-type-laboratory-table.pipe';
+import { SearchTypeMedicamentBarPipe } from './pipes/searchTypeMedicamentBar/search-type-medicament-bar.pipe';
+import { SearchTypeMedicamentTablePipe } from './pipes/searchTypeMedicamentTable/search-type-medicament-table.pipe';
 
 
 
@@ -119,11 +128,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         AboutUsComponent,
         ContactUsComponent,
         HotelComponent,
-        SearchHotelPipe,
         EventsAdminComponent,
         HotelViewComponent,
-        SearchHotelTablePipe,
-        SearchEventPipe,
         TypeLaboratoryAdminComponent,
         TypeMedicamentAdminComponent,
         SpecialityAdminComponent,
@@ -139,6 +145,18 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
         DoctorAdminComponent,
         AppointmentAdminComponent,
         PharmacyViewAllComponent,
+        SearchMedicamentBarPipe,
+        SearchUserBarPipe,
+        SearchAppointmentTablePipe,
+        SearchAppointmentBarPipe,
+        SearchDoctorBarPipe,
+        SearchDoctorTablePipe,
+        SearchSpecialityBarPipe,
+        SearchSpecialityTablePipe,
+        SearchTypeLaboratoryBarPipe,
+        SearchTypeLaboratoryTablePipe,
+        SearchTypeMedicamentBarPipe,
+        SearchTypeMedicamentTablePipe,
     ],
     imports: [
         FormsModule,

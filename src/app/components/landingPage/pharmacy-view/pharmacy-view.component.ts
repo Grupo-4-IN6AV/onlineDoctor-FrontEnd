@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild } from "@angular/core";
+import { Component, OnInit, DoCheck, ViewEncapsulation, ViewChild } from "@angular/core";
 import { SwiperComponent } from "swiper/angular";
 import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
+import { MedicamentRestService } from "src/app/services/medicamentRest/medicament-rest.service";
+import {ActivatedRoute} from '@angular/router'
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
@@ -10,16 +12,47 @@ SwiperCore.use([FreeMode, Navigation, Thumbs]);
   styleUrls: ['./pharmacy-view.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PharmacyViewComponent implements OnInit {
+export class PharmacyViewComponent implements OnInit, DoCheck{
   thumbsSwiper: any
-  constructor(
+  idMedicament: any;
+  medicament: any;
+  avality:any;
 
+  constructor
+  (
+    public activatedRoute : ActivatedRoute,
+    private medicamentRest: MedicamentRestService
   ) {
 
    }
 
-  ngOnInit(): void {
-  
+  ngOnInit(): void 
+  {
+    this.activatedRoute.paramMap.subscribe(ruta => 
+      {
+        this.idMedicament = ruta.get('id');
+      });
+      this.getMedicament(this.idMedicament)
+  }
+
+  ngDoCheck(): void {
+    
+  }
+
+  getMedicament(id: string)
+  {
+    this.medicamentRest.getMedicament(id).subscribe({
+      next: (res: any) => 
+      {
+        this.medicament = res.medicament
+        if(this.medicament.availibility === true){
+          this.avality = 'En Stock'
+        }else{
+          this.avality = 'No disponible'
+        }
+      },
+      error: (err) => console.log(err)
+    })
   }
 
 }

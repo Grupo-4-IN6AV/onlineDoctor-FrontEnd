@@ -18,6 +18,8 @@ import {
 import { EChartsOption } from 'echarts';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import {MedicamentRestService} from 'src/app/services/medicamentRest/medicament-rest.service'
+import { DoctorRestService } from 'src/app/services/doctorRest/doctor-rest.service';
+import { AppointmentRestService } from 'src/app/services/appointmentRest/appointment-rest.service';
 
 export type SparklineChartOptions = {
   series: ApexAxisChartSeries;
@@ -59,17 +61,32 @@ export class HomeAdminComponent implements OnInit
 {
 
   users: any;
-  totalUsers: any;
+  totalAppo: any;
   totalDoctors: any;
   totalPatients: any;
   totalMedicaments: any;
   totalSells: any;
   medicaments: any;
+  doctors: any;
+  appointments: any;
 
   ngOnInit(): void
   {
+
     this.getUsers();
+    this.getDoctors();
     this.getMedicaments();
+    this.getAppoiments();
+    
+  }
+
+  getAppoiments(){
+    this.appoimentsRest.getAppointments().subscribe({
+      next:(res: any)=>{
+        this.appointments = res.appointmentsExist
+        this.totalAppo = this.appointments.length
+      }
+    })
   }
 
   getUsers()
@@ -78,29 +95,29 @@ export class HomeAdminComponent implements OnInit
       next: (res: any) =>
       {
         this.users = res.users
-        this.totalUsers = this.users.length;
-        var arrayDoctor = [];
-        var arrayClients = [];
-        for(let user of this.users)
-        {
-          if(user.role === 'DOCTOR')
-            arrayDoctor.push(user);
-          else if(user.role === 'PACIENTE')
-            arrayClients.push(user);
-        }
-        this.totalDoctors = arrayDoctor.length;
-        this.totalPatients = arrayClients.length
-        //DATA A LA GRAFICA//
+        this.totalPatients = this.users.length;
+        this.donut_chart.series[0].data.push(
+          {
+            value: this.totalPatients, name:'PACIENTES'
+          },
+        )
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
+  getDoctors(){
+    this.doctorRest.getDoctors().subscribe({
+      next: (res: any)=>{
+        this.doctors = res.doctors
+        this.totalDoctors = res.doctors.length
         this.donut_chart.series[0].data.push(
           {
             value: this.totalDoctors, name:'DOCTORES'
           },
-          {
-            value: this.totalPatients, name:'PACIENTES'
-          }
-          )
+        )
       },
-      error: (err) => console.log(err)
+      error: (err)=>console.log(err)
     })
   }
 
@@ -251,7 +268,9 @@ export class HomeAdminComponent implements OnInit
   constructor
   (
     private medicamentRest: MedicamentRestService,
-    private userRest: UserRestService
+    private userRest: UserRestService,
+    private doctorRest: DoctorRestService,
+    private appoimentsRest: AppointmentRestService
   )
   {
 

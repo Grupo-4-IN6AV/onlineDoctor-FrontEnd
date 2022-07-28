@@ -42,4 +42,9 @@ export class SpecialityRestService {
   {
     return this.http.delete(environment.baseURI + 'speciality/deleteSpeciality/' + id, { headers: this.httpOptions });
   }
+
+  getSpecialityName(params:{})
+  {
+    return this.http.post(environment.baseURI + 'speciality/getSpecialityByName', params, {headers: this.httpOptions});
+  }
 }
