@@ -5,6 +5,13 @@
     </h1>
     <hr />
 
+    <div *ngIf="!showTableMedicament" class="row d-flex justify-content-center align-items-center">
+        <div class="form">
+          <i class="fa fa-search ms-2"></i>
+          <input [(ngModel)]="searchMedicament" type="text" class="form-control form-input" placeholder="Search User...">
+        </div>
+    </div>
+
     <div class="text-center mt-2 mb-2">
         <button type="button" data-bs-toggle="modal" data-bs-target="#addMedicament"
             class="ms-3 btn btn-event btn-success" (click)="getTypesMedicaments()">
@@ -32,7 +39,8 @@
     <div *ngIf="!showTableMedicament">
         <div class="container">
             <div class="products-container">
-                <div *ngFor="let medicament of medicaments | searchMedicamentBar: searchMedicament" class="product" data-name="p-1">
+                <div *ngFor="let medicament of medicaments | searchMedicamentBar: searchMedicament" class="product"
+                    data-name="p-1">
                     <h5 class="card-title">{{ medicament.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ medicament.description }}</h6>
                     <button (click)="getMedicament(medicament._id); getTypesMedicaments()" class="btn btn-success m-3"
@@ -309,24 +317,31 @@
                                 </li>
 
                                 <li>
-                                    <i *ngIf="!medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()"></i>
-                                    <i *ngIf="!medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getUsersByDown()"></i>
-                                  </li>
-                              
-                                  <li>
-                                    <i *ngIf="medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()" style="color: #4a8af9;"></i>
-                                    <i *ngIf="medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-desc text-gray-400 ms-3" (click)="getByDown()"></i>
-                                  </li>
-                  
-                                  <li>
-                                    <i *ngIf="!medicamentNameUp && medicamentNameDown" class="fa fa-sort-alpha-asc text-gray-400 ms-3" (click)="getByUp()"></i>
-                                    <i *ngIf="!medicamentNameUp && medicamentNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()" style="color: #4a8af9;"></i>
-                                  </li>
-                  
-                                  <li>
+                                    <i *ngIf="!medicamentNameUp && !medicamentNameDown"
+                                        class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()"></i>
+                                    <i *ngIf="!medicamentNameUp && !medicamentNameDown"
+                                        class="fa fa-sort-alpha-desc ms-3" (click)="getUsersByDown()"></i>
+                                </li>
+
+                                <li>
+                                    <i *ngIf="medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-asc ms-3"
+                                        (click)="getByUp()" style="color: #4a8af9;"></i>
+                                    <i *ngIf="medicamentNameUp && !medicamentNameDown"
+                                        class="fa fa-sort-alpha-desc text-gray-400 ms-3" (click)="getByDown()"></i>
+                                </li>
+
+                                <li>
+                                    <i *ngIf="!medicamentNameUp && medicamentNameDown"
+                                        class="fa fa-sort-alpha-asc text-gray-400 ms-3" (click)="getByUp()"></i>
+                                    <i *ngIf="!medicamentNameUp && medicamentNameDown"
+                                        class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()"
+                                        style="color: #4a8af9;"></i>
+                                </li>
+
+                                <li>
                                     <i *ngIf="medicamentNameUp || medicamentNameDown" (click)="cleanTable()"
-                                    class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
-                                  </li>
+                                        class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
+                                </li>
 
                                 <li *ngIf="buttonActions">
                                     <div class="icon-button-demo m-l-10">
@@ -387,10 +402,11 @@
                                         data-bs-target="#viewTypeLaboratory">{{ medicament.stock }}</td>
                                     <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewTypeLaboratory">{{ medicament.sales }}</td>
-                                    <td *ngIf="medicament.availibility === false" (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                                    <td *ngIf="medicament.availibility === false"
+                                        (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewTypeLaboratory">Not Available</td>
-                                    <td *ngIf="medicament.availibility === true"  (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewTypeLaboratory">Available</td>
+                                    <td *ngIf="medicament.availibility === true" (click)="getMedicament(medicament._id)"
+                                        data-bs-toggle="modal" data-bs-target="#viewTypeLaboratory">Available</td>
                                 </tr>
                                 <tr rowspan="9" *ngIf="notFound === true">
                                     <td colspan="9" class="text-center">Not Medicaments Found</td>

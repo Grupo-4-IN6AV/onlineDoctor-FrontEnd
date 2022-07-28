@@ -5,6 +5,13 @@
   </h1>
   <hr />
 
+  <div *ngIf="!showTableTypeMedicament" class="row d-flex justify-content-center align-items-center">
+    <div class="form">
+      <i class="fa fa-search ms-2"></i>
+      <input [(ngModel)]="searchTypeMedicament" type="text" class="form-control form-input" placeholder="Search User...">
+    </div>
+  </div>
+
   <div class="text-center mt-2 mb-2">
     <button type="button" data-bs-toggle="modal" data-bs-target="#addTypeMedicament"
       class="ms-3 btn btn-event btn-success">
