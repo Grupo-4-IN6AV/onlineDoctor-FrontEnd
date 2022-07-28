@@ -1,26 +1,26 @@
 <section class="content">
   <h1 style="margin-top: 4rem">
     &nbsp;<i class="fa fa-users" aria-hidden="true"> </i>
-    Patients
+    Pacientes
   </h1>
   <hr />
 
   <div class="text-center mt-2 mb-2">
     <button type="button" data-bs-toggle="modal" data-bs-target="#addUser" class="ms-3 btn btn-event btn-success">
-      Add Patients
+      Agregar Pacientes
       <span class="btn-icon-end"><i class="fas fa-user"></i> </span>
     </button>
     <button *ngIf="!showTableUsers" (click)="showTable()" type="button" class="ms-3 btn btn-event btn-secondary">
-      Table Patients
+      Tabla de Pacientes
       <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
     </button>
     <button *ngIf="showTableUsers" (click)="showTable(); cleanTable()" type="button"
       class="ms-3 btn btn-event btn-secondary">
-      Return Cards
+      Ver por Cartas
       <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
     </button>
     <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
-      Back Home
+      Inicio
       <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
     </button>
   </div>
@@ -36,17 +36,17 @@
           <p class="card-text">{{ user.role }}</p>
           <button (click)="getUser(user._id)" class="btn btn-success m-3" data-bs-toggle="modal"
             data-bs-target="#updateUser" class="btn btn-warning m-2">
-            <i class="fa fa-pencil" aria-hidden="true"> </i> Update
+            <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
           </button>
           <button (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#deleteUser"
             class="btn btn-danger">
             <i class="fa fa-trash" aria-hidden="true"></i>
-            Delete
+            Eliminar
           </button>
           <button (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser"
             class="btn btn-secondary ms-2">
             <i class="fa fa-eye" aria-hidden="true"></i>
-            View
+            Ver
           </button>
         </div>
       </div>
@@ -86,14 +86,14 @@
                 <div class="count-container">
 
                   <div class="box">
-                    <h3>Name:</h3>
+                    <h3>Nombre:</h3>
                   </div>
                   <div class="box">
                     <p>{{ userView.name }}</p>
                   </div>
 
                   <div class="box">
-                    <h3>Surname:</h3>
+                    <h3>Apellido:</h3>
                   </div>
                   <div *ngIf="userView.surname" class="box">
                     <p>{{ userView.surname }}</p>
@@ -103,7 +103,7 @@
                   </div>
 
                   <div class="box">
-                    <h3>Username:</h3>
+                    <h3>Usuario:</h3>
                   </div>
                   <div class="box">
                     <p>{{ userView.username }}</p>
@@ -137,7 +137,7 @@
                   </div>
 
                   <div class="box">
-                    <h3>Phone:</h3>
+                    <h3>Tel:</h3>
                   </div>
                   <div *ngIf="userView.phone" class="box">
                     <p>{{ userView.phone }}</p>
@@ -147,7 +147,7 @@
                   </div>
 
                   <div class="box">
-                    <h3>Age</h3>
+                    <h3>Edad</h3>
                   </div>
                   <div *ngIf="userView.age" class="box">
                     <p>{{ userView.age }}</p>
@@ -157,7 +157,7 @@
                   </div>
 
                   <div class="box">
-                    <h3>Gender</h3>
+                    <h3>Genero</h3>
                   </div>
                   <div class="box">
                     <p>{{ userView.gender }}</p>
@@ -177,7 +177,7 @@
           <div class="modal-header">
             <h3 class="modal-title" id="modal-basic-title">
               <i class="fas fa-user-plus" aria-hidden="true"></i>
-              &nbsp;Add User
+              &nbsp;Agregar Usuario
             </h3>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -185,19 +185,19 @@
             <form (ngSubmit)="saveUser(addUserForm)" #addUserForm="ngForm">
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Name</mat-label>
+                  <mat-label>Nombre</mat-label>
                   <input autocomplete="off" [(ngModel)]="user.name" name="name" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Surname</mat-label>
+                  <mat-label>Apellido</mat-label>
                   <input autocomplete="off" [(ngModel)]="user.surname" name="surname" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Username</mat-label>
+                  <mat-label>Usuario</mat-label>
                   <input autocomplete="off" [(ngModel)]="user.username" name="username" matInput />
                 </mat-form-field>
               </div>
@@ -215,13 +215,13 @@
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Age</mat-label>
+                  <mat-label>Edad</mat-label>
                   <input autocomplete="off" [(ngModel)]="user.age" name="age" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Password</mat-label>
+                  <mat-label>Contraseña</mat-label>
                   <input autocomplete="off" [(ngModel)]="user.password" name="password" type="password" matInput />
                 </mat-form-field>
               </div>
@@ -233,27 +233,26 @@
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Phone</mat-label>
+                  <mat-label>Tel</mat-label>
                   <input [(ngModel)]="user.phone" name="phone" type="text" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Gender</mat-label>
+                  <mat-label>Genero</mat-label>
                   <mat-select [(ngModel)]="user.gender" name="gender">
-                    <mat-option value="MALE">MALE</mat-option>
-                    <mat-option value="FEMALE">FEMALE</mat-option>
+                    <mat-option value="MALE">Masculino</mat-option>
+                    <mat-option value="FEMALE">Femenino</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <hr />
               <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                  <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
-                  Save
+                  <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                 </button>
                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Save User
+                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                 </button>
               </div>
             </form>
@@ -272,7 +271,7 @@
         <div class="modal-header">
           <h3 class="modal-title" id="modal-basic-title">
             <i class="fas fa-pencil" aria-hidden="true"></i>
-            &nbsp;Update User
+            &nbsp;Editar Paciente
           </h3>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -280,19 +279,19 @@
           <form (ngSubmit)="updateUser()" *ngIf="userUpdate">
             <div class="text-inside">
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Name</mat-label>
+                <mat-label>Nombre</mat-label>
                 <input autocomplete="off" [(ngModel)]="userUpdate.name" name="name" matInput />
               </mat-form-field>
             </div>
             <div class="text-inside">
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Surname</mat-label>
+                <mat-label>Apellido</mat-label>
                 <input autocomplete="off" [(ngModel)]="userUpdate.surname" name="surname" matInput />
               </mat-form-field>
             </div>
             <div class="text-inside">
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Username</mat-label>
+                <mat-label>Usuario</mat-label>
                 <input autocomplete="off" [(ngModel)]="userUpdate.username" name="username" matInput />
               </mat-form-field>
             </div>
@@ -304,7 +303,7 @@
             </div>
             <div class="text-inside">
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Phone</mat-label>
+                <mat-label>Tel</mat-label>
                 <input autocomplete="off" [(ngModel)]="userUpdate.phone" name="phone" type="text" matInput />
               </mat-form-field>
             </div>
@@ -322,26 +321,26 @@
             </div>
             <div class="text-inside">
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Age</mat-label>
+                <mat-label>Edad</mat-label>
                 <input autocomplete="off" [(ngModel)]="userUpdate.age" name="age" type="text" matInput />
               </mat-form-field>
             </div>
             <div class="text-inside">
               <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Gender</mat-label>
+                <mat-label>Genero</mat-label>
                 <mat-select [(ngModel)]="userUpdate.gender" name="gender">
-                  <mat-option value="MALE">MALE</mat-option>
-                  <mat-option value="FEMALE">FEMALE</mat-option>
+                  <mat-option value="MALE">Masculino</mat-option>
+                  <mat-option value="FEMALE">Femenino</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <hr />
             <div class="modal-footer justify-content-center">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update
+                <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
               </button>
               <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                <i class="fa fa-floppy-o" aria-hidden="true"></i> Update User
+                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
               </button>
             </div>
           </form>
@@ -368,7 +367,7 @@
                         {{ userDeleteModal.name }}
                       </div>
                       <div class="badge col-yellow">
-                        PACIENTES
+                        PACIENTE
                       </div>
                     </div>
                   </div>
@@ -383,14 +382,14 @@
               <div class="count-container">
 
                 <div class="box">
-                  <h3>Name:</h3>
+                  <h3>Nombre:</h3>
                 </div>
                 <div class="box">
                   <p>{{ userDeleteModal.name }}</p>
                 </div>
 
                 <div class="box">
-                  <h3>Surname:</h3>
+                  <h3>Apellido:</h3>
                 </div>
                 <div *ngIf="userDeleteModal.surname" class="box">
                   <p>{{ userDelete.surname }}</p>
@@ -400,7 +399,7 @@
                 </div>
 
                 <div class="box">
-                  <h3>Username:</h3>
+                  <h3>Usuario:</h3>
                 </div>
                 <div class="box">
                   <p>{{ userDeleteModal.username }}</p>
@@ -416,12 +415,11 @@
                   </div>
                   <div class="modal-footer justify-content-center">
                     <button (click)="showPassword()" type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                      <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
-                      Delete
+                      <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                     </button>
                     <button (click)="deleteUser(userDeleteModal._id, userDeletePassword)" type="submit"
                       class="btn btn-success" data-bs-dismiss="modal">
-                      <i class="fa fa-floppy-o" aria-hidden="true"></i> Siguiente
+                      <i class="fa fa-floppy-o" aria-hidden="true"></i> Eliminar
                     </button>
                   </div>
                 </form>
@@ -443,7 +441,7 @@
               <ul class="header-buttons-left ml-0">
                 <li class="dropdown">
                   <div class="header">
-                    <h2>Table Users</h2>
+                    <h2>Tabla de Pacientes</h2>
                   </div>
                 </li>
                 <li class="dropdown m-l-20">
@@ -484,16 +482,16 @@
               <thead>
                 <tr>
                   <th class="text-center">#</th>
-                  <th>Photo</th>
-                  <th>Name</th>
-                  <th>Surname</th>
-                  <th>Username</th>
+                  <th>Foto</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Usuario</th>
                   <th>DPI</th>
                   <th>NIT</th>
                   <th>Email</th>
-                  <th>Role</th>
-                  <th>Phone</th>
-                  <th>Gender</th>
+                  <th>Rol</th>
+                  <th>Tel</th>
+                  <th>Genero</th>
                 </tr>
               </thead>
               <tbody>

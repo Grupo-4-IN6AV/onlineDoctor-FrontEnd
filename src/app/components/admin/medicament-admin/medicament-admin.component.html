@@ -1,28 +1,28 @@
 <section class="content">
     <h1 style="margin-top: 4rem">
         &nbsp;<i class="fa-solid fa-prescription-bottle-medical"></i>
-        Medicament
+        Medicamentos
     </h1>
     <hr />
 
     <div class="text-center mt-2 mb-2">
         <button type="button" data-bs-toggle="modal" data-bs-target="#addMedicament"
             class="ms-3 btn btn-event btn-success" (click)="getTypesMedicaments()">
-            Add Medicament
+            Agregar Medicamento
             <span class="btn-icon-end"><i class="fa-solid fa-prescription-bottle-medical"></i></span>
         </button>
         <button *ngIf="!showTableMedicament" (click)="showTable()" type="button"
             class="ms-3 btn btn-event btn-secondary">
-            Table Medicament
+            Tabla de Medicamentos
             <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
         </button>
         <button *ngIf="showTableMedicament" (click)="showTable(); cleanTable()" type="button"
             class="ms-3 btn btn-event btn-secondary">
-            Return Cards
+            Ver por Cartas
             <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
         </button>
         <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
-            Back Home
+            Inicio
             <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
         </button>
     </div>
@@ -37,16 +37,16 @@
                     <h6 class="card-subtitle mb-2 text-muted">{{ medicament.description }}</h6>
                     <button (click)="getMedicament(medicament._id); getTypesMedicaments()" class="btn btn-success m-3"
                         data-bs-toggle="modal" data-bs-target="#updateMedicament" class="btn btn-warning m-2">
-                        <i class="fa fa-pencil" aria-hidden="true"> </i> Update
+                        <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
                     </button>
                     <button (click)="deleteMedicament(medicament._id)" class="btn btn-danger">
                         <i class="fa fa-trash" aria-hidden="true"></i>
-                        Delete
+                        Eliminar
                     </button>
                     <button (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
                         data-bs-target="#viewMedicament" class="btn btn-secondary ms-2">
                         <i class="fa fa-eye" aria-hidden="true"></i>
-                        View
+                        Ver
                     </button>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                             <div *ngIf="medicamentView" class="descripcion">
                                 <div class="count-container">
                                     <div class="box">
-                                        <h3>Name:</h3>
+                                        <h3>Nombre:</h3>
                                     </div>
 
                                     <div class="box">
@@ -92,7 +92,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <h3>Description:</h3>
+                                        <h3>Descripción:</h3>
                                     </div>
 
                                     <div class="box">
@@ -100,7 +100,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <h3>Type Medicament</h3>
+                                        <h3>Tipo de Medicamento</h3>
                                     </div>
 
                                     <div class="box">
@@ -108,7 +108,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <h3>Price</h3>
+                                        <h3>Precio</h3>
                                     </div>
 
                                     <div class="box">
@@ -116,7 +116,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <h3>Stock</h3>
+                                        <h3>Existencia</h3>
                                     </div>
 
                                     <div class="box">
@@ -124,7 +124,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <h3>Sales</h3>
+                                        <h3>Ventas</h3>
                                     </div>
 
                                     <div class="box">
@@ -132,12 +132,12 @@
                                     </div>
 
                                     <div class="box">
-                                        <h3>Availibility</h3>
+                                        <h3>Disponibilidad</h3>
                                     </div>
 
                                     <div class="box">
-                                        <p *ngIf="medicamentView.availibility === true">Available</p>
-                                        <p *ngIf="medicamentView.availibility === false">Not Available</p>
+                                        <p *ngIf="medicamentView.availibility === true">Disponible</p>
+                                        <p *ngIf="medicamentView.availibility === false">No Disponible</p>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                     <div class="modal-header">
                         <h3 class="modal-title" id="modal-basic-title">
                             <i class="fa-solid fa-vial-virus"></i>
-                            &nbsp;Add Medicament
+                            &nbsp;Agregar Medicamento
                         </h3>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                             aria-label="Close"></button>
@@ -163,20 +163,20 @@
                         <form (ngSubmit)="saveMedicament(addMedicamentForm)" #addMedicamentForm="ngForm">
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Name</mat-label>
+                                    <mat-label>Nombre</mat-label>
                                     <input autocomplete="off" [(ngModel)]="medicament.name" name="name" matInput />
                                 </mat-form-field>
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Description</mat-label>
+                                    <mat-label>Descripción</mat-label>
                                     <input autocomplete="off" [(ngModel)]="medicament.description" name="description"
                                         matInput />
                                 </mat-form-field>
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Type Medicament</mat-label>
+                                    <mat-label>Tipo de Medicamento</mat-label>
                                     <mat-select [(ngModel)]="medicament.typeMedicament" name="typeMedicament">
                                         <mat-option *ngFor="let typeMedicament of typesMedicament"
                                             value={{typeMedicament._id}}>{{typeMedicament.name}}</mat-option>
@@ -185,24 +185,23 @@
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Price</mat-label>
+                                    <mat-label>Precio</mat-label>
                                     <input autocomplete="off" [(ngModel)]="medicament.price" name="price" matInput />
                                 </mat-form-field>
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Stock</mat-label>
+                                    <mat-label>Existencia</mat-label>
                                     <input autocomplete="off" [(ngModel)]="medicament.stock" name="stock" matInput />
                                 </mat-form-field>
                             </div>
                             <hr />
                             <div class="modal-footer justify-content-center">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
-                                    Save
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                                 </button>
                                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Save Medicament
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                                 </button>
                             </div>
                         </form>
@@ -221,7 +220,7 @@
                 <div class="modal-header">
                     <h3 class="modal-title" id="modal-basic-title">
                         <i class="fas fa-pencil" aria-hidden="true"></i>
-                        &nbsp;Update Medicament
+                        &nbsp;Editar Medicamento
                     </h3>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Close"></button>
@@ -230,20 +229,20 @@
                     <form (ngSubmit)="updateMedicament()" *ngIf="medicamentUpdate">
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Name</mat-label>
+                                <mat-label>Nombre</mat-label>
                                 <input autocomplete="off" [(ngModel)]="medicamentUpdate.name" name="name" matInput />
                             </mat-form-field>
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Description</mat-label>
+                                <mat-label>Descripción</mat-label>
                                 <input autocomplete="off" [(ngModel)]="medicamentUpdate.description" name="description"
                                     matInput />
                             </mat-form-field>
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Type Medicament</mat-label>
+                                <mat-label>Tipo de Medicamento</mat-label>
                                 <mat-select [(ngModel)]="medicamentUpdate.typeMedicament._id" name="typeMedicament">
                                     <mat-option *ngFor="let typeMedicament of typesMedicament"
                                         value={{typeMedicament._id}}>{{typeMedicament.name}}
@@ -253,23 +252,23 @@
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Price</mat-label>
+                                <mat-label>Precio</mat-label>
                                 <input autocomplete="off" [(ngModel)]="medicamentUpdate.price" name="price" matInput />
                             </mat-form-field>
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Stock</mat-label>
+                                <mat-label>Existencia</mat-label>
                                 <input autocomplete="off" [(ngModel)]="medicamentUpdate.stock" name="stock" matInput />
                             </mat-form-field>
                         </div>
                         <hr />
                         <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update
+                                <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                             </button>
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Update Medicament
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                             </button>
                         </div>
                     </form>
@@ -288,7 +287,7 @@
                             <ul class="header-buttons-left ml-0">
                                 <li class="dropdown">
                                     <div class="header">
-                                        <h2>Table Medicament</h2>
+                                        <h2>Tabla de Medicamentos</h2>
                                     </div>
                                 </li>
                                 <li class="dropdown m-l-20">
@@ -328,14 +327,14 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Photo</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Type Medicament</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Sales</th>
-                                    <th>Availibility</th>
+                                    <th>Foto</th>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Tipo de Medicamento</th>
+                                    <th>Precio</th>
+                                    <th>Existencia</th>
+                                    <th>Ventas</th>
+                                    <th>Disponibilidad</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -367,12 +366,12 @@
                                     <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewTypeLaboratory">{{ medicament.sales }}</td>
                                     <td *ngIf="medicament.availibility === false" (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewTypeLaboratory">Not Available</td>
+                                        data-bs-target="#viewTypeLaboratory">No Disponible</td>
                                     <td *ngIf="medicament.availibility === true"  (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewTypeLaboratory">Available</td>
+                                        data-bs-target="#viewTypeLaboratory">Disponible</td>
                                 </tr>
                                 <tr rowspan="9" *ngIf="notFound === true">
-                                    <td colspan="9" class="text-center">Not Medicaments Found</td>
+                                    <td colspan="9" class="text-center">Medicamento no encontrado </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -382,6 +381,6 @@
         </div>
     </div>
     <h1 *ngIf="notFound === true && showTableMedicament === false" class="text-center">
-        Not Medicament Found
+        Medicamento no encontrado
     </h1>
 </section>

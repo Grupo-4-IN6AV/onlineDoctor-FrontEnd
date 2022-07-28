@@ -1,28 +1,28 @@
 <section class="content">
     <h1 style="margin-top: 4rem">
         &nbsp;<i class="fa-solid fa-calendar-day"></i>
-        Appointment
+        Citas
     </h1>
     <hr />
 
     <div class="text-center mt-2 mb-2">
         <button type="button" data-bs-toggle="modal" data-bs-target="#addAppointment"
             class="ms-3 btn btn-event btn-success" (click)="getUsers(); getDoctors()">
-            Add Appointment
+            Agregar Cita
             <span class="btn-icon-end"><i class="fa-solid fa-calendar-day"></i></span>
         </button>
         <button *ngIf="!showTableAppointment" (click)="showTable()" type="button"
             class="ms-3 btn btn-event btn-secondary">
-            Table Appointment
+            Tabla de Citas
             <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
         </button>
         <button *ngIf="showTableAppointment" (click)="showTable(); cleanTable()" type="button"
             class="ms-3 btn btn-event btn-secondary">
-            Return Cards
+            Ver por Cartas
             <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
         </button>
         <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
-            Back Home
+            Inicio
             <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
         </button>
     </div>
@@ -37,16 +37,16 @@
                     <h6 class="card-subtitle mb-2 text-muted">{{ appointment.date }}</h6>
                     <button (click)="getAppointment(appointment._id); getUsers(); getDoctors()" class="btn btn-success m-3"
                         data-bs-toggle="modal" data-bs-target="#updateAppointment" class="btn btn-warning m-2">
-                        <i class="fa fa-pencil" aria-hidden="true"> </i> Update
+                        <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
                     </button>
                     <button (click)="deleteAppointment(appointment._id)" class="btn btn-danger">
                         <i class="fa fa-trash" aria-hidden="true"></i>
-                        Delete
+                        Eliminar
                     </button>
                     <button (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
                         data-bs-target="#viewAppointment" class="btn btn-secondary ms-2">
                         <i class="fa fa-eye" aria-hidden="true"></i>
-                        View
+                        Ver
                     </button>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                             <div *ngIf="appointmentView" class="descripcion">
                                 <div class="count-container">
                                     <div class="box">
-                                        <h3>Pacient:</h3>
+                                        <h3>Paciente:</h3>
                                     </div>
 
                                     <div class="box">
@@ -100,7 +100,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <h3>Date:</h3>
+                                        <h3>Fecha:</h3>
                                     </div>
 
                                     <div class="box">
@@ -108,7 +108,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <h3>Modality:</h3>
+                                        <h3>Modalidad:</h3>
                                     </div>
 
                                     <div class="box">
@@ -129,7 +129,7 @@
                     <div class="modal-header">
                         <h3 class="modal-title" id="modal-basic-title">
                             <i class="fa-solid fa-calendar-day"></i>
-                            &nbsp;Add Appointment
+                            &nbsp;Agregar Cita
                         </h3>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                             aria-label="Close"></button>
@@ -138,7 +138,7 @@
                         <form (ngSubmit)="saveAppointment(addAppointmentForm)" #addAppointmentForm="ngForm">
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Pacient</mat-label>
+                                    <mat-label>Paciente</mat-label>
                                     <mat-select [(ngModel)]="appointment.pacient" name="pacient">
                                         <div *ngFor="let user of users">
                                             <mat-option *ngIf="user.role == 'PACIENTE'"
@@ -161,14 +161,14 @@
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Date</mat-label>
+                                    <mat-label>Fecha</mat-label>
                                     <input autocomplete="off" type="date" [(ngModel)]="appointment.date" name="date" matInput />
                                 </mat-form-field>
                             </div>
                             
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Modality</mat-label>
+                                    <mat-label>Modalidad</mat-label>
                                     <mat-select [(ngModel)]="appointment.modality" name="state">
                                         <mat-option value="VIRTUAL">Virtual</mat-option>
                                         <mat-option value="PRESENCIAL">Presencial</mat-option>
@@ -178,11 +178,10 @@
                             <hr />
                             <div class="modal-footer justify-content-center">
                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
-                                    Save
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                                 </button>
                                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Save Appointment
+                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                                 </button>
                             </div>
                         </form>
@@ -201,7 +200,7 @@
                 <div class="modal-header">
                     <h3 class="modal-title" id="modal-basic-title">
                         <i class="fas fa-pencil" aria-hidden="true"></i>
-                        &nbsp;Update Appointment
+                        &nbsp;Actuializar Cita
                     </h3>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Close"></button>
@@ -210,7 +209,7 @@
                     <form (ngSubmit)="updateAppointment()" *ngIf="appointmentUpdate">
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Pacient</mat-label>
+                                <mat-label>Paciente</mat-label>
                                 <mat-select disabled [(ngModel)]="appointmentUpdate.pacient._id" name="pacient">
                                     <div *ngFor="let user of users">
                                         <mat-option *ngIf="user.role === 'PACIENTE'"
@@ -232,13 +231,13 @@
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Date</mat-label>
+                                <mat-label>Fecha</mat-label>
                                 <input autocomplete="off" type="date" [(ngModel)]="appointmentUpdate.date" name="date" matInput />
                             </mat-form-field>
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Modaility</mat-label>
+                                <mat-label>Modalidad</mat-label>
                                 <mat-select [(ngModel)]="appointmentUpdate.modality" name="state">
                                     <mat-option value="VIRTUAL">Virtual</mat-option>
                                     <mat-option value="PRESENCIAL">Presencial</mat-option>
@@ -248,10 +247,10 @@
                         <hr />
                         <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update
+                                <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                             </button>
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Update Appointment
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                             </button>
                         </div>
                     </form>
@@ -270,7 +269,7 @@
                             <ul class="header-buttons-left ml-0">
                                 <li class="dropdown">
                                     <div class="header">
-                                        <h2>Table Appointment</h2>
+                                        <h2>Tabla de Citas</h2>
                                     </div>
                                 </li>
                                 <li class="dropdown m-l-20">
@@ -310,11 +309,11 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Photo</th>
-                                    <th>Pacient</th>
+                                    <th>Foto</th>
+                                    <th>Paciente</th>
                                     <th>Doctor</th>
-                                    <th>Date</th>
-                                    <th>Modality</th>
+                                    <th>Fecha</th>
+                                    <th>Modalidad</th>
                                 </tr>
                             </thead>
                             <tbody>

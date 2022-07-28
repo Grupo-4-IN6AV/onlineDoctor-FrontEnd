@@ -1,26 +1,26 @@
 <section class="content">
     <h1 style="margin-top: 4rem">
       &nbsp;<i class="fa fa-user-md" aria-hidden="true"></i>
-      Speciality
+      Especialidad
     </h1>
     <hr />
   
     <div class="text-center mt-2 mb-2">
       <button type="button" data-bs-toggle="modal" data-bs-target="#addSpeciality" class="ms-3 btn btn-event btn-success">
-        Add Speciality
+        Agregar Especialidad
         <span class="btn-icon-end"><i class="fa fa-user-md"></i> </span>
       </button>
       <button *ngIf="!showTableSpeciality" (click)="showTable()" type="button" class="ms-3 btn btn-event btn-secondary">
-        Table Speciality
+        Tabla de Especialidades
         <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
       </button>
       <button *ngIf="showTableSpeciality" (click)="showTable(); cleanTable()" type="button"
         class="ms-3 btn btn-event btn-secondary">
-        Return Cards
+        Ver por Cartas
         <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
       </button>
       <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
-        Back Home
+        Inicio
         <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
       </button>
     </div>
@@ -35,16 +35,16 @@
             <h6 class="card-subtitle mb-2 text-muted">{{ speciality.description }}</h6>
             <button (click)="getSpeciality(speciality._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateSpeciality"
               class="btn btn-warning m-2">
-              <i class="fa fa-pencil" aria-hidden="true"> </i> Update
+              <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
             </button>
             <button (click)="deleteSpeciality(speciality._id)" class="btn btn-danger">
               <i class="fa fa-trash" aria-hidden="true"></i>
-              Delete
+              Eliminar
             </button>
             <button (click)="getSpeciality(speciality._id)" data-bs-toggle="modal" data-bs-target="#viewSpeciality"
               class="btn btn-secondary ms-2">
               <i class="fa fa-eye" aria-hidden="true"></i>
-              View
+              Ver
             </button>
           </div>
         </div>
@@ -81,7 +81,7 @@
                 <div *ngIf="specialityView" class="descripcion">
                   <div class="count-container">
                     <div class="box">
-                      <h3>Name:</h3>
+                      <h3>Nombre:</h3>
                     </div>
   
                     <div class="box">
@@ -89,7 +89,7 @@
                     </div>
   
                     <div class="box">
-                      <h3>Description:</h3>
+                      <h3>Descripción:</h3>
                     </div>
   
                     <div class="box">
@@ -110,7 +110,7 @@
             <div class="modal-header">
               <h3 class="modal-title" id="modal-basic-title">
                 <i class="fa fa-user-md"></i>
-                &nbsp;Add Speciality
+                &nbsp;Agregar Especialidad
               </h3>
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -118,24 +118,23 @@
               <form (ngSubmit)="saveSpeciality(addSpecialityForm)" #addSpecialityForm="ngForm">
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Name</mat-label>
+                    <mat-label>Nombre</mat-label>
                     <input autocomplete="off" [(ngModel)]="speciality.name" name="name" matInput />
                   </mat-form-field>
                 </div>
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Description</mat-label>
+                    <mat-label>Descripción</mat-label>
                     <input autocomplete="off" [(ngModel)]="speciality.description" name="description" matInput />
                   </mat-form-field>
                 </div>
                 <hr />
                 <div class="modal-footer justify-content-center">
                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                    <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
-                    Save
+                    <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                   </button>
                   <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Save Speciality
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                   </button>
                 </div>
               </form>
@@ -154,7 +153,7 @@
           <div class="modal-header">
             <h3 class="modal-title" id="modal-basic-title">
               <i class="fas fa-pencil" aria-hidden="true"></i>
-              &nbsp;Update Speciality
+              &nbsp;Editar Epecialidad
             </h3>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -162,23 +161,23 @@
             <form (ngSubmit)="updateSpeciality()" *ngIf="specialityUpdate">
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Name</mat-label>
+                  <mat-label>Nombre</mat-label>
                   <input autocomplete="off" [(ngModel)]="specialityUpdate.name" name="name" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Description</mat-label>
+                  <mat-label>Descripción</mat-label>
                   <input autocomplete="off" [(ngModel)]="specialityUpdate.description" name="description" matInput />
                 </mat-form-field>
               </div>
               <hr />
               <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                  <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update
+                  <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                 </button>
                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Update Speciality
+                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                 </button>
               </div>
             </form>
@@ -197,7 +196,7 @@
                 <ul class="header-buttons-left ml-0">
                   <li class="dropdown">
                     <div class="header">
-                      <h2>Table Speciality</h2>
+                      <h2>Tabla de Especialidades </h2>
                     </div>
                   </li>
                   <li class="dropdown m-l-20">
@@ -235,9 +234,9 @@
                 <thead>
                   <tr>
                     <th class="text-center">#</th>
-                    <th>Photo</th>
-                    <th>Name</th>
-                    <th>Description</th>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -257,7 +256,7 @@
                     <td (click)="getSpeciality(speciality._id)" data-bs-toggle="modal" data-bs-target="#viewSpeciality">{{ speciality.description }}</td>
                   </tr>
                   <tr rowspan="9" *ngIf="notFound === true">
-                    <td colspan="9" class="text-center">Not Speciality Found</td>
+                    <td colspan="9" class="text-center">Especialidad no encontrada</td>
                   </tr>
                 </tbody>
               </table>
@@ -267,7 +266,7 @@
       </div>
     </div>
     <h1 *ngIf="notFound === true && showTableSpeciality === false" class="text-center">
-      Not Speciality Found
+      Especialidad no encontrada
     </h1>
   </section>
   

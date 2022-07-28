@@ -1,26 +1,26 @@
 <section class="content">
     <h1 style="margin-top: 4rem">
       &nbsp;<i class="fa-solid fa-vial-virus"></i>
-      Type Laboratory
+      Tipo de Laboratorio
     </h1>
     <hr />
   
     <div class="text-center mt-2 mb-2">
       <button type="button" data-bs-toggle="modal" data-bs-target="#addTypeLaboratory" class="ms-3 btn btn-event btn-success">
-        Add Type Laboratory
+        Agregar Tipo de Laboratorio
         <span class="btn-icon-end"><i class="fa-solid fa-vial-virus"></i> </span>
       </button>
       <button *ngIf="!showTableTypeLaboratory" (click)="showTable()" type="button" class="ms-3 btn btn-event btn-secondary">
-        Table Type Laboratory
+        Tabla de tipos de Laboratorio
         <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
       </button>
       <button *ngIf="showTableTypeLaboratory" (click)="showTable(); cleanTable()" type="button"
         class="ms-3 btn btn-event btn-secondary">
-        Return Cards
+        Ver por Cartas
         <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
       </button>
       <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
-        Back Home
+        Inicio
         <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
       </button>
     </div>
@@ -35,16 +35,14 @@
             <h6 class="card-subtitle mb-2 text-muted">{{ typeLaboratory.description }}</h6>
             <button (click)="getTypeLaboratory(typeLaboratory._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateTypeLaboratory"
               class="btn btn-warning m-2">
-              <i class="fa fa-pencil" aria-hidden="true"> </i> Update
+              <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
             </button>
             <button (click)="deleteTypeLaboratory(typeLaboratory._id)" class="btn btn-danger">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-              Delete
+              <i class="fa fa-trash" aria-hidden="true"></i> Eliminar
             </button>
             <button (click)="getTypeLaboratory(typeLaboratory._id)" data-bs-toggle="modal" data-bs-target="#viewTypeLaboratory"
               class="btn btn-secondary ms-2">
-              <i class="fa fa-eye" aria-hidden="true"></i>
-              View
+              <i class="fa fa-eye" aria-hidden="true"></i> Ver
             </button>
           </div>
         </div>
@@ -81,7 +79,7 @@
                 <div *ngIf="typeLaboratoryView" class="descripcion">
                   <div class="count-container">
                     <div class="box">
-                      <h3>Name:</h3>
+                      <h3>Nombre:</h3>
                     </div>
   
                     <div class="box">
@@ -89,7 +87,7 @@
                     </div>
   
                     <div class="box">
-                      <h3>Description:</h3>
+                      <h3>Descripción:</h3>
                     </div>
   
                     <div class="box">
@@ -110,7 +108,7 @@
             <div class="modal-header">
               <h3 class="modal-title" id="modal-basic-title">
                 <i class="fa-solid fa-vial-virus"></i>
-                &nbsp;Add Type Laboratory
+                &nbsp;Agregar Tipo de Laboratorio
               </h3>
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -118,24 +116,23 @@
               <form (ngSubmit)="saveTypeLaboratory(addTypeLaboratoryForm)" #addTypeLaboratoryForm="ngForm">
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Name</mat-label>
+                    <mat-label>Nombre</mat-label>
                     <input autocomplete="off" [(ngModel)]="typeLaboratory.name" name="name" matInput />
                   </mat-form-field>
                 </div>
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Description</mat-label>
+                    <mat-label>Descriptción</mat-label>
                     <input autocomplete="off" [(ngModel)]="typeLaboratory.description" name="description" matInput />
                   </mat-form-field>
                 </div>
                 <hr />
                 <div class="modal-footer justify-content-center">
                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                    <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
-                    Save
+                    <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                   </button>
                   <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Save Type Laboratory
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                   </button>
                 </div>
               </form>
@@ -154,7 +151,7 @@
           <div class="modal-header">
             <h3 class="modal-title" id="modal-basic-title">
               <i class="fas fa-pencil" aria-hidden="true"></i>
-              &nbsp;Update Type Laboratory
+              &nbsp;Editar Tipo de Laboratorio
             </h3>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
@@ -162,23 +159,23 @@
             <form (ngSubmit)="updateTypeLaboratory()" *ngIf="typeLaboratoryUpdate">
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Name</mat-label>
+                  <mat-label>Nombre</mat-label>
                   <input autocomplete="off" [(ngModel)]="typeLaboratoryUpdate.name" name="name" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Description</mat-label>
+                  <mat-label>Descripción</mat-label>
                   <input autocomplete="off" [(ngModel)]="typeLaboratoryUpdate.description" name="description" matInput />
                 </mat-form-field>
               </div>
               <hr />
               <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                  <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update
+                  <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                 </button>
                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Update Type Laboratory
+                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                 </button>
               </div>
             </form>
@@ -197,7 +194,7 @@
                 <ul class="header-buttons-left ml-0">
                   <li class="dropdown">
                     <div class="header">
-                      <h2>Table Type Laboratory</h2>
+                      <h2>Tabla de tipos de Laboratorio</h2>
                     </div>
                   </li>
                   <li class="dropdown m-l-20">
@@ -235,9 +232,9 @@
                 <thead>
                   <tr>
                     <th class="text-center">#</th>
-                    <th>Photo</th>
-                    <th>Name</th>
-                    <th>Description</th>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -257,7 +254,7 @@
                     <td (click)="getTypeLaboratory(typeLaboratory._id)" data-bs-toggle="modal" data-bs-target="#viewTypeLaboratory">{{ typeLaboratory.description }}</td>
                   </tr>
                   <tr rowspan="9" *ngIf="notFound === true">
-                    <td colspan="9" class="text-center">Not Types Laboratory Found</td>
+                    <td colspan="9" class="text-center">Tipo de Laboratorio no encontrado</td>
                   </tr>
                 </tbody>
               </table>
@@ -267,7 +264,7 @@
       </div>
     </div>
     <h1 *ngIf="notFound === true && showTableTypeLaboratory === false" class="text-center">
-      Not Types Laboratory Found
+      Tipo de Laboratorio no encontrado
     </h1>
   </section>
   

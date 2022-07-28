@@ -2,7 +2,7 @@ import { RouteInfo } from './sidebar.metadata';
 export const ROUTES: RouteInfo[] = [
   {
     path: 'home',
-    title: 'Home',
+    title: 'Inicio',
     moduleName: 'admin',
     iconType: 'material-icons-two-tone',
     icon: 'home',
@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'patients',
-    title: 'Patients',
+    title: 'Pacientes',
     moduleName: 'admin',
     iconType: 'material-icons-two-tone',
     icon: 'person',
@@ -26,7 +26,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'doctor',
-    title: 'Doctor',
+    title: 'Doctores',
     moduleName: 'admin',
     iconType: 'material-icons-two-tone',
     icon: 'masks',
@@ -38,7 +38,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'typeLaboratory',
-    title: 'Type Laboratory',
+    title: 'Tipo de Laboratorios',
     moduleName: 'admin',
     iconType: 'material-icons-two-tone',
     icon: 'science',
@@ -50,7 +50,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'medicament',
-    title: 'Medicament',
+    title: 'Medicamentos',
     moduleName: 'admin',
     iconType: 'material-icons-two-tone',
     icon: 'medication',
@@ -62,7 +62,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'typeMedicament',
-    title: 'Type Medicament',
+    title: 'Tipo de Medicamentos',
     moduleName: 'admin',
     iconType: 'material-icons-two-tone',
     icon: 'medication_liquid',
@@ -74,7 +74,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'speciality',
-    title: 'Speciality',
+    title: 'Especialidades',
     moduleName: 'admin',
     iconType: 'material-icons-two-tone',
     icon: 'local_pharmacy',
@@ -86,7 +86,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'appointment',
-    title: 'Appointment',
+    title: 'Citas',
     moduleName: 'admin',
     iconType: 'material-icons-two-tone',
     icon: 'today',
@@ -98,7 +98,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'laboratory',
-    title: 'Laboratory',
+    title: 'Laboratorios',
     moduleName: 'admin',
     iconType: 'material-icons-two-tone',
     icon: 'biotech',

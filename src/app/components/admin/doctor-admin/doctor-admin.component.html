@@ -1,26 +1,26 @@
 <section class="content">
     <h1 style="margin-top: 4rem">
       &nbsp;<i class="fa-solid fa-user-nurse"></i>
-      Doctors
+      Doctores
     </h1>
     <hr />
   
     <div class="text-center mt-2 mb-2">
       <button type="button" data-bs-toggle="modal" data-bs-target="#addUser" class="ms-3 btn btn-event btn-success">
-        Add Doctor
+        Agregar Doctor
         <span class="btn-icon-end"><i class="fa-solid fa-user-nurse"></i> </span>
       </button>
       <button *ngIf="!showTableDoctors" (click)="showTable()" type="button" class="ms-3 btn btn-event btn-secondary">
-        Table Doctor
+        Tabla de Doctores
         <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
       </button>
       <button *ngIf="showTableDoctors" (click)="showTable(); cleanTable()" type="button"
         class="ms-3 btn btn-event btn-secondary">
-        Return Cards
+        Ver por Cartas
         <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
       </button>
       <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
-        Back Home
+        Inicio
         <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
       </button>
     </div>
@@ -36,17 +36,17 @@
             <p class="card-text">{{ doctor.role }}</p>
             <button (click)="getDoctor(doctor._id)" class="btn btn-success m-3" data-bs-toggle="modal"
               data-bs-target="#updateDoctor" class="btn btn-warning m-2">
-              <i class="fa fa-pencil" aria-hidden="true"> </i> Update
+              <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
             </button>
             <button (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#deleteDoctor"
               class="btn btn-danger">
               <i class="fa fa-trash" aria-hidden="true"></i>
-              Delete
+              Eliminar
             </button>
             <button (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser"
               class="btn btn-secondary ms-2">
               <i class="fa fa-eye" aria-hidden="true"></i>
-              View
+              Ver
             </button>
           </div>
         </div>
@@ -86,14 +86,14 @@
                   <div class="count-container">
   
                     <div class="box">
-                      <h3>Name:</h3>
+                      <h3>Nombre:</h3>
                     </div>
                     <div class="box">
                       <p>{{ doctorView.name }}</p>
                     </div>
   
                     <div class="box">
-                      <h3>Surname:</h3>
+                      <h3>Apellido:</h3>
                     </div>
                     <div *ngIf="doctorView.surname" class="box">
                       <p>{{ doctorView.surname }}</p>
@@ -103,7 +103,7 @@
                     </div>
   
                     <div class="box">
-                      <h3>Username:</h3>
+                      <h3>Usuario:</h3>
                     </div>
                     <div class="box">
                       <p>{{ doctorView.username }}</p>
@@ -127,7 +127,7 @@
                     </div>
   
                     <div class="box">
-                      <h3>Phone:</h3>
+                      <h3>Tel:</h3>
                     </div>
                     <div *ngIf="doctorView.phone" class="box">
                       <p>{{ doctorView.phone }}</p>
@@ -137,7 +137,7 @@
                     </div>
   
                     <div class="box">
-                      <h3>Age</h3>
+                      <h3>Edad</h3>
                     </div>
                     <div *ngIf="doctorView.age" class="box">
                       <p>{{ doctorView.age }}</p>
@@ -147,13 +147,13 @@
                     </div>
   
                     <div class="box">
-                      <h3>Gender</h3>
+                      <h3>Genero</h3>
                     </div>
                     <div *ngIf="doctorView.gender == 'MALE'" class="box">
-                      <p>Hombre</p>
+                      <p>Masculino</p>
                     </div>
                     <div *ngIf="doctorView.gender == 'FEMALE'" class="box">
-                      <p>Mujer</p>
+                      <p>Femenino</p>
                     </div>
                   </div>
                 </div>
@@ -170,7 +170,7 @@
             <div class="modal-header">
               <h3 class="modal-title" id="modal-basic-title">
                 <i class="fas fa-doctor-plus" aria-hidden="true"></i>
-                &nbsp;Add Doctor
+                &nbsp;Agregar Doctor
               </h3>
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -178,19 +178,19 @@
               <form (ngSubmit)="saveDoctor(addUserForm)" #addUserForm="ngForm">
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Name</mat-label>
+                    <mat-label>Nombre</mat-label>
                     <input autocomplete="off" [(ngModel)]="doctor.name" name="name" matInput />
                   </mat-form-field>
                 </div>
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Surname</mat-label>
+                    <mat-label>Apellido</mat-label>
                     <input autocomplete="off" [(ngModel)]="doctor.surname" name="surname" matInput />
                   </mat-form-field>
                 </div>
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Username</mat-label>
+                    <mat-label>Usuario</mat-label>
                     <input autocomplete="off" [(ngModel)]="doctor.username" name="username" matInput />
                   </mat-form-field>
                 </div>
@@ -208,45 +208,44 @@
                 </div>
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Phone</mat-label>
+                    <mat-label>Tel</mat-label>
                     <input [(ngModel)]="doctor.phone" name="phone" type="text" matInput />
                   </mat-form-field>
                 </div>
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Password</mat-label>
+                    <mat-label>Contraseña</mat-label>
                     <input autocomplete="off" [(ngModel)]="doctor.password" name="password" type="password" matInput />
                   </mat-form-field>
                 </div>
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Age</mat-label>
+                    <mat-label>Edad</mat-label>
                     <input autocomplete="off" [(ngModel)]="doctor.age" name="age" matInput />
                   </mat-form-field>
                 </div>
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Gender</mat-label>
+                    <mat-label>Genero</mat-label>
                     <mat-select [(ngModel)]="doctor.gender" name="gender">
-                      <mat-option value="MALE">MALE</mat-option>
-                      <mat-option value="FEMALE">FEMALE</mat-option>
+                      <mat-option value="MALE">MASCULINO</mat-option>
+                      <mat-option value="FEMALE">FEMENINO</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
                 <div class="text-inside">
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Collegiate Number</mat-label>
+                    <mat-label>Numero de Colegiado</mat-label>
                     <input autocomplete="off" [(ngModel)]="doctor.collegiateNumber" name="collegiateNumber" matInput />
                   </mat-form-field>
                 </div>
                 <hr />
                 <div class="modal-footer justify-content-center">
                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                    <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
-                    Save
+                    <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                   </button>
                   <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Save Doctor
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                   </button>
                 </div>
               </form>
@@ -265,26 +264,26 @@
           <div class="modal-header">
             <h3 class="modal-title" id="modal-basic-title">
               <i class="fas fa-pencil" aria-hidden="true"></i>
-              &nbsp;Update Doctor
+              &nbsp;Editar Doctor
             </h3>
           </div>
           <div class="modal-body">
             <form (ngSubmit)="updateDoctor()" *ngIf="doctorUpdate">
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Name</mat-label>
+                  <mat-label>Nombre</mat-label>
                   <input autocomplete="off" [(ngModel)]="doctorUpdate.name" name="name" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Surname</mat-label>
+                  <mat-label>Apellido</mat-label>
                   <input autocomplete="off" [(ngModel)]="doctorUpdate.surname" name="surname" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Username</mat-label>
+                  <mat-label>Usuario</mat-label>
                   <input autocomplete="off" [(ngModel)]="doctorUpdate.username" name="username" matInput />
                 </mat-form-field>
               </div>
@@ -302,32 +301,32 @@
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Phone</mat-label>
+                  <mat-label>Tel</mat-label>
                   <input autocomplete="off" [(ngModel)]="doctorUpdate.phone" name="phone" type="text" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Age</mat-label>
+                  <mat-label>Edad</mat-label>
                   <input autocomplete="off" [(ngModel)]="doctorUpdate.age" name="age" type="text" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Gender</mat-label>
+                  <mat-label>Genero</mat-label>
                   <mat-select [(ngModel)]="doctorUpdate.gender" name="gender">
-                    <mat-option value="MALE">MALE</mat-option>
-                    <mat-option value="FEMALE">FEMALE</mat-option>
+                    <mat-option value="MALE">MASCULINO</mat-option>
+                    <mat-option value="FEMALE">FEMENINO</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
               <hr />
               <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                  <i class="fa fa-times-circle" aria-hidden="true"></i> Discard Update
+                  <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                 </button>
                 <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Update Doctor
+                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
                 </button>
               </div>
             </form>
@@ -369,14 +368,14 @@
                 <div class="count-container">
   
                   <div class="box">
-                    <h3>Name:</h3>
+                    <h3>Nombre:</h3>
                   </div>
                   <div class="box">
                     <p>{{ doctorDeleteModal.name }}</p>
                   </div>
   
                   <div class="box">
-                    <h3>Surname:</h3>
+                    <h3>Apellido:</h3>
                   </div>
                   <div *ngIf="doctorDeleteModal.surname" class="box">
                     <p>{{ doctorDelete.surname }}</p>
@@ -386,7 +385,7 @@
                   </div>
   
                   <div class="box">
-                    <h3>Username:</h3>
+                    <h3>Usuario:</h3>
                   </div>
                   <div class="box">
                     <p>{{ doctorDeleteModal.username }}</p>
@@ -402,12 +401,11 @@
                     </div>
                     <div class="modal-footer justify-content-center">
                       <button (click)="showPassword()" type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                        <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
-                        Delete
+                        <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
                       </button>
                       <button (click)="deleteDoctor(doctorDeleteModal._id, doctorDeletePassword)" type="submit"
                         class="btn btn-success" data-bs-dismiss="modal">
-                        <i class="fa fa-floppy-o" aria-hidden="true"></i> Siguiente
+                        <i class="fa fa-floppy-o" aria-hidden="true"></i> Eliminar
                       </button>
                     </div>
                   </form>
@@ -429,7 +427,7 @@
                 <ul class="header-buttons-left ml-0">
                   <li class="dropdown">
                     <div class="header">
-                      <h2>Table Doctors</h2>
+                      <h2>Tabla de Doctores</h2>
                     </div>
                   </li>
                   <li class="dropdown m-l-20">
@@ -468,16 +466,16 @@
                 <thead>
                   <tr>
                     <th class="text-center">#</th>
-                    <th>Photo</th>
-                    <th>Name</th>
-                    <th>Surname</th>
-                    <th>Username</th>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Usuario</th>
                     <th>DPI</th>
                     <th>Email</th>
-                    <th>Phone</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Role</th>
+                    <th>Tel</th>
+                    <th>Edad</th>
+                    <th>Genero</th>
+                    <th>Rol</th>
                   </tr>
                 </thead>
                 <tbody>
