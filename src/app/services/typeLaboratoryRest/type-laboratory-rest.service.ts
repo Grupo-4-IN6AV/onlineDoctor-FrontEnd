@@ -57,4 +57,13 @@ export class TypeLaboratoryRestService {
   {
     return this.http.get(environment.baseURI + 'typeLaboratory/getTypeLaboratoryZtoA', { headers: this.httpOptions });
   }
+
+  getTypesLaboratoryDoctor()
+  {
+    return this.http.get(environment.baseURI + 'typeLaboratory/getTypesLaboratoryDoctor', { headers: this.httpOptions });
+  }
+  getTypeLaboratoryDoctor(id:string)
+  {
+    return this.http.get(environment.baseURI + 'typeLaboratory/getTypeLaboratoryDoctor/' + id, { headers: this.httpOptions });
+  }
 }

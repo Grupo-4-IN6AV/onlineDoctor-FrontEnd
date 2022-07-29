@@ -64,4 +64,13 @@ export class UserRestService
     return this.http.get(environment.baseURI + 'user/getUsersZtoA', { headers: this.httpOptions });
   }
 
+  getUsersDoctor()
+  {
+    return this.http.get(environment.baseURI + 'user/getUsersDoctor', { headers: this.httpOptions });
+  }
+
+  getUserDoctor(id:string)
+  {
+    return this.http.get(environment.baseURI + 'user/getUserDoctor/' + id, { headers: this.httpOptions });
+  }
 }
