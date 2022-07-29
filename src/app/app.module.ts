@@ -105,6 +105,13 @@ import { LayoutPacientComponent } from './components/pacient/layout-pacient/layo
 import { SidebarPacientComponent } from './components/pacient/sidebar-pacient/sidebar-pacient.component';
 import { SidebarrightPacientComponent } from './components/pacient/sidebarright-pacient/sidebarright-pacient.component';
 import { HomePacientComponent } from './components/pacient/home-pacient/home-pacient.component';
+import { LaboratoryDoctorComponent } from './components/doctor/laboratory-doctor/laboratory-doctor.component';
+import { LaboratoryPacientComponent } from './components/pacient/laboratory-pacient/laboratory-pacient.component';
+import { AppointmentPacientComponent } from './components/pacient/appointment-pacient/appointment-pacient.component';
+import { DiaryPacientComponent } from './components/pacient/diary-pacient/diary-pacient.component';
+import { PrescriptionPacientComponent } from './components/pacient/prescription-pacient/prescription-pacient.component';
+import { PharmacyPacientComponent } from './components/pacient/pharmacy-pacient/pharmacy-pacient.component';
+import { ShoppingCartPacientComponent } from './components/pacient/shopping-cart-pacient/shopping-cart-pacient.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -167,6 +174,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SidebarPacientComponent,
     SidebarrightPacientComponent,
     HomePacientComponent,
+    LaboratoryDoctorComponent,
+    LaboratoryPacientComponent,
+    AppointmentPacientComponent,
+    DiaryPacientComponent,
+    PrescriptionPacientComponent,
+    PharmacyPacientComponent,
+    ShoppingCartPacientComponent,
   ],
   imports: [
     FormsModule,

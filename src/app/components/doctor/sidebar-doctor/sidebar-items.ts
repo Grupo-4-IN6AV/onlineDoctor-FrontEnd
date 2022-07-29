@@ -23,5 +23,17 @@ export const ROUTES: RouteInfo[] = [
     badge: '',
     badgeClass: '',
     submenu: [],
+  },
+  {
+    path: 'laboratory',
+    title: 'Laboratorio',
+    moduleName: 'admin',
+    iconType: 'material-icons-two-tone',
+    icon: 'biotech',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
   }
 ];
