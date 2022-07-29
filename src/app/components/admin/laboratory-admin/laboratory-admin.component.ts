@@ -27,7 +27,10 @@ export class LaboratoryAdminComponent implements OnInit {
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
-  controloClick: number = 0
+  controloClick: number = 0;
+  newDate: any;
+  OnlyOneDate: any;
+  actualDate: any;
   
   constructor(
     public dialog: MatDialog,
@@ -40,6 +43,7 @@ export class LaboratoryAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.actualDate = new Date()
     this.getLaboratories();
   }
 
@@ -47,6 +51,12 @@ export class LaboratoryAdminComponent implements OnInit {
     this.laboratoryRest.getLaboratories().subscribe({
       next: (res: any) => {
         this.laboratories = res.laboratories;
+        var arrayDate = [];
+        for(let date of res.laboratories){
+          const newDate = date.date.split('T');
+          arrayDate.push(newDate[0])
+        }
+        this.newDate = arrayDate;
       },
       error: (err) => console.log(err)
     })
@@ -97,6 +107,8 @@ export class LaboratoryAdminComponent implements OnInit {
         this.laboratoryView = res.laboratory;
         this.laboratoryUpdate = res.laboratory;
         this.laboratoryDelete = res.laboratory;
+        let split = res.laboratory.date.split('T');
+        this.OnlyOneDate = split[0];
       },
       error: (err) => {
         Swal.fire({

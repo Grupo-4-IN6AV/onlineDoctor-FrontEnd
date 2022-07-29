@@ -41,7 +41,7 @@
             <div class="products-container">
                 <div *ngFor="let laboratory of laboratories" class="product" data-name="p-1">
                     <h5 class="card-title">{{ laboratory.pacient.name }} | {{ laboratory.typeLaboratory.name }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ laboratory.date }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{newDate[laboratories.indexOf(laboratory)]}}</h6>
                     <button (click)="getLaboratory(laboratory._id); getUsers(); getTypesLaboratory()"
                         class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateLaboratory"
                         class="btn btn-warning m-2">
@@ -112,11 +112,11 @@
                                     </div>
 
                                     <div class="box">
-                                        <p>{{ laboratoryView.date }}</p>
+                                        <p>{{ OnlyOneDate }}</p>
                                     </div>
 
                                     <div class="box">
-                                        <h3>Especialidad:</h3>
+                                        <h3>Especificaciones:</h3>
                                     </div>
 
                                     <div class="box">
@@ -170,15 +170,16 @@
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Fecha</mat-label>
-                                    <input autocomplete="off" type="date" [(ngModel)]="laboratory.date" name="date"
-                                        matInput />
+                                  <mat-label>Fecha</mat-label>
+                                  <input [(ngModel)]="laboratory.date" [min]="actualDate" name="date" matInput [matDatepicker]="picker">
+                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker></mat-datepicker>
                                 </mat-form-field>
                             </div>
 
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Specifications</mat-label>
+                                    <mat-label>Especificaciones</mat-label>
                                     <input autocomplete="off" [(ngModel)]="laboratory.specifications"
                                         name="specifications" matInput />
                                 </mat-form-field>
@@ -246,7 +247,7 @@
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Especialidad</mat-label>
+                                <mat-label>Especificaciones</mat-label>
                                 <input autocomplete="off" [(ngModel)]="laboratoryUpdate.specifications"
                                     name="specifications" matInput />
                             </mat-form-field>
@@ -320,7 +321,7 @@
                                     <th>Paciente</th>
                                     <th>Tipo de Laboratorio</th>
                                     <th>Fecha</th>
-                                    <th>Specialidad</th>
+                                    <th>Especificaciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -344,7 +345,7 @@
                                     <td (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewLaboratory">{{ laboratory.typeLaboratory.name }}</td>
                                     <td (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewLaboratory">{{ laboratory.date }}</td>
+                                        data-bs-target="#viewLaboratory">{{newDate[laboratories.indexOf(laboratory)]}}</td>
                                     <td (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewLaboratory">{{ laboratory.specifications }}</td>
                                 </tr>
