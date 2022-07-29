@@ -81,7 +81,8 @@ const routes: Routes =
       {path: 'diary', component: DiaryPacientComponent},
       {path: 'pharmacy', component: PharmacyPacientComponent},
       {path: 'prescription', component: PrescriptionPacientComponent},
-      {path: 'shopping-cart', component: ShoppingCartPacientComponent}
+      {path: 'shopping-cart', component: ShoppingCartPacientComponent},
+      {path: 'meeting/:id', component: MeetingComponent},
     ]
   },
   { path: '**', component: NotFoundPageComponent}

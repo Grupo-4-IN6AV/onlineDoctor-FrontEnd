@@ -13,18 +13,6 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
-    path: 'patients',
-    title: 'Patients',
-    moduleName: 'admin',
-    iconType: 'material-icons-two-tone',
-    icon: 'person',
-    class: '',
-    groupTitle: false,
-    badge: '',
-    badgeClass: '',
-    submenu: [],
-  },
-  {
     path: 'laboratory',
     title: 'Laboratorio',
     moduleName: 'admin',
@@ -38,7 +26,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'appointment',
-    title: 'Citas',
+    title: 'Agendar cita',
     moduleName: 'admin',
     iconType: 'material-icons-two-tone',
     icon: 'today',
