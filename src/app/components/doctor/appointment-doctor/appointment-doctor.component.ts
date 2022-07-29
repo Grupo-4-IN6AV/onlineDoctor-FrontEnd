@@ -273,5 +273,4 @@ export class AppointmentDoctorComponent implements OnInit {
   closeDialog(): void {
     this.dialog.closeAll();
   }
-
 }
