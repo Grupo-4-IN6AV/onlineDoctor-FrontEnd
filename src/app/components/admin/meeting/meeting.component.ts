@@ -24,6 +24,7 @@ export class MeetingComponent implements OnInit, AfterViewInit {
   doctors: any;
   idAppointment: any;
   //appointmentGet:any;
+  actualUser: any;
 
   // For Custom Controls
   isAudioMuted = false;
@@ -42,7 +43,7 @@ export class MeetingComponent implements OnInit, AfterViewInit {
       this.idAppointment = ruta.get('id');
     });
 
-
+    this.actualUser = this.credentialRest.getIdentity().role;
 
   }
 
@@ -114,7 +115,15 @@ export class MeetingComponent implements OnInit, AfterViewInit {
 
   handleVideoConferenceLeft = () => {
     console.log("handleVideoConferenceLeft");
-    this.router.navigate(['/admin/appointment']);
+    if(this.actualUser === 'DOCTOR'){
+      this.router.navigate(['/doctor/appointment']);
+    }
+    if( this.actualUser === 'PACIENTE'){
+      this.router.navigate(['/paciente/appointment']);
+    }
+    if(this.actualUser === 'ADMIN'){
+      this.router.navigate(['/admin/appointment']);
+    }
   }
 
   handleMuteStatus = (audio) => {
