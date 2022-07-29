@@ -45,7 +45,8 @@
         </div>
     </section>
 
-    <div class="modal fade" style="z-index: 1100;" id="viewMedicament" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" style="z-index: 1100;" id="viewMedicament" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="addContainer">
@@ -113,8 +114,15 @@
                                     <p *ngIf="medicamentView.availibility === false">No Disponible</p>
                                 </div>
 
-                                
 
+                            </div>
+                            <div class="content d-flex justify-content-center">
+                                <button type="button" class="ms-3 btn btn-event btn-success">
+                                    Agregar al carrito
+                                    <span class="btn-icon-end">
+                                        <i class="fa-solid fa-cart-arrow-down"></i>
+                                    </span>
+                                </button>
                             </div>
                         </div>
                     </div>
