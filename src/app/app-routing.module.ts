@@ -25,6 +25,12 @@ import { MeetingComponent } from './components/admin/meeting/meeting.component';
 import { CallComponent } from './components/admin/call/call.component';
 import { LayoutPacientComponent } from './components/pacient/layout-pacient/layout-pacient.component';
 import { HomePacientComponent } from './components/pacient/home-pacient/home-pacient.component';
+import { LaboratoryPacientComponent } from './components/pacient/laboratory-pacient/laboratory-pacient.component';
+import { AppointmentPacientComponent } from './components/pacient/appointment-pacient/appointment-pacient.component';
+import { DiaryPacientComponent } from './components/pacient/diary-pacient/diary-pacient.component';
+import { PrescriptionPacientComponent } from './components/pacient/prescription-pacient/prescription-pacient.component';
+import { ShoppingCartPacientComponent } from './components/pacient/shopping-cart-pacient/shopping-cart-pacient.component';
+import { PharmacyPacientComponent } from './components/pacient/pharmacy-pacient/pharmacy-pacient.component';
 
 const routes: Routes =
 [
@@ -65,6 +71,12 @@ const routes: Routes =
     path: 'paciente', component:LayoutPacientComponent,children:
     [
       {path: 'home', component: HomePacientComponent},
+      {path: 'appointment', component: AppointmentPacientComponent},
+      {path: 'laboratory', component: LaboratoryPacientComponent},
+      {path: 'diary', component: DiaryPacientComponent},
+      {path: 'pharmacy', component: PharmacyPacientComponent},
+      {path: 'prescription', component: PrescriptionPacientComponent},
+      {path: 'shopping-cart', component: ShoppingCartPacientComponent}
     ]
   },
   { path: '**', component: NotFoundPageComponent}
