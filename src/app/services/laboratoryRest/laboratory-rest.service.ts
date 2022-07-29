@@ -42,4 +42,32 @@ export class LaboratoryRestService {
   {
     return this.http.delete(environment.baseURI + 'laboratory/deleteLaboratory/' + id, { headers: this.httpOptions });
   }
+
+  //FUNCIONES DE DOCTORES//
+
+  getLaboratoriesDoctor(id: string)
+  {
+    return this.http.get(environment.baseURI + 'laboratory/getLaboratoriesDoctor/' + id, { headers: this.httpOptions });
+  }
+
+  saveLaboratoryDoctor(params:{})
+  {
+    return this.http.post(environment.baseURI + 'laboratory/saveLaboratoryDoctor', params, { headers: this.httpOptions });
+  }
+
+  getLaboratoryDoctor(id:string)
+  {
+    return this.http.get(environment.baseURI + 'laboratory/getLaboratoryDoctor/' + id, { headers: this.httpOptions });
+  }
+
+  updateLaboratoryDoctor(id:string, params:{})
+  {
+    console.log(params)
+    return this.http.put(environment.baseURI + 'laboratory/updateLaboratoryDoctor/' + id, params, { headers: this.httpOptions });
+  }
+
+  deleteLaboratoryDoctor(id:string, idUser:string)
+  {
+    return this.http.delete(environment.baseURI + 'laboratory/deleteLaboratoryDoctor/' + id + '/' + idUser, { headers: this.httpOptions });
+  }
 }

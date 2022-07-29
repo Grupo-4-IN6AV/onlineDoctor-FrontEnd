@@ -7,12 +7,25 @@ import { LaboratoryRestService } from 'src/app/services/laboratoryRest/laborator
 import { LaboratoryModel } from 'src/app/models/laboratory.model';
 import Swal from 'sweetalert2';
 
+import timeGridPlugin from '@fullcalendar/timegrid'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import esLocale from '@fullcalendar/core/locales/es'
+import { DOCUMENT } from '@angular/common';
+
+import {
+  CalendarOptions,
+  DateSelectArg,
+  EventClickArg,
+  EventApi,
+} from '@fullcalendar/angular';
+
 @Component({
-  selector: 'app-laboratory-admin',
-  templateUrl: './laboratory-admin.component.html',
-  styleUrls: ['./laboratory-admin.component.css']
+  selector: 'app-laboratory-doctor',
+  templateUrl: './laboratory-doctor.component.html',
+  styleUrls: ['./laboratory-doctor.component.css']
 })
-export class LaboratoryAdminComponent implements OnInit {
+export class LaboratoryDoctorComponent implements OnInit {
 
   laboratories: any;
   laboratory: LaboratoryModel;
@@ -22,15 +35,28 @@ export class LaboratoryAdminComponent implements OnInit {
   laboratoryDelete: any;
   showTableLaboratory: boolean = false;
   reset: any;
-  users:any;
   typesLaboratory:any;
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
   controloClick: number = 0;
-  newDate: any;
-  OnlyOneDate: any;
+  showButtons: boolean = false;
+  laboratoryId:any;
   actualDate: any;
+  newDate:any;
+  onlyOneDate:any;
+  calendarOptions:CalendarOptions = {initialView: 'dayGridMonth', events: []};
+  namePacient: any;
+  showCalendarLaboratories:any;
+
+  //Variables de usuarios
+  users:any;
+  userId:any;
+  showUsers: boolean = true;
+  searchUser:any;
+  updateLaboratory: any;
+
+
   
   constructor(
     public dialog: MatDialog,
@@ -44,40 +70,74 @@ export class LaboratoryAdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.actualDate = new Date()
-    this.getLaboratories();
+    this.getUsersDoctor();
   }
 
-  getLaboratories() {
-    this.laboratoryRest.getLaboratories().subscribe({
+  getLaboratoriesDoctor() {
+    this.laboratoryRest.getLaboratoriesDoctor(this.userId).subscribe({
       next: (res: any) => {
         this.laboratories = res.laboratories;
         var arrayDate = [];
-        for(let date of res.laboratories){
-          const newDate = date.date.split('T');
-          arrayDate.push(newDate[0])
+        for (let date of res.laboratories){
+          let newDate = date.date.split('T')
+          arrayDate.push(newDate[0]);
         }
         this.newDate = arrayDate;
+        var calendarArray = [];
+        var availableEventsArray = [];
+
+        for(let laboratory of this.laboratories){
+          var laboratoryId = laboratory._id;
+          var nameLaboratory = 'Laboratory |'+'Tipo de laboratorio: ' + laboratory.typeLaboratory.name + ' ' + '| Pacient.' + laboratory.pacient.name;
+          var actualDate = laboratory.date.split('T');
+          calendarArray.push({
+            title: nameLaboratory,
+            description: laboratoryId,
+            date: actualDate[0],
+            className: "fc-event-primary"
+          })
+        }
+        this.calendarOptions.events = calendarArray;
       },
       error: (err) => console.log(err)
     })
   }
 
-  getUsers() {
-    this.userRest.getUsers().subscribe({
-      next: (res: any) => this.users = res.users,
+  getUsersDoctor() {
+    this.userRest.getUsersDoctor().subscribe({
+      next: (res: any) => {this.users = res.users, console.log(this.users)},
       error: (err) => console.log(err)
     })
   }
 
-  getTypesLaboratory() {
-    this.typeLaboratoryRest.getTypesLaboratory().subscribe({
+  getUserDoctor(id : string)
+  { 
+    this.userId = id;
+    this.showButtons = !this.showButtons;
+    this.showUsers = !this.showUsers;
+    this.userRest.getUser(id).subscribe({
+      next: (res:any) => { this.namePacient = res.user.name },
+      error: (err) => console.log(err)
+    })
+    this.getLaboratoriesDoctor();
+  }
+
+  getTypesLaboratoryDoctor() {
+    this.typeLaboratoryRest.getTypesLaboratoryDoctor().subscribe({
       next: (res: any) => this.typesLaboratory = res.typesLaboratory,
       error: (err) => console.log(err)
     })
   }
 
-  saveLaboratory(addLaboratoryForm: any) {
-    this.laboratoryRest.saveLaboratory(this.laboratory).subscribe
+  saveLaboratoryDoctor(addLaboratoryForm: any) {
+    var data = {
+      pacient: this.userId,
+      typeLaboratory: this.laboratory.typeLaboratory,
+      date: this.laboratory.date,
+      specifications: this.laboratory.specifications
+    }
+
+    this.laboratoryRest.saveLaboratoryDoctor(data).subscribe
       ({
         next: (res: any) => {
           Swal.fire
@@ -86,7 +146,7 @@ export class LaboratoryAdminComponent implements OnInit {
               title: res.message,
               confirmButtonColor: '#28B463'
             });
-          this.getLaboratories();
+          this.getLaboratoriesDoctor();
           addLaboratoryForm.reset();
         },
         error: (err: any) => {
@@ -101,14 +161,16 @@ export class LaboratoryAdminComponent implements OnInit {
       addLaboratoryForm.reset();
   }
 
-  getLaboratory(id: string) {
-    this.laboratoryRest.getLaboratory(id).subscribe({
+  getLaboratoryDoctor(id: string) {
+    this.laboratoryRest.getLaboratoryDoctor(id).subscribe({
       next: (res: any) => {
+        this.laboratoryId = id;
         this.laboratoryView = res.laboratory;
         this.laboratoryUpdate = res.laboratory;
         this.laboratoryDelete = res.laboratory;
-        let split = res.laboratory.date.split('T');
-        this.OnlyOneDate = split[0];
+
+        var split = res.laboratory.date.split('T');
+        this.onlyOneDate = split[0];
       },
       error: (err) => {
         Swal.fire({
@@ -120,15 +182,21 @@ export class LaboratoryAdminComponent implements OnInit {
     })
   }
 
-  updateLaboratory() {
-    this.laboratoryRest.updateLaboratory(this.laboratoryUpdate._id, this.laboratoryUpdate).subscribe({
+  updateLaboratoryDoctor() {
+    var data = {
+      pacient: this.userId,
+      typeLaboratory: this.laboratoryUpdate.typeLaboratory,
+      date: this.laboratoryUpdate.date,
+      specifications: this.laboratoryUpdate.specifications
+    }
+    this.laboratoryRest.updateLaboratoryDoctor(this.laboratoryUpdate._id, data).subscribe({
       next: (res: any) => {
         Swal.fire({
           icon: 'success',
           title: res.message,
           confirmButtonColor: '#28B463'
         });
-        this.getLaboratories();
+        this.getLaboratoriesDoctor();
         this.showButtonActions(this.laboratoryUpdate._id, false)
       },
       error: (err) => {
@@ -141,7 +209,7 @@ export class LaboratoryAdminComponent implements OnInit {
     })
   }
 
-  deleteLaboratory(id: string) {
+  deleteLaboratoryDoctor(id: string) {
     Swal.fire({
       title: 'Do you want to delete this Laboratory?',
       showDenyButton: true,
@@ -151,7 +219,7 @@ export class LaboratoryAdminComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.laboratoryRest.deleteLaboratory(id).subscribe({
+        this.laboratoryRest.deleteLaboratoryDoctor(id, this.userId).subscribe({
           next: (res: any) => {
             Swal.fire({
               title: res.message,
@@ -160,7 +228,7 @@ export class LaboratoryAdminComponent implements OnInit {
               showConfirmButton: false,
               timer: 2000
             });
-            this.getLaboratories();
+            this.getLaboratoriesDoctor();
             this.showButtonActions(id, false)
           },
           error: (err) => Swal.fire({
@@ -170,7 +238,7 @@ export class LaboratoryAdminComponent implements OnInit {
             timer: 3000
           })
         })
-        this.getLaboratories();
+        this.getLaboratoriesDoctor();
       } else if (result.isDenied) {
         Swal.fire('Laboratory Not Deleted', '', 'info')
       }
@@ -179,13 +247,14 @@ export class LaboratoryAdminComponent implements OnInit {
 
   showTable() {
     this.showTableLaboratory = !this.showTableLaboratory;
+    this.showCalendarLaboratories = false;
     for (let laboratory of this.laboratories) {
       laboratory.checked = true
     }
   }
 
   cleanTable() {
-    this.getLaboratories();
+    this.getLaboratoriesDoctor();
     this.searchLaboratory = this.reset;
   }
 
@@ -215,5 +284,11 @@ export class LaboratoryAdminComponent implements OnInit {
   closeDialog(): void {
     this.dialog.closeAll();
   }
+
+  showCalendar(){
+    this.showCalendarLaboratories = true;
+    this.showTableLaboratory = false;
+  }
+
 
 }

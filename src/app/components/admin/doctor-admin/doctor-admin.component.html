@@ -1,363 +1,81 @@
 <section class="content">
-    <h1 style="margin-top: 4rem">
-      &nbsp;<i class="fa-solid fa-user-nurse"></i>
-      Doctores
-    </h1>
-    <hr />
-  
-    <div *ngIf="!showTableDoctors" class="row d-flex justify-content-center align-items-center">
-      <div class="form">
-        <i class="fa fa-search ms-2"></i>
-        <input [(ngModel)]="searchDoctor" type="text" class="form-control form-input" placeholder="Search User...">
-      </div>
-    </div>
+  <h1 style="margin-top: 4rem">
+    &nbsp;<i class="fa-solid fa-user-nurse"></i>
+    Doctores
+  </h1>
+  <hr />
 
-    <div class="text-center mt-2 mb-2">
-      <button type="button" data-bs-toggle="modal" data-bs-target="#addUser" class="ms-3 btn btn-event btn-success">
-        Agregar Doctor
-        <span class="btn-icon-end"><i class="fa-solid fa-user-nurse"></i> </span>
-      </button>
-      <button *ngIf="!showTableDoctors" (click)="showTable()" type="button" class="ms-3 btn btn-event btn-secondary">
-        Tabla de Doctores
-        <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
-      </button>
-      <button *ngIf="showTableDoctors" (click)="showTable(); cleanTable()" type="button"
-        class="ms-3 btn btn-event btn-secondary">
-        Ver por Cartas
-        <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
-      </button>
-      <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
-        Inicio
-        <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
-      </button>
+  <div *ngIf="!showTableDoctors" class="row d-flex justify-content-center align-items-center">
+    <div class="form">
+      <i class="fa fa-search ms-2"></i>
+      <input [(ngModel)]="searchDoctor" type="text" class="form-control form-input" placeholder="Search User...">
     </div>
-    <hr />
-  
-    <!--CARDS DE USERS-->
-    <div *ngIf="!showTableDoctors">
-      <div class="container">
-        <div class="products-container">
-          <div *ngFor="let doctor of doctors | searchDoctorBar: searchDoctor" class="product" data-name="p-1">
-            <h5 class="card-title">{{ doctor.name }} {{ doctor.surname }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ doctor.username }}</h6>
-            <p class="card-text">{{ doctor.role }}</p>
-            <button (click)="getDoctor(doctor._id)" class="btn btn-success m-3" data-bs-toggle="modal"
-              data-bs-target="#updateDoctor" class="btn btn-warning m-2">
-              <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
-            </button>
-            <button (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#deleteDoctor"
-              class="btn btn-danger">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-              Eliminar
-            </button>
-            <button (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser"
-              class="btn btn-secondary ms-2">
-              <i class="fa fa-eye" aria-hidden="true"></i>
-              Ver
-            </button>
-          </div>
+  </div>
+
+  <div class="text-center mt-2 mb-2">
+    <button type="button" data-bs-toggle="modal" data-bs-target="#addUser" class="ms-3 btn btn-event btn-success">
+      Agregar Doctor
+      <span class="btn-icon-end"><i class="fa-solid fa-user-nurse"></i> </span>
+    </button>
+    <button *ngIf="!showTableDoctors" (click)="showTable()" type="button" class="ms-3 btn btn-event btn-secondary">
+      Tabla de Doctores
+      <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
+    </button>
+    <button *ngIf="showTableDoctors" (click)="showTable(); cleanTable()" type="button"
+      class="ms-3 btn btn-event btn-secondary">
+      Ver por Cartas
+      <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
+    </button>
+    <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
+      Inicio
+      <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
+    </button>
+  </div>
+  <hr />
+
+  <!--CARDS DE USERS-->
+  <div *ngIf="!showTableDoctors">
+    <div class="container">
+      <div class="products-container">
+        <div *ngFor="let doctor of doctors | searchDoctorBar: searchDoctor" class="product" data-name="p-1">
+          <h5 class="card-title">{{ doctor.name }} {{ doctor.surname }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ doctor.username }}</h6>
+          <p class="card-text">{{ doctor.role }}</p>
+          <button (click)="getDoctor(doctor._id)" class="btn btn-success m-3" data-bs-toggle="modal"
+            data-bs-target="#updateDoctor" class="btn btn-warning m-2">
+            <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
+          </button>
+          <button (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#deleteDoctor"
+            class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            Eliminar
+          </button>
+          <button (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser"
+            class="btn btn-secondary ms-2">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            Ver
+          </button>
         </div>
       </div>
     </div>
-  
-    <div>
-      <div class="modal fade" id="viewUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="addContainer">
-              <div class="contact-details">
-                <div class="modalHeader">
-                  <div class="editRowModal">
-                    <div *ngIf="doctorView" class="modalHeader clearfix">
-                      <div class="modal-about contact-header">
-                        <div class="contact-details-img">
-                          <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
-                        </div>
-                        <div class="contact-details-heading">
-                          <div class="contact-details-name mb-2">
-                            {{ doctorView.name }} {{doctorView.surname}}
-                          </div>
-                          <div class="badge col-yellow">
-                            DOCTOR
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
-                    <mat-icon>close</mat-icon>
-                  </button>
-                </div>
-                <hr />
-                <div *ngIf="doctorView" class="descripcion">
-                  <div class="count-container">
-  
-                    <div class="box">
-                      <h3>Nombre:</h3>
-                    </div>
-                    <div class="box">
-                      <p>{{ doctorView.name }}</p>
-                    </div>
-  
-                    <div class="box">
-                      <h3>Apellido:</h3>
-                    </div>
-                    <div *ngIf="doctorView.surname" class="box">
-                      <p>{{ doctorView.surname }}</p>
-                    </div>
-                    <div *ngIf="!doctorView.surname" class="box">
-                      <p>-Sin apellido-</p>
-                    </div>
-  
-                    <div class="box">
-                      <h3>Usuario:</h3>
-                    </div>
-                    <div class="box">
-                      <p>{{ doctorView.username }}</p>
-                    </div>
-  
-                    <div class="box">
-                      <h3>DPI:</h3>
-                    </div>
-                    <div *ngIf="doctorView.DPI" class="box">
-                      <p>{{ doctorView.DPI }}</p>
-                    </div>
-                    <div *ngIf="!doctorView.DPI" class="box">
-                      <p>-Sin DPI-</p>
-                    </div>
-  
-                    <div class="box">
-                      <h3>Email:</h3>
-                    </div>
-                    <div class="box">
-                      <p>{{ doctorView.email }}</p>
-                    </div>
-  
-                    <div class="box">
-                      <h3>Tel:</h3>
-                    </div>
-                    <div *ngIf="doctorView.phone" class="box">
-                      <p>{{ doctorView.phone }}</p>
-                    </div>
-                    <div *ngIf="!doctorView.phone" class="box">
-                      <p>-Sin Telefono-</p>
-                    </div>
-  
-                    <div class="box">
-                      <h3>Edad</h3>
-                    </div>
-                    <div *ngIf="doctorView.age" class="box">
-                      <p>{{ doctorView.age }}</p>
-                    </div>
-                    <div *ngIf="!doctorView.age" class="box">
-                      <p>-Sin Edad-</p>
-                    </div>
-  
-                    <div class="box">
-                      <h3>Genero</h3>
-                    </div>
-                    <div *ngIf="doctorView.gender == 'MALE'" class="box">
-                      <p>Masculino</p>
-                    </div>
-                    <div *ngIf="doctorView.gender == 'FEMALE'" class="box">
-                      <p>Femenino</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <!--ADD USER-->
-      <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h3 class="modal-title" id="modal-basic-title">
-                <i class="fas fa-doctor-plus" aria-hidden="true"></i>
-                &nbsp;Agregar Doctor
-              </h3>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form (ngSubmit)="saveDoctor(addUserForm)" #addUserForm="ngForm">
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Nombre</mat-label>
-                    <input autocomplete="off" [(ngModel)]="doctor.name" name="name" matInput />
-                  </mat-form-field>
-                </div>
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Apellido</mat-label>
-                    <input autocomplete="off" [(ngModel)]="doctor.surname" name="surname" matInput />
-                  </mat-form-field>
-                </div>
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Usuario</mat-label>
-                    <input autocomplete="off" [(ngModel)]="doctor.username" name="username" matInput />
-                  </mat-form-field>
-                </div>
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>DPI</mat-label>
-                    <input autocomplete="off" [(ngModel)]="doctor.DPI" name="DPI" matInput />
-                  </mat-form-field>
-                </div>
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input autocomplete="off" [(ngModel)]="doctor.email" name="email" matInput />
-                  </mat-form-field>
-                </div>
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Tel</mat-label>
-                    <input [(ngModel)]="doctor.phone" name="phone" type="text" matInput />
-                  </mat-form-field>
-                </div>
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Contraseña</mat-label>
-                    <input autocomplete="off" [(ngModel)]="doctor.password" name="password" type="password" matInput />
-                  </mat-form-field>
-                </div>
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Edad</mat-label>
-                    <input autocomplete="off" [(ngModel)]="doctor.age" name="age" matInput />
-                  </mat-form-field>
-                </div>
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Genero</mat-label>
-                    <mat-select [(ngModel)]="doctor.gender" name="gender">
-                      <mat-option value="MALE">MASCULINO</mat-option>
-                      <mat-option value="FEMALE">FEMENINO</mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Numero de Colegiado</mat-label>
-                    <input autocomplete="off" [(ngModel)]="doctor.collegiateNumber" name="collegiateNumber" matInput />
-                  </mat-form-field>
-                </div>
-                <hr />
-                <div class="modal-footer justify-content-center">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                    <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
-                  </button>
-                  <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-  
-  
-    <!--UPDATE USER-->
-    <div class="modal fade" id="updateDoctor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title" id="modal-basic-title">
-              <i class="fas fa-pencil" aria-hidden="true"></i>
-              &nbsp;Editar Doctor
-            </h3>
-          </div>
-          <div class="modal-body">
-            <form (ngSubmit)="updateDoctor()" *ngIf="doctorUpdate">
-              <div class="text-inside">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Nombre</mat-label>
-                  <input autocomplete="off" [(ngModel)]="doctorUpdate.name" name="name" matInput />
-                </mat-form-field>
-              </div>
-              <div class="text-inside">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Apellido</mat-label>
-                  <input autocomplete="off" [(ngModel)]="doctorUpdate.surname" name="surname" matInput />
-                </mat-form-field>
-              </div>
-              <div class="text-inside">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Usuario</mat-label>
-                  <input autocomplete="off" [(ngModel)]="doctorUpdate.username" name="username" matInput />
-                </mat-form-field>
-              </div>
-              <div class="text-inside">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>DPI</mat-label>
-                  <input autocomplete="off" [(ngModel)]="doctorUpdate.DPI" name="username" matInput />
-                </mat-form-field>
-              </div>
-              <div class="text-inside">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Email</mat-label>
-                  <input autocomplete="off" [(ngModel)]="doctorUpdate.email" name="email" matInput />
-                </mat-form-field>
-              </div>
-              <div class="text-inside">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Tel</mat-label>
-                  <input autocomplete="off" [(ngModel)]="doctorUpdate.phone" name="phone" type="text" matInput />
-                </mat-form-field>
-              </div>
-              <div class="text-inside">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Edad</mat-label>
-                  <input autocomplete="off" [(ngModel)]="doctorUpdate.age" name="age" type="text" matInput />
-                </mat-form-field>
-              </div>
-              <div class="text-inside">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Genero</mat-label>
-                  <mat-select [(ngModel)]="doctorUpdate.gender" name="gender">
-                    <mat-option value="MALE">MASCULINO</mat-option>
-                    <mat-option value="FEMALE">FEMENINO</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <hr />
-              <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                  <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
-                </button>
-                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Eliminar User -->
-    <div class="modal fade" id="deleteDoctor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  </div>
+
+  <div>
+    <div class="modal fade" id="viewUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="addContainer">
             <div class="contact-details">
               <div class="modalHeader">
                 <div class="editRowModal">
-                  <div *ngIf="doctorDeleteModal" class="modalHeader clearfix">
+                  <div *ngIf="doctorView" class="modalHeader clearfix">
                     <div class="modal-about contact-header">
                       <div class="contact-details-img">
                         <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
                       </div>
                       <div class="contact-details-heading">
                         <div class="contact-details-name mb-2">
-                          {{ doctorDeleteModal.name }}
+                          {{ doctorView.name }} {{doctorView.surname}}
                         </div>
                         <div class="badge col-yellow">
                           DOCTOR
@@ -371,51 +89,79 @@
                 </button>
               </div>
               <hr />
-              <div *ngIf="doctorDeleteModal" class="descripcion">
+              <div *ngIf="doctorView" class="descripcion">
                 <div class="count-container">
-  
+
                   <div class="box">
                     <h3>Nombre:</h3>
                   </div>
                   <div class="box">
-                    <p>{{ doctorDeleteModal.name }}</p>
+                    <p>{{ doctorView.name }}</p>
                   </div>
-  
+
                   <div class="box">
                     <h3>Apellido:</h3>
                   </div>
-                  <div *ngIf="doctorDeleteModal.surname" class="box">
-                    <p>{{ doctorDelete.surname }}</p>
+                  <div *ngIf="doctorView.surname" class="box">
+                    <p>{{ doctorView.surname }}</p>
                   </div>
-                  <div *ngIf="!doctorDeleteModal.surname" class="box">
+                  <div *ngIf="!doctorView.surname" class="box">
                     <p>-Sin apellido-</p>
                   </div>
-  
+
                   <div class="box">
                     <h3>Usuario:</h3>
                   </div>
                   <div class="box">
-                    <p>{{ doctorDeleteModal.username }}</p>
+                    <p>{{ doctorView.username }}</p>
                   </div>
-  
-                  <form style="width:100%">
-                    <div class="text-inside">
-                      <mat-form-field class="example-full-width" appearance="outline">
-                        <mat-label>Tu Contraseña</mat-label>
-                        <input type="password" autocomplete="off" [(ngModel)]="doctorDeletePassword" name="password"
-                          matInput />
-                      </mat-form-field>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                      <button (click)="showPassword()" type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                        <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
-                      </button>
-                      <button (click)="deleteDoctor(doctorDeleteModal._id, doctorDeletePassword)" type="submit"
-                        class="btn btn-success" data-bs-dismiss="modal">
-                        <i class="fa fa-floppy-o" aria-hidden="true"></i> Eliminar
-                      </button>
-                    </div>
-                  </form>
+
+                  <div class="box">
+                    <h3>DPI:</h3>
+                  </div>
+                  <div *ngIf="doctorView.DPI" class="box">
+                    <p>{{ doctorView.DPI }}</p>
+                  </div>
+                  <div *ngIf="!doctorView.DPI" class="box">
+                    <p>-Sin DPI-</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Email:</h3>
+                  </div>
+                  <div class="box">
+                    <p>{{ doctorView.email }}</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Tel:</h3>
+                  </div>
+                  <div *ngIf="doctorView.phone" class="box">
+                    <p>{{ doctorView.phone }}</p>
+                  </div>
+                  <div *ngIf="!doctorView.phone" class="box">
+                    <p>-Sin Telefono-</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Edad</h3>
+                  </div>
+                  <div *ngIf="doctorView.age" class="box">
+                    <p>{{ doctorView.age }}</p>
+                  </div>
+                  <div *ngIf="!doctorView.age" class="box">
+                    <p>-Sin Edad-</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Genero</h3>
+                  </div>
+                  <div *ngIf="doctorView.gender == 'MALE'" class="box">
+                    <p>Masculino</p>
+                  </div>
+                  <div *ngIf="doctorView.gender == 'FEMALE'" class="box">
+                    <p>Femenino</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -423,136 +169,410 @@
         </div>
       </div>
     </div>
-  
-    <!--TABLE USERS-->
-    <div *ngIf="showTableDoctors" class="row clearfix mt-5">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card">
-          <div class="materialTableHeader mb-3">
-            <div class="row">
-              <div class="col-8">
-                <ul class="header-buttons-left ml-0">
-                  <li class="dropdown">
-                    <div class="header">
-                      <h2>Tabla de Doctores</h2>
-                    </div>
-                  </li>
-                  <li class="dropdown m-l-20">
-                    <label for="search-input">
-                      <i class="material-icons search-icon">search</i>
-                    </label>
-                    <input [(ngModel)]="searchDoctor" placeholder="Search.." type="text" #filter
-                      class="browser-default search-field" aria-label="Search box" />
-                  </li>
 
-                  <li>
-                    <i *ngIf="!doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()"></i>
-                    <i *ngIf="!doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()"></i>
-                  </li>
-              
-                  <li>
-                    <i *ngIf="doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()" style="color: #4a8af9;"></i>
-                    <i *ngIf="doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-desc text-gray-400 ms-3" (click)="getByDown()"></i>
-                  </li>
-  
-                  <li>
-                    <i *ngIf="!doctorNameUp && doctorNameDown" class="fa fa-sort-alpha-asc text-gray-400 ms-3" (click)="getByUp()"></i>
-                    <i *ngIf="!doctorNameUp && doctorNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()" style="color: #4a8af9;"></i>
-                  </li>
-  
-                  <li>
-                    <i *ngIf="doctorNameUp || doctorNameDown" (click)="cleanTable()"
-                    class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
-                  </li>
-
-                  <li *ngIf="buttonActions">
-                    <div class="icon-button-demo m-l-10">
-                      <button (click)="getDoctor(doctorDelete._id)" data-bs-toggle="modal" data-bs-target="#deleteDoctor"
-                        mat-mini-fab color="warn">
-                        <mat-icon class="col-white">delete
-                        </mat-icon>
-                      </button>
-                    </div>
-                  </li>
-                  <li *ngIf="buttonActions">
-                    <div class="icon-button-demo m-l-10">
-                      <button data-bs-toggle="modal" data-bs-target="#updateDoctor" mat-mini-fab class="colorUpdate">
-                        <mat-icon class="col-white">edit
-                        </mat-icon>
-                      </button>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+    <!--ADD USER-->
+    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="modal-basic-title">
+              <i class="fas fa-doctor-plus" aria-hidden="true"></i>
+              &nbsp;Agregar Doctor
+            </h3>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="tableBody">
-            <div class="table-responsive">
-              <i (click)="cleanTable()" class="closeFilter" aria-hidden="true">
-              </i>
-              <table class="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th class="text-center">#</th>
-                    <th>Foto</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Usuario</th>
-                    <th>DPI</th>
-                    <th>Email</th>
-                    <th>Tel</th>
-                    <th>Edad</th>
-                    <th>Genero</th>
-                    <th>Rol</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let doctor of doctors | searchDoctorTable: searchDoctor">
-                    <td (click)="getDoctor(doctor._id)">
-                      <mat-checkbox *ngIf="doctor.checked==true || controloClick==0" #check="matCheckbox"
-                        (click)="showButtonActions(doctor._id, check); getDoctor(doctor._id)" class="example-margin"
-                        color="primary">
-                      </mat-checkbox>
-                      <mat-checkbox disabled="" *ngIf="doctor.checked==false" class="example-margin" color="primary">
-                      </mat-checkbox>
-                      {{ doctors.indexOf(doctor) + 1 }}
-                    </td>
-                    <td (click)="getDoctor(doctor._id)" class="table-img">
-                      <img src="assets/images/user/user8.jpg" alt="" />
-                    </td>
-                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.name }}</td>
-                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.surname }}
-                    </td>
-                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.username }}
-                    </td>
-                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.DPI }}
-                    </td>
-                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.email }}
-                    </td>
-                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.phone }}
-                    </td>
-                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.age }}
-                    </td>
-                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.gender }}
-                    </td>
-                    <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser" align="center">
-                      <div *ngIf="doctor.role === 'DOCTOR'" data-bs-toggle="modal" data-bs-target="#viewUser"
-                        class="badge col-yellow">
-                        {{ doctor.role }}
+          <div class="modal-body">
+            <form (ngSubmit)="saveDoctor(addUserForm)" #addUserForm="ngForm">
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Nombre</mat-label>
+                  <input autocomplete="off" [(ngModel)]="doctor.name" name="name" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Apellido</mat-label>
+                  <input autocomplete="off" [(ngModel)]="doctor.surname" name="surname" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Usuario</mat-label>
+                  <input autocomplete="off" [(ngModel)]="doctor.username" name="username" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>DPI</mat-label>
+                  <input autocomplete="off" [(ngModel)]="doctor.DPI" name="DPI" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input autocomplete="off" [(ngModel)]="doctor.email" name="email" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Tel</mat-label>
+                  <input [(ngModel)]="doctor.phone" name="phone" type="text" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Contraseña</mat-label>
+                  <input autocomplete="off" [(ngModel)]="doctor.password" name="password" type="password" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Edad</mat-label>
+                  <input autocomplete="off" [(ngModel)]="doctor.age" name="age" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Genero</mat-label>
+                  <mat-select [(ngModel)]="doctor.gender" name="gender">
+                    <mat-option value="MALE">MASCULINO</mat-option>
+                    <mat-option value="FEMALE">FEMENINO</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Numero de Colegiado</mat-label>
+                  <input autocomplete="off" [(ngModel)]="doctor.collegiateNumber" name="collegiateNumber" matInput />
+                </mat-form-field>
+              </div>
+              <hr />
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Especialidad</mat-label>
+                  <mat-select [(ngModel)]="doctor.gender" name="gender">
+                    <mat-option value="MALE">MASCULINO</mat-option>
+                    <mat-option value="FEMALE">FEMENINO</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                  <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
+                </button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--UPDATE USER-->
+  <div class="modal fade" id="updateDoctor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-basic-title">
+            <i class="fas fa-pencil" aria-hidden="true"></i>
+            &nbsp;Editar Doctor
+          </h3>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="updateDoctor()" *ngIf="doctorUpdate">
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input autocomplete="off" [(ngModel)]="doctorUpdate.name" name="name" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Apellido</mat-label>
+                <input autocomplete="off" [(ngModel)]="doctorUpdate.surname" name="surname" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Usuario</mat-label>
+                <input autocomplete="off" [(ngModel)]="doctorUpdate.username" name="username" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>DPI</mat-label>
+                <input autocomplete="off" [(ngModel)]="doctorUpdate.DPI" name="username" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input autocomplete="off" [(ngModel)]="doctorUpdate.email" name="email" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Tel</mat-label>
+                <input autocomplete="off" [(ngModel)]="doctorUpdate.phone" name="phone" type="text" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Edad</mat-label>
+                <input autocomplete="off" [(ngModel)]="doctorUpdate.age" name="age" type="text" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Genero</mat-label>
+                <mat-select [(ngModel)]="doctorUpdate.gender" name="gender">
+                  <mat-option value="MALE">MASCULINO</mat-option>
+                  <mat-option value="FEMALE">FEMENINO</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <hr />
+            <div class="modal-footer justify-content-center">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
+              </button>
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Eliminar User -->
+  <div class="modal fade" id="deleteDoctor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="addContainer">
+          <div class="contact-details">
+            <div class="modalHeader">
+              <div class="editRowModal">
+                <div *ngIf="doctorDeleteModal" class="modalHeader clearfix">
+                  <div class="modal-about contact-header">
+                    <div class="contact-details-img">
+                      <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
+                    </div>
+                    <div class="contact-details-heading">
+                      <div class="contact-details-name mb-2">
+                        {{ doctorDeleteModal.name }}
                       </div>
-                    </td>
-                  </tr>
-                  <tr rowspan="9" *ngIf="notFound === true">
-                    <td colspan="9" class="text-center">Not Users Found</td>
-                  </tr>
-                </tbody>
-              </table>
+                      <div class="badge col-yellow">
+                        DOCTOR
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <hr />
+            <div *ngIf="doctorDeleteModal" class="descripcion">
+              <div class="count-container">
+
+                <div class="box">
+                  <h3>Nombre:</h3>
+                </div>
+                <div class="box">
+                  <p>{{ doctorDeleteModal.name }}</p>
+                </div>
+
+                <div class="box">
+                  <h3>Apellido:</h3>
+                </div>
+                <div *ngIf="doctorDeleteModal.surname" class="box">
+                  <p>{{ doctorDelete.surname }}</p>
+                </div>
+                <div *ngIf="!doctorDeleteModal.surname" class="box">
+                  <p>-Sin apellido-</p>
+                </div>
+
+                <div class="box">
+                  <h3>Usuario:</h3>
+                </div>
+                <div class="box">
+                  <p>{{ doctorDeleteModal.username }}</p>
+                </div>
+
+                <form style="width:100%">
+                  <div class="text-inside">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Tu Contraseña</mat-label>
+                      <input type="password" autocomplete="off" [(ngModel)]="doctorDeletePassword" name="password"
+                        matInput />
+                    </mat-form-field>
+                  </div>
+                  <div class="modal-footer justify-content-center">
+                    <button (click)="showPassword()" type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                      <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
+                    </button>
+                    <button (click)="deleteDoctor(doctorDeleteModal._id, doctorDeletePassword)" type="submit"
+                      class="btn btn-success" data-bs-dismiss="modal">
+                      <i class="fa fa-floppy-o" aria-hidden="true"></i> Eliminar
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <h1 *ngIf="notFound === true && showTableDoctors === false" class="text-center">
-      Not Users Found
-    </h1>
+  </div>
+
+  <!--TABLE USERS-->
+  <div *ngIf="showTableDoctors" class="row clearfix mt-5">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="materialTableHeader mb-3">
+          <div class="row">
+            <div class="col-8">
+              <ul class="header-buttons-left ml-0">
+                <li class="dropdown">
+                  <div class="header">
+                    <h2>Tabla de Doctores</h2>
+                  </div>
+                </li>
+                <li class="dropdown m-l-20">
+                  <label for="search-input">
+                    <i class="material-icons search-icon">search</i>
+                  </label>
+                  <input [(ngModel)]="searchDoctor" placeholder="Search.." type="text" #filter
+                    class="browser-default search-field" aria-label="Search box" />
+                </li>
+
+                <li>
+                  <i *ngIf="!doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()"></i>
+                  <i *ngIf="!doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-desc ms-3"
+                    (click)="getByDown()"></i>
+                </li>
+
+                <li>
+                  <i *ngIf="doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()"
+                    style="color: #4a8af9;"></i>
+                  <i *ngIf="doctorNameUp && !doctorNameDown" class="fa fa-sort-alpha-desc text-gray-400 ms-3"
+                    (click)="getByDown()"></i>
+                </li>
+
+                <li>
+                  <i *ngIf="!doctorNameUp && doctorNameDown" class="fa fa-sort-alpha-asc text-gray-400 ms-3"
+                    (click)="getByUp()"></i>
+                  <i *ngIf="!doctorNameUp && doctorNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()"
+                    style="color: #4a8af9;"></i>
+                </li>
+
+                <li>
+                  <i *ngIf="doctorNameUp || doctorNameDown" (click)="cleanTable()"
+                    class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
+                </li>
+
+                <li *ngIf="buttonActions">
+                  <div class="icon-button-demo m-l-10">
+                    <button (click)="getDoctor(doctorDelete._id)" data-bs-toggle="modal" data-bs-target="#deleteDoctor"
+                      mat-mini-fab color="warn">
+                      <mat-icon class="col-white">delete
+                      </mat-icon>
+                    </button>
+                  </div>
+                </li>
+                <li *ngIf="buttonActions">
+                  <div class="icon-button-demo m-l-10">
+                    <button data-bs-toggle="modal" data-bs-target="#updateDoctor" mat-mini-fab class="colorUpdate">
+                      <mat-icon class="col-white">edit
+                      </mat-icon>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="tableBody">
+          <div class="table-responsive">
+            <i (click)="cleanTable()" class="closeFilter" aria-hidden="true">
+            </i>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Foto</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Usuario</th>
+                  <th>DPI</th>
+                  <th>Email</th>
+                  <th>Tel</th>
+                  <th>Edad</th>
+                  <th>Genero</th>
+                  <th>Rol</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let doctor of doctors | searchDoctorTable: searchDoctor">
+                  <td (click)="getDoctor(doctor._id)">
+                    <mat-checkbox *ngIf="doctor.checked==true || controloClick==0" #check="matCheckbox"
+                      (click)="showButtonActions(doctor._id, check); getDoctor(doctor._id)" class="example-margin"
+                      color="primary">
+                    </mat-checkbox>
+                    <mat-checkbox disabled="" *ngIf="doctor.checked==false" class="example-margin" color="primary">
+                    </mat-checkbox>
+                    {{ doctors.indexOf(doctor) + 1 }}
+                  </td>
+                  <td (click)="getDoctor(doctor._id)" class="table-img">
+                    <img src="assets/images/user/user8.jpg" alt="" />
+                  </td>
+                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.name
+                    }}</td>
+                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{
+                    doctor.surname }}
+                  </td>
+                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{
+                    doctor.username }}
+                  </td>
+                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.DPI }}
+                  </td>
+                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.email
+                    }}
+                  </td>
+                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.phone
+                    }}
+                  </td>
+                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.age }}
+                  </td>
+                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.gender
+                    }}
+                  </td>
+                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser" align="center">
+                    <div *ngIf="doctor.role === 'DOCTOR'" data-bs-toggle="modal" data-bs-target="#viewUser"
+                      class="badge col-yellow">
+                      {{ doctor.role }}
+                    </div>
+                  </td>
+                </tr>
+                <tr rowspan="9" *ngIf="notFound === true">
+                  <td colspan="9" class="text-center">Not Users Found</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h1 *ngIf="notFound === true && showTableDoctors === false" class="text-center">
+    Not Users Found
+  </h1>
 </section>

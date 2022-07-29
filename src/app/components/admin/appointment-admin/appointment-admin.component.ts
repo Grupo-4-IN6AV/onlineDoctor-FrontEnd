@@ -6,6 +6,18 @@ import { AppointmentRestService } from 'src/app/services/appointmentRest/appoint
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import { DoctorRestService } from 'src/app/services/doctorRest/doctor-rest.service';
 import Swal from 'sweetalert2';
+import timeGridPlugin from '@fullcalendar/timegrid'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction'
+import esLocale from '@fullcalendar/core/locales/es'
+import { DOCUMENT } from '@angular/common';
+
+import {
+  CalendarOptions,
+  DateSelectArg,
+  EventClickArg,
+  EventApi,
+} from '@fullcalendar/angular';
 
 @Component({
   selector: 'app-appointment-admin',
@@ -27,10 +39,12 @@ export class AppointmentAdminComponent implements OnInit {
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
-  controloClick: number = 0
+  controloClick: number = 0;
+  actualDate : any;
 
-  
-  
+  //Opciones de Calendarios
+  calendarOptions: CalendarOptions = {initialView:'dayGridMonth', events:[]};
+  showCalendarAppointments: any;
   
   constructor(
     public dialog: MatDialog,
@@ -43,6 +57,7 @@ export class AppointmentAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.actualDate = new Date();
     this.getAppointments();
   }
 
@@ -50,6 +65,21 @@ export class AppointmentAdminComponent implements OnInit {
     this.appointmentRest.getAppointments().subscribe({
       next: (res: any) => {
         this.appointments = res.appointmentsExist;
+        var color;
+        var calendarArray = [];
+        var availableEventsArray = [];
+        for( let appointment of this.appointments){
+          var appointmentID = appointment._id;
+          var nameAppointment = 'Apointment'+'Dr. ' + appointment.doctor.name + ' ' + 'Pacient.' + appointment.pacient.name;
+          var actualDate = appointment.date.split('T');
+          calendarArray.push({
+            title: nameAppointment,
+            description: appointmentID,
+            date: actualDate[0],
+            className: "fc-event-primary"
+          })
+        }
+        this.calendarOptions.events = calendarArray;
       },
       error: (err) => console.log(err)
     })
@@ -170,9 +200,15 @@ export class AppointmentAdminComponent implements OnInit {
 
   showTable() {
     this.showTableAppointment = !this.showTableAppointment;
+    this.showCalendarAppointments = false;
     for (let appointment of this.appointments) {
       appointment.checked = true
     }
+  }
+
+  showCalendar(){
+    this.showCalendarAppointments = true;
+    this.showTableAppointment = false;
   }
 
   cleanTable() {
