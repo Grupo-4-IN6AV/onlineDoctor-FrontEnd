@@ -25,6 +25,7 @@ import { MeetingComponent } from './components/admin/meeting/meeting.component';
 import { CallComponent } from './components/admin/call/call.component';
 import { LayoutPacientComponent } from './components/pacient/layout-pacient/layout-pacient.component';
 import { HomePacientComponent } from './components/pacient/home-pacient/home-pacient.component';
+import { LaboratoryDoctorComponent } from './components/doctor/laboratory-doctor/laboratory-doctor.component';
 
 const routes: Routes =
 [
@@ -59,6 +60,7 @@ const routes: Routes =
     path: 'doctor', component:LayoutDoctorComponent,children:
     [
       {path: 'home', component: HomeDoctorComponent},
+      {path: 'laboratory', component: LaboratoryDoctorComponent},
     ]
   },
   {

@@ -105,6 +105,7 @@ import { LayoutPacientComponent } from './components/pacient/layout-pacient/layo
 import { SidebarPacientComponent } from './components/pacient/sidebar-pacient/sidebar-pacient.component';
 import { SidebarrightPacientComponent } from './components/pacient/sidebarright-pacient/sidebarright-pacient.component';
 import { HomePacientComponent } from './components/pacient/home-pacient/home-pacient.component';
+import { LaboratoryDoctorComponent } from './components/doctor/laboratory-doctor/laboratory-doctor.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -167,6 +168,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SidebarPacientComponent,
     SidebarrightPacientComponent,
     HomePacientComponent,
+    LaboratoryDoctorComponent,
   ],
   imports: [
     FormsModule,
