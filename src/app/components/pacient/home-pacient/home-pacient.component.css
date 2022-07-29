@@ -20,7 +20,7 @@
 
 .content-text {
     font-family: Poppins;
-    max-width: 30vw;
+    max-width: 40vw;
     max-height: 50vh;
     justify-content: center;
     align-items: center;
@@ -29,21 +29,21 @@
 
 .firstTitle {
     text-align: center;
-    max-width: 30vw;
+    max-width: 40vw;
     color: #3D75F0;
 }
 
 .firstText {
     text-align: justify;
-    max-width: 30vw;
+    max-width: 40vw;
     color: #A6A6A6;
 }
 
 .content-Image {
     min-height: 50vh;
-    min-width: 70vw;
+    min-width: 50vw;
     max-height: 50vh;
-    max-width: 70vw;
+    max-width: 50vw;
     margin: 0 auto;
     justify-content: center;
     display: flex;
@@ -279,7 +279,7 @@ hr {
     }
 
     .content-Image img {
-        max-height: 24rem;
+        max-height: 20rem;
         object-fit: cover;
     }
 
