@@ -1,13 +1,13 @@
 <section class="content">
     <h1 style="margin-top: 4rem">
         &nbsp;<i class="fa-solid fa-calendar-day"></i>
-        Agendar Citas
+        Agendar Cita
     </h1>
     <hr />
 
     <div class="text-center mt-2 mb-2">
         <button type="button" data-bs-toggle="modal" data-bs-target="#addAppointment"
-            class="ms-3 btn btn-event btn-success" (click)="getDoctors()">
+            class="ms-3 btn btn-event btn-success" (click)="getUsers()">
             Agregar Cita
             <span class="btn-icon-end"><i class="fa-solid fa-calendar-day"></i></span>
         </button>
@@ -36,7 +36,8 @@
     <div *ngIf="!showTableAppointment && !showCalendarAppointments">
         <div class="container">
             <div class="products-container">
-                <div *ngFor="let appointment of appointments" class="product" data-name="p-1">
+                <div *ngFor="let appointment of appointments | searchAppointmentBar: searhApointment" class="product"
+                    data-name="p-1">
                     <h5 class="card-title">{{ appointment.pacient.name }} | {{ appointment.doctor.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{newDate[appointments.indexOf(appointment)]}}</h6>
                     <button (click)="getAppointment(appointment._id); getUsers(); getDoctors()"
@@ -55,7 +56,7 @@
                     </button>
                     <br>
                     <button *ngIf="appointment.modality == 'VIRTUAL'" data-bs-toggle="modal"
-                        [routerLink]="['/paciente/meeting/' + appointment._id]" class="btn btn-success ms-2">
+                        [routerLink]="['/doctor/meeting/' + appointment._id]" class="btn btn-success ms-2">
                         <i class="fa fa-eye" aria-hidden="true"></i>
                         Entrar a la Reunion
                     </button>
@@ -78,7 +79,7 @@
                                         <div class="modal-about contact-header">
                                             <div class="contact-details-heading">
                                                 <div class="contact-details-name mt-2">
-                                                    <i class="fa-solid fa-calendar-day"></i> Cita Medica
+                                                <i class="fa-solid fa-calendar-day"></i>   Cita Medica
                                                 </div>
                                             </div>
                                         </div>
@@ -147,10 +148,10 @@
                         <form (ngSubmit)="saveAppointment(addAppointmentForm)" #addAppointmentForm="ngForm">
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Doctor</mat-label>
-                                    <mat-select [(ngModel)]="appointment.doctor" name="doctor">
-                                        <div *ngFor="let doctor of doctors">
-                                            <mat-option value={{doctor._id}}>{{doctor.name}}
+                                    <mat-label>Paciente</mat-label>
+                                    <mat-select [(ngModel)]="appointment.pacient" name="pacient">
+                                        <div *ngFor="let user of users">
+                                            <mat-option *ngIf="user.role == 'PACIENTE'" value={{user._id}}>{{user.name}}
                                             </mat-option>
                                         </div>
 
@@ -159,11 +160,18 @@
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Fecha</mat-label>
-                                    <input [(ngModel)]="appointment.date" [min]="actualDate" name="date" matInput
-                                        [matDatepicker]="picker">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
+                                    <mat-label>Doctor</mat-label>
+                                    <input disabled autocomplete="off" value="{{doctor.name}}" name="pacient"
+                                        matInput />
+
+                                </mat-form-field>
+                            </div>
+                            <div class="text-inside">
+                                <mat-form-field class="example-full-width" appearance="outline">
+                                  <mat-label>Fecha</mat-label>
+                                  <input [(ngModel)]="appointment.date" [min]="actualDate" name="date" matInput [matDatepicker]="picker">
+                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                  <mat-datepicker #picker></mat-datepicker>
                                 </mat-form-field>
                             </div>
                             <div class="text-inside">
@@ -209,18 +217,20 @@
                     <form (ngSubmit)="updateAppointment()" *ngIf="appointmentUpdate">
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Doctor</mat-label>
-                                <mat-select [(ngModel)]="appointmentUpdate.doctor._id" name="doctor">
-                                    <div *ngFor="let doctor of doctors">
-                                        <mat-option value={{doctor._id}}>{{doctor.name}}</mat-option>
+                                <mat-label>Paciente</mat-label>
+                                <mat-select disabled [(ngModel)]="appointmentUpdate.pacient._id" name="pacient">
+                                    <div *ngFor="let user of users">
+                                        <mat-option *ngIf="user.role === 'PACIENTE'" value={{user._id}}>{{user.name}}
+                                        </mat-option>
                                     </div>
+
                                 </mat-select>
                             </mat-form-field>
                         </div>
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Paciente</mat-label>
-                                <input disabled autocomplete="off" value="{{user.name}}" name="pacient" matInput />
+                                <mat-label>Doctor</mat-label>
+                                <input disabled autocomplete="off" value="{{doctor.name}}" name="pacient" matInput />
                             </mat-form-field>
                         </div>
                         <div class="text-inside">
@@ -334,8 +344,7 @@
                                     <td (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewAppointment">{{ appointment.doctor.name }}</td>
                                     <td (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewAppointment">{{newDate[appointments.indexOf(appointment)]}}
-                                    </td>
+                                        data-bs-target="#viewAppointment">{{newDate[appointments.indexOf(appointment)]}}</td>
                                     <td (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewAppointment">{{ appointment.modality }}</td>
                                 </tr>

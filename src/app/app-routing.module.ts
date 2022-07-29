@@ -32,6 +32,7 @@ import { DiaryPacientComponent } from './components/pacient/diary-pacient/diary-
 import { PrescriptionPacientComponent } from './components/pacient/prescription-pacient/prescription-pacient.component';
 import { ShoppingCartPacientComponent } from './components/pacient/shopping-cart-pacient/shopping-cart-pacient.component';
 import { PharmacyPacientComponent } from './components/pacient/pharmacy-pacient/pharmacy-pacient.component';
+import { AppointmentDoctorComponent } from './components/doctor/appointment-doctor/appointment-doctor.component';
 
 const routes: Routes =
 [
@@ -67,6 +68,8 @@ const routes: Routes =
     [
       {path: 'home', component: HomeDoctorComponent},
       {path: 'laboratory', component: LaboratoryDoctorComponent},
+      {path: 'appointment', component: AppointmentDoctorComponent },
+      {path: 'meeting/:id', component: MeetingComponent},
     ]
   },
   {
@@ -78,7 +81,8 @@ const routes: Routes =
       {path: 'diary', component: DiaryPacientComponent},
       {path: 'pharmacy', component: PharmacyPacientComponent},
       {path: 'prescription', component: PrescriptionPacientComponent},
-      {path: 'shopping-cart', component: ShoppingCartPacientComponent}
+      {path: 'shopping-cart', component: ShoppingCartPacientComponent},
+      {path: 'meeting/:id', component: MeetingComponent},
     ]
   },
   { path: '**', component: NotFoundPageComponent}

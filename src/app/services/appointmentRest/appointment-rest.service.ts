@@ -24,6 +24,16 @@ export class AppointmentRestService {
     return this.http.get(environment.baseURI + 'appointment/getAppointments', { headers: this.httpOptions });
   }
 
+  getAppointmentsUser()
+  {
+    return this.http.get(environment.baseURI + 'appointment/getAppointmentsUser', { headers: this.httpOptions });
+  }
+
+  getAppointmentsPaciente()
+  {
+    return this.http.get(environment.baseURI + 'appointment/getAppointmentsPaciente', { headers: this.httpOptions });
+  }
+
   saveAppointment(params:{})
   {
     return this.http.post(environment.baseURI + 'appointment/saveAppointment', params, { headers: this.httpOptions });

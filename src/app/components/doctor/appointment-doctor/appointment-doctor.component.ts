@@ -21,11 +21,11 @@ import {
 } from '@fullcalendar/angular';
 
 @Component({
-  selector: 'app-appointment-pacient',
-  templateUrl: './appointment-pacient.component.html',
-  styleUrls: ['./appointment-pacient.component.css']
+  selector: 'app-appointment-doctor',
+  templateUrl: './appointment-doctor.component.html',
+  styleUrls: ['./appointment-doctor.component.css']
 })
-export class AppointmentPacientComponent implements OnInit {
+export class AppointmentDoctorComponent implements OnInit {
 
   appointments: any;
   appointment: AppointmentModel;
@@ -36,8 +36,7 @@ export class AppointmentPacientComponent implements OnInit {
   showTableAppointment: boolean = false;
   reset: any;
   users: any;
-  user:any;
-  doctors: any;
+  doctor: any;
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
@@ -68,17 +67,16 @@ export class AppointmentPacientComponent implements OnInit {
     this.actualDate = new Date();
     this.getAppointments();
     this.actualUserId = this.credentialReset.getIdentity()._id;
-    this.getDoctors();
-    this.getUser()
+    this.getDoctor();
   }
 
   getAppointments() {
-    this.appointmentRest.getAppointmentsPaciente().subscribe({
+    this.appointmentRest.getAppointmentsUser().subscribe({
       next: (res: any) => {
         this.appointments = res.appointmentsExist;
 
         var arrayDate = [];
-        for (let date of res.appointmentsExist) {
+        for(let date of res.appointmentsExist){
           const newDate = date.date.split('T');
           arrayDate.push(newDate[0])
         }
@@ -111,26 +109,19 @@ export class AppointmentPacientComponent implements OnInit {
     })
   }
 
-  getUser(){
-    this.userRest.getUser(this.actualUserId).subscribe({
-      next: (res: any) => this.user = res.user,
-      error: (err) => console.log(err)
-    })
-  }
-
-  getDoctors() {
-    this.doctorRest.getDoctors().subscribe({
-      next: (res: any) => {this.doctors = res.doctors},
+  getDoctor() {
+    this.doctorRest.getDoctor(this.actualUserId).subscribe({
+      next: (res: any) => this.doctor = res.doctor,
       error: (err) => console.log(err)
     })
   }
 
   saveAppointment(addAppointmentForm: any) {
     let params = {
-      pacient: this.actualUserId,
-      doctor: this.appointment.doctor,
+      pacient: this.appointment.pacient,
+      doctor: this.actualUserId,
       date: this.appointment.date,
-      modality: this.appointment.modality,
+      modality: this.appointment.modality
     }
     this.appointmentRest.saveAppointment(params).subscribe
       ({

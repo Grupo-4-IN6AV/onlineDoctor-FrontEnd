@@ -52,8 +52,7 @@
             Ver por Cartas
             <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
         </button>
-        <button (click)="showCalendar()" type="button"
-            class="ms-3 btn btn-event btn-primary">
+        <button (click)="showCalendar()" type="button" class="ms-3 btn btn-event btn-primary">
             Ver Calendario
             <span class="btn-icon-end"><i class="fa-solid fa-microscope"></i> </span>
         </button>
@@ -376,7 +375,8 @@
                                     <td (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewLaboratory">{{ laboratory.typeLaboratory.name }}</td>
                                     <td (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewLaboratory">{{newDate[laboratories.indexOf(laboratory)]}}</td>
+                                        data-bs-target="#viewLaboratory">{{newDate[laboratories.indexOf(laboratory)]}}
+                                    </td>
                                     <td (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewLaboratory">{{ laboratory.specifications }}</td>
                                 </tr>
