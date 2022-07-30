@@ -20,7 +20,7 @@
     <div *ngIf="showUsers">
         <div class="container">
             <div class="products-container">
-                <div *ngFor="let user of users" class="product" data-name="p-1">
+                <div *ngFor="let user of users | searchUserBar: searchPrescription" class="product" data-name="p-1">
                     <div *ngIf="user.role === 'PACIENTE'">
                         <h5 class="card-title">{{user.name}} {{user.surname}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{user.username}}</h6>
