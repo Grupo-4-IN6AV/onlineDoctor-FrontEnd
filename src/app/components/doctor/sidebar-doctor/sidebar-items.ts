@@ -35,5 +35,17 @@ export const ROUTES: RouteInfo[] = [
     badge: '',
     badgeClass: '',
     submenu: [],
-  }
+  },
+  {
+    path: 'prescription',
+    title: 'Recetas',
+    moduleName: 'admin',
+    iconType: 'material-icons-two-tone',
+    icon: 'article',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
 ];
