@@ -34,6 +34,7 @@ import { ShoppingCartPacientComponent } from './components/pacient/shopping-cart
 import { PharmacyPacientComponent } from './components/pacient/pharmacy-pacient/pharmacy-pacient.component';
 import { AppointmentDoctorComponent } from './components/doctor/appointment-doctor/appointment-doctor.component';
 import { PrescriptionDoctorComponent } from './components/doctor/prescription-doctor/prescription-doctor.component';
+import { DiaryDoctorComponent } from './components/doctor/diary-doctor/diary-doctor.component';
 
 const routes: Routes =
 [
@@ -72,6 +73,7 @@ const routes: Routes =
       {path: 'appointment', component: AppointmentDoctorComponent },
       {path: 'prescription', component: PrescriptionDoctorComponent },
       {path: 'meeting/:id', component: MeetingComponent},
+      {path: 'diary', component: DiaryDoctorComponent},
     ]
   },
   {

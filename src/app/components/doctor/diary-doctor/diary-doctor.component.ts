@@ -11,13 +11,12 @@ import {
   EventApi,
 } from '@fullcalendar/angular';
 
-
 @Component({
-  selector: 'app-diary-pacient',
-  templateUrl: './diary-pacient.component.html',
-  styleUrls: ['./diary-pacient.component.css']
+  selector: 'app-diary-doctor',
+  templateUrl: './diary-doctor.component.html',
+  styleUrls: ['./diary-doctor.component.css']
 })
-export class DiaryPacientComponent implements OnInit {
+export class DiaryDoctorComponent implements OnInit {
 
   actualDate: any;
   
@@ -40,7 +39,7 @@ export class DiaryPacientComponent implements OnInit {
   }
 
   async getAppointments () {
-    this.appointmentRest.getAppointmentsPaciente().subscribe({
+    this.appointmentRest.getAppointmentsUser().subscribe({
       next: (res: any) => {
         var calendarArray = [];
         
@@ -56,9 +55,9 @@ export class DiaryPacientComponent implements OnInit {
           })
         }
 
-        this.laboratoriesRest.getLaboratoriesPacient().subscribe({
+        this.laboratoriesRest.getLaboratoriesUser().subscribe({
           next: (res: any) => {
-            for (let laboratory of res.laboratoryExist) {
+            for (let laboratory of res.laboratories) {
               var laboratoryID = laboratory._id;
               var nameLaboratory = 'Lab.' + laboratory.typeLaboratory.name + ' |  ' + laboratory.pacient.name;
               var actualDate2 = laboratory.date.split('T');
