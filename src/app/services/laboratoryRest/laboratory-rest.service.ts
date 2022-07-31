@@ -70,4 +70,11 @@ export class LaboratoryRestService {
   {
     return this.http.delete(environment.baseURI + 'laboratory/deleteLaboratoryDoctor/' + id + '/' + idUser, { headers: this.httpOptions });
   }
+
+  //FUNCIONES DE PACIENTES//
+  getLaboratoryPacient(id:string)
+  {
+    return this.http.get(environment.baseURI + 'laboratory/getLaboratoryPacient/' + id, { headers: this.httpOptions });
+  }
+
 }

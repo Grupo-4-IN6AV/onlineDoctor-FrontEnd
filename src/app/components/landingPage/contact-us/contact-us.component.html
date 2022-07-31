@@ -1,10 +1,10 @@
 <div class="contactBox" style="height: 100vh;">
   <div class="form">
       <div class="contact-info">
-          <h3 class="title">Contact Us</h3>
+          <h3 class="title">Contactanos</h3>
           <p class="text">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-              dolorum adipisci recusandae praesentium dicta!
+              ¡Podemos Ayudarte! <br>
+              Ingresa tu mensaje y te ayudaremos a solucionar tus dudas.
           </p>
           <div class="info">
               <div class="information">
@@ -13,16 +13,16 @@
               </div>
               <div class="information">
                   <img src="../../../assets/images/contactUs/email.png" class="icon" alt="" />
-                  <p class="infomationTitle">lorem@ipsum.com</p>
+                  <p class="infomationTitle">OnlineDoctorsSoporteTecnico@gmail.com</p>
               </div>
               <div class="information">
                   <img src="../../../assets/images/contactUs/phone.png" class="icon" alt="" />
-                  <p class="infomationTitle">123-456-789</p>
+                  <p class="infomationTitle">+502: 5555-5555</p>
               </div>
           </div>
 
           <div class="social-media">
-              <p>Contact Us by:</p>
+              <p>Contactanos por:</p>
               <div class="social-icons">
                   <a href="#">
                       <i class="fab fa-facebook-f"></i>
@@ -42,9 +42,9 @@
 
       <div class="contact-form">
           <form (ngSubmit)="sendMessage(contactForm)" #contactForm="ngForm" class="mx-1 mx-md-4" autocomplete="off">
-              <h3 class="title">Contact Us</h3>
+              <h3 class="title">Mensaje</h3>
               <div class="input-container">
-                  <input [(ngModel)]="contact.username" placeholder="Name" type="text" name="username"
+                  <input [(ngModel)]="contact.username" placeholder="Nombre" type="text" name="username"
                       class="input" />
               </div>
               <div class="input-container">
@@ -52,13 +52,13 @@
                       class="input" />
               </div>
               <div class="input-container">
-                  <input [(ngModel)]="contact.phone" placeholder="Phone" type="tel" name="phone" class="input" />
+                  <input [(ngModel)]="contact.phone" placeholder="Teléfono" type="tel" name="phone" class="input" />
               </div>
               <div class="input-container textarea">
-                  <textarea [(ngModel)]="contact.message" placeholder="Message" name="message"
+                  <textarea [(ngModel)]="contact.message" placeholder="Mensaje" name="message"
                       class="input"></textarea>
               </div>
-              <input type="submit" value="Send" class="btnContact" />
+              <input type="submit" value="Enviar" class="btnContact" />
           </form>
       </div>
   </div>
