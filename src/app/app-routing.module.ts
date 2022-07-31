@@ -35,6 +35,8 @@ import { PharmacyPacientComponent } from './components/pacient/pharmacy-pacient/
 import { AppointmentDoctorComponent } from './components/doctor/appointment-doctor/appointment-doctor.component';
 import { PrescriptionDoctorComponent } from './components/doctor/prescription-doctor/prescription-doctor.component';
 import { DiaryDoctorComponent } from './components/doctor/diary-doctor/diary-doctor.component';
+import { ProfilePacientComponent } from './components/pacient/profile-pacient/profile-pacient.component';
+import { ProfileDoctorComponent } from './components/doctor/profile-doctor/profile-doctor.component';
 
 const routes: Routes =
 [
@@ -74,6 +76,7 @@ const routes: Routes =
       {path: 'prescription', component: PrescriptionDoctorComponent },
       {path: 'meeting/:id', component: MeetingComponent},
       {path: 'diary', component: DiaryDoctorComponent},
+      {path: 'profile', component: ProfileDoctorComponent},
     ]
   },
   {
@@ -87,6 +90,7 @@ const routes: Routes =
       {path: 'prescription', component: PrescriptionPacientComponent},
       {path: 'shopping-cart', component: ShoppingCartPacientComponent},
       {path: 'meeting/:id', component: MeetingComponent},
+      {path: 'profile', component: ProfilePacientComponent},
     ]
   },
   { path: '**', component: NotFoundPageComponent}

@@ -1,4 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;500&display=swap');
+.btn-sample {
+  color: #FFFFFF;
+  background-color: #0D6EFD;
+  border-color: #0D6EFD;
+}
+
+.btn-sample:hover,
+.btn-sample:focus,
+.btn-sample:active,
+.btn-sample.active,
+.open .dropdown-toggle.btn-sample {
+  color: #FFFFFF;
+  background-color: #0058DB;
+  border-color: #0D6EFD;
+}
+
+.btn-sample:active,
+.btn-sample.active,
+.open .dropdown-toggle.btn-sample {
+  background-image: none;
+}
+
+.btn-sample.disabled,
+.btn-sample[disabled],
+fieldset[disabled] .btn-sample,
+.btn-sample.disabled:hover,
+.btn-sample[disabled]:hover,
+fieldset[disabled] .btn-sample:hover,
+.btn-sample.disabled:focus,
+.btn-sample[disabled]:focus,
+fieldset[disabled] .btn-sample:focus,
+.btn-sample.disabled:active,
+.btn-sample[disabled]:active,
+fieldset[disabled] .btn-sample:active,
+.btn-sample.disabled.active,
+.btn-sample[disabled].active,
+fieldset[disabled] .btn-sample.active {
+  background-color: #0D6EFD;
+  border-color: #0D6EFD;
+}
+
+.btn-sample .badge {
+  color: #0D6EFD;
+  background-color: #FFFFFF;
+}
 
 .head-title h1
 {
@@ -562,114 +606,13 @@ th
     background-color: #F0AD4E;
 }
 
-.form{
-
-   position: relative;
- }
- 
- .form .fa-search
- {
-   position: absolute;
-   top:20px;
-   left: 20px;
-   color: #9ca3af;
- }
- 
- .form span
- {
-   position: absolute;
-   right: 17px;
-   top: 13px;
-   padding: 2px;
-   border-left: 1px solid #d1d5db;
- }
- 
- .left-pan
- {
-   padding-left: 7px;
- }
- 
- .left-pan i
- {
-  padding-left: 10px;
- }
- 
- .form-input
- {
-   height: 55px;
-   text-indent: 33px;
-   border-radius: 10px;
- }
- 
- .form-input:focus{
- 
-   box-shadow: none;
-   border:none;
- }
-
-.medicament .box-medicaments .box-medicament {
-  max-height: 175px;
-  max-width: 150px;
-  min-height: 175px;
-  min-width: 150px;
-  text-align: center;
-  padding: 0.7rem;
-  background: #fff;
-  border: 3px #3D75F0 solid;
-  border-radius: .5rem;
-  font-family: Poppins;
-  cursor: pointer;
+#dropdownBasic1::after {
+  content: none;
 }
 
-.medicament .box-medicaments .box-medicament:hover {
-  transform: translateY(-7.5px);
-  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
-}
-
-.medicament .box-medicaments .box-medicament .img-Medicament {
-  padding-bottom: 10px;
-  max-height: 70px;
-}
-
-.medicament .box-medicaments .box-medicament h3 {
-  color: #444;
-  font-size: 0.9rem;
-  font-family: Poppins, medium;
-}
-
-.medicament .box-medicaments .box-medicament .button-card-Medicament {
-  color: #fff;
-  background-color: green;
-  border-radius: 0.8rem;
-  cursor: pointer;
-  font-size: 0.2rem;
-  margin-top: 5px;
-  border: none;
-}
-
-.medicament .box-medicaments .box-medicament .button-card-Medicament-Eliminar {
-  color: #fff;
-  background-color: red;
-  border-radius: 0.8rem;
-  cursor: pointer;
-  font-size: 0.2rem;
-  margin-top: 5px;
-  border: none;
-}
-
-.card-title-Medicament{
-  margin: 3px;
-}
-
-#mySkills{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
-}
-
-.box-medicaments{
-  display: flex;
-  align-items: center;
-  justify-content: center; 
-  margin-top: 1rem;
+.redimention
+{
+  max-height: 150px;
+  max-width: 250px;
+  object-fit: cover;
 }

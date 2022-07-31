@@ -6,23 +6,36 @@ import {
   OnInit,
   Renderer2,
   AfterViewInit,
+  DoCheck,
 } from '@angular/core';
 import { ConfigService } from '../../../../src/app/config/config.service';
 import { RightSidebarService } from '../../../../src/app/core/service/rightsidebar.service';
 const document: any = window.document;
-
-
+import { environment } from 'src/environments/environment';
+import { CredentialsRestService } from 'src/app/services/credentialsRest/credentials-rest.service';
+import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 @Component({
   selector: 'app-header-pacient',
   templateUrl: './header-pacient.component.html',
   styleUrls: ['./header-pacient.component.sass']
 })
-export class HeaderPacientComponent implements OnInit {
+export class HeaderPacientComponent implements OnInit, DoCheck
+{
+
+  user: any;
+
+  //Mostrar Fotografía//
+  userImage: any
+  uri: any
+  token:string;
 
   public config: any = {};
   isNavbarCollapsed = true;
   isOpenSidebar: boolean;
+
   constructor(
+    private userRest: UserRestService,
+    private credentialRest: CredentialsRestService,
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     public elementRef: ElementRef,
@@ -180,8 +193,27 @@ export class HeaderPacientComponent implements OnInit {
     );
   }
 
-  logOut() {
-    localStorage.clear();
+  userLogin()
+  {
+    this.userRest.getUser(this.credentialRest.getIdentity()._id).subscribe({
+      next: (res: any) => {
+        this.user = res.user;
+        this.userImage = this.user.image;
+        this.uri = environment.baseURI + 'user/getImageUser/' + this.userImage;
+      },
+      error: (err) => {alert(err.error.message)}
+    })
+  }
+
+  ngDoCheck(): void
+  {
+      this.userImage = this.credentialRest.getIdentity().image;
+      this.uri = environment.baseURI + 'user/getImageUser/' + this.userImage;
+  }
+
+  logOut()
+  {
+    localStorage.removeItem('token');
     window.location.replace('/')
   }
 

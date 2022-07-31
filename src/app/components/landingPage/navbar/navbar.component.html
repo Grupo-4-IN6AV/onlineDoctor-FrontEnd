@@ -12,33 +12,33 @@
       <div class="nav-links">
         <ul ms-2 me-1>
           <li *ngIf="home" (click)="changeNavBar('home')" class="nav-link nav-link-active" style="--i: .6s">
-            <a routerLink="">Home</a>
+            <a routerLink="">Inicio</a>
           </li>
           <li *ngIf="!home" (click)="changeNavBar('home')" class="nav-link" style="--i: .6s">
-            <a routerLink="">Home</a>
+            <a routerLink="">Inicio</a>
           </li>
           <li *ngIf="aboutUs" (click)="changeNavBar('about')" class="nav-link nav-link-active" style="--i: 1s">
-            <a routerLink="/aboutUs">About Us</a>
+            <a routerLink="/aboutUs">Nosotros</a>
           </li>
           <li *ngIf="!aboutUs" (click)="changeNavBar('about')" class="nav-link" style="--i: 1s">
-            <a routerLink="/aboutUs">About Us</a>
+            <a routerLink="/aboutUs">Nosotros</a>
           </li>
           <li *ngIf="contactUs === true" (click)="changeNavBar('contact')" class="nav-link nav-link-active" style="--i: 1.35s">
-            <a routerLink="/contactUs">Contact Us</a>
+            <a routerLink="/contactUs">Contactanos</a>
           </li>
           <li *ngIf="!contactUs" (click)="changeNavBar('contact')" class="nav-link" style="--i: 1.35s">
-            <a routerLink="/contactUs">Contact Us</a>
+            <a routerLink="/contactUs">Contactanos</a>
           </li>
           <li *ngIf="pharmacy === true" (click)="changeNavBar('pharmacy')" class="nav-link nav-link-active" style="--i: 1.35s">
-            <a routerLink="/pharmacy">Pharmacy</a>
+            <a routerLink="/pharmacy">Farmacia</a>
           </li>
           <li *ngIf="!pharmacy"(click)="changeNavBar('pharmacy')" class="nav-link" style="--i: 1.35s">
-            <a routerLink="/pharmacy">Pharmacy</a>
+            <a routerLink="/pharmacy">Farmacia</a>
           </li>
         </ul>
       </div>
       <div class="log-sign" style="--i: 1.8s">
-        <a (click)="changeNavBar('not')" routerLink="/login" class="btn transparent">Log in</a>
+        <a (click)="changeNavBar('not')" routerLink="/login" class="btn transparent">Iniciar Sesión</a>
       </div>
     </div>
 
