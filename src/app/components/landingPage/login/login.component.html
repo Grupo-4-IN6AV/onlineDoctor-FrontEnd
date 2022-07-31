@@ -2,22 +2,22 @@
   <div class="forms-container">
     <div class="signin-signup">
       <form action="#" class="sign-in-form">
-        <h2 class="title">Sign in</h2>
+        <h2 class="title">Iniciar Sesión</h2>
         <form (ngSubmit)="login()">
           <div class="input-field">
             <i class="fa-solid fa-user"></i>
-            <input [(ngModel)]="user.identifier" name="identifier" type="text" placeholder="Username" />
+            <input [(ngModel)]="user.identifier" name="identifier" type="text" placeholder="Usuario" />
           </div>
           <div class="input-field">
             <i class="fa-solid fa-lock"></i>
-            <input [(ngModel)]='user.password' name="password" type="password" placeholder="Password"/>
+            <input [(ngModel)]='user.password' name="password" type="password" placeholder="Contraseña"/>
           </div>
-          <input type="submit" value="Login" class="btn solid" />
+          <input type="submit" value="Iniciar Sesión" class="btn solid" />
         </form>
       </form>
 
       <form (ngSubmit)="register()" class="sign-up-form mt-5">
-        <h2 class="title">Sign up</h2>
+        <h2 class="title">Registrarse</h2>
         <div class="input-field">
           <i class="fa-solid fa-user"></i>
           <input [(ngModel)]="user.name" name="name" type="text" placeholder="Nombre y Apellido" />
@@ -38,12 +38,12 @@
           <mat-form-field class="example-full-width">
             <mat-label>Género</mat-label>
             <mat-select [(ngModel)]="user.gender" name="gender">
-              <mat-option value="MALE">Hombre</mat-option>
-              <mat-option value="FEMALE">Mujer</mat-option>
+              <mat-option value="MALE">Masculino</mat-option>
+              <mat-option value="FEMALE">Femenino</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
-        <input type="submit" class="btn" value="Sign up" />
+        <input type="submit" class="btn" value="Registrarse" />
       </form>
     </div>
   </div>
