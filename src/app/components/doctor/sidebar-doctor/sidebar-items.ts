@@ -48,4 +48,16 @@ export const ROUTES: RouteInfo[] = [
     badgeClass: '',
     submenu: [],
   },
+  {
+    path: 'diary',
+    title: 'Agenda Virtual',
+    moduleName: 'doctor',
+    iconType: 'material-icons-two-tone',
+    icon: 'book',
+    class: '',
+    groupTitle: false,
+    badge: '',
+    badgeClass: '',
+    submenu: [],
+  },
 ];
