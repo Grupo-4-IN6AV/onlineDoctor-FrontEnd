@@ -8,7 +8,7 @@
   <div *ngIf="!showTableTypeLaboratory" class="row d-flex justify-content-center align-items-center">
     <div class="form">
       <i class="fa fa-search ms-2"></i>
-      <input [(ngModel)]="searchTypeLaboratory" type="text" class="form-control form-input" placeholder="Search User...">
+      <input [(ngModel)]="searchTypeLaboratory" type="text" class="form-control form-input" placeholder="Buscar Tipo de Laboratorio...">
     </div>
   </div>
 
@@ -39,7 +39,7 @@
   <div *ngIf="!showTableTypeLaboratory">
     <div class="container">
       <div class="products-container">
-        <div *ngFor="let typeLaboratory of typesLaboratory | searchTypeLaboratoryBar: searchTypeLaboratory"
+        <div *ngFor="let typeLaboratory of typesLaboratory | searchTypeLaboratoryTable: searchTypeLaboratory"
           class="product" data-name="p-1">
           <h5 class="card-title">{{ typeLaboratory.name }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ typeLaboratory.description }}</h6>
@@ -208,7 +208,7 @@
               <ul class="header-buttons-left ml-0">
                 <li class="dropdown">
                   <div class="header">
-                    <h2>Tabla de Tipos de Laboratorioy</h2>
+                    <h2>Tabla de Tipos de Laboratorio</h2>
                   </div>
                 </li>
                 <li class="dropdown m-l-20">

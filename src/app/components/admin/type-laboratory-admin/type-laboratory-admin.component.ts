@@ -34,7 +34,7 @@ export class TypeLaboratoryAdminComponent implements OnInit {
     public dialog: MatDialog,
     private modalService: NgbModal,
     private typeLaboratoryRest: TypeLaboratoryRestService,
-  ) { 
+  ) {
     this.typeLaboratory = new TypeLaboratoryModel('', '', '', true);
   }
 
@@ -162,7 +162,7 @@ export class TypeLaboratoryAdminComponent implements OnInit {
         error: (err) => console.log(err)
       })
     }
-  
+
     getByDown() {
       this.typeLaboratoryRest.getTypeLaboratorysByDown().subscribe({
         next: (res: any) => {
@@ -173,7 +173,7 @@ export class TypeLaboratoryAdminComponent implements OnInit {
         error: (err) => console.log(err)
       })
     }
-  
+
     cleanTable() {
       this.typeLaboratoryNameUp = this.reset
       this.typeLaboratoryNameDown = this.reset

@@ -8,7 +8,7 @@
   <div *ngIf="!showTableDoctors" class="row d-flex justify-content-center align-items-center">
     <div class="form">
       <i class="fa fa-search ms-2"></i>
-      <input [(ngModel)]="searchDoctor" type="text" class="form-control form-input" placeholder="Search User...">
+      <input [(ngModel)]="searchDoctor" type="text" class="form-control form-input" placeholder="Buscar Doctor...">
     </div>
   </div>
 
@@ -37,7 +37,7 @@
   <div *ngIf="!showTableDoctors">
     <div class="container">
       <div class="products-container">
-        <div *ngFor="let doctor of doctors | searchDoctorBar: searchDoctor" class="product" data-name="p-1">
+        <div *ngFor="let doctor of doctors | searchDoctorTable: searchDoctor" class="product" data-name="p-1">
           <h5 class="card-title">{{ doctor.name }} {{ doctor.surname }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ doctor.username }}</h6>
           <p class="card-text">{{ doctor.role }}</p>
@@ -450,7 +450,7 @@
                   <label for="search-input">
                     <i class="material-icons search-icon">search</i>
                   </label>
-                  <input [(ngModel)]="searchDoctor" placeholder="Search.." type="text" #filter
+                  <input [(ngModel)]="searchDoctor" placeholder="Buscar Doctor.." type="text" #filter
                     class="browser-default search-field" aria-label="Search box" />
                 </li>
 
@@ -562,8 +562,8 @@
                     </div>
                   </td>
                 </tr>
-                <tr rowspan="9" *ngIf="notFound === true">
-                  <td colspan="9" class="text-center">Not Users Found</td>
+                <tr rowspan="11" *ngIf="notFound === true">
+                  <td colspan="11" class="text-center">Doctor no Encontrado</td>
                 </tr>
               </tbody>
             </table>
@@ -573,6 +573,6 @@
     </div>
   </div>
   <h1 *ngIf="notFound === true && showTableDoctors === false" class="text-center">
-    Not Users Found
+    Doctor no Encontrado
   </h1>
 </section>

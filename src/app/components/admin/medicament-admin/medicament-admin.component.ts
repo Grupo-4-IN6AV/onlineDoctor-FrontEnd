@@ -36,6 +36,7 @@ export class MedicamentAdminComponent implements OnInit {
   //CARGA DE IMÁGENES//
   filesToUpload: any;
   uriMedicaments: any;
+  uri:any;
 
 
   constructor(
@@ -100,6 +101,7 @@ export class MedicamentAdminComponent implements OnInit {
         this.medicamentView = res.medicament;
         this.medicamentUpdate = res.medicament;
         this.medicamentDelete = res.medicament;
+        this.uri = environment.baseURI + 'medicament/getImageMedicament/' + res.medicament.image
         console.log(res.medicament)
       },
       error: (err) => {
@@ -248,7 +250,7 @@ export class MedicamentAdminComponent implements OnInit {
           Swal.fire
             ({
               icon: 'success',
-              title: 'Image added Successfully.',
+              title: 'Imagen agregada Exitosamente',
               confirmButtonColor: '#28B463'
             });
         }
