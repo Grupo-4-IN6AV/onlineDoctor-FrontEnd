@@ -9,7 +9,8 @@
           <li class="sidebar-user-panel">
             <div class="user-panel">
               <div class=" image">
-                <img src="assets/images/usrbig.jpg" class="img-circle user-img-circle" alt="User Image" />
+                <img *ngIf="!userImage" src="../../../../assets/images/user/usrbig3.jpg" class="img-circle user-img-circle" alt="User Image" />
+                <img *ngIf="userImage" src="{{uri}}" crossorigin="anonymous" class="img-circle user-img-circle" alt="User Image" />
               </div>
             </div>
             <div class="profile-usertitle">
@@ -17,7 +18,7 @@
               <div class="profile-usertitle-job ">{{user.role}}</div>
             </div>
             <div class="sidebar-userpic-btn">
-              <a mat-icon-button disabled routerLink="extra-pages/profile" matTooltip="Profile"
+              <a mat-icon-button disabled routerLink="profile" matTooltip="Profile"
                 [matTooltipPosition]="'above'">
                 <i class="material-icons-two-tone">account_circle</i>
               </a>
@@ -48,4 +49,3 @@
     </aside>
     <!-- #END# Left Sidebar -->
   </div>
-  
