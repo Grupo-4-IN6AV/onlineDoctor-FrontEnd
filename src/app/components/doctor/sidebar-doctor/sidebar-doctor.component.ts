@@ -8,19 +8,27 @@ import {
   Renderer2,
   HostListener,
   OnDestroy,
+  DoCheck,
 } from '@angular/core';
 import { ROUTES } from './sidebar-items';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import { CredentialsRestService } from 'src/app/services/credentialsRest/credentials-rest.service';
-
+import { environment } from 'src/environments/environment';
+import { DoctorRestService } from 'src/app/services/doctorRest/doctor-rest.service';
 @Component({
   selector: 'app-sidebar-doctor',
   templateUrl: './sidebar-doctor.component.html',
   styleUrls: ['./sidebar-doctor.component.sass']
 })
-export class SidebarDoctorComponent implements OnInit {
+export class SidebarDoctorComponent implements OnInit, DoCheck{
 
   user: any;
+
+  //Mostrar Fotografía//
+  userImage: any
+  uri: any
+  token:string;
+
 
   public sidebarItems: any[];
   level1Menu = '';
@@ -41,7 +49,7 @@ export class SidebarDoctorComponent implements OnInit {
     private renderer: Renderer2,
     public elementRef: ElementRef,
     private router: Router,
-    private userRest: UserRestService,
+    private doctorRest: DoctorRestService,
     private credentialRest: CredentialsRestService,
   ) {
     const body = this.elementRef.nativeElement.closest('body');
@@ -142,16 +150,24 @@ export class SidebarDoctorComponent implements OnInit {
   }
 
   userLogin() {
-    this.userRest.getUser(this.credentialRest.getIdentity()._id).subscribe({
+    this.doctorRest.getDoctor(this.credentialRest.getIdentity()._id).subscribe({
       next: (res: any) => {
-        this.user = res.user;
+        this.user = res.doctor;
       },
       error: (err) => { alert(err.error.message) }
     })
   }
 
-  logOut() {
-    localStorage.clear();
+  ngDoCheck(): void
+  {
+      this.user = this.credentialRest.getIdentity()
+      this.userImage = this.credentialRest.getIdentity().image;
+      this.uri = environment.baseURI + 'doctor/getImageDoctor/' + this.userImage;
+  }
+
+  logOut()
+  {
+    localStorage.remove('token');
     window.location.replace('/')
   }
 }

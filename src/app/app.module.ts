@@ -117,6 +117,7 @@ import { AppointmentDoctorComponent } from './components/doctor/appointment-doct
 import { PrescriptionDoctorComponent } from './components/doctor/prescription-doctor/prescription-doctor.component';
 import { DiaryDoctorComponent } from './components/doctor/diary-doctor/diary-doctor.component';
 import { ProfilePacientComponent } from './components/pacient/profile-pacient/profile-pacient.component';
+import { ProfileDoctorComponent } from './components/doctor/profile-doctor/profile-doctor.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -190,6 +191,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     PrescriptionDoctorComponent,
     DiaryDoctorComponent,
     ProfilePacientComponent,
+    ProfileDoctorComponent,
   ],
   imports: [
     FormsModule,

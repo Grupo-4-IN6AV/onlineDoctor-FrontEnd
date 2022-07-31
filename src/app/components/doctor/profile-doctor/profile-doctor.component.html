@@ -1,0 +1,225 @@
+<section class="content">
+  <div class="container-fluid">
+    <h1 style="margin-top: 4rem">
+      &nbsp;<i class="fa fa-user"></i>
+      Tu Perfil
+    </h1>
+    <hr>
+    <!-- Your content goes here  -->
+    <div class="row clearfix">
+      <div class="col-lg-4 col-md-12">
+        <div class="card">
+          <div class="m-b-20">
+            <div class="contact-grid" style="height: 100%;">
+              <div class="profile-header bg-dark">
+                <div class="user-name">{{doctor.name}} {{doctor.surname}}</div>
+                <div class="name-center">{{doctor.role}}</div>
+              </div>
+              <img *ngIf="!doctorImage" data-bs-toggle="modal" data-bs-target="#viewPhoto"
+                src="assets/images/user/usrbig3.jpg" class="user-img" alt="">
+              <img *ngIf="doctorImage" data-bs-toggle="modal" data-bs-target="#viewPhoto" src="{{uri}}"
+                crossorigin="anonymous" class="user-img redimention" alt="">
+              <div>
+                <span class="phone">
+                  <i class="material-icons">phone</i>+502 {{doctor.phone}}</span>
+              </div>
+              <div style="margin-top: -2rem;">
+                <span class="phone">
+                  <i class="material-icons">email</i>{{doctor.email}}</span>
+              </div>
+              <button type="button" class="btn btn-sample" data-bs-toggle="modal" data-bs-target="#uploadImage">
+                <i class="fa fa-image" aria-hidden="true"></i>
+                &nbsp; Agregar Imagen
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-12">
+        <div class="card">
+          <mat-tab-group>
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon msr-2">face</mat-icon>
+                Sobre Mí
+              </ng-template>
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="project_widget">
+                  <div class="header">
+                    <h2><strong>About</strong></h2>
+                  </div>
+                  <div class="body">
+                    <div class="row">
+                      <div class="col-md-3 col-6 b-r">
+                        <strong>Name</strong>
+                        <br>
+                        <p class="text-muted">{{doctor.name}}</p>
+                      </div>
+                      <div class="col-md-3 col-6 b-r">
+                        <strong>Surname</strong>
+                        <br>
+                        <p class="text-muted">{{doctor.surname}}</p>
+                      </div>
+                      <div class="col-md-3 col-6 b-r">
+                        <strong>Email</strong>
+                        <br>
+                        <p class="text-muted">{{doctor.email}}</p>
+                      </div>
+                      <div class="col-md-3 col-6 b-r">
+                        <strong>Username</strong>
+                        <br>
+                        <p class="text-muted">{{doctor.username}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon msr-2">settings</mat-icon>
+                Configuración
+              </ng-template>
+              <div class="header">
+                <h2>
+                  <i class="fas fa-user"></i>
+                  <strong> Security</strong> Settings
+                </h2>
+              </div>
+              <div class="body">
+                <div class="example-container">
+                  <form>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Nombre</mat-label>
+                      <input [(ngModel)]="updateUser.name" name="name" matInput>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Apellido</mat-label>
+                      <input [(ngModel)]="updateUser.surname" name="surname" matInput>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Username</mat-label>
+                      <input [(ngModel)]="updateUser.username" name="username" matInput>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Email</mat-label>
+                      <input [(ngModel)]="updateUser.email" name="email" matInput>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Teléfono</mat-label>
+                      <input [(ngModel)]="updateUser.phone" name="phone" matInput>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Role</mat-label>
+                      <input disabled [(ngModel)]="updateUser.role" name="role" matInput>
+                    </mat-form-field>
+                    <div class="d-flex justify-content-center">
+                      <button type="submit" class="btn btn-success ms-2">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                        &nbsp; Actualizar Cuenta
+                      </button>
+                      <button type="button" class="btn btn-danger ms-2">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        &nbsp; Eliminar Cuenta
+                      </button>
+                      <button data-bs-toggle="modal" data-bs-target="#changePassword" type="button" class="btn btn-dark ms-2">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                        &nbsp; Cambiar Contraseña
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="viewPhoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-basic-title">
+            <h2><i class="fas fa-image"></i>
+              &nbsp; Tu Imagen de Perfil</h2>
+          </h3>
+          <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <img *ngIf="!doctorImage" src="assets/images/user/usrbig3.jpg" style="max-width:100%" alt="">
+          <img *ngIf="doctorImage" src="{{uri}}" style="max-width:100%" crossorigin="anonymous" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="uploadImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-basic-title">
+            <i class="fas fa-image"></i>
+            &nbsp; Agregar Imagen
+          </h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <label for="image" class="form-label">
+              <label style="font-size:1.5rem;" for="image" class="form-label">Selecciona tú Imagen</label>
+              <input (change)="filesChange($event)" type="file" class="form-control" id="image">
+            </label>
+          </div>
+        </div>
+        <hr>
+        <div class="modal-footer justify-content-center">
+          <button (click)="uploadImage()" type="submit" data-bs-dismiss="modal" class="btn btn-sample">
+            <i class="fa fa-image" aria-hidden="true"></i>
+            &nbsp; Agregar Imagen
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="changePassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-basic-title">
+            <i class="fas fa-key"></i>
+            &nbsp; Change Password
+          </h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Actual Password</mat-label>
+                <input [(ngModel)]="password" type="password" name="password" matInput>
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>New Password</mat-label>
+                <input [(ngModel)]="newPassword" type="password" name="newPassword" matInput>
+              </mat-form-field>
+            </div>
+            <hr />
+            <div class="modal-footer justify-content-center">
+              <button (click)="cleanForm()" type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                <i class="fa fa-times-circle" aria-hidden="true"></i> Discard
+              </button>
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i> Change Password
+              </button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
