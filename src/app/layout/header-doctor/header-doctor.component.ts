@@ -6,22 +6,35 @@ import {
   OnInit,
   Renderer2,
   AfterViewInit,
+  DoCheck,
 } from '@angular/core';
+import { CredentialsRestService } from 'src/app/services/credentialsRest/credentials-rest.service';
+import { DoctorRestService } from 'src/app/services/doctorRest/doctor-rest.service';
 import { ConfigService } from '../../../../src/app/config/config.service';
 import { RightSidebarService } from '../../../../src/app/core/service/rightsidebar.service';
 const document: any = window.document;
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header-doctor',
   templateUrl: './header-doctor.component.html',
   styleUrls: ['./header-doctor.component.sass']
 })
-export class HeaderDoctorComponent implements OnInit {
+export class HeaderDoctorComponent implements OnInit, DoCheck {
+
+  user: any;
+
+  //Mostrar Fotografía//
+  userImage: any
+  uri: any
+  token:string;
 
   public config: any = {};
   isNavbarCollapsed = true;
   isOpenSidebar: boolean;
   constructor(
+    private doctorRest: DoctorRestService,
+    private credentialRest: CredentialsRestService,
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     public elementRef: ElementRef,
@@ -179,8 +192,27 @@ export class HeaderDoctorComponent implements OnInit {
     );
   }
 
-  logOut() {
-    localStorage.clear();
+  userLogin()
+  {
+    this.doctorRest.getDoctor(this.credentialRest.getIdentity()._id).subscribe({
+      next: (res: any) => {
+        this.user = res.user;
+        this.userImage = this.user.image;
+        this.uri = environment.baseURI + 'doctor/getImageDoctor/' + this.userImage;
+      },
+      error: (err) => {alert(err.error.message)}
+    })
+  }
+
+  ngDoCheck(): void
+  {
+      this.userImage = this.credentialRest.getIdentity().image;
+      this.uri = environment.baseURI + 'doctor/getImageDoctor/' + this.userImage;
+  }
+
+  logOut()
+  {
+    localStorage.removeItem('token');
     window.location.replace('/')
   }
 
