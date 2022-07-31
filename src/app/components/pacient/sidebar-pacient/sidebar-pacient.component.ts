@@ -12,6 +12,7 @@ import {
 import { ROUTES } from './sidebar-items';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import { CredentialsRestService } from 'src/app/services/credentialsRest/credentials-rest.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sidebar-pacient',
@@ -21,6 +22,11 @@ import { CredentialsRestService } from 'src/app/services/credentialsRest/credent
 export class SidebarPacientComponent implements OnInit {
 
   user: any;
+
+  //Mostrar Fotografía//
+  userImage: any
+  uri: any
+  token:string;
 
   public sidebarItems: any[];
   level1Menu = '';
@@ -145,13 +151,23 @@ export class SidebarPacientComponent implements OnInit {
     this.userRest.getUser(this.credentialRest.getIdentity()._id).subscribe({
       next: (res: any) => {
         this.user = res.user;
+        this.userImage = this.user.image;
+        this.uri = environment.baseURI + 'user/getImageUser/' + this.userImage;
       },
       error: (err) => { alert(err.error.message) }
     })
   }
 
-  logOut() {
-    localStorage.clear();
+  ngDoCheck(): void
+  {
+      this.user = this.credentialRest.getIdentity()
+      this.userImage = this.credentialRest.getIdentity().image;
+      this.uri = environment.baseURI + 'user/getImageUser/' + this.userImage;
+  }
+
+  logOut()
+  {
+    localStorage.removeItem('token');
     window.location.replace('/')
   }
 

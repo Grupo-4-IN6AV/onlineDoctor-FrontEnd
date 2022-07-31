@@ -10,6 +10,7 @@ import interactionPlugin from '@fullcalendar/interaction'; // a plugin
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
@@ -115,6 +116,7 @@ import { ShoppingCartPacientComponent } from './components/pacient/shopping-cart
 import { AppointmentDoctorComponent } from './components/doctor/appointment-doctor/appointment-doctor.component';
 import { PrescriptionDoctorComponent } from './components/doctor/prescription-doctor/prescription-doctor.component';
 import { DiaryDoctorComponent } from './components/doctor/diary-doctor/diary-doctor.component';
+import { ProfilePacientComponent } from './components/pacient/profile-pacient/profile-pacient.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -187,6 +189,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AppointmentDoctorComponent,
     PrescriptionDoctorComponent,
     DiaryDoctorComponent,
+    ProfilePacientComponent,
   ],
   imports: [
     FormsModule,
@@ -227,8 +230,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatIconModule,
     MatSelectModule,
     NgApexchartsModule,
-    FullCalendarModule,
-    SwiperModule, // register FullCalendar with you app
+    FullCalendarModule,// register FullCalendar with you app
+    MatTabsModule,
+    SwiperModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
