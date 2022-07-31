@@ -345,13 +345,13 @@
                                 <div class="form">
                                     <i class="fa fa-search ms-2"></i>
                                     <input [(ngModel)]="laboratorysPrescription" name="laboratorysPrescription"
-                                        type="text" class="form-control form-input" placeholder="Buscar Medicamento...">
+                                        type="text" class="form-control form-input" placeholder="Buscar Laboratorio...">
                                 </div>
                             </div>
                             <hr>
                             <section class="medicament" id="mySkills">
                                 <div class="box-medicaments"
-                                    *ngFor="let laboratory of laboratories">
+                                    *ngFor="let laboratory of laboratories | searchLaboratoryPrescription:laboratorysPrescription">
                                     <div *ngFor="let laboratoryOutPrescription of laboratorysOutPrescription">
                                         <div class="box-medicament"
                                             *ngIf="laboratoryOutPrescription._id == laboratory._id">
@@ -387,6 +387,9 @@
                             </section>
                         </div>
                     </form>
+                    <h1 *ngIf="notFound" class="text-center">
+                      Laboratorio No Encontrado
+                  </h1>
                 </div>
             </div>
         </div>

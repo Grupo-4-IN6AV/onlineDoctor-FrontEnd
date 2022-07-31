@@ -1,423 +1,453 @@
 <section class="content">
-    <h1 style="margin-top: 4rem">
-        &nbsp;<i class="fa-solid fa-prescription-bottle-medical"></i>
-        Medicamentos
-    </h1>
-    <hr />
+  <h1 style="margin-top: 4rem">
+    &nbsp;<i class="fa-solid fa-prescription-bottle-medical"></i>
+    Medicamentos
+  </h1>
+  <hr />
 
-    <div *ngIf="!showTableMedicament" class="row d-flex justify-content-center align-items-center">
-        <div class="form">
-          <i class="fa fa-search ms-2"></i>
-          <input [(ngModel)]="searchMedicament" type="text" class="form-control form-input" placeholder="Search User...">
+  <div *ngIf="!showTableMedicament" class="row d-flex justify-content-center align-items-center">
+    <div class="form">
+      <i class="fa fa-search ms-2"></i>
+      <input [(ngModel)]="searchMedicament" type="text" class="form-control form-input" placeholder="Buscar Medicamento...">
+    </div>
+  </div>
+
+  <div class="text-center mt-2 mb-2">
+    <button type="button" data-bs-toggle="modal" data-bs-target="#addMedicament" class="ms-3 btn btn-event btn-success"
+      (click)="getTypesMedicaments()">
+      Agregar Medicamento
+      <span class="btn-icon-end"><i class="fa-solid fa-prescription-bottle-medical"></i></span>
+    </button>
+    <button *ngIf="!showTableMedicament" (click)="showTable()" type="button" class="ms-3 btn btn-event btn-secondary">
+      Tabla de Medicamentos
+      <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
+    </button>
+    <button *ngIf="showTableMedicament" (click)="showTable(); cleanTable()" type="button"
+      class="ms-3 btn btn-event btn-secondary">
+      Ver por Cartas
+      <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
+    </button>
+    <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
+      Inicio
+      <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
+    </button>
+  </div>
+  <hr />
+
+  <!--CARDS DE USERS-->
+  <div *ngIf="!showTableMedicament">
+    <div class="container">
+      <div class="products-container">
+        <div *ngFor="let medicament of medicaments | searchMedicamentTable: searchMedicament" class="product"
+          data-name="p-1">
+          <h5 class="card-title">{{ medicament.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ medicament.description }}</h6>
+          <button (click)="getMedicament(medicament._id); getTypesMedicaments()" class="btn btn-success m-3"
+            data-bs-toggle="modal" data-bs-target="#updateMedicament" class="btn btn-warning m-2">
+            <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
+          </button>
+          <button (click)="deleteMedicament(medicament._id)" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            Eliminar
+          </button>
+          <button (click)="getMedicament(medicament._id)" data-bs-toggle="modal" data-bs-target="#viewMedicament"
+            class="btn btn-secondary ms-2">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            Ver
+          </button>
+          <button (click)="getMedicament(medicament._id);" type="button" class="btn btn-sample ms-2" data-bs-toggle="modal" data-bs-target="#uploadImage">
+            <i class="fa fa-image" aria-hidden="true"></i>
+            &nbsp; Cargar Imagen
+          </button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!--View Medicament-->
+  <div>
+    <div class="modal fade" id="viewMedicament" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="addContainer">
+            <div class="contact-details">
+              <div class="modalHeader">
+                <div class="editRowModal">
+                  <div *ngIf="medicamentView" class="modalHeader clearfix">
+                    <div class="modal-about contact-header">
+                      <div class="contact-details-img">
+                        <img *ngIf="!medicamentView.image" src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
+                        <img style="object-fit: cover;" *ngIf="medicamentView.image" src="{{uri}}" crossorigin="anonymous"
+                          alt="avatar" />
+                      </div>
+                      <div class="contact-details-heading">
+                        <div class="contact-details-name mb-2">
+                          {{ medicamentView.name }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+              <hr />
+              <div *ngIf="medicamentView" class="descripcion">
+                <div class="count-container">
+                  <div class="box">
+                    <h3>Nombre:</h3>
+                  </div>
+
+                  <div class="box">
+                    <p>{{ medicamentView.name }}</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Descripción:</h3>
+                  </div>
+
+                  <div class="box">
+                    <p>{{ medicamentView.description }}</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Tipo de Medicamento</h3>
+                  </div>
+
+                  <div class="box">
+                    <p>{{ medicamentView.typeMedicament.name }}</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Precio</h3>
+                  </div>
+
+                  <div class="box">
+                    <p>{{ medicamentView.price }}</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Existencia</h3>
+                  </div>
+
+                  <div class="box">
+                    <p>{{ medicamentView.stock }}</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Ventas</h3>
+                  </div>
+
+                  <div class="box">
+                    <p>{{ medicamentView.sales }}</p>
+                  </div>
+
+                  <div class="box">
+                    <h3>Disponibilidad</h3>
+                  </div>
+
+                  <div class="box">
+                    <p *ngIf="medicamentView.availibility === true">Disponible</p>
+                    <p *ngIf="medicamentView.availibility === false">No Disponible</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="text-center mt-2 mb-2">
-        <button type="button" data-bs-toggle="modal" data-bs-target="#addMedicament"
-            class="ms-3 btn btn-event btn-success" (click)="getTypesMedicaments()">
-            Agregar Medicamento
-            <span class="btn-icon-end"><i class="fa-solid fa-prescription-bottle-medical"></i></span>
-        </button>
-        <button *ngIf="!showTableMedicament" (click)="showTable()" type="button"
-            class="ms-3 btn btn-event btn-secondary">
-            Tabla de Medicamentos
-            <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
-        </button>
-        <button *ngIf="showTableMedicament" (click)="showTable(); cleanTable()" type="button"
-            class="ms-3 btn btn-event btn-secondary">
-            Ver por Cartas
-            <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
-        </button>
-        <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
-            Inicio
-            <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
-        </button>
+    <!--ADD Medicament-->
+    <div class="modal fade" id="addMedicament" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" id="modal-basic-title">
+              <i class="fa-solid fa-vial-virus"></i>
+              &nbsp;Agregar Medicamento
+            </h3>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="saveMedicament(addMedicamentForm)" #addMedicamentForm="ngForm">
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Nombre</mat-label>
+                  <input autocomplete="off" [(ngModel)]="medicament.name" name="name" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Descripción</mat-label>
+                  <input autocomplete="off" [(ngModel)]="medicament.description" name="description" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Tipo de Medicamento</mat-label>
+                  <mat-select [(ngModel)]="medicament.typeMedicament" name="typeMedicament">
+                    <mat-option *ngFor="let typeMedicament of typesMedicament" value={{typeMedicament._id}}>
+                      {{typeMedicament.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Precio</mat-label>
+                  <input autocomplete="off" [(ngModel)]="medicament.price" name="price" matInput />
+                </mat-form-field>
+              </div>
+              <div class="text-inside">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Existencia</mat-label>
+                  <input autocomplete="off" [(ngModel)]="medicament.stock" name="stock" matInput />
+                </mat-form-field>
+              </div>
+              <hr />
+              <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                  <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
+                </button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                  <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    <hr />
+  </div>
 
-    <!--CARDS DE USERS-->
-    <div *ngIf="!showTableMedicament">
-        <div class="container">
-            <div class="products-container">
-                <div *ngFor="let medicament of medicaments | searchMedicamentBar: searchMedicament" class="product"
-                    data-name="p-1">
-                    <h5 class="card-title">{{ medicament.name }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ medicament.description }}</h6>
-                    <button (click)="getMedicament(medicament._id); getTypesMedicaments()" class="btn btn-success m-3"
-                        data-bs-toggle="modal" data-bs-target="#updateMedicament" class="btn btn-warning m-2">
-                        <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
+
+
+  <!--UPDATE USER-->
+  <div class="modal fade" id="updateMedicament" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-basic-title">
+            <i class="fas fa-pencil" aria-hidden="true"></i>
+            &nbsp;Editar Medicamento
+          </h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="updateMedicament()" *ngIf="medicamentUpdate">
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input autocomplete="off" [(ngModel)]="medicamentUpdate.name" name="name" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <input autocomplete="off" [(ngModel)]="medicamentUpdate.description" name="description" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Tipo de Medicamento</mat-label>
+                <mat-select [(ngModel)]="medicamentUpdate.typeMedicament._id" name="typeMedicament">
+                  <mat-option *ngFor="let typeMedicament of typesMedicament" value={{typeMedicament._id}}>
+                    {{typeMedicament.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Precio</mat-label>
+                <input autocomplete="off" [(ngModel)]="medicamentUpdate.price" name="price" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Existencia</mat-label>
+                <input autocomplete="off" [(ngModel)]="medicamentUpdate.stock" name="stock" matInput />
+              </mat-form-field>
+            </div>
+            <hr />
+            <div class="modal-footer justify-content-center">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
+              </button>
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--TABLE USERS-->
+  <div *ngIf="showTableMedicament" class="row clearfix mt-5">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="materialTableHeader mb-3">
+          <div class="row">
+            <div class="col-8">
+              <ul class="header-buttons-left ml-0">
+                <li class="dropdown">
+                  <div class="header">
+                    <h2>Tabla de Medicamentos</h2>
+                  </div>
+                </li>
+                <li class="dropdown m-l-20">
+                  <label for="search-input">
+                    <i class="material-icons search-icon">search</i>
+                  </label>
+                  <input [(ngModel)]="searchMedicament" placeholder="Buscar Medicamento.." type="text" #filter
+                    class="browser-default search-field" aria-label="Search box" />
+                </li>
+                <li *ngIf="buttonActions">
+                  <div class="icon-button-demo m-l-10">
+                    <button (click)="deleteMedicament(medicamentDelete._id)" mat-mini-fab color="warn">
+                      <mat-icon class="col-white">delete
+                      </mat-icon>
                     </button>
-                    <button (click)="deleteMedicament(medicament._id)" class="btn btn-danger">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        Eliminar
+                  </div>
+                </li>
+
+                <li>
+                  <i *ngIf="!medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-asc ms-3"
+                    (click)="getByUp()"></i>
+                  <i *ngIf="!medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-desc ms-3"
+                    (click)="getByDown()"></i>
+                </li>
+
+                <li>
+                  <i *ngIf="medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-asc ms-3"
+                    (click)="getByUp()" style="color: #4a8af9;"></i>
+                  <i *ngIf="medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-desc text-gray-400 ms-3"
+                    (click)="getByDown()"></i>
+                </li>
+
+                <li>
+                  <i *ngIf="!medicamentNameUp && medicamentNameDown" class="fa fa-sort-alpha-asc text-gray-400 ms-3"
+                    (click)="getByUp()"></i>
+                  <i *ngIf="!medicamentNameUp && medicamentNameDown" class="fa fa-sort-alpha-desc ms-3"
+                    (click)="getByDown()" style="color: #4a8af9;"></i>
+                </li>
+
+                <li>
+                  <i *ngIf="medicamentNameUp || medicamentNameDown" (click)="cleanTable()"
+                    class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
+                </li>
+
+                <li *ngIf="buttonActions">
+                  <div class="icon-button-demo m-l-10">
+                    <button data-bs-toggle="modal" data-bs-target="#updateMedicament" mat-mini-fab class="colorUpdate"
+                      (click)="getTypesMedicaments()">
+                      <mat-icon class="col-white">edit
+                      </mat-icon>
                     </button>
-                    <button (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                        data-bs-target="#viewMedicament" class="btn btn-secondary ms-2">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                        Ver
-                    </button>
-                </div>
+                  </div>
+                </li>
+              </ul>
             </div>
+          </div>
         </div>
+        <div class="tableBody">
+          <div class="table-responsive">
+            <i *ngIf="" (click)="cleanTable()" class="fa fa-times-circle closeFilter" aria-hidden="true">
+            </i>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Foto</th>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>Tipo de Medicamento</th>
+                  <th>Precio</th>
+                  <th>Existencia</th>
+                  <th>Ventas</th>
+                  <th>Disponibilidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let medicament of medicaments | searchMedicamentTable: searchMedicament">
+                  <td (click)="getMedicament(medicament._id)">
+                    <mat-checkbox *ngIf="medicament.checked==true || controloClick==0" #check="matCheckbox"
+                      (click)="showButtonActions(medicament._id, check); getMedicament(medicament._id)"
+                      class="example-margin" color="primary">
+                    </mat-checkbox>
+                    <mat-checkbox disabled="" *ngIf="medicament.checked==false" class="example-margin" color="primary">
+                    </mat-checkbox>
+                    {{ medicaments.indexOf(medicament) + 1 }}
+                  </td>
+                  <td (click)="getMedicament(medicament._id)" class="table-img">
+                    <img *ngIf="medicament.image===undefined" style="object-fit: cover;" src="assets/images/user/user8.jpg"
+                      crossorigin="anonymous" alt="" />
+                    <img *ngIf="medicament.image!==undefined" style="object-fit: cover;" src="{{uriMedicaments+medicament.image}}"
+                      crossorigin="anonymous" alt="" />
+                  </td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                    data-bs-target="#viewMedicament">{{ medicament.name }}</td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                    data-bs-target="#viewMedicament">{{ medicament.description }}</td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                    data-bs-target="#viewMedicament">{{ medicament.typeMedicament.name }}</td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                    data-bs-target="#viewMedicament">{{ medicament.price }}</td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                    data-bs-target="#viewMedicament">{{ medicament.stock }}</td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                    data-bs-target="#viewMedicament">{{ medicament.sales }}</td>
+                  <td *ngIf="medicament.availibility === false" (click)="getMedicament(medicament._id)"
+                    data-bs-toggle="modal" data-bs-target="#viewMedicament">No Disponible</td>
+                  <td *ngIf="medicament.availibility === true" (click)="getMedicament(medicament._id)"
+                    data-bs-toggle="modal" data-bs-target="#viewMedicament">Disponible</td>
+                </tr>
+                <tr rowspan="9" *ngIf="notFound === true">
+                  <td colspan="9" class="text-center">Medicamento no encontrado </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+  <h1 *ngIf="notFound === true && showTableMedicament === false" class="text-center">
+    Medicamento no encontrado
+  </h1>
 
-    <!--View Medicament-->
-    <div>
-        <div class="modal fade" id="viewMedicament" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="addContainer">
-                        <div class="contact-details">
-                            <div class="modalHeader">
-                                <div class="editRowModal">
-                                    <div *ngIf="medicamentView" class="modalHeader clearfix">
-                                        <div class="modal-about contact-header">
-                                            <div class="contact-details-img">
-                                                <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
-                                            </div>
-                                            <div class="contact-details-heading">
-                                                <div class="contact-details-name mb-2">
-                                                    {{ medicamentView.name }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
-                                    <mat-icon>close</mat-icon>
-                                </button>
-                            </div>
-                            <hr />
-                            <div *ngIf="medicamentView" class="descripcion">
-                                <div class="count-container">
-                                    <div class="box">
-                                        <h3>Nombre:</h3>
-                                    </div>
 
-                                    <div class="box">
-                                        <p>{{ medicamentView.name }}</p>
-                                    </div>
-
-                                    <div class="box">
-                                        <h3>Descripción:</h3>
-                                    </div>
-
-                                    <div class="box">
-                                        <p>{{ medicamentView.description }}</p>
-                                    </div>
-
-                                    <div class="box">
-                                        <h3>Tipo de Medicamento</h3>
-                                    </div>
-
-                                    <div class="box">
-                                        <p>{{ medicamentView.typeMedicament.name }}</p>
-                                    </div>
-
-                                    <div class="box">
-                                        <h3>Precio</h3>
-                                    </div>
-
-                                    <div class="box">
-                                        <p>{{ medicamentView.price }}</p>
-                                    </div>
-
-                                    <div class="box">
-                                        <h3>Existencia</h3>
-                                    </div>
-
-                                    <div class="box">
-                                        <p>{{ medicamentView.stock }}</p>
-                                    </div>
-
-                                    <div class="box">
-                                        <h3>Ventas</h3>
-                                    </div>
-
-                                    <div class="box">
-                                        <p>{{ medicamentView.sales }}</p>
-                                    </div>
-
-                                    <div class="box">
-                                        <h3>Disponibilidad</h3>
-                                    </div>
-
-                                    <div class="box">
-                                        <p *ngIf="medicamentView.availibility === true">Disponible</p>
-                                        <p *ngIf="medicamentView.availibility === false">No Disponible</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!--CARGA DE IMÁGENES MODAL-->
+  <div class="modal fade" id="uploadImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-basic-title">
+            <i class="fas fa-image"></i>
+            &nbsp; Cargar Imagen
+          </h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-
-        <!--ADD Medicament-->
-        <div class="modal fade" id="addMedicament" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="modal-basic-title">
-                            <i class="fa-solid fa-vial-virus"></i>
-                            &nbsp;Agregar Medicamento
-                        </h3>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form (ngSubmit)="saveMedicament(addMedicamentForm)" #addMedicamentForm="ngForm">
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Nombre</mat-label>
-                                    <input autocomplete="off" [(ngModel)]="medicament.name" name="name" matInput />
-                                </mat-form-field>
-                            </div>
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Descripción</mat-label>
-                                    <input autocomplete="off" [(ngModel)]="medicament.description" name="description"
-                                        matInput />
-                                </mat-form-field>
-                            </div>
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Tipo de Medicamento</mat-label>
-                                    <mat-select [(ngModel)]="medicament.typeMedicament" name="typeMedicament">
-                                        <mat-option *ngFor="let typeMedicament of typesMedicament"
-                                            value={{typeMedicament._id}}>{{typeMedicament.name}}</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Precio</mat-label>
-                                    <input autocomplete="off" [(ngModel)]="medicament.price" name="price" matInput />
-                                </mat-form-field>
-                            </div>
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Existencia</mat-label>
-                                    <input autocomplete="off" [(ngModel)]="medicament.stock" name="stock" matInput />
-                                </mat-form-field>
-                            </div>
-                            <hr />
-                            <div class="modal-footer justify-content-center">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
-                                </button>
-                                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div class="modal-body">
+          <div>
+            <label for="image" class="form-label">
+              <label style="font-size:1.5rem;" for="image" class="form-label">Selecciona una Imagen</label>
+              <input (change)="filesChange($event)" type="file" class="form-control" id="image">
+            </label>
+          </div>
         </div>
+        <hr>
+        <div class="modal-footer justify-content-center">
+          <button (click)="uploadImage()" type="submit" data-bs-dismiss="modal" class="btn btn-sample">
+            <i class="fa fa-image" aria-hidden="true"></i>
+            &nbsp; Agregar Imagen
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 
-
-
-    <!--UPDATE USER-->
-    <div class="modal fade" id="updateMedicament" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="modal-basic-title">
-                        <i class="fas fa-pencil" aria-hidden="true"></i>
-                        &nbsp;Editar Medicamento
-                    </h3>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form (ngSubmit)="updateMedicament()" *ngIf="medicamentUpdate">
-                        <div class="text-inside">
-                            <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Nombre</mat-label>
-                                <input autocomplete="off" [(ngModel)]="medicamentUpdate.name" name="name" matInput />
-                            </mat-form-field>
-                        </div>
-                        <div class="text-inside">
-                            <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Descripción</mat-label>
-                                <input autocomplete="off" [(ngModel)]="medicamentUpdate.description" name="description"
-                                    matInput />
-                            </mat-form-field>
-                        </div>
-                        <div class="text-inside">
-                            <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Tipo de Medicamento</mat-label>
-                                <mat-select [(ngModel)]="medicamentUpdate.typeMedicament._id" name="typeMedicament">
-                                    <mat-option *ngFor="let typeMedicament of typesMedicament"
-                                        value={{typeMedicament._id}}>{{typeMedicament.name}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div class="text-inside">
-                            <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Precio</mat-label>
-                                <input autocomplete="off" [(ngModel)]="medicamentUpdate.price" name="price" matInput />
-                            </mat-form-field>
-                        </div>
-                        <div class="text-inside">
-                            <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Existencia</mat-label>
-                                <input autocomplete="off" [(ngModel)]="medicamentUpdate.stock" name="stock" matInput />
-                            </mat-form-field>
-                        </div>
-                        <hr />
-                        <div class="modal-footer justify-content-center">
-                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
-                            </button>
-                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--TABLE USERS-->
-    <div *ngIf="showTableMedicament" class="row clearfix mt-5">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="card">
-                <div class="materialTableHeader mb-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <ul class="header-buttons-left ml-0">
-                                <li class="dropdown">
-                                    <div class="header">
-                                        <h2>Tabla de Medicamentos</h2>
-                                    </div>
-                                </li>
-                                <li class="dropdown m-l-20">
-                                    <label for="search-input">
-                                        <i class="material-icons search-icon">search</i>
-                                    </label>
-                                    <input [(ngModel)]="searchMedicament" placeholder="Search.." type="text" #filter
-                                        class="browser-default search-field" aria-label="Search box" />
-                                </li>
-                                <li *ngIf="buttonActions">
-                                    <div class="icon-button-demo m-l-10">
-                                        <button (click)="deleteMedicament(medicamentDelete._id)" mat-mini-fab
-                                            color="warn">
-                                            <mat-icon class="col-white">delete
-                                            </mat-icon>
-                                        </button>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <i *ngIf="!medicamentNameUp && !medicamentNameDown"
-                                        class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()"></i>
-                                    <i *ngIf="!medicamentNameUp && !medicamentNameDown"
-                                        class="fa fa-sort-alpha-desc ms-3" (click)="getUsersByDown()"></i>
-                                </li>
-
-                                <li>
-                                    <i *ngIf="medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-asc ms-3"
-                                        (click)="getByUp()" style="color: #4a8af9;"></i>
-                                    <i *ngIf="medicamentNameUp && !medicamentNameDown"
-                                        class="fa fa-sort-alpha-desc text-gray-400 ms-3" (click)="getByDown()"></i>
-                                </li>
-
-                                <li>
-                                    <i *ngIf="!medicamentNameUp && medicamentNameDown"
-                                        class="fa fa-sort-alpha-asc text-gray-400 ms-3" (click)="getByUp()"></i>
-                                    <i *ngIf="!medicamentNameUp && medicamentNameDown"
-                                        class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()"
-                                        style="color: #4a8af9;"></i>
-                                </li>
-
-                                <li>
-                                    <i *ngIf="medicamentNameUp || medicamentNameDown" (click)="cleanTable()"
-                                        class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
-                                </li>
-
-                                <li *ngIf="buttonActions">
-                                    <div class="icon-button-demo m-l-10">
-                                        <button data-bs-toggle="modal" data-bs-target="#updateMedicament" mat-mini-fab
-                                            class="colorUpdate" (click)="getTypesMedicaments()">
-                                            <mat-icon class="col-white">edit
-                                            </mat-icon>
-                                        </button>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="tableBody">
-                    <div class="table-responsive">
-                        <i *ngIf="" (click)="cleanTable()" class="fa fa-times-circle closeFilter" aria-hidden="true">
-                        </i>
-                        <table class="table table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">#</th>
-                                    <th>Foto</th>
-                                    <th>Nombre</th>
-                                    <th>Descripción</th>
-                                    <th>Tipo de Medicamento</th>
-                                    <th>Precio</th>
-                                    <th>Existencia</th>
-                                    <th>Ventas</th>
-                                    <th>Disponibilidad</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let medicament of medicaments | searchMedicamentTable: searchMedicament">
-                                    <td (click)="getMedicament(medicament._id)">
-                                        <mat-checkbox *ngIf="medicament.checked==true || controloClick==0"
-                                            #check="matCheckbox"
-                                            (click)="showButtonActions(medicament._id, check); getMedicament(medicament._id)"
-                                            class="example-margin" color="primary">
-                                        </mat-checkbox>
-                                        <mat-checkbox disabled="" *ngIf="medicament.checked==false"
-                                            class="example-margin" color="primary">
-                                        </mat-checkbox>
-                                        {{ medicaments.indexOf(medicament) + 1 }}
-                                    </td>
-                                    <td (click)="getMedicament(medicament._id)" class="table-img">
-                                        <img src="assets/images/user/user8.jpg" alt="" />
-                                    </td>
-                                    <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewTypeLaboratory">{{ medicament.name }}</td>
-                                    <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewTypeLaboratory">{{ medicament.description }}</td>
-                                    <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewTypeLaboratory">{{ medicament.typeMedicament.name }}</td>
-                                    <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewTypeLaboratory">{{ medicament.price }}</td>
-                                    <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewTypeLaboratory">{{ medicament.stock }}</td>
-                                    <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewTypeLaboratory">{{ medicament.sales }}</td>
-                                    <td *ngIf="medicament.availibility === false"
-                                        (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewTypeLaboratory">No Disponible</td>
-                                    <td *ngIf="medicament.availibility === true" (click)="getMedicament(medicament._id)"
-                                        data-bs-toggle="modal" data-bs-target="#viewTypeLaboratory">Disponible</td>
-                                </tr>
-                                <tr rowspan="9" *ngIf="notFound === true">
-                                    <td colspan="9" class="text-center">Medicamento no encontrado </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <h1 *ngIf="notFound === true && showTableMedicament === false" class="text-center">
-        Medicamento no encontrado
-    </h1>
 </section>

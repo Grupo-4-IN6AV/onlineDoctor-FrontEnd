@@ -80,7 +80,7 @@ export class ProfileDoctorComponent implements OnInit {
           Swal.fire
             ({
               icon: 'success',
-              title: 'Imagen Agregada Exitosamente',
+              title: 'Imagen agregada Exitosamente',
               confirmButtonColor: '#28B463'
             });
         }
