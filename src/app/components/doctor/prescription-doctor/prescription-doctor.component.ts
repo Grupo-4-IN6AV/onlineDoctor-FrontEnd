@@ -32,27 +32,36 @@ export class PrescriptionDoctorComponent implements OnInit {
   checked: boolean = true;
   controloClick: number = 0;
   showButtons: boolean = false;
-  prescriptionId:any;
+  prescriptionId: any;
+
+  medicamentsInPrescription: any;
+  medicamentsOutPrescription: any;
+
+  laboratorysInPrescription: any;
+  laboratorysOutPrescription: any;
 
   //Variables de usuarios
-  users:any;
-  userId:any;
+  users: any;
+  userId: any;
   showUsers: boolean = true;
-  searchUser:any;
+  searchUser: any;
   namePacient: any;
 
   //Variables doctores medicamentos y laboratorios
-  doctors:any;
-  medicaments:any;
-  laboratories:any;
+  doctors: any;
+  medicaments: any;
+  laboratories: any;
   doctorId: any;
-  nameDoctor:any;
+  nameDoctor: any;
   actualUserId: any;
-  doctor:any;
-  medicamentsUser:any;
-  medicamentsAllUser:any;
-  laboratoriesUser:any;
-  laboratorysUser:any;
+  doctor: any;
+  medicamentsUser: any;
+  medicamentsAllUser: any;
+  laboratoriesUser: any;
+  laboratorysUser: any;
+
+  medicamentPrescription: any;
+  laboratorysPrescription: any;
 
   constructor(
     public dialog: MatDialog,
@@ -63,8 +72,8 @@ export class PrescriptionDoctorComponent implements OnInit {
     private laboratoryRest: LaboratoryRestService,
     private prescriptionRest: PrescriptionRestService,
     private credentialReset: CredentialsRestService,
-  ) { 
-    this.prescription = new PrescriptionModel('','','', '', '', '', '', '', true)
+  ) {
+    this.prescription = new PrescriptionModel('', '', '', '', '', '', '', '', true)
   }
 
   ngOnInit(): void {
@@ -84,18 +93,17 @@ export class PrescriptionDoctorComponent implements OnInit {
 
   getUsersDoctor() {
     this.userRest.getUsersDoctor().subscribe({
-      next: (res: any) => {this.users = res.users, console.log(this.users)},
+      next: (res: any) => { this.users = res.users, console.log(this.users) },
       error: (err) => console.log(err)
     })
   }
 
-  getUserDoctor(id : string)
-  { 
+  getUserDoctor(id: string) {
     this.userId = id;
     this.showButtons = !this.showButtons;
     this.showUsers = !this.showUsers;
     this.userRest.getUser(id).subscribe({
-      next: (res:any) => { this.namePacient = res.user.name },
+      next: (res: any) => { this.namePacient = res.user.name },
       error: (err) => console.log(err)
     })
     this.getPrescriptionsDoctor();
@@ -103,7 +111,9 @@ export class PrescriptionDoctorComponent implements OnInit {
 
   getMedicaments() {
     this.medicamentRest.getMedicaments().subscribe({
-      next: (res: any) => this.medicaments = res.medicaments,
+      next: (res: any) => {
+        this.medicaments = res.medicaments;
+      },
       error: (err) => console.log(err)
     })
   }
@@ -111,6 +121,26 @@ export class PrescriptionDoctorComponent implements OnInit {
   getLaboratories() {
     this.laboratoryRest.getLaboratoriesDoctor(this.userId).subscribe({
       next: (res: any) => this.laboratories = res.laboratories,
+      error: (err) => console.log(err)
+    })
+  }
+
+  getMedicamentsOutList() {
+    this.prescriptionRest.getMedicamentsOutPrescription(this.prescriptionId).subscribe({
+      next: (res: any) => {
+        this.medicamentsOutPrescription = res.medicamentsOutPrescription,
+          this.medicamentsInPrescription = res.medicamentsInPrescription
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
+  getLaboratorysOutPrescription() {
+    this.prescriptionRest.getLaboratorysOutPrescription(this.prescriptionId).subscribe({
+      next: (res: any) => {
+        this.laboratorysOutPrescription = res.laboratorysOutPrescription,
+          this.laboratorysInPrescription = res.laboratorysInPrescription
+      },
       error: (err) => console.log(err)
     })
   }
@@ -139,7 +169,6 @@ export class PrescriptionDoctorComponent implements OnInit {
       AnotherMedicaments: this.prescription.AnotherMedicaments,
       AnotherLaboratories: this.prescription.AnotherLaboratories
     }
-
     this.prescriptionRest.savePrescription(data).subscribe
       ({
         next: (res: any) => {
@@ -149,6 +178,7 @@ export class PrescriptionDoctorComponent implements OnInit {
               title: res.message,
               confirmButtonColor: '#28B463'
             });
+          this.getMedicaments();
           this.getPrescriptionsDoctor();
           addPrescriptionForm.reset();
         },
@@ -158,10 +188,14 @@ export class PrescriptionDoctorComponent implements OnInit {
             title: err.error.message || err.error,
             confirmButtonColor: '#E74C3C'
           });
+          this.getMedicaments();
+          this.getPrescriptionsDoctor();
           addPrescriptionForm.reset();
         },
       })
-      addPrescriptionForm.reset();
+    this.getMedicaments();
+    this.getPrescriptionsDoctor();
+    addPrescriptionForm.reset();
   }
 
   getPrescriptionDoctor(id: string) {
@@ -171,9 +205,8 @@ export class PrescriptionDoctorComponent implements OnInit {
         this.prescriptionView = res.prescription;
         this.prescriptionUpdate = res.prescription;
         this.prescriptionDelete = res.prescription;
-        this.medicamentsUser = res.prescription.medicaments;
-        this.laboratoriesUser = res.prescription.laboratorys;
-        console.log(this.laboratoriesUser)
+        this.getMedicamentsOutList();
+        this.getLaboratorysOutPrescription();
       },
       error: (err) => {
         Swal.fire({
@@ -217,11 +250,11 @@ export class PrescriptionDoctorComponent implements OnInit {
 
   deletePrescriptionDoctor(id: string) {
     Swal.fire({
-      title: 'Do you want to delete this Prescription?',
+      title: 'Deseas eliminar esta receta?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -234,27 +267,32 @@ export class PrescriptionDoctorComponent implements OnInit {
               showConfirmButton: false,
               timer: 2000
             });
+            this.getMedicaments();
             this.getPrescriptionsDoctor();
             this.showButtonActions(id, false)
           },
-          error: (err) => Swal.fire({
-            title: err.error.message,
-            icon: 'error',
-            position: 'center',
-            timer: 3000
-          })
+          error: (err) => {
+            Swal.fire({
+              title: err.error.message,
+              icon: 'error',
+              position: 'center',
+              timer: 3000
+            });
+            this.getMedicaments();
+            this.getPrescriptionsDoctor();
+          }
         })
+        this.getMedicaments();
         this.getPrescriptionsDoctor();
       } else if (result.isDenied) {
-        Swal.fire('Prescription Not Deleted', '', 'info')
+        Swal.fire('No se elimino este medicamento', '', 'info')
       }
     })
   }
 
-  addMedicament(id:string) {
+  addMedicament(id: string) {
     var data = {
       pacient: this.userId,
-      dcotor: this.actualUserId,
       medicaments: id,
     }
 
@@ -267,7 +305,9 @@ export class PrescriptionDoctorComponent implements OnInit {
               title: res.message,
               confirmButtonColor: '#28B463'
             });
-          this.getPrescriptionsDoctor();
+          this.getMedicaments();
+          this.getPrescriptionDoctor(this.prescriptionId);
+          this.getMedicamentsOutList();
         },
         error: (err: any) => {
           Swal.fire({
@@ -275,11 +315,14 @@ export class PrescriptionDoctorComponent implements OnInit {
             title: err.error.message || err.error,
             confirmButtonColor: '#E74C3C'
           });
+          this.getMedicaments();
+          this.getPrescriptionDoctor(this.prescriptionId);
+          this.getMedicamentsOutList();
         },
       })
   }
 
-  addLaboratory(id:string) {
+  addLaboratory(id: string) {
     var data = {
       pacient: this.userId,
       dcotor: this.actualUserId,
@@ -295,7 +338,9 @@ export class PrescriptionDoctorComponent implements OnInit {
               title: res.message,
               confirmButtonColor: '#28B463'
             });
-          this.getPrescriptionsDoctor();
+          this.getLaboratories();
+          this.getPrescriptionDoctor(this.prescriptionId);
+          this.getLaboratorysOutPrescription();
         },
         error: (err: any) => {
           Swal.fire({
@@ -303,6 +348,9 @@ export class PrescriptionDoctorComponent implements OnInit {
             title: err.error.message || err.error,
             confirmButtonColor: '#E74C3C'
           });
+          this.getLaboratories();
+          this.getPrescriptionDoctor(this.prescriptionId);
+          this.getLaboratorysOutPrescription();
         },
       })
   }
@@ -312,11 +360,11 @@ export class PrescriptionDoctorComponent implements OnInit {
       medicamentID: id,
     }
     Swal.fire({
-      title: 'Do you want to delete this Medicament?',
+      title: 'Deseas eliminar este medicamento de la receta?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -329,19 +377,25 @@ export class PrescriptionDoctorComponent implements OnInit {
               showConfirmButton: false,
               timer: 2000
             });
-            this.getPrescriptionsDoctor();
+            this.getMedicaments();
+            this.getPrescriptionDoctor(this.prescriptionId);
+            this.getMedicamentsOutList();
             this.showButtonActions(id, false)
           },
-          error: (err) => Swal.fire({
-            title: err.error.message || err.message,
-            icon: 'error',
-            position: 'center',
-            timer: 3000
-          })
+          error: (err) => {
+            Swal.fire({
+              title: err.error.message || err.message,
+              icon: 'error',
+              position: 'center',
+              timer: 3000
+            });
+            this.getMedicaments();
+            this.getPrescriptionDoctor(this.prescriptionId);
+            this.getMedicamentsOutList();
+          }
         })
-        this.getPrescriptionsDoctor();
       } else if (result.isDenied) {
-        Swal.fire('Medicament Not Deleted', '', 'info')
+        Swal.fire('Medicamento No Eliminado', '', 'info')
       }
     })
   }
@@ -351,11 +405,11 @@ export class PrescriptionDoctorComponent implements OnInit {
       laboratoryID: id,
     }
     Swal.fire({
-      title: 'Do you want to delete this Laboratory?',
+      title: 'Deseas eliminar este laboratorio de la receta?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -368,19 +422,25 @@ export class PrescriptionDoctorComponent implements OnInit {
               showConfirmButton: false,
               timer: 2000
             });
-            this.getPrescriptionsDoctor();
+            this.getLaboratories();
+            this.getPrescriptionDoctor(this.prescriptionId);
+            this.getLaboratorysOutPrescription();
             this.showButtonActions(id, false)
           },
-          error: (err) => Swal.fire({
-            title: err.error.message,
-            icon: 'error',
-            position: 'center',
-            timer: 3000
-          })
+          error: (err) => {
+            Swal.fire({
+              title: err.error.message,
+              icon: 'error',
+              position: 'center',
+              timer: 3000
+            });
+            this.getLaboratories();
+            this.getPrescriptionDoctor(this.prescriptionId);
+            this.getLaboratorysOutPrescription();
+          }
         })
-        this.getPrescriptionsDoctor();
       } else if (result.isDenied) {
-        Swal.fire('Laboratory Not Deleted', '', 'info')
+        Swal.fire('Laboratorio No Eliminado', '', 'info')
       }
     })
   }

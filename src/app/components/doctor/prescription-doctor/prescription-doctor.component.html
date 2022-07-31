@@ -10,7 +10,7 @@
             <div class="form">
                 <i class="fa fa-search ms-2"></i>
                 <input [(ngModel)]="searchPrescription" type="text" class="form-control form-input"
-                    placeholder="Search User...">
+                    placeholder="Buscar Usuario...">
             </div>
         </div>
         <br>
@@ -28,7 +28,7 @@
                         <button (click)="getUserDoctor(user._id)" class="btn btn-success m-3" data-bs-toggle="modal"
                             data-bs-target="#updateHotel" class="btn btn-warning m-2">
                             <i class="fa fa-pencil" aria-hidden="true">
-                            </i> Laboratorio
+                            </i> Recetas
                         </button>
                     </div>
                 </div>
@@ -81,26 +81,15 @@
                         Ver
                     </button>
                     <br>
-                    <button (click)="getMedicaments(); getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
+                    <button (click)="getMedicaments(); getPrescriptionDoctor(prescription._id);" data-bs-toggle="modal"
                         data-bs-target="#addMedicament" class="btn btn-success ms-2">
-                        <i class="fa-solid fa-plus"></i>
-                        Agregar Medicamento
-                    </button>
-                    <button (click)="getMedicaments(); getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
-                        data-bs-target="#deleteMedicament" class="btn btn-danger ms-2">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        Eliminar Medicamento
-                    </button>
-                    <br>
-                    <button (click)="getLaboratories(); getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
-                        data-bs-target="#addLaboratory" class="btn btn-success mt-2 ms-2">
-                        <i class="fa-solid fa-plus"></i>
-                        Agregar Laboratorio
+                        <i class="fa-solid fa-pills"></i>
+                        Medicamentos
                     </button>
                     <button (click)="getLaboratories(); getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
-                        data-bs-target="#deleteLaboratory" class="btn btn-danger mt-2 ms-2">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        Eliminar Laboratorio
+                        data-bs-target="#addLaboratory" class="btn btn-success ms-2">
+                        <i class="fa-solid fa-vial-virus"></i>
+                        Laboratorios
                     </button>
                 </div>
             </div>
@@ -210,7 +199,7 @@
         <!--ADD Laboratories-->
         <div class="modal fade" id="addPrescription" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="modal-basic-title">
@@ -234,28 +223,24 @@
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <mat-label>Doctor</mat-label>
                                     <input disabled autocomplete="off" value="{{doctor.name}}" name="doctor" matInput />
-
                                 </mat-form-field>
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <mat-label>Descripción</mat-label>
-                                    <input autocomplete="off" [(ngModel)]="prescription.description"
-                                        name="specifications" matInput />
+                                    <textarea autocomplete="off" [(ngModel)]="prescription.description" name="description" matInput></textarea>
                                 </mat-form-field>
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <mat-label>Otros medicamentos</mat-label>
-                                    <input autocomplete="off" [(ngModel)]="prescription.AnotherMedicaments"
-                                        name="specifications" matInput />
+                                    <textarea autocomplete="off" [(ngModel)]="prescription.AnotherMedicaments" name="AnotherMedicaments" matInput></textarea>
                                 </mat-form-field>
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <mat-label>Otros Laboratorios</mat-label>
-                                    <input autocomplete="off" [(ngModel)]="prescription.AnotherLaboratories"
-                                        name="specifications" matInput />
+                                    <textarea autocomplete="off" [(ngModel)]="prescription.AnotherLaboratories" name="AnotherLaboratories" matInput></textarea>
                                 </mat-form-field>
                             </div>
                             <hr />
@@ -275,14 +260,14 @@
     </div>
 
 
-    <!--ADD MEDICAMENTO-->
+    <!--CONTROL MEDICAMENTO-->
     <div class="modal fade" id="addMedicament" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-dialog  modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="modal-basic-title">
-                        <i class="fa-solid fa-file-prescription"></i>
-                        &nbsp;Agregar Medicamento
+                        <i class="fa-solid fa-pills"></i>
+                        &nbsp;Medicamentos
                     </h3>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Close"></button>
@@ -290,70 +275,47 @@
                 <div class="modal-body">
                     <form>
                         <div class="containCards">
-                            <h2 class="title-medicament">Medicamentos</h2>
-                            <hr>
-                            <section class="medicament" id="mySkills">
-                                <div class="box-medicaments" *ngFor="let medicament of medicaments">
-                                    <div class="box-medicament">
-                                        <a>
-                                            <div class="productMedicament" routerLink="/doctor/prescription">
-                                                <img class="img-Medicament" src="assets\images\home-pacient\64.png"
-                                                    alt="">
-                                                <br>
-                                                <h3 class="card-title-Medicament">{{medicament.name}}
-                                                </h3>
-                                            </div>
-                                                <button (click)="addMedicament(medicament._id)" type="submit"
-                                                class="button-card-Medicament">Añadir</button>                                                    
-                                        </a>
-                                    </div>
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="form">
+                                    <i class="fa fa-search ms-2"></i>
+                                    <input [(ngModel)]="medicamentPrescription" name="medicamentPrescription"
+                                        type="text" class="form-control form-input" placeholder="Buscar Medicamento...">
                                 </div>
-                            </section>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!--DELETE MEDICAMENTO-->
-    <div class="modal fade" id="deleteMedicament" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="modal-basic-title">
-                        <i class="fa-solid fa-file-prescription"></i>
-                        &nbsp;Delete Medicamento
-                    </h3>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="containCards">
-                            <h2 class="title-medicament">Medicamentos</h2>
+                            </div>
                             <hr>
                             <section class="medicament" id="mySkills">
-                                <div class="box-medicaments" *ngFor="let medicament of medicaments">
-                                    <div class="box-medicament">
-                                        <a>
-                                            <div class="productMedicament" routerLink="/doctor/prescription">
-                                                <img class="img-Medicament" src="assets\images\home-pacient\64.png"
-                                                    alt="">
-                                                <br>
-                                                <h3 class="card-title-Medicament">{{medicament.name}}
-                                                </h3>
-                                            </div>
-                                            <div *ngFor="let actuallyMedicament of medicamentsUser">
-                                                <div *ngIf="medicament._id === actuallyMedicament._id">
-                                                    <button (click)="deleteMedicament(medicament._id)" type="submit"
-                                                    class="button-card-Medicament-Eliminar">Eliminar</button>
+                                <div class="box-medicaments"
+                                    *ngFor="let medicament of medicaments | searchMedicamentBar: medicamentPrescription">
+                                    <div *ngFor="let medicamentOutPrescription of medicamentsOutPrescription">
+                                        <div class="box-medicament"
+                                            *ngIf="medicamentOutPrescription._id == medicament._id">
+                                            <a (click)="addMedicament(medicament._id)">
+                                                <div class="productMedicament">
+                                                    <img class="img-Medicament" src="assets\images\home-pacient\64.png"
+                                                        alt="">
+                                                    <br>
+                                                    <h3 class="card-title-Medicament">{{medicament.name}}
+                                                    </h3>
                                                 </div>
-                                            </div>
-                                            
-                                                
-                                        </a>
+                                                <button type="submit" class="button-card-Medicament">Añadir</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div *ngFor="let medicamentInPrescription of medicamentsInPrescription">
+                                        <div class="box-medicament"
+                                            *ngIf="medicamentInPrescription._id == medicament._id">
+                                            <a (click)="deleteMedicament(medicament._id)">
+                                                <div class="productMedicament">
+                                                    <img class="img-Medicament" src="assets\images\home-pacient\64.png"
+                                                        alt="">
+                                                    <br>
+                                                    <h3 class="card-title-Medicament">{{medicament.name}}
+                                                    </h3>
+                                                </div>
+                                                <button type="submit"
+                                                    class="button-card-Medicament-Eliminar">Eliminar</button>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
@@ -363,14 +325,15 @@
             </div>
         </div>
     </div>
-    <!--ADD LABORATORY-->
+
+    <!--CONTROL LABORATORY-->
     <div class="modal fade" id="addLaboratory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog  modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="modal-basic-title">
-                        <i class="fa-solid fa-file-prescription"></i>
-                        &nbsp;Agregar Laboratorio
+                        <i class="fa-solid fa-vial-virus"></i>
+                        &nbsp;Laboratorios
                     </h3>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                         aria-label="Close"></button>
@@ -378,66 +341,47 @@
                 <div class="modal-body">
                     <form>
                         <div class="containCards">
-                            <h2 class="title-medicament">Laboratorios</h2>
-                            <hr>
-                            <section class="medicament" id="mySkills">
-                                <div class="box-medicaments" *ngFor="let laboratory of laboratories">
-                                    <div class="box-medicament"><a>
-                                            <div class="productMedicament" routerLink="/doctor/prescription">
-                                                <img class="img-Medicament" src="assets\images\home-pacient\65.png"
-                                                    alt="">
-                                                <br>
-                                                <h3 class="card-title-Medicament">{{laboratory.typeLaboratory.name}}
-                                                </h3>
-                                            </div>
-                                            <button (click)="addLaboratory(laboratory._id)" type="submit"
-                                                class="button-card-Medicament">Añadir</button>
-                                        </a>
-                                    </div>
+                            <div class="row d-flex justify-content-center align-items-center">
+                                <div class="form">
+                                    <i class="fa fa-search ms-2"></i>
+                                    <input [(ngModel)]="laboratorysPrescription" name="laboratorysPrescription"
+                                        type="text" class="form-control form-input" placeholder="Buscar Medicamento...">
                                 </div>
-                            </section>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--DELETE LABORATORY-->
-    <div class="modal fade" id="deleteLaboratory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="modal-basic-title">
-                        <i class="fa-solid fa-file-prescription"></i>
-                        &nbsp;Eliminar Laboratorio
-                    </h3>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="containCards">
-                            <h2 class="title-medicament">Laboratorios</h2>
+                            </div>
                             <hr>
                             <section class="medicament" id="mySkills">
-                                <div class="box-medicaments" *ngFor="let laboratory of laboratories">
-                                    <div class="box-medicament"><a>
-                                            <div class="productMedicament" routerLink="/doctor/prescription">
-                                                <img class="img-Medicament" src="assets\images\home-pacient\65.png"
-                                                    alt="">
-                                                <br>
-                                                <h3 class="card-title-Medicament">{{laboratory.typeLaboratory.name}}
-                                                </h3>
-                                            </div>
-                                            <div *ngFor="let actuallyLaboratory of laboratoriesUser">
-                                                <div *ngIf="laboratory._id === actuallyLaboratory._id">
-                                                    <button (click)="deleteLaboratory(laboratory._id)" type="submit"
-                                                    class="button-card-Medicament-Eliminar">Eliminar</button>
+                                <div class="box-medicaments"
+                                    *ngFor="let laboratory of laboratories">
+                                    <div *ngFor="let laboratoryOutPrescription of laboratorysOutPrescription">
+                                        <div class="box-medicament"
+                                            *ngIf="laboratoryOutPrescription._id == laboratory._id">
+                                            <a (click)="addLaboratory(laboratory._id)">
+                                                <div class="productMedicament">
+                                                    <img class="img-Medicament" src="assets\images\home-pacient\64.png"
+                                                        alt="">
+                                                    <br>
+                                                    <h3 class="card-title-Medicament">{{laboratory.typeLaboratory.name}}
+                                                    </h3>
                                                 </div>
-                                            </div>
-                                            
-                                        </a>
+                                                <button type="submit" class="button-card-Medicament">Añadir</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div *ngFor="let laboratoryInPrescription of laboratorysInPrescription">
+                                        <div class="box-medicament"
+                                            *ngIf="laboratoryInPrescription._id == laboratory._id">
+                                            <a (click)="deleteLaboratory(laboratory._id)">
+                                                <div class="productMedicament">
+                                                    <img class="img-Medicament" src="assets\images\home-pacient\64.png"
+                                                        alt="">
+                                                    <br>
+                                                    <h3 class="card-title-Medicament">{{laboratory.typeLaboratory.name}}
+                                                    </h3>
+                                                </div>
+                                                <button type="submit"
+                                                    class="button-card-Medicament-Eliminar">Eliminar</button>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
@@ -447,7 +391,6 @@
             </div>
         </div>
     </div>
-
 
     <!--UPDATE Laboratories-->
     <div class="modal fade" id="updatePrescription" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -596,23 +539,29 @@
                                         data-bs-target="#viewPrescription">{{ prescription.pacient.name }}</td>
                                     <td (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewPrescription">{{ prescription.doctor.name }}</td>
-                    
-                                    <td *ngIf="!prescription.description" (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
+
+                                    <td *ngIf="!prescription.description"
+                                        (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewPrescription">No hay descripcion</td>
-                                    <td *ngIf="prescription.description" (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
+                                    <td *ngIf="prescription.description"
+                                        (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewPrescription">{{prescription.description}}
                                     </td>
                                     <!-- OTRO MEDICAMENTO -->
-                                    <td *ngIf="prescription.AnotherMedicaments" (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
+                                    <td *ngIf="prescription.AnotherMedicaments"
+                                        (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewPrescription">{{ prescription.AnotherMedicaments }}</td>
-                                        
-                                    <td *ngIf="!prescription.AnotherMedicaments" (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
-                                    data-bs-target="#viewPrescription">No hay otros Medicamentos</td>
-                                    
+
+                                    <td *ngIf="!prescription.AnotherMedicaments"
+                                        (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewPrescription">No hay otros Medicamentos</td>
+
                                     <!-- OTRO Laboratory -->
-                                    <td *ngIf="!prescription.AnotherLaboratories" (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
-                                    data-bs-target="#viewPrescription">No hay otros Laboratorios</td>
-                                    <td *ngIf="prescription.AnotherLaboratories" (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
+                                    <td *ngIf="!prescription.AnotherLaboratories"
+                                        (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
+                                        data-bs-target="#viewPrescription">No hay otros Laboratorios</td>
+                                    <td *ngIf="prescription.AnotherLaboratories"
+                                        (click)="getPrescriptionDoctor(prescription._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewPrescription">{{ prescription.AnotherLaboratories }}</td>
                                 </tr>
                                 <tr rowspan="9" *ngIf="notFound === true">

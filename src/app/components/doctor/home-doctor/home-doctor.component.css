@@ -75,7 +75,7 @@ hr {
     margin-top: 2rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -83,10 +83,10 @@ hr {
 }
 
 .service .box-container .box {
-    max-height: 300px;
-    max-width: 250px;
-    min-height: 300px;
-    min-width: 250px;
+    max-height: 260px;
+    max-width: 150px;
+    min-height: 260px;
+    min-width: 240px;
     flex: 1 1;
     text-align: center;
     padding: 2rem;
