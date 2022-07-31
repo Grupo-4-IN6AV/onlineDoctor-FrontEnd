@@ -65,4 +65,14 @@ export class PrescriptionRestService {
   {
     return this.http.post(environment.baseURI + 'previewPrescription/deleteLaboratory/' + id , params, { headers: this.httpOptions });
   }
+
+  getMedicamentsOutPrescription(id: string)
+  {
+    return this.http.get(environment.baseURI + 'previewPrescription/getMedicamentsOutPrescription/' + id , { headers: this.httpOptions });
+  }
+
+  getLaboratorysOutPrescription(id: string)
+  {
+    return this.http.get(environment.baseURI + 'previewPrescription/getLaboratorysOutPrescription/' + id , { headers: this.httpOptions });
+  }
 }
