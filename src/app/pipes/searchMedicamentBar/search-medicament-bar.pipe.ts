@@ -4,8 +4,8 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'searchMedicamentBar'
 })
 export class SearchMedicamentBarPipe implements PipeTransform {
-
   transform(medicaments:any, search:any){
+    console.log(medicaments, search)
     if(search == undefined){
       return medicaments;
     }else{
