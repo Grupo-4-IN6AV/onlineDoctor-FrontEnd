@@ -25,6 +25,11 @@ export class PrescriptionRestService {
     return this.http.get(environment.baseURI + 'previewPrescription/getPreviewPrescriptionsDoctor/' + id, { headers: this.httpOptions });
   }
 
+  getPrescriptionsUser()
+  {
+    return this.http.get(environment.baseURI + 'previewPrescription/getPreviewPrescriptionsUSER' , { headers: this.httpOptions });
+  }
+
   savePrescription(params:{})
   {
     return this.http.post(environment.baseURI + 'previewPrescription/savePreviewPrescription', params, { headers: this.httpOptions });

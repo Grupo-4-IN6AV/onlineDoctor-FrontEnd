@@ -87,7 +87,7 @@ export class AppointmentDoctorComponent implements OnInit {
         var availableEventsArray = [];
         for (let appointment of this.appointments) {
           var appointmentID = appointment._id;
-          var nameAppointment = 'Apointment' + 'Dr. ' + appointment.doctor.name + ' ' + 'Pacient.' + appointment.pacient.name;
+          var nameAppointment = 'Cita ' + 'Dr. ' + appointment.doctor.name + ' ' + 'Pacient.' + appointment.pacient.name;
           var actualDate = appointment.date.split('T');
           calendarArray.push({
             title: nameAppointment,
