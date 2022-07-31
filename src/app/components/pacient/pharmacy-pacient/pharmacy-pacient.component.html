@@ -1,6 +1,10 @@
 <section class="content" style="background: #fff; min-height: 90vh;">
-    <section class="pt-5 pt-md-7">
-
+        <h1 style="padding-top: 1.3rem;">
+            &nbsp;<i class="fa-solid fa-house-medical"></i>
+            Farmacia
+        </h1>
+        <hr>
+        <section>
         <div class="container">
             <div class="form-input">
                 <input [(ngModel)]="searchMedicament" name="name" placeholder="Search...">
@@ -117,7 +121,7 @@
 
                             </div>
                             <div class="content d-flex justify-content-center">
-                                <button type="button" class="ms-3 btn btn-event btn-success">
+                                <button (click)="addToCart(params)" data-bs-dismiss="modal" type="button" class="ms-3 btn btn-event btn-success">
                                     Agregar al carrito
                                     <span class="btn-icon-end">
                                         <i class="fa-solid fa-cart-arrow-down"></i>
