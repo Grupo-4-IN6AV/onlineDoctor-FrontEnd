@@ -3,6 +3,8 @@ import { MedicamentRestService } from 'src/app/services/medicamentRest/medicamen
 import {ScriptsPharmacyService} from '../../../services/cargarScripts/scripts-pharmacy.service';
 import {ScriptsPharmasyGlobalService} from '../../../services/cargarScripts/scripts-pharmasy-global.service'
 import Swal from 'sweetalert2';
+import { ShoppingCartRestService } from 'src/app/services/shoppingCartRest/shopping-cart-rest.service';
+import { ShoppingCartModel } from 'src/app/models/shoppingCart.model';
 
 @Component({
   selector: 'app-pharmacy-pacient',
@@ -10,6 +12,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./pharmacy-pacient.component.css']
 })
 export class PharmacyPacientComponent implements OnInit {
+
+  product: any;
 
   medicaments: any;
 
@@ -22,6 +26,7 @@ export class PharmacyPacientComponent implements OnInit {
     private _ScriptsPharmacyGlobal: ScriptsPharmasyGlobalService,
     private _ScriptsPharmacy: ScriptsPharmacyService,
     private pharmacyRest: MedicamentRestService,
+    private shoppingCartRest: ShoppingCartRestService,
   ) {
     _ScriptsPharmacyGlobal.Carga(["gulpfile"]);
     _ScriptsPharmacy.Carga(["jquery-2.2.4.min"]);
@@ -56,4 +61,32 @@ export class PharmacyPacientComponent implements OnInit {
       }
     })
   }
+
+  addToCart() {
+    let params =
+    {
+      products: this.medicamentView._id,
+      quantity: 1
+    }
+    this.shoppingCartRest.createShoppingCart(params).subscribe({
+      next: (res: any) => {
+        Swal.fire
+          ({
+            icon: 'success',
+            title: res.message,
+            confirmButtonColor: '#28B463'
+          });
+
+        // this.product = res.medicaments
+      },
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message || err.error,
+          confirmButtonColor: '#E74C3C'
+        });
+      }
+    })
+  }
+
 }
