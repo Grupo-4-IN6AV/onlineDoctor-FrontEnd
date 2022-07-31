@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MedicamentRestService } from '../../../services/medicamentRest/medicament-rest.service'
 import { TypeMedicamentRestService } from 'src/app/services/typeMedicamentRest/type-medicament-rest.service';
 import { MedicamentModel } from '../../../models/medicament.model'
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -31,6 +32,12 @@ export class MedicamentAdminComponent implements OnInit {
   checked: boolean = true;
   controloClick: number = 0
 
+
+  //CARGA DE IMÁGENES//
+  filesToUpload: any;
+  uriMedicaments: any;
+
+
   constructor(
     public dialog: MatDialog,
     private modalService: NgbModal,
@@ -46,7 +53,11 @@ export class MedicamentAdminComponent implements OnInit {
 
   getMedicaments() {
     this.medicamentRest.getMedicaments().subscribe({
-      next: (res: any) => { this.medicaments = res.medicaments },
+      next: (res: any) =>
+      {
+        this.medicaments = res.medicaments
+        this.uriMedicaments = environment.baseURI+'medicament/getImageMedicament/'
+      },
       error: (err) => console.log(err)
     })
   }
@@ -220,5 +231,40 @@ export class MedicamentAdminComponent implements OnInit {
   closeDialog(): void {
     this.dialog.closeAll();
   }
+
+  //UPLOAD IMAGE//
+  filesChange(inputFile: any)
+  {
+    this.filesToUpload = <Array<File>>inputFile.target.files;
+  }
+
+  uploadImage()
+  {
+    this.medicamentRest.requestFiles(this.medicamentView._id, this.filesToUpload, 'image')
+      .then((res: any) => {
+        if (!res.error)
+        {
+          this.getMedicaments();
+          Swal.fire
+            ({
+              icon: 'success',
+              title: 'Image added Successfully.',
+              confirmButtonColor: '#28B463'
+            });
+        }
+        else
+        {
+          console.log(res)
+        }
+      })
+      .catch(error =>
+        {
+          Swal.fire({
+            icon: 'error',
+            title: error,
+            confirmButtonColor: '#E74C3C'
+          });
+        })
+    }
 
 }
