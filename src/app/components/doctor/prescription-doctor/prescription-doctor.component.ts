@@ -10,7 +10,6 @@ import { PrescriptionModel } from 'src/app/models/prescription.model';
 import { CredentialsRestService } from '../../../services/credentialsRest/credentials-rest.service';
 
 import Swal from 'sweetalert2';
-import { clippingParents } from '@popperjs/core';
 
 @Component({
   selector: 'app-prescription-doctor',
@@ -100,13 +99,19 @@ export class PrescriptionDoctorComponent implements OnInit {
 
   getUserDoctor(id: string) {
     this.userId = id;
-    this.showButtons = !this.showButtons;
-    this.showUsers = !this.showUsers;
+    this.showButtons = true;
+    this.showUsers =! this.showUsers;
     this.userRest.getUser(id).subscribe({
       next: (res: any) => { this.namePacient = res.user.name },
       error: (err) => console.log(err)
     })
     this.getPrescriptionsDoctor();
+  }
+
+  backUsers()
+  {
+    this.showUsers = true
+    this.showButtons = false
   }
 
   getMedicaments() {
