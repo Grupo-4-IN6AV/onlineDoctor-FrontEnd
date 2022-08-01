@@ -66,4 +66,22 @@ export class PrescriptionPacientComponent implements OnInit {
     })
   }
 
+  getPrescriptionPDF(id:string)
+  {
+    this.prescriptionRest.createPrescriptionPDF(id).subscribe({
+      next: (res: any) =>
+      {
+        window.open("http://localhost:3000/Receta/" + id);
+      },
+      error: (err) =>
+      {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message || err.error,
+          confirmButtonColor: '#E74C3C'
+        });
+      }
+    })
+  }
+
 }
