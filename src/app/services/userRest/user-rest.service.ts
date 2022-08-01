@@ -25,53 +25,53 @@ export class UserRestService
   //FUNCIONES DE ADMINISTRADOR//
   getUsers()
   {
-    return this.http.get(environment.baseURI + 'user/getUsers', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'user/getUsers', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   saveUser(params:{})
   {
-    return this.http.post(environment.baseURI + 'user/saveUser', params, { headers: this.httpOptions });
+    return this.http.post(environment.baseURI + 'user/saveUser', params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   updateUser(id:string, params:{})
   {
-    return this.http.put(environment.baseURI + 'user/updateUser/' + id, params, { headers: this.httpOptions });
+    return this.http.put(environment.baseURI + 'user/updateUser/' + id, params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getUser(id:string)
   {
-    return this.http.get(environment.baseURI + 'user/getUser/' + id, { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'user/getUser/' + id, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   searchUser(params:{ })
   {
-    return this.http.post(environment.baseURI + 'user/getUsersByName', params, { headers: this.httpOptions });
+    return this.http.post(environment.baseURI + 'user/getUsersByName', params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
 
   deleteUser(id:string, params:{})
   {
-    return this.http.post(environment.baseURI + 'user/deleteUser/' + id, params, { headers: this.httpOptions });
+    return this.http.post(environment.baseURI + 'user/deleteUser/' + id, params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getUsersByUp()
   {
-    return this.http.get(environment.baseURI + 'user/getUsersAtoZ', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'user/getUsersAtoZ', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getUsersByDown()
   {
-    return this.http.get(environment.baseURI + 'user/getUsersZtoA', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'user/getUsersZtoA', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getUsersDoctor()
   {
-    return this.http.get(environment.baseURI + 'user/getUsersDoctor', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'user/getUsersDoctor', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getUserDoctor(id:string)
   {
-    return this.http.get(environment.baseURI + 'user/getUserDoctor/' + id, { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'user/getUserDoctor/' + id, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   //Implementación de Imágenes//

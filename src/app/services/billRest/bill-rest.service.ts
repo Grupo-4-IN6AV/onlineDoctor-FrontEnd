@@ -18,6 +18,6 @@ export class BillRestService {
   ) { }
 
   createBill(){
-    return this.http.post(environment.baseURI + 'bill/createBill', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
+    return this.http.post(environment.baseURI + 'bill/createBill', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()).set('Authorization', this.credentialReset.getToken()) });
   }
 }
