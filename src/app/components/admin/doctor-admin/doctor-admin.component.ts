@@ -3,6 +3,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DoctorRestService } from 'src/app/services/doctorRest/doctor-rest.service';
+import { SpecialityRestService } from 'src/app/services/specialityRest/speciality-rest.service';
 import Swal from 'sweetalert2';
 import { DoctorModel } from 'src/app/models/doctor.model';
 
@@ -12,13 +13,17 @@ import { DoctorModel } from 'src/app/models/doctor.model';
   styleUrls: ['./doctor-admin.component.css']
 })
 export class DoctorAdminComponent implements OnInit {
+  specialityView: any;
+
+  
 
   constructor(
     public dialog: MatDialog,
     private modalService: NgbModal,
     private doctorRest: DoctorRestService,
+    private specialityRest: SpecialityRestService
   ) {
-    this.doctor = new DoctorModel('', '', '', '', '', '', '', '', '', '', '', 'DOCTOR', true, '');
+    this.doctor = new DoctorModel('', '', '', '', '', '', '', '', '', '', '', 'DOCTOR', true, '', '');
   }
 
   public ngOnInit(): void {
@@ -36,11 +41,12 @@ export class DoctorAdminComponent implements OnInit {
   doctorDeleteModal: any;
   doctorDeletePassword: any;
   showTableDoctors: boolean = false;
-
+  
   doctorNameUp: any;
   doctorNameDown: any;
   reset: any;
 
+  specialities: any;
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
@@ -50,6 +56,13 @@ export class DoctorAdminComponent implements OnInit {
   getDoctors() {
     this.doctorRest.getDoctors().subscribe({
       next: (res: any) => this.doctors = res.doctors,
+      error: (err) => console.log(err)
+    })
+  }
+
+  getSpecialities() {
+    this.specialityRest.getSpecialities().subscribe({
+      next: (res: any) => this.specialities = res.specialities,
       error: (err) => console.log(err)
     })
   }
@@ -84,8 +97,10 @@ export class DoctorAdminComponent implements OnInit {
       next: (res: any) => {
         this.doctorView = res.doctor;
         this.doctorUpdate = res.doctor;
+        console.log(this.doctorUpdate)
         this.doctorDelete = res.doctor;
         this.doctorDeleteModal = res.doctor;
+        console.log (this.doctorView)
       },
       error: (err) => { console.log(err.error.message) }
     })

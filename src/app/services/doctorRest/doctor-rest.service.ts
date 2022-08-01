@@ -67,6 +67,11 @@ export class DoctorRestService {
     return this.http.get(environment.baseURI + 'doctor/getDoctorZtoA', { headers: this.httpOptions });
   }
 
+  getSpecialities()
+  {
+    return this.http.get(environment.baseURI + 'speciality/getSpecialities', { headers: this.httpOptions });
+  }
+
   //Implementación de Imágenes//
   requestFiles(
     doctorID: string,
