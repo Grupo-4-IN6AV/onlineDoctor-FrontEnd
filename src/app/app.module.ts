@@ -5,6 +5,7 @@ import { SharedModule } from './shared/shared.module';
 import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+import {MatBadgeModule} from '@angular/material/badge';
 
 /*IMPORTACIONES MANUALES*/
 import { MatRadioModule } from '@angular/material/radio';
@@ -241,6 +242,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FullCalendarModule,// register FullCalendar with you app
     MatTabsModule,
     SwiperModule,
+    MatBadgeModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
