@@ -356,16 +356,16 @@
                             <hr>
                             <section class="medicament" id="mySkills">
                                 <div class="box-medicaments"
-                                    *ngFor="let laboratory of laboratories | searchLaboratoryPrescription:laboratorysPrescription">
+                                    *ngFor="let typeLaboratory of typesLaboratories | searchLaboratoryPrescription:laboratorysPrescription">
                                     <div *ngFor="let laboratoryOutPrescription of laboratorysOutPrescription">
                                         <div class="box-medicament"
-                                            *ngIf="laboratoryOutPrescription._id == laboratory._id">
-                                            <a (click)="addLaboratory(laboratory._id)">
+                                            *ngIf="laboratoryOutPrescription._id == typeLaboratory._id">
+                                            <a (click)="addLaboratory(typeLaboratory._id)">
                                                 <div class="productMedicament">
                                                     <img class="img-Medicament" src="assets\images\home-pacient\64.png"
                                                         alt="">
                                                     <br>
-                                                    <h3 class="card-title-Medicament">{{laboratory.typeLaboratory.name}}
+                                                    <h3 class="card-title-Medicament">{{typeLaboratory.name}}
                                                     </h3>
                                                 </div>
                                                 <button type="submit" class="button-card-Medicament">Añadir</button>
@@ -374,13 +374,13 @@
                                     </div>
                                     <div *ngFor="let laboratoryInPrescription of laboratorysInPrescription">
                                         <div class="box-medicament"
-                                            *ngIf="laboratoryInPrescription._id == laboratory._id">
-                                            <a (click)="deleteLaboratory(laboratory._id)">
+                                            *ngIf="laboratoryInPrescription._id == typeLaboratory._id">
+                                            <a (click)="deleteLaboratory(typeLaboratory._id)">
                                                 <div class="productMedicament">
                                                     <img class="img-Medicament" src="assets\images\home-pacient\64.png"
                                                         alt="">
                                                     <br>
-                                                    <h3 class="card-title-Medicament">{{laboratory.typeLaboratory.name}}
+                                                    <h3 class="card-title-Medicament">{{typeLaboratory.name}}
                                                     </h3>
                                                 </div>
                                                 <button type="submit"

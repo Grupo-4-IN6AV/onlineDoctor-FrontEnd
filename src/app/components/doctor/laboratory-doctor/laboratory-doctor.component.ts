@@ -159,7 +159,7 @@ export class LaboratoryDoctorComponent implements OnInit {
           title: res.message,
           confirmButtonColor: '#28B463'
         });
-        this.actualDoctor()
+        this.actualDoctor();
         addResultLaboratory.reset();
       },
       error: (err) =>{
@@ -211,6 +211,7 @@ export class LaboratoryDoctorComponent implements OnInit {
       next: (res: any) => {
         this.laboratoryId = id;
         this.laboratoryView = res.laboratory;
+        console.log(this.laboratoryView)
         this.AddlaboratoryView = res.laboratory;
         this.fullNamePacient = res.laboratory.pacient.name + ' ' + res.laboratory.pacient.surname
         this.laboratoryUpdate = res.laboratory;
@@ -258,11 +259,11 @@ export class LaboratoryDoctorComponent implements OnInit {
 
   deleteLaboratoryDoctor(id: string) {
     Swal.fire({
-      title: 'Do you want to delete this Laboratory?',
+      title: 'Deseas eliminar este Laboratorio?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -287,7 +288,7 @@ export class LaboratoryDoctorComponent implements OnInit {
         })
         this.getLaboratoriesDoctor();
       } else if (result.isDenied) {
-        Swal.fire('Laboratory Not Deleted', '', 'info')
+        Swal.fire('Laboratorio no eliminado', '', 'info')
       }
     })
   }

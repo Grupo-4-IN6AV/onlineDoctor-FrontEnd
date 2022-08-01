@@ -75,11 +75,11 @@
                         class="btn btn-warning m-2">
                         <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
                     </button>
-                    <button (click)="deleteLaboratoryDoctor(laboratory._id)" class="btn btn-danger">
+                    <button (click)="deleteLaboratoryDoctor(laboratory._id);" class="btn btn-danger">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                         Eliminar
                     </button>
-                    <button (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
+                    <button (click)="getLaboratoryDoctor(laboratory._id);" data-bs-toggle="modal"
                         data-bs-target="#addResultLaboratory" class="btn  ms-2 pretty-button">
                         <i class="fa-solid fa-plus"></i>
                         Agregar Resultado
@@ -158,6 +158,22 @@
                                     <div class="box">
                                         <p>{{ laboratoryView.specifications }}</p>
                                     </div>
+
+                                    <div *ngIf="laboratoryView.resultado" class="box">
+                                        <h3>Resultado: </h3>
+                                    </div>
+
+                                    <div *ngIf="laboratoryView.resultado" class="box">
+                                        <p>{{ laboratoryView.resultado }}</p>
+                                    </div>
+
+                                    <div *ngIf="laboratoryView.diagnosis" class="box">
+                                        <h3>Diagnostico: </h3>
+                                    </div>
+
+                                    <div *ngIf="laboratoryView.diagnosis" class="box">
+                                        <p>{{ laboratoryView.diagnosis }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -180,14 +196,14 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form (ngSubmit)="saveLaboratoryDoctor(addLaboratoryForm)" #addLaboratoryForm="ngForm">
-                        <div class="text-inside">
-                            <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Paciente</mat-label>
-                                <input disabled autocomplete="off" [(ngModel)]="namePacient" name="pacient" matInput />
+                    <div class="text-inside">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Paciente</mat-label>
+                            <input disabled autocomplete="off" [(ngModel)]="namePacient" name="pacient" matInput />
 
-                            </mat-form-field>
-                        </div>
+                        </mat-form-field>
+                    </div>
+                    <form (ngSubmit)="saveLaboratoryDoctor(addLaboratoryForm)" #addLaboratoryForm="ngForm">
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Tipo de Laboratorio</mat-label>

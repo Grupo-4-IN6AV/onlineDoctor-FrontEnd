@@ -1,63 +1,99 @@
 <nav #navbar class="navbar active">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a href="#" onClick="return false;" class="navbar-toggle collapsed"
-          (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
-        <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
-        <a class="navbar-brand" routerLink="/admin/home">
-          <img src="../../../assets/images/navbar/MockUps.png" style="max-height: 43px; margin-top:-5px;" alt="Logo" />
-          <span class="logo-name" style="font-size: 1.439rem; margin-left: -13px;"><span style="color: orange; ">ONLINE </span> <span style="color: #1975e6; margin-left: -10px;">DOCTOR</span></span>
-        </a>
-      </div>
-      <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
-        <ul class="float-start collapse-menu-icon">
-          <li>
-            <button mat-icon-button (click)="callSidemenuCollapse()" class="sidemenu-collapse">
-              <mat-icon>menu</mat-icon>
-            </button>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <!-- Full Screen Button -->
-          <li class="fullscreen">
-            <button mat-icon-button (click)="callFullscreen()" class=" nav-notification-icons">
-              <mat-icon>fullscreen</mat-icon>
-            </button>
-          </li>
-          <!-- #END# Notifications-->
-          <li class="nav-item user_profile" ngbDropdown>
-            <a href="#" onClick="return false;" ngbDropdownToggle role="button" class="nav-notification-icons pt-0">
-              <img *ngIf="!userImage" src="../../../assets/images/user/usrbig3.jpg" class="rounded-circle" width="32" height="32" alt="User">
-              <img *ngIf="userImage" src="{{uri}}" class="rounded-circle" width="32" crossorigin="anonymous" style="object-fit: cover;" height="32" alt="User">
-            </a>
-            <div ngbDropdownMenu class="notification-dropdown pullDown">
-              <div class="noti-list" style="position: relative; max-width: 600px; max-height: 300px;" [perfectScrollbar]>
-                <ul class="menu">
-                  <li class="body">
-                    <ul class="user_dw_menu">
-                      <li>
-                        <a routerLink="profile" onClick="return false;">
-                          <mat-icon aria-hidden="false" class="msr-2">person</mat-icon>Profile
-                        </a>
-                      </li>
-                      <li>
-                        <a (click)="logOut()">
-                          <mat-icon aria-hidden="false" class="msr-2">power_settings_new</mat-icon>Logout
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </li>
-          <!-- #END# Tasks -->
-          <li class="float-end">
-            <button mat-icon-button (click)="toggleRightSidebar()" class="nav-notification-icons js-right-sidebar">
-              <mat-icon id="settingBtn">settings</mat-icon>
-            </button>
-          </li>
-        </ul>
-      </div>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="#" onClick="return false;" class="navbar-toggle collapsed"
+        (click)="isNavbarCollapsed = !isNavbarCollapsed" aria-expanded="false"></a>
+      <a href="#" onClick="return false;" class="bars" (click)="mobileMenuSidebarOpen($event,'overlay-open')"></a>
+      <a class="navbar-brand" routerLink="/admin/home">
+        <img src="../../../assets/images/navbar/MockUps.png" style="max-height: 43px; margin-top:-5px;" alt="Logo" />
+        <span class="logo-name" style="font-size: 1.439rem; margin-left: -13px;"><span style="color: orange; ">ONLINE
+          </span> <span style="color: #1975e6; margin-left: -10px;">DOCTOR</span></span>
+      </a>
     </div>
-  </nav>
+    <div class="collapse navbar-collapse" [ngbCollapse]="isNavbarCollapsed">
+      <ul class="float-start collapse-menu-icon">
+        <li>
+          <button mat-icon-button (click)="callSidemenuCollapse()" class="sidemenu-collapse">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- #START# Notifications-->
+        <li class="nav-item" ngbDropdown>
+
+          <button mat-icon-button ngbDropdownToggle class="nav-notification-icons">
+              <mat-icon matBadge="{{itemsShoppingCart}}" matBadgeColor="warn">shopping_cart</mat-icon>
+          </button>
+
+          <div ngbDropdownMenu class="notification-dropdown pullDown">
+            <div class="noti-list" style="position: relative; max-width: 600px; max-height: 250px;" [perfectScrollbar]>
+              <ul class="menu">
+                <li>
+                  <a href="#" *ngFor="let medicament of medicaments" routerLink="/paciente/shopping-cart">
+                    <span class="table-img msg-user">
+                      <img src="" alt="">
+                    </span>
+                    <span class="menu-info">
+                      <span class="menu-title">{{medicament.medicament.name}}</span>
+                      <span class="menu-desc">
+                        <i class="material-icons">all_inbox</i>  {{medicament.quantity}} unidades
+                      </span>
+                      <span class="menu-desc"><!--{{notification.message}}--></span>
+                    </span>
+                  </a>
+                  <h6 class="text-center" *ngIf="itemsShoppingCart===0"> Carrito de compras vacio.</h6>
+                </li>
+              </ul>
+            </div>
+            <a *ngIf="itemsShoppingCart!==0" class="text-center d-block border-top py-1" routerLink="/paciente/shopping-cart">Todos los detalles...
+            </a>
+          </div>
+        </li>
+        <!-- #END# Notifications-->
+
+        <!-- Full Screen Button -->
+        <li class="fullscreen">
+          <button mat-icon-button (click)="callFullscreen()" class=" nav-notification-icons">
+            <mat-icon>fullscreen</mat-icon>
+          </button>
+        </li>
+
+        <li class="nav-item user_profile" ngbDropdown>
+          <a href="#" onClick="return false;" ngbDropdownToggle role="button" class="nav-notification-icons pt-0">
+            <img *ngIf="!userImage" src="../../../assets/images/user/usrbig3.jpg" class="rounded-circle" width="32"
+              height="32" alt="User">
+            <img *ngIf="userImage" src="{{uri}}" class="rounded-circle" width="32" crossorigin="anonymous"
+              style="object-fit: cover;" height="32" alt="User">
+          </a>
+          <div ngbDropdownMenu class="notification-dropdown pullDown">
+            <div class="noti-list" style="position: relative; max-width: 600px; max-height: 300px;" [perfectScrollbar]>
+              <ul class="menu">
+                <li class="body">
+                  <ul class="user_dw_menu">
+                    <li>
+                      <a routerLink="profile" onClick="return false;">
+                        <mat-icon aria-hidden="false" class="msr-2">person</mat-icon>Profile
+                      </a>
+                    </li>
+                    <li>
+                      <a (click)="logOut()">
+                        <mat-icon aria-hidden="false" class="msr-2">power_settings_new</mat-icon>Logout
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <!-- #END# Tasks -->
+        <li class="float-end">
+          <button mat-icon-button (click)="toggleRightSidebar()" class="nav-notification-icons js-right-sidebar">
+            <mat-icon id="settingBtn">settings</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

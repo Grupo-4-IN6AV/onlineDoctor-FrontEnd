@@ -3,6 +3,7 @@ import { SwiperComponent } from "swiper/angular";
 import SwiperCore, { FreeMode, Navigation, Thumbs } from "swiper";
 import { MedicamentRestService } from "src/app/services/medicamentRest/medicament-rest.service";
 import {ActivatedRoute} from '@angular/router'
+import Swal from 'sweetalert2';
 
 SwiperCore.use([FreeMode, Navigation, Thumbs]);
 
@@ -55,4 +56,13 @@ export class PharmacyViewComponent implements OnInit, DoCheck{
     })
   }
 
+  pedirLogin()
+  {
+    Swal.fire({
+      icon: 'info',
+      title: 'Atención',
+      text: 'Debe iniciar sesión para comprar este medicamento.',
+      footer: '<a>¿No tienes una cuenta? <a href="/login"><b>&nbsp;Registrate aquí</b></a></a>'
+    })
+  }
 }

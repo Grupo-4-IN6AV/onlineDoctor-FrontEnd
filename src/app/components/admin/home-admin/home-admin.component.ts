@@ -77,7 +77,7 @@ export class HomeAdminComponent implements OnInit
     this.getDoctors();
     this.getMedicaments();
     this.getAppoiments();
-    
+    this.getUsersAndDoctors();
   }
 
   getAppoiments(){
@@ -96,11 +96,53 @@ export class HomeAdminComponent implements OnInit
       {
         this.users = res.users
         this.totalPatients = this.users.length;
-        this.donut_chart.series[0].data.push(
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
+  getUsersAndDoctors()
+  {
+    this.userRest.getUsersAndDoctors().subscribe({
+      next: (res: any) =>
+      {
+        this.donut_chart = {
+          tooltip:
           {
-            value: this.totalPatients, name:'PACIENTES'
+            trigger: 'item',
+            formatter: '{a} <br/>{b} : {c} ({d}%)',
           },
-        )
+          legend:
+          {
+            show: true,
+            data: ['DOCTORES', 'PACIENTES'],
+            textStyle:
+            {
+              color: '#9aa0ac',
+              padding: [5, 10],
+            },
+          },
+          toolbox:
+          {
+            show: true,
+          },
+          series:
+          [
+            {
+              name: 'Role',
+              type: 'pie',
+              radius: ['40%', '70%'],
+              itemStyle: {
+                borderRadius: 0,
+                borderColor: '#fff',
+                borderWidth: 2,
+              },
+              data:[],
+            },
+          ],
+          color: ['#FFC107', '#0D6EFD'],
+        };
+        this.donut_chart.series[0].data = res.array
       },
       error: (err) => console.log(err)
     })
@@ -111,11 +153,7 @@ export class HomeAdminComponent implements OnInit
       next: (res: any)=>{
         this.doctors = res.doctors
         this.totalDoctors = res.doctors.length
-        this.donut_chart.series[0].data.push(
-          {
-            value: this.totalDoctors, name:'DOCTORES'
-          },
-        )
+
       },
       error: (err)=>console.log(err)
     })
@@ -135,46 +173,10 @@ export class HomeAdminComponent implements OnInit
   }
 
 
-  donut_chart: EChartsOption =
-  {
-    tooltip:
-    {
-      trigger: 'item',
-      formatter: '{a} <br/>{b} : {c} ({d}%)',
-    },
-    legend:
-    {
-      show: true,
-      data: ['DOCTORES', 'PACIENTES'],
-      textStyle:
-      {
-        color: '#9aa0ac',
-        padding: [5, 10],
-      },
-    },
-    toolbox:
-    {
-      show: true,
-    },
-    series:
-    [
-      {
-        name: 'Role',
-        type: 'pie',
-        radius: ['40%', '70%'],
-        itemStyle: {
-          borderRadius: 0,
-          borderColor: '#fff',
-          borderWidth: 2,
-        },
-        data:[],
-      },
-    ],
-    color: ['#FFC107', '#0D6EFD'],
-  };
+  donut_chart: EChartsOption
 
   @ViewChild('chart') chart: ChartComponent;
-  
+
   // sparkline chart start
   public commonBarSparklineOptions: Partial<SparklineChartOptions> = {
     chart: {

@@ -74,6 +74,11 @@ export class UserRestService
     return this.http.get(environment.baseURI + 'user/getUserDoctor/' + id, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
+  getUsersAndDoctors()
+  {
+    return this.http.get(environment.baseURI + 'user/getUsersAndDoctors', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
+  }
+
   //Implementación de Imágenes//
   requestFiles(
     userID: string,

@@ -279,7 +279,7 @@
                                     <td class="text-center">
                                       <i  (click)="getPrescription(prescription._id)" data-bs-toggle="modal"
                                       data-bs-target="#viewPrescription" style="font-size: 1.5rem; cursor:pointer" class="fas fa-eye me-2"></i>
-                                      <i style="color:red; font-size: 1.5rem;" class="fas fa-file-pdf ms-2"></i>
+                                      <i (click)="getPrescriptionPDF(prescription._id)" style="color:red; font-size: 1.5rem; cursor:pointer" class="fas fa-file-pdf ms-2"></i>
                                     </td>
                                 </tr>
                             </tbody>

@@ -80,4 +80,9 @@ export class PrescriptionRestService {
   {
     return this.http.get(environment.baseURI + 'previewPrescription/getLaboratorysOutPrescription/' + id , { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
+
+  createPrescriptionPDF(id: string)
+  {
+    return this.http.get(environment.baseURI + 'previewPrescription/createPrescriptionPDF/' + id , { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
+  }
 }

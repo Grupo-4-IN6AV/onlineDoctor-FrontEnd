@@ -69,11 +69,7 @@ export class PrescriptionPacientComponent implements OnInit {
       },
       error: (err) =>
       {
-        Swal.fire({
-          icon: 'error',
-          title: err.error.message || err.error,
-          confirmButtonColor: '#E74C3C'
-        });
+        console.log(err);
       }
     })
   }
@@ -126,8 +122,27 @@ export class PrescriptionPacientComponent implements OnInit {
           this.laboratorysInPrescription = res.laboratorysInPrescription,
           console.log(res.laboratorysInPrescription)
       },
-      error: (err) => console.log(err)
+      error: (err) => console.log(err)}
+    )}
+
+
+  getPrescriptionPDF(id:string)
+  {
+    this.prescriptionRest.createPrescriptionPDF(id).subscribe({
+      next: (res: any) =>
+      {
+        window.open("http://localhost:3000/Receta/" + id);
+      },
+      error: (err) =>
+      {
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message || err.error,
+          confirmButtonColor: '#E74C3C'
+        });
+      }
     })
   }
-
 }
+
+
