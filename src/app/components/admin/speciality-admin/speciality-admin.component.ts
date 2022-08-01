@@ -109,11 +109,11 @@ export class SpecialityAdminComponent implements OnInit {
   
     deleteSpeciality(id: string) {
       Swal.fire({
-        title: 'Do you want to delete this Speciality?',
+        title: 'Quieres eliminar esta especialidad?',
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: 'Delete',
-        denyButtonText: `Don't delete`,
+        confirmButtonText: 'Eliminar',
+        denyButtonText: `No Eliminar`,
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
@@ -138,7 +138,7 @@ export class SpecialityAdminComponent implements OnInit {
           })
           this.getSpecialities();
         } else if (result.isDenied) {
-          Swal.fire('Speciality Not Deleted', '', 'info')
+          Swal.fire('Especialidad No Eliminada', '', 'info')
         }
       })
     }

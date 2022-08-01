@@ -80,6 +80,9 @@
                         <div class="contact-details-name mb-2">
                           {{ typeLaboratoryView.name }}
                         </div>
+                        <div class="badge col-yellow">
+                          Tipo de Laboratorio
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -218,14 +221,6 @@
                   <input [(ngModel)]="searchTypeLaboratory" placeholder="Search.." type="text" #filter
                     class="browser-default search-field" aria-label="Search box" />
                 </li>
-                <li *ngIf="buttonActions">
-                  <div class="icon-button-demo m-l-10">
-                    <button (click)="deleteTypeLaboratory(typeLaboratoryDelete._id)" mat-mini-fab color="warn">
-                      <mat-icon class="col-white">delete
-                      </mat-icon>
-                    </button>
-                  </div>
-                </li>
 
                 <li>
                   <i *ngIf="!typeLaboratoryNameUp && !typeLaboratoryNameDown" class="fa fa-sort-alpha-asc ms-3"
@@ -251,6 +246,15 @@
                 <li>
                   <i *ngIf="typeLaboratoryNameUp || typeLaboratoryNameDown" (click)="cleanTable()"
                     class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
+                </li>
+
+                <li *ngIf="buttonActions">
+                  <div class="icon-button-demo m-l-10">
+                    <button (click)="deleteTypeLaboratory(typeLaboratoryDelete._id)" mat-mini-fab color="warn">
+                      <mat-icon class="col-white">delete
+                      </mat-icon>
+                    </button>
+                  </div>
                 </li>
 
                 <li *ngIf="buttonActions">

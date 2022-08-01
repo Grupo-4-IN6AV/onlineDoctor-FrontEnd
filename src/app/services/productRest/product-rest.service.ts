@@ -20,6 +20,6 @@ export class ProductRestService {
   
   getProducts()
   {
-    return this.http.get(environment.baseURI + 'product/getProducts', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'product/getProducts', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 }

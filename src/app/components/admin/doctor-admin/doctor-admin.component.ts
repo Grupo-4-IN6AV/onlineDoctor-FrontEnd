@@ -3,6 +3,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DoctorRestService } from 'src/app/services/doctorRest/doctor-rest.service';
+import { SpecialityRestService } from 'src/app/services/specialityRest/speciality-rest.service';
 import Swal from 'sweetalert2';
 import { DoctorModel } from 'src/app/models/doctor.model';
 
@@ -12,13 +13,17 @@ import { DoctorModel } from 'src/app/models/doctor.model';
   styleUrls: ['./doctor-admin.component.css']
 })
 export class DoctorAdminComponent implements OnInit {
+  specialityView: any;
+
+  
 
   constructor(
     public dialog: MatDialog,
     private modalService: NgbModal,
     private doctorRest: DoctorRestService,
+    private specialityRest: SpecialityRestService
   ) {
-    this.doctor = new DoctorModel('', '', '', '', '', '', '', '', '', '', '', 'DOCTOR', true, '');
+    this.doctor = new DoctorModel('', '', '', '', '', '', '', '', '', '', '', 'DOCTOR', true, '', '');
   }
 
   public ngOnInit(): void {
@@ -36,11 +41,12 @@ export class DoctorAdminComponent implements OnInit {
   doctorDeleteModal: any;
   doctorDeletePassword: any;
   showTableDoctors: boolean = false;
-
+  
   doctorNameUp: any;
   doctorNameDown: any;
   reset: any;
 
+  specialities: any;
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
@@ -50,6 +56,13 @@ export class DoctorAdminComponent implements OnInit {
   getDoctors() {
     this.doctorRest.getDoctors().subscribe({
       next: (res: any) => this.doctors = res.doctors,
+      error: (err) => console.log(err)
+    })
+  }
+
+  getSpecialities() {
+    this.specialityRest.getSpecialities().subscribe({
+      next: (res: any) => this.specialities = res.specialities,
       error: (err) => console.log(err)
     })
   }
@@ -117,11 +130,11 @@ export class DoctorAdminComponent implements OnInit {
 
   deleteDoctor(id: string, password: string) {
     Swal.fire({
-      title: 'Do you want to delete this Doctor?',
+      title: 'Quires eliminar este doctor?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -154,6 +167,7 @@ export class DoctorAdminComponent implements OnInit {
             if (this.showTableDoctors === true) {
               this.showButtonActions(this.doctorUpdate._id, false)
             };
+            this.getDoctors();
           }
 
         })
@@ -161,6 +175,7 @@ export class DoctorAdminComponent implements OnInit {
       } else if (result.isDenied) {
         Swal.fire('User Not Deleted', '', 'info')
         this.doctorDeletePassword = "";
+        this.getDoctors();
       }
     })
     this.doctorDeletePassword = "";

@@ -109,11 +109,11 @@ export class TypeLaboratoryAdminComponent implements OnInit {
 
   deleteTypeLaboratory(id: string) {
     Swal.fire({
-      title: 'Do you want to delete this Type Laboratory?',
+      title: 'Quieres eliminar este Tipo de Laboratorio?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -138,7 +138,7 @@ export class TypeLaboratoryAdminComponent implements OnInit {
         })
         this.getTypesLaboratory();
       } else if (result.isDenied) {
-        Swal.fire('Type Laboratory Not Deleted', '', 'info')
+        Swal.fire('Tipo de Laboratorio No Eliminado', '', 'info')
       }
     })
   }
