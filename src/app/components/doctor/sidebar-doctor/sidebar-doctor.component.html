@@ -17,14 +17,14 @@
               <div class="profile-usertitle-job ">{{user.role}}</div>
             </div>
             <div class="sidebar-userpic-btn">
-              <a mat-icon-button disabled routerLink="extra-pages/profile" matTooltip="Profile"
+              <a mat-icon-button disabled routerLink="/doctor/profile" matTooltip="Perfil"
                 [matTooltipPosition]="'above'">
                 <i class="material-icons-two-tone">account_circle</i>
               </a>
-              <a mat-icon-button disabled routerLink="calendar" matTooltip="Calendar" [matTooltipPosition]="'above'">
+              <a mat-icon-button disabled routerLink="/doctor/diary" matTooltip="Agenda Virtual" [matTooltipPosition]="'above'">
                 <i class="material-icons-two-tone">event</i>
               </a>
-              <a mat-icon-button disabled (click)="logOut()" matTooltip="LogOut"
+              <a mat-icon-button disabled (click)="logOut()" matTooltip="Cerrar sesión"
               [matTooltipPosition]="'above'">
               <i class="material-icons-two-tone">power_settings_new</i>
             </a>

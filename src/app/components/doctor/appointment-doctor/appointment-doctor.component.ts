@@ -195,11 +195,11 @@ export class AppointmentDoctorComponent implements OnInit {
 
   deleteAppointment(id: string) {
     Swal.fire({
-      title: 'Do you want to delete this Appointment?',
+      title: 'Quieres Eliminar este Cita?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -213,7 +213,7 @@ export class AppointmentDoctorComponent implements OnInit {
               timer: 2000
             });
             this.getAppointments();
-            this.showButtonActions(id, false)
+            this.showButtonActions(id, false);
           },
           error: (err) => Swal.fire({
             title: err.error.message,
@@ -224,7 +224,7 @@ export class AppointmentDoctorComponent implements OnInit {
         })
         this.getAppointments();
       } else if (result.isDenied) {
-        Swal.fire('Appointment Not Deleted', '', 'info')
+        Swal.fire('Cita No Eliminada', '', 'info')
       }
     })
   }
