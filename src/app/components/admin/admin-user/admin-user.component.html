@@ -533,11 +533,15 @@
                     <img src="assets/images/user/user8.jpg" alt="" />
                   </td>
                   <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.name }}</td>
-                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.surname }}
+                  <td *ngIf="user.surname" (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.surname }}
+                  </td>
+                  <td *ngIf="!user.surname" (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">-Sin Apellido-
                   </td>
                   <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.username }}
                   </td>
-                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.DPI }}
+                  <td *ngIf="user.DPI" (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.DPI }}
+                  </td>
+                  <td *ngIf="!user.DPI" (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">-Sin DPI-
                   </td>
                   <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.email }}
                   </td>
@@ -547,7 +551,9 @@
                       {{ user.role }}
                     </div>
                   </td>
-                  <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.phone }}
+                  <td *ngIf="user.phone" (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.phone }}
+                  </td>
+                  <td *ngIf="!user.phone" (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">-Sin Telefono-
                   </td>
                   <td (click)="getUser(user._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ user.gender }}
                   </td>

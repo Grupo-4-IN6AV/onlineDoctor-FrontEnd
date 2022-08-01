@@ -38,11 +38,6 @@ export class LaboratoryRestService {
     return this.http.put(environment.baseURI + 'laboratory/updateLaboratory/' + id, params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()).set('Authorization', this.credentialReset.getToken()) });
   }
 
-  deleteLaboratory(id:string)
-  {
-    return this.http.delete(environment.baseURI + 'laboratory/deleteLaboratory/' + id, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()).set('Authorization', this.credentialReset.getToken()) });
-  }
-
   //FUNCIONES DE DOCTORES//
 
   getLaboratoriesDoctor(id: string)

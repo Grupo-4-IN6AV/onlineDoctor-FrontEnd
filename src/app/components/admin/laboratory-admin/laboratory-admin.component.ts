@@ -141,17 +141,17 @@ export class LaboratoryAdminComponent implements OnInit {
     })
   }
 
-  deleteLaboratory(id: string) {
+  deleteLaboratory(id: string, idUser: string) {
     Swal.fire({
-      title: 'Do you want to delete this Laboratory?',
+    title: 'Quieres eliminar este Laboratorio?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.laboratoryRest.deleteLaboratory(id).subscribe({
+        this.laboratoryRest.deleteLaboratoryDoctor(id,idUser).subscribe({
           next: (res: any) => {
             Swal.fire({
               title: res.message,
@@ -172,7 +172,7 @@ export class LaboratoryAdminComponent implements OnInit {
         })
         this.getLaboratories();
       } else if (result.isDenied) {
-        Swal.fire('Laboratory Not Deleted', '', 'info')
+        Swal.fire('Laboratorio No Eliminado', '', 'info')
       }
     })
   }
