@@ -5,6 +5,7 @@ import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import { TypeLaboratoryRestService } from 'src/app/services/typeLaboratoryRest/type-laboratory-rest.service';
 import { LaboratoryRestService } from 'src/app/services/laboratoryRest/laboratory-rest.service';
 import { LaboratoryModel } from 'src/app/models/laboratory.model';
+import { CredentialsRestService } from '../../../services/credentialsRest/credentials-rest.service';
 import Swal from 'sweetalert2';
 
 import timeGridPlugin from '@fullcalendar/timegrid'
@@ -59,7 +60,11 @@ export class LaboratoryDoctorComponent implements OnInit {
   updateLaboratory: any;
   fullNamePacient: any;
 
+  actualDoctorData: any;
+  fullNameDoctor: any;
 
+  dataLaboratoryComent:any;
+  dataLaboratoryDiagnostic:any;
   
   constructor(
     public dialog: MatDialog,
@@ -67,13 +72,21 @@ export class LaboratoryDoctorComponent implements OnInit {
     private laboratoryRest: LaboratoryRestService,
     private userRest: UserRestService,
     private typeLaboratoryRest: TypeLaboratoryRestService,
+    private credentialReset: CredentialsRestService
   ) { 
     this.laboratory = new LaboratoryModel('','','', '', '', true)
   }
 
   ngOnInit(): void {
-    this.actualDate = new Date()
+    this.actualDate = new Date();
+    this.actualDoctor();
     this.getUsersDoctor();
+  }
+
+  
+  actualDoctor(){
+    this.actualDoctorData = this.credentialReset.getIdentity();
+    this.fullNameDoctor = this.actualDoctorData.name + " " + this.actualDoctorData.surname
   }
 
   getLaboratoriesDoctor() {
@@ -132,6 +145,34 @@ export class LaboratoryDoctorComponent implements OnInit {
     })
   }
 
+  saveResultLaboratory(addResultLaboratory: any) {
+    var params = {
+      result: this.dataLaboratoryComent,
+      diagnosis: this.dataLaboratoryDiagnostic
+    };
+    this.laboratoryRest.saveResult(this.laboratoryId, params).subscribe({
+      next: (res: any) => {
+        Swal.fire
+        ({
+          icon: 'success',
+          title: res.message,
+          confirmButtonColor: '#28B463'
+        });
+        this.actualDoctor()
+        addResultLaboratory.reset();
+      },
+      error: (err) =>{
+        Swal.fire({
+          icon: 'error',
+          title: err.error.message || err.error,
+          confirmButtonColor: '#E74C3C'
+        });
+        addResultLaboratory.reset();
+      }
+    })
+    addResultLaboratory.reset();
+  }
+
   saveLaboratoryDoctor(addLaboratoryForm: any) {
     var data = {
       pacient: this.userId,
@@ -170,7 +211,6 @@ export class LaboratoryDoctorComponent implements OnInit {
         this.laboratoryId = id;
         this.laboratoryView = res.laboratory;
         this.AddlaboratoryView = res.laboratory;
-        console.log(this.AddlaboratoryView)
         this.fullNamePacient = res.laboratory.pacient.name + ' ' + res.laboratory.pacient.surname
         this.laboratoryUpdate = res.laboratory;
         this.laboratoryDelete = res.laboratory;
