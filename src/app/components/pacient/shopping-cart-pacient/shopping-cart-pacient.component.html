@@ -1,70 +1,109 @@
 <section class="content">
-    <section class="section-padding mt-5">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-md-9">
-                    <div class="cart_product">
-                        <div class="cart_product_heading">
-                            <div class="row align-items-center">
-                                <div class="col-sm-6 text-lg-left">
-                                    <h4>Shopping Cart
-                                        <span>( 3 Item )</span>
-                                    </h4>
-                                </div>
-                                <div class="col-sm-6 text-lg-right">
-                                    <a href="#" class="btn btn-light btn-medium button-sm d-none d-md-inline-block"><i
-                                            class="ti-trash"></i> Empty
-                                        Cart</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="cart_item">
-                            <div class="cart_item_image">
-                                <img src="assets/img/product/product-1.png" alt="shop">
-                            </div>
-                            <div class="c-item-body mt-4 mt-md-0">
-                                <div class="cart_item_title mb-2">
-                                    <h4>1mg Salmon Omega 3 Fish Oil Capsule</h4>
-                                    <p class="small mb-0 text-muted">bottle of 60 capsules</p>
-                                </div>
-                                <div class="cart_item_price">
-                                    <div class="product-price">
-                                        <span>
-                                            <strong>₹499 </strong>
-                                            <del>₹1,000</del>
-                                            <small class="product-discountPercentage">(50% OFF)</small>
-                                        </span>
-                                    </div>
-                                    <div class="cart_product_remove">
-                                        <a href="#">
-                                            <i class="ti-trash"></i> Remove</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="qty-input btn mt-4 mt-md-0">
-                                <i class="less">-</i>
-                                <input type="text" value="0" />
-                                <i class="more">+</i>
-                            </div>
-                        </div>
-                    </div>
+    <!--TÍTULO DEL COMPONENTE-->
+<div class="head-title">
+    <div class="left">
+      <h1>
+        &nbsp;<i class="fa fa-file" aria-hidden="true"></i> Details Sale
+      </h1>
+      <hr>
+    </div>
+  </div>
+  
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card">
+          <div class="card-body p-4">
+  
+            <div class="row">
+  
+              <div class="col-lg-7">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div>
+                    <p class="mb-1">Shopping cart</p>
+                    <p class="mb-0">You have {{quantityMedicaments}} items in your cart</p>
+                  </div>
                 </div>
-                <div class="col-lg-3 mt-lg-0 mt-6">
-                    <div class="cart-summary">
-                        <div class="cart-summary-wrap">
-                            <h4>Cart Summary</h4>
-                            <p>Sub Total <span>$1250.00</span></p>
-                            <p>Shipping Cost <span>$00.00</span></p>
-                            <h2>Grand Total <span>$1250.00</span></h2>
+  
+                <div *ngFor="let medicament of medicaments" class="card mb-3">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex flex-row align-items-center">
+                        <div class="ms-3">
+                          <h5>{{medicaments.medicament.name}}</h5>
+                          <p class="small mb-0">{{medicaments.medicament.description}}</p>
                         </div>
-                        <div class="cart-summary-button">
-                            <a href="checkout.html" class="btn btn-primary btn-rounded btn-full btn-large">Proceed to
-                                Checkout <i class="ti-arrow-right"></i> </a>
+                      </div>
+                      <div class="d-flex flex-row align-items-center">
+                        <div style="width: 50px;">
+                          <h5 class="fw-normal mb-0">{{medicament.quantity}}</h5>
                         </div>
+                        <div style="width: 80px;">
+                          <h5 class="mb-0">Q.{{medicament.price}}</h5>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
+  
+              <div class="col-lg-5">
+  
+                <div class="card colorDetails text-white rounded-3">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                      <h5 class="mb-0">Sale Details</h5>
+                      <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" class="img-fluid rounded-3"
+                        style="width: 45px;" alt="Avatar">
+                    </div>
+  
+                    <form class="mt-4">
+                      <div class="form-outline form-white mb-4">
+                        <input [(ngModel)]="dataClient.patient" name="clientName" disabled type="text" id="typeName" class="form-control form-control-lg" siez="17">
+                        <label class="form-label" for="typeName">Client Name:</label>
+                      </div>
+  
+                      <div class="form-outline form-white mb-4">
+                        <input [(ngModel)]="dataClient.dpi" name="clientDPI" disabled type="text" id="typeName" class="form-control form-control-lg" siez="17">
+                        <label class="form-label" for="typeText">DPI:</label>
+                      </div>
+  
+                      <div class="form-outline form-white mb-4">
+                        <input [(ngModel)]="dataClient.NIT" name="clientNIT" disabled type="text" id="typeName" class="form-control form-control-lg" siez="17">
+                        <label class="form-label" for="typeText">NIT:</label>
+                      </div>
+                    </form>
+  
+                    <hr class="my-4">
+  
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">SubTotal</p>
+                      <p class="mb-2">Q.{{dataClient.subTotal.toFixed(2)}}</p>
+                    </div>
+  
+                    <div class="d-flex justify-content-between">
+                      <p class="mb-2">IVA</p>
+                      <p class="mb-2">Q.{{dataClient.IVA.toFixed(2)}}</p>
+                    </div>
+  
+                    <div class="d-flex justify-content-between mb-4">
+                      <p class="mb-2">Total</p>
+                      <p class="mb-2">Q.{{dataClient.total.toFixed(2)}}</p>
+                    </div>
+  
+                    <button class="btn btn-primary btn-icon-split">
+                      <span class="icon">
+                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                      </span>
+                      <span class="text">Generate Bill</span>
+                  </button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
 </section>
