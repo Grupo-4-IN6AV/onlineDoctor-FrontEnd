@@ -145,45 +145,72 @@
                     </div>
                     <div class="modal-body">
                         <form (ngSubmit)="saveAppointment(addAppointmentForm)" #addAppointmentForm="ngForm">
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Doctor</mat-label>
-                                    <mat-select [(ngModel)]="appointment.doctor" name="doctor">
-                                        <div *ngFor="let doctor of doctors">
-                                            <mat-option value={{doctor._id}}>{{doctor.name}}
-                                            </mat-option>
+                            <div class="containCards">
+                                <div class="row d-flex justify-content-center align-items-center" *ngIf="showDoctors">
+                                    <div class="form">
+                                        <i class="fa fa-search ms-2"></i>
+                                        <input [(ngModel)]="searchDoctor" name="doctorAppo"
+                                            type="text" class="form-control form-input" placeholder="Buscar Doctor...">
+                                    </div>
+                                </div>
+                                <hr>
+                                <section class="medicament" id="mySkills">
+                                    <div *ngIf="showDoctors">
+                                        <div class="box-medicaments">
+                                            <div *ngFor="let doctor of doctors | searchDoctorBar:searchDoctor">
+                                                <div class="box-medicament">
+                                                    <a>
+                                                        <div class="productMedicament">
+                                                            <img class="img-Medicament"
+                                                                src="https://toppng.com/uploads/preview/stethoscope-icon-2316460-480-doctor-icon-115533927019hztskdd7s.png" alt="">
+                                                            <br>
+                                                            <h3 class="card-title-Medicament">{{doctor.name}}
+                                                            </h3>
+                                                        </div>
+                                                        <button (click)="getDoctor(doctor._id)" type="submit"
+                                                            class="button-card-Medicament">Siguiente</button>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
+                                </section>
+                                <div *ngIf="showDate">
+                                    <div *ngIf="showDate">
+                                        <div class="text-inside">
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <mat-label>Fecha</mat-label>
+                                                <input [(ngModel)]="appointment.date" [min]="actualDate" name="date"
+                                                    matInput [matDatepicker]="picker">
+                                                <mat-datepicker-toggle matSuffix [for]="picker">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="text-inside">
+                                            <mat-form-field class="example-full-width" appearance="outline">
+                                                <mat-label>Modalidad</mat-label>
+                                                <mat-select [(ngModel)]="appointment.modality" name="state">
+                                                    <mat-option value="VIRTUAL">Virtual</mat-option>
+                                                    <mat-option value="PRESENCIAL">Presencial</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <hr />
+                                        <div class="modal-footer justify-content-center">
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                                <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
+                                            </button>
+                                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
 
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Fecha</mat-label>
-                                    <input [(ngModel)]="appointment.date" [min]="actualDate" name="date" matInput
-                                        [matDatepicker]="picker">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-                                </mat-form-field>
-                            </div>
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Modalidad</mat-label>
-                                    <mat-select [(ngModel)]="appointment.modality" name="state">
-                                        <mat-option value="VIRTUAL">Virtual</mat-option>
-                                        <mat-option value="PRESENCIAL">Presencial</mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                            <hr />
-                            <div class="modal-footer justify-content-center">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
-                                </button>
-                                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
-                                </button>
-                            </div>
+
                         </form>
                     </div>
                 </div>

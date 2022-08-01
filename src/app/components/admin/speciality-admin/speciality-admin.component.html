@@ -1,107 +1,111 @@
 <section class="content">
-    <h1 style="margin-top: 4rem">
-      &nbsp;<i class="fa fa-user-md" aria-hidden="true"></i>
-      Especialidad
-    </h1>
-    <hr />
+  <h1 style="margin-top: 4rem">
+    &nbsp;<i class="fa fa-user-md" aria-hidden="true"></i>
+    Especialidad
+  </h1>
+  <hr />
 
-    <div *ngIf="!showTableSpeciality" class="row d-flex justify-content-center align-items-center">
-      <div class="form">
-        <i class="fa fa-search ms-2"></i>
-        <input [(ngModel)]="searchSpeciality" type="text" class="form-control form-input" placeholder="Buscar Especialidad...">
-      </div>
+  <div *ngIf="!showTableSpeciality" class="row d-flex justify-content-center align-items-center">
+    <div class="form">
+      <i class="fa fa-search ms-2"></i>
+      <input [(ngModel)]="searchSpeciality" type="text" class="form-control form-input"
+        placeholder="Buscar Especialidad...">
     </div>
+  </div>
 
-    <div class="text-center mt-2 mb-2">
-      <button type="button" data-bs-toggle="modal" data-bs-target="#addSpeciality" class="ms-3 btn btn-event btn-success">
-        Agregar Especialidad
-        <span class="btn-icon-end"><i class="fa fa-user-md"></i> </span>
-      </button>
-      <button *ngIf="!showTableSpeciality" (click)="showTable()" type="button" class="ms-3 btn btn-event btn-secondary">
-        Tabla de Especialidades
-        <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
-      </button>
-      <button *ngIf="showTableSpeciality" (click)="showTable(); cleanTable()" type="button"
-        class="ms-3 btn btn-event btn-secondary">
-        Ver por Cartas
-        <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
-      </button>
-      <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
-        Inicio
-        <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
-      </button>
-    </div>
-    <hr />
+  <div class="text-center mt-2 mb-2">
+    <button type="button" data-bs-toggle="modal" data-bs-target="#addSpeciality" class="ms-3 btn btn-event btn-success">
+      Agregar Especialidad
+      <span class="btn-icon-end"><i class="fa fa-user-md"></i> </span>
+    </button>
+    <button *ngIf="!showTableSpeciality" (click)="showTable()" type="button" class="ms-3 btn btn-event btn-secondary">
+      Tabla de Especialidades
+      <span class="btn-icon-end"><i class="fas fa-table"></i> </span>
+    </button>
+    <button *ngIf="showTableSpeciality" (click)="showTable(); cleanTable()" type="button"
+      class="ms-3 btn btn-event btn-secondary">
+      Ver por Cartas
+      <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
+    </button>
+    <button routerLink="/admin/home" type="button" class="ms-3 btn btn-event btn-dark">
+      Inicio
+      <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
+    </button>
+  </div>
+  <hr />
 
-    <!--CARDS-->
-    <div *ngIf="!showTableSpeciality">
-      <div class="container">
-        <div class="products-container">
-          <div *ngFor="let speciality of specialities | searchSpecialityTable: searchSpeciality" class="product" data-name="p-1">
-            <h5 class="card-title">{{ speciality.name }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ speciality.description }}</h6>
-            <button (click)="getSpeciality(speciality._id)" class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateSpeciality"
-              class="btn btn-warning m-2">
-              <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
-            </button>
-            <button (click)="deleteSpeciality(speciality._id)" class="btn btn-danger">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-              Eliminar
-            </button>
-            <button (click)="getSpeciality(speciality._id)" data-bs-toggle="modal" data-bs-target="#viewSpeciality"
-              class="btn btn-secondary ms-2">
-              <i class="fa fa-eye" aria-hidden="true"></i>
-              Ver
-            </button>
-          </div>
+  <!--CARDS-->
+  <div *ngIf="!showTableSpeciality">
+    <div class="container">
+      <div class="products-container">
+        <div *ngFor="let speciality of specialities | searchSpecialityTable: searchSpeciality" class="product"
+          data-name="p-1">
+          <h5 class="card-title">{{ speciality.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ speciality.description }}</h6>
+          <button (click)="getSpeciality(speciality._id)" class="btn btn-success m-3" data-bs-toggle="modal"
+            data-bs-target="#updateSpeciality" class="btn btn-warning m-2">
+            <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
+          </button>
+          <button (click)="deleteSpeciality(speciality._id)" class="btn btn-danger">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            Eliminar
+          </button>
+          <button (click)="getSpeciality(speciality._id)" data-bs-toggle="modal" data-bs-target="#viewSpeciality"
+            class="btn btn-secondary ms-2">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            Ver
+          </button>
         </div>
       </div>
     </div>
+  </div>
 
-    <!--View Speciality-->
-    <div>
-      <div class="modal fade" id="viewSpeciality" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="addContainer">
-              <div class="contact-details">
-                <div class="modalHeader">
-                  <div class="editRowModal">
-                    <div *ngIf="specialityView" class="modalHeader clearfix">
-                      <div class="modal-about contact-header">
-                        <div class="contact-details-img">
-                          <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
+  <!--View Speciality-->
+  <div>
+    <div class="modal fade" id="viewSpeciality" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="addContainer">
+            <div class="contact-details">
+              <div class="modalHeader">
+                <div class="editRowModal">
+                  <div *ngIf="specialityView" class="modalHeader clearfix">
+                    <div class="modal-about contact-header">
+                      <div class="contact-details-img">
+                        <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
+                      </div>
+                      <div class="contact-details-heading">
+                        <div class="contact-details-name mb-2">
+                          {{ specialityView.name }}
                         </div>
-                        <div class="contact-details-heading">
-                          <div class="contact-details-name mb-2">
-                            {{ specialityView.name }}
-                          </div>
+                        <div class="badge col-yellow">
+                          Especialidad
                         </div>
                       </div>
                     </div>
                   </div>
-                  <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
-                    <mat-icon>close</mat-icon>
-                  </button>
                 </div>
-                <hr />
-                <div *ngIf="specialityView" class="descripcion">
-                  <div class="count-container">
-                    <div class="box">
-                      <h3>Nombre:</h3>
-                    </div>
+                <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+              <hr />
+              <div *ngIf="specialityView" class="descripcion">
+                <div class="count-container">
+                  <div class="box">
+                    <h3>Nombre:</h3>
+                  </div>
 
-                    <div class="box">
-                      <p>{{ specialityView.name }}</p>
-                    </div>
+                  <div class="box">
+                    <p>{{ specialityView.name }}</p>
+                  </div>
 
-                    <div class="box">
-                      <h3>Descripción:</h3>
-                    </div>
+                  <div class="box">
+                    <h3>Descripción:</h3>
+                  </div>
 
-                    <div class="box">
-                      <p>{{ specialityView.description }}</p>
-                    </div>
+                  <div class="box">
+                    <p>{{ specialityView.description }}</p>
                   </div>
                 </div>
               </div>
@@ -109,73 +113,31 @@
           </div>
         </div>
       </div>
-
-    <!--ADD Speciality-->
-      <div class="modal fade" id="addSpeciality" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h3 class="modal-title" id="modal-basic-title">
-                <i class="fa fa-user-md"></i>
-                &nbsp;Agregar Especialidad
-              </h3>
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form (ngSubmit)="saveSpeciality(addSpecialityForm)" #addSpecialityForm="ngForm">
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Nombre</mat-label>
-                    <input autocomplete="off" [(ngModel)]="speciality.name" name="name" matInput />
-                  </mat-form-field>
-                </div>
-                <div class="text-inside">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Descripción</mat-label>
-                    <input autocomplete="off" [(ngModel)]="speciality.description" name="description" matInput />
-                  </mat-form-field>
-                </div>
-                <hr />
-                <div class="modal-footer justify-content-center">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                    <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
-                  </button>
-                  <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
-
-
-    <!--UPDATE USER-->
-    <div class="modal fade" id="updateSpeciality" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!--ADD Speciality-->
+    <div class="modal fade" id="addSpeciality" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h3 class="modal-title" id="modal-basic-title">
-              <i class="fas fa-pencil" aria-hidden="true"></i>
-              &nbsp;Editar Epecialidad
+              <i class="fa fa-user-md"></i>
+              &nbsp;Agregar Especialidad
             </h3>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form (ngSubmit)="updateSpeciality()" *ngIf="specialityUpdate">
+            <form (ngSubmit)="saveSpeciality(addSpecialityForm)" #addSpecialityForm="ngForm">
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Nombre</mat-label>
-                  <input autocomplete="off" [(ngModel)]="specialityUpdate.name" name="name" matInput />
+                  <input autocomplete="off" [(ngModel)]="speciality.name" name="name" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Descripción</mat-label>
-                  <input autocomplete="off" [(ngModel)]="specialityUpdate.description" name="description" matInput />
+                  <input autocomplete="off" [(ngModel)]="speciality.description" name="description" matInput />
                 </mat-form-field>
               </div>
               <hr />
@@ -192,109 +154,160 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <!--TABLE-->
-    <div *ngIf="showTableSpeciality" class="row clearfix mt-5">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card">
-          <div class="materialTableHeader mb-3">
-            <div class="row">
-              <div class="col-8">
-                <ul class="header-buttons-left ml-0">
-                  <li class="dropdown">
-                    <div class="header">
-                      <h2>Tabla de Especialidades </h2>
-                    </div>
-                  </li>
-                  <li class="dropdown m-l-20">
-                    <label for="search-input">
-                      <i class="material-icons search-icon">search</i>
-                    </label>
-                    <input [(ngModel)]="searchSpeciality" placeholder="Buscar Especialidad.." type="text" #filter
-                      class="browser-default search-field" aria-label="Search box" />
-                  </li>
-                  <li *ngIf="buttonActions">
-                    <div class="icon-button-demo m-l-10">
-                      <button (click)="deleteSpeciality(specialityDelete._id)" mat-mini-fab color="warn">
-                        <mat-icon class="col-white">delete
-                        </mat-icon>
-                      </button>
-                    </div>
-                  </li>
 
-                  <li>
-                    <i *ngIf="!specialityNameUp && !specialityNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()"></i>
-                    <i *ngIf="!specialityNameUp && !specialityNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()"></i>
-                  </li>
 
-                  <li>
-                    <i *ngIf="specialityNameUp && !specialityNameDown" class="fa fa-sort-alpha-asc ms-3" (click)="getByUp()" style="color: #4a8af9;"></i>
-                    <i *ngIf="specialityNameUp && !specialityNameDown" class="fa fa-sort-alpha-desc text-gray-400 ms-3" (click)="getByDown()"></i>
-                  </li>
+  <!--UPDATE USER-->
+  <div class="modal fade" id="updateSpeciality" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-basic-title">
+            <i class="fas fa-pencil" aria-hidden="true"></i>
+            &nbsp;Editar Epecialidad
+          </h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="updateSpeciality()" *ngIf="specialityUpdate">
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input autocomplete="off" [(ngModel)]="specialityUpdate.name" name="name" matInput />
+              </mat-form-field>
+            </div>
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Descripción</mat-label>
+                <input autocomplete="off" [(ngModel)]="specialityUpdate.description" name="description" matInput />
+              </mat-form-field>
+            </div>
+            <hr />
+            <div class="modal-footer justify-content-center">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
+              </button>
+              <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
-                  <li>
-                    <i *ngIf="!specialityNameUp && specialityNameDown" class="fa fa-sort-alpha-asc text-gray-400 ms-3" (click)="getByUp()"></i>
-                    <i *ngIf="!specialityNameUp && specialityNameDown" class="fa fa-sort-alpha-desc ms-3" (click)="getByDown()" style="color: #4a8af9;"></i>
-                  </li>
+  <!--TABLE-->
+  <div *ngIf="showTableSpeciality" class="row clearfix mt-5">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="card">
+        <div class="materialTableHeader mb-3">
+          <div class="row">
+            <div class="col-8">
+              <ul class="header-buttons-left ml-0">
+                <li class="dropdown">
+                  <div class="header">
+                    <h2>Tabla de Especialidades </h2>
+                  </div>
+                </li>
+                <li class="dropdown m-l-20">
+                  <label for="search-input">
+                    <i class="material-icons search-icon">search</i>
+                  </label>
+                  <input [(ngModel)]="searchSpeciality" placeholder="Buscar Especialidad.." type="text" #filter
+                    class="browser-default search-field" aria-label="Search box" />
+                </li>
 
-                  <li>
-                    <i *ngIf="specialityNameUp || specialityNameDown" (click)="cleanTable()"
+                <li>
+                  <i *ngIf="!specialityNameUp && !specialityNameDown" class="fa fa-sort-alpha-asc ms-3"
+                    (click)="getByUp()"></i>
+                  <i *ngIf="!specialityNameUp && !specialityNameDown" class="fa fa-sort-alpha-desc ms-3"
+                    (click)="getByDown()"></i>
+                </li>
+
+                <li>
+                  <i *ngIf="specialityNameUp && !specialityNameDown" class="fa fa-sort-alpha-asc ms-3"
+                    (click)="getByUp()" style="color: #4a8af9;"></i>
+                  <i *ngIf="specialityNameUp && !specialityNameDown" class="fa fa-sort-alpha-desc text-gray-400 ms-3"
+                    (click)="getByDown()"></i>
+                </li>
+
+                <li>
+                  <i *ngIf="!specialityNameUp && specialityNameDown" class="fa fa-sort-alpha-asc text-gray-400 ms-3"
+                    (click)="getByUp()"></i>
+                  <i *ngIf="!specialityNameUp && specialityNameDown" class="fa fa-sort-alpha-desc ms-3"
+                    (click)="getByDown()" style="color: #4a8af9;"></i>
+                </li>
+
+                <li>
+                  <i *ngIf="specialityNameUp || specialityNameDown" (click)="cleanTable()"
                     class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
-                  </li>
+                </li>
 
-                  <li *ngIf="buttonActions">
-                    <div class="icon-button-demo m-l-10">
-                      <button data-bs-toggle="modal" data-bs-target="#updateSpeciality" mat-mini-fab class="colorUpdate">
-                        <mat-icon class="col-white">edit
-                        </mat-icon>
-                      </button>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+                <li *ngIf="buttonActions">
+                  <div class="icon-button-demo m-l-10">
+                    <button (click)="deleteSpeciality(specialityDelete._id)" mat-mini-fab color="warn">
+                      <mat-icon class="col-white">delete
+                      </mat-icon>
+                    </button>
+                  </div>
+                </li>
+                <li *ngIf="buttonActions">
+                  <div class="icon-button-demo m-l-10">
+                    <button data-bs-toggle="modal" data-bs-target="#updateSpeciality" mat-mini-fab class="colorUpdate">
+                      <mat-icon class="col-white">edit
+                      </mat-icon>
+                    </button>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
-          <div class="tableBody">
-            <div class="table-responsive">
-              <i *ngIf="" (click)="cleanTable()" class="fa fa-times-circle closeFilter" aria-hidden="true">
-              </i>
-              <table class="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th class="text-center">#</th>
-                    <th>Foto</th>
-                    <th>Nombre</th>
-                    <th>Descripción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let speciality of specialities | searchSpecialityTable: searchSpeciality">
-                    <td (click)="getSpeciality(speciality._id)">
-                      <mat-checkbox *ngIf="speciality.checked==true || controloClick==0"
-                       #check="matCheckbox" (click)="showButtonActions(speciality._id, check); getSpeciality(speciality._id)" class="example-margin" color="primary">
-                      </mat-checkbox>
-                      <mat-checkbox disabled="" *ngIf="speciality.checked==false" class="example-margin" color="primary">
-                      </mat-checkbox>
-                      {{ specialities.indexOf(speciality) + 1 }}
-                    </td>
-                    <td (click)="getSpeciality(speciality._id)" class="table-img">
-                      <img src="assets/images/user/user8.jpg" alt="" />
-                    </td>
-                    <td (click)="getSpeciality(speciality._id)" data-bs-toggle="modal" data-bs-target="#viewSpeciality">{{ speciality.name }}</td>
-                    <td (click)="getSpeciality(speciality._id)" data-bs-toggle="modal" data-bs-target="#viewSpeciality">{{ speciality.description }}</td>
-                  </tr>
-                  <tr rowspan="9" *ngIf="notFound === true">
-                    <td colspan="9" class="text-center">Especialidad no encontrada</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        </div>
+        <div class="tableBody">
+          <div class="table-responsive">
+            <i *ngIf="" (click)="cleanTable()" class="fa fa-times-circle closeFilter" aria-hidden="true">
+            </i>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Foto</th>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let speciality of specialities | searchSpecialityTable: searchSpeciality">
+                  <td (click)="getSpeciality(speciality._id)">
+                    <mat-checkbox *ngIf="speciality.checked==true || controloClick==0" #check="matCheckbox"
+                      (click)="showButtonActions(speciality._id, check); getSpeciality(speciality._id)"
+                      class="example-margin" color="primary">
+                    </mat-checkbox>
+                    <mat-checkbox disabled="" *ngIf="speciality.checked==false" class="example-margin" color="primary">
+                    </mat-checkbox>
+                    {{ specialities.indexOf(speciality) + 1 }}
+                  </td>
+                  <td (click)="getSpeciality(speciality._id)" class="table-img">
+                    <img src="assets/images/user/user8.jpg" alt="" />
+                  </td>
+                  <td (click)="getSpeciality(speciality._id)" data-bs-toggle="modal" data-bs-target="#viewSpeciality">{{
+                    speciality.name }}</td>
+                  <td (click)="getSpeciality(speciality._id)" data-bs-toggle="modal" data-bs-target="#viewSpeciality">{{
+                    speciality.description }}</td>
+                </tr>
+                <tr rowspan="9" *ngIf="notFound === true">
+                  <td colspan="9" class="text-center">Especialidad no encontrada</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-    <h1 *ngIf="notFound === true && showTableSpeciality === false" class="text-center">
-      Especialidad no encontrada
-    </h1>
-  </section>
-
+  </div>
+  <h1 *ngIf="notFound === true && showTableSpeciality === false" class="text-center">
+    Especialidad no encontrada
+  </h1>
+</section>

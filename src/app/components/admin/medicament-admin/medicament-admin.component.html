@@ -8,7 +8,8 @@
   <div *ngIf="!showTableMedicament" class="row d-flex justify-content-center align-items-center">
     <div class="form">
       <i class="fa fa-search ms-2"></i>
-      <input [(ngModel)]="searchMedicament" type="text" class="form-control form-input" placeholder="Buscar Medicamento...">
+      <input [(ngModel)]="searchMedicament" type="text" class="form-control form-input"
+        placeholder="Buscar Medicamento...">
     </div>
   </div>
 
@@ -55,7 +56,8 @@
             <i class="fa fa-eye" aria-hidden="true"></i>
             Ver
           </button>
-          <button (click)="getMedicament(medicament._id);" type="button" class="btn btn-sample ms-2" data-bs-toggle="modal" data-bs-target="#uploadImage">
+          <button (click)="getMedicament(medicament._id);" type="button" class="btn btn-sample ms-2"
+            data-bs-toggle="modal" data-bs-target="#uploadImage">
             <i class="fa fa-image" aria-hidden="true"></i>
             &nbsp; Cargar Imagen
           </button>
@@ -76,13 +78,17 @@
                   <div *ngIf="medicamentView" class="modalHeader clearfix">
                     <div class="modal-about contact-header">
                       <div class="contact-details-img">
-                        <img *ngIf="!medicamentView.image" src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
-                        <img style="object-fit: cover;" *ngIf="medicamentView.image" src="{{uri}}" crossorigin="anonymous"
+                        <img *ngIf="!medicamentView.image" src="../../../../assets/images/user/usrbig2.jpg"
                           alt="avatar" />
+                        <img style="object-fit: cover;" *ngIf="medicamentView.image" src="{{uri}}"
+                          crossorigin="anonymous" alt="avatar" />
                       </div>
                       <div class="contact-details-heading">
                         <div class="contact-details-name mb-2">
                           {{ medicamentView.name }}
+                        </div>
+                        <div class="badge col-yellow">
+                          Medicamento
                         </div>
                       </div>
                     </div>
@@ -196,13 +202,13 @@
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Precio</mat-label>
-                  <input autocomplete="off" [(ngModel)]="medicament.price" name="price" matInput />
+                  <input type="number" autocomplete="off" [(ngModel)]="medicament.price" name="price" matInput />
                 </mat-form-field>
               </div>
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Existencia</mat-label>
-                  <input autocomplete="off" [(ngModel)]="medicament.stock" name="stock" matInput />
+                  <input type="number" autocomplete="off" [(ngModel)]="medicament.stock" name="stock" matInput />
                 </mat-form-field>
               </div>
               <hr />
@@ -305,14 +311,6 @@
                   <input [(ngModel)]="searchMedicament" placeholder="Buscar Medicamento.." type="text" #filter
                     class="browser-default search-field" aria-label="Search box" />
                 </li>
-                <li *ngIf="buttonActions">
-                  <div class="icon-button-demo m-l-10">
-                    <button (click)="deleteMedicament(medicamentDelete._id)" mat-mini-fab color="warn">
-                      <mat-icon class="col-white">delete
-                      </mat-icon>
-                    </button>
-                  </div>
-                </li>
 
                 <li>
                   <i *ngIf="!medicamentNameUp && !medicamentNameDown" class="fa fa-sort-alpha-asc ms-3"
@@ -340,6 +338,14 @@
                     class="fa fa-times-circle closeFilter ms-4" aria-hidden="true"></i>
                 </li>
 
+                <li *ngIf="buttonActions">
+                  <div class="icon-button-demo m-l-10">
+                    <button (click)="deleteMedicament(medicamentDelete._id)" mat-mini-fab color="warn">
+                      <mat-icon class="col-white">delete
+                      </mat-icon>
+                    </button>
+                  </div>
+                </li>
                 <li *ngIf="buttonActions">
                   <div class="icon-button-demo m-l-10">
                     <button data-bs-toggle="modal" data-bs-target="#updateMedicament" mat-mini-fab class="colorUpdate"
@@ -383,23 +389,23 @@
                     {{ medicaments.indexOf(medicament) + 1 }}
                   </td>
                   <td (click)="getMedicament(medicament._id)" class="table-img">
-                    <img *ngIf="medicament.image===undefined" style="object-fit: cover;" src="assets/images/user/user8.jpg"
-                      crossorigin="anonymous" alt="" />
-                    <img *ngIf="medicament.image!==undefined" style="object-fit: cover;" src="{{uriMedicaments+medicament.image}}"
-                      crossorigin="anonymous" alt="" />
+                    <img *ngIf="medicament.image===undefined" style="object-fit: cover;"
+                      src="assets/images/user/user8.jpg" crossorigin="anonymous" alt="" />
+                    <img *ngIf="medicament.image!==undefined" style="object-fit: cover;"
+                      src="{{uriMedicaments+medicament.image}}" crossorigin="anonymous" alt="" />
                   </td>
-                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                    data-bs-target="#viewMedicament">{{ medicament.name }}</td>
-                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                    data-bs-target="#viewMedicament">{{ medicament.description }}</td>
-                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                    data-bs-target="#viewMedicament">{{ medicament.typeMedicament.name }}</td>
-                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                    data-bs-target="#viewMedicament">{{ medicament.price }}</td>
-                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                    data-bs-target="#viewMedicament">{{ medicament.stock }}</td>
-                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                    data-bs-target="#viewMedicament">{{ medicament.sales }}</td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal" data-bs-target="#viewMedicament">{{
+                    medicament.name }}</td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal" data-bs-target="#viewMedicament">{{
+                    medicament.description }}</td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal" data-bs-target="#viewMedicament">{{
+                    medicament.typeMedicament.name }}</td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal" data-bs-target="#viewMedicament">{{
+                    medicament.price }}</td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal" data-bs-target="#viewMedicament">{{
+                    medicament.stock }}</td>
+                  <td (click)="getMedicament(medicament._id)" data-bs-toggle="modal" data-bs-target="#viewMedicament">{{
+                    medicament.sales }}</td>
                   <td *ngIf="medicament.availibility === false" (click)="getMedicament(medicament._id)"
                     data-bs-toggle="modal" data-bs-target="#viewMedicament">No Disponible</td>
                   <td *ngIf="medicament.availibility === true" (click)="getMedicament(medicament._id)"

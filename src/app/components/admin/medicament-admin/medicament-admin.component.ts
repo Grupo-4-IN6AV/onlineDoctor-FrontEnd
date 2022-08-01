@@ -137,11 +137,11 @@ export class MedicamentAdminComponent implements OnInit {
 
   deleteMedicament(id: string) {
     Swal.fire({
-      title: 'Do you want to delete this Medicament?',
+      title: 'Quires eliminar este Medicamento?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -166,7 +166,7 @@ export class MedicamentAdminComponent implements OnInit {
         })
         this.getMedicaments();
       } else if (result.isDenied) {
-        Swal.fire('Medicament Not Deleted', '', 'info')
+        Swal.fire('Medicamento No Eliminado', '', 'info')
       }
     })
   }

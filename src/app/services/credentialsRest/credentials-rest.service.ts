@@ -24,7 +24,7 @@ export class CredentialsRestService
   login(params: {})
   {
     let body = JSON.stringify(params); //CONVERTIR A JSON
-    return this.http.post(environment.baseURI + 'user/login', body, {headers: this.httpOptions});
+    return this.http.post(environment.baseURI + 'user/login', body, { headers: this.httpOptions });
   }
 
   getToken(){

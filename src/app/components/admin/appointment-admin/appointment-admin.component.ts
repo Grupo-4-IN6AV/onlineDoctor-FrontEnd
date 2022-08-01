@@ -42,6 +42,9 @@ export class AppointmentAdminComponent implements OnInit {
   controloClick: number = 0;
   actualDate : any;
 
+  newDate:any;
+  OnlyOneDate: any;
+
   //Opciones de Calendarios
   calendarOptions: CalendarOptions = {initialView:'dayGridMonth', events:[]};
   showCalendarAppointments: any;
@@ -70,7 +73,7 @@ export class AppointmentAdminComponent implements OnInit {
         var availableEventsArray = [];
         for( let appointment of this.appointments){
           var appointmentID = appointment._id;
-          var nameAppointment = 'Apointment'+'Dr. ' + appointment.doctor.name + ' ' + 'Pacient.' + appointment.pacient.name;
+          var nameAppointment = 'Apointment '+'Dr. ' + appointment.doctor.name + ' ' + 'Pacient.' + appointment.pacient.name;
           var actualDate = appointment.date.split('T');
           calendarArray.push({
             title: nameAppointment,
@@ -79,6 +82,12 @@ export class AppointmentAdminComponent implements OnInit {
             className: "fc-event-primary"
           })
         }
+        var arrayDate = [];
+        for(let date of res.appointmentsExist){
+          const newDate = date.date.split('T');
+          arrayDate.push(newDate[0])
+        }
+        this.newDate = arrayDate;
         this.calendarOptions.events = calendarArray;
       },
       error: (err) => console.log(err)
@@ -130,6 +139,8 @@ export class AppointmentAdminComponent implements OnInit {
         this.appointmentView = res.appointment;
         this.appointmentUpdate = res.appointment;
         this.appointmentDelete = res.appointment;
+        let split = res.appointment.date.split('T');
+        this.OnlyOneDate = split[0];
       },
       error: (err) => {
         Swal.fire({
@@ -164,11 +175,11 @@ export class AppointmentAdminComponent implements OnInit {
 
   deleteAppointment(id: string) {
     Swal.fire({
-      title: 'Do you want to delete this Appointment?',
+      title: 'Quieres eliminar esta cita?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -193,7 +204,7 @@ export class AppointmentAdminComponent implements OnInit {
         })
         this.getAppointments();
       } else if (result.isDenied) {
-        Swal.fire('Appointment Not Deleted', '', 'info')
+        Swal.fire('Cita No Eliminada', '', 'info')
       }
     })
   }

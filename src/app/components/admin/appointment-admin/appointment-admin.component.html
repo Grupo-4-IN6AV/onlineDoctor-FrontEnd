@@ -39,7 +39,7 @@
                 <div *ngFor="let appointment of appointments | searchAppointmentBar: searhApointment" class="product"
                     data-name="p-1">
                     <h5 class="card-title">{{ appointment.pacient.name }} | {{ appointment.doctor.name }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ appointment.date }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{newDate[appointments.indexOf(appointment)]}}</h6>
                     <button (click)="getAppointment(appointment._id); getUsers(); getDoctors()"
                         class="btn btn-success m-3" data-bs-toggle="modal" data-bs-target="#updateAppointment"
                         class="btn btn-warning m-2">
@@ -58,7 +58,7 @@
                     <button *ngIf="appointment.modality == 'VIRTUAL'" data-bs-toggle="modal"
                         [routerLink]="['/admin/meeting/' + appointment._id]" class="btn btn-success ms-2">
                         <i class="fa fa-eye" aria-hidden="true"></i>
-                        Join the meeting
+                        Entrar a la reunion
                     </button>
                 </div>
             </div>
@@ -82,7 +82,10 @@
                                             </div>
                                             <div class="contact-details-heading">
                                                 <div class="contact-details-name mb-2">
-                                                    {{ appointmentView.modality }}
+                                                    {{ appointmentView.pacient.name }} | Dr.{{ appointmentView.doctor.name }}
+                                                </div>
+                                                <div class="badge col-yellow">
+                                                    Cita
                                                 </div>
                                             </div>
                                         </div>
@@ -100,7 +103,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <p>{{ appointmentView.pacient.name }}</p>
+                                        <p>{{ appointmentView.pacient.name }} {{ appointmentView.pacient.surname }}</p>
                                     </div>
 
                                     <div class="box">
@@ -108,7 +111,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <p>{{ appointmentView.doctor.name }}</p>
+                                        <p>{{ appointmentView.doctor.name }} {{ appointmentView.doctor.surname }}</p>
                                     </div>
 
                                     <div class="box">
@@ -116,7 +119,7 @@
                                     </div>
 
                                     <div class="box">
-                                        <p>{{ appointmentView.date }}</p>
+                                        <p>{{ OnlyOneDate }}</p>
                                     </div>
 
                                     <div class="box">
@@ -175,8 +178,10 @@
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
                                     <mat-label>Fecha</mat-label>
-                                    <input autocomplete="off" type="date" [(ngModel)]="appointment.date" name="date"
-                                        matInput />
+                                    <input [(ngModel)]="appointment.date" [min]="actualDate" name="date" matInput
+                                        [matDatepicker]="picker">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
                                 </mat-form-field>
                             </div>
 
@@ -246,8 +251,10 @@
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Fecha</mat-label>
-                                <input autocomplete="off" type="date" [(ngModel)]="appointmentUpdate.date" name="date"
-                                    matInput />
+                                <input [(ngModel)]="appointmentUpdate.date" [min]="actualDate" name="date" matInput
+                                    [matDatepicker]="picker">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
                         </div>
                         <div class="text-inside">
@@ -353,7 +360,7 @@
                                     <td (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewAppointment">{{ appointment.doctor.name }}</td>
                                     <td (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewAppointment">{{ appointment.date }}</td>
+                                        data-bs-target="#viewAppointment">{{newDate[appointments.indexOf(appointment)]}}</td>
                                     <td (click)="getAppointment(appointment._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewAppointment">{{ appointment.modality }}</td>
                                 </tr>
