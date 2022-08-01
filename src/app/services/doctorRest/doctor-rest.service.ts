@@ -24,52 +24,52 @@ export class DoctorRestService {
   //FUNCIONES DE ADMINISTRADOR//
   getDoctors()
   {
-    return this.http.get(environment.baseURI + 'doctor/getDoctors', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'doctor/getDoctors', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   saveDoctor(params:{})
   {
-    return this.http.post(environment.baseURI + 'doctor/saveDoctorAdmin', params, { headers: this.httpOptions });
+    return this.http.post(environment.baseURI + 'doctor/saveDoctorAdmin', params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   updateDoctor(id:string, params:{})
   {
-    return this.http.put(environment.baseURI + 'doctor/updateDoctorAdmin/' + id, params, { headers: this.httpOptions });
+    return this.http.put(environment.baseURI + 'doctor/updateDoctorAdmin/' + id, params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getDoctor(id:string)
   {
-    return this.http.get(environment.baseURI + 'doctor/getDoctor/' + id, { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'doctor/getDoctor/' + id, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   searchDoctor(params:{ })
   {
-    return this.http.post(environment.baseURI + 'doctor/searchDoctor/', params, { headers: this.httpOptions });
+    return this.http.post(environment.baseURI + 'doctor/searchDoctor/', params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   deleteDoctor(id:string, params:{})
   {
-    return this.http.post(environment.baseURI + 'doctor/deleteDoctorAdmin/' + id, params, { headers: this.httpOptions });
+    return this.http.post(environment.baseURI + 'doctor/deleteDoctorAdmin/' + id, params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getDoctorName(params:{})
   {
-    return this.http.post(environment.baseURI + 'doctor/getDoctorByName', params, {headers: this.httpOptions});
+    return this.http.post(environment.baseURI + 'doctor/getDoctorByName', params, {headers: this.httpOptions.set('Authorization', this.credentialReset.getToken())});
   }
 
   getDoctorsByUp()
   {
-    return this.http.get(environment.baseURI + 'doctor/getDoctorAtoZ', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'doctor/getDoctorAtoZ', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getDoctorsByDown()
   {
-    return this.http.get(environment.baseURI + 'doctor/getDoctorZtoA', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'doctor/getDoctorZtoA', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getSpecialities()
   {
-    return this.http.get(environment.baseURI + 'speciality/getSpecialities', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'speciality/getSpecialities', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   //Implementación de Imágenes//

@@ -20,50 +20,50 @@ export class TypeLaboratoryRestService {
 
   getTypesLaboratory()
   {
-    return this.http.get(environment.baseURI + 'typeLaboratory/getTypesLaboratory', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'typeLaboratory/getTypesLaboratory', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   saveTypeLaboratory(params:{})
   {
-    return this.http.post(environment.baseURI + 'typeLaboratory/saveTypeLaboratory', params, { headers: this.httpOptions });
+    return this.http.post(environment.baseURI + 'typeLaboratory/saveTypeLaboratory', params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getTypeLaboratory(id:string)
   {
-    return this.http.get(environment.baseURI + 'typeLaboratory/getTypeLaboratory/' + id, { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'typeLaboratory/getTypeLaboratory/' + id, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   updateTypeLaboratory(id:string, params:{})
   {
-    return this.http.put(environment.baseURI + 'typeLaboratory/updateTypeLaboratory/' + id, params, { headers: this.httpOptions });
+    return this.http.put(environment.baseURI + 'typeLaboratory/updateTypeLaboratory/' + id, params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   deleteTypeLaboratory(id:string)
   {
-    return this.http.delete(environment.baseURI + 'typeLaboratory/deleteTypeLaboratory/' + id, { headers: this.httpOptions });
+    return this.http.delete(environment.baseURI + 'typeLaboratory/deleteTypeLaboratory/' + id, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getTypeLaboratoryName(params:{})
   {
-    return this.http.post(environment.baseURI + 'typeLaboratory/getTypeLaboratoryByName', params, {headers: this.httpOptions});
+    return this.http.post(environment.baseURI + 'typeLaboratory/getTypeLaboratoryByName', params, {headers: this.httpOptions.set('Authorization', this.credentialReset.getToken())});
   }
 
   getTypeLaboratorysByUp()
   {
-    return this.http.get(environment.baseURI + 'typeLaboratory/getTypeLaboratoryAtoZ', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'typeLaboratory/getTypeLaboratoryAtoZ', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getTypeLaboratorysByDown()
   {
-    return this.http.get(environment.baseURI + 'typeLaboratory/getTypeLaboratoryZtoA', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'typeLaboratory/getTypeLaboratoryZtoA', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
   getTypesLaboratoryDoctor()
   {
-    return this.http.get(environment.baseURI + 'typeLaboratory/getTypesLaboratoryDoctor', { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'typeLaboratory/getTypesLaboratoryDoctor', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
   getTypeLaboratoryDoctor(id:string)
   {
-    return this.http.get(environment.baseURI + 'typeLaboratory/getTypeLaboratoryDoctor/' + id, { headers: this.httpOptions });
+    return this.http.get(environment.baseURI + 'typeLaboratory/getTypeLaboratoryDoctor/' + id, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 }
