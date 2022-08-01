@@ -167,7 +167,7 @@ export class AdminUserComponent implements OnInit {
             this.showButtonActions(this.userUpdate._id, false)
           };
         }
-          
+
         })
         this.getUsers();
       } else if (result.isDenied) {
@@ -195,6 +195,7 @@ export class AdminUserComponent implements OnInit {
         this.userNameDown = this.reset;
         this.userNameUp = res.UsuariosAtoZ
         this.users = res.UsuariosAtoZ
+        console.log(this.users)
       },
       error: (err) => console.log(err)
     })

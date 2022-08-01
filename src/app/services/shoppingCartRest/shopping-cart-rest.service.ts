@@ -17,11 +17,13 @@ export class ShoppingCartRestService {
     private http: HttpClient,
   ) { }
 
-  createShoppingCart(params: {}){
-    return this.http.post(environment.baseURI + 'shoppingCart/createShoppingCart', params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()).set('Authorization', this.credentialReset.getToken()) });
+  createShoppingCart(params: {})
+  {
+    return this.http.post(environment.baseURI + 'shoppingCart/createShoppingCart', params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
-  getShoppingCart(){
-    return this.http.get(environment.baseURI + 'shoppingCart/getShoppingCart', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()).set('Authorization', this.credentialReset.getToken()) });
+  getShoppingCart()
+  {
+    return this.http.get(environment.baseURI + 'shoppingCart/getShoppingCart', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 }
