@@ -14,6 +14,7 @@ export class DoctorModel {
         public role: string,
         public checked: boolean,
         public identifier: string,
+        public speciality: string,
     ){}
   }
   

@@ -13,7 +13,7 @@
   </div>
 
   <div class="text-center mt-2 mb-2">
-    <button type="button" data-bs-toggle="modal" data-bs-target="#addUser" class="ms-3 btn btn-event btn-success">
+    <button type="button" (click)="getSpecialities()" data-bs-toggle="modal" data-bs-target="#addUser" class="ms-3 btn btn-event btn-success">
       Agregar Doctor
       <span class="btn-icon-end"><i class="fa-solid fa-user-nurse"></i> </span>
     </button>
@@ -41,16 +41,16 @@
           <h5 class="card-title">{{ doctor.name }} {{ doctor.surname }}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ doctor.username }}</h6>
           <p class="card-text">{{ doctor.role }}</p>
-          <button (click)="getDoctor(doctor._id)" class="btn btn-success m-3" data-bs-toggle="modal"
+          <button (click)="getDoctor(doctor._id); getSpecialities()" class="btn btn-success m-3" data-bs-toggle="modal"
             data-bs-target="#updateDoctor" class="btn btn-warning m-2">
             <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
           </button>
-          <button (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#deleteDoctor"
+          <button (click)="deleteDoctor(doctor._id); getSpecialities()" data-bs-toggle="modal" data-bs-target="#deleteDoctor"
             class="btn btn-danger">
             <i class="fa fa-trash" aria-hidden="true"></i>
             Eliminar
           </button>
-          <button (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser"
+          <button (click)="getDoctor(doctor._id); getSpecialities()" data-bs-toggle="modal" data-bs-target="#viewUser"
             class="btn btn-secondary ms-2">
             <i class="fa fa-eye" aria-hidden="true"></i>
             Ver
@@ -102,7 +102,7 @@
                   <div class="box">
                     <h3>Apellido:</h3>
                   </div>
-                  <div *ngIf="doctorView.surname" class="box">
+                  <div class="box">
                     <p>{{ doctorView.surname }}</p>
                   </div>
                   <div *ngIf="!doctorView.surname" class="box">
@@ -119,7 +119,7 @@
                   <div class="box">
                     <h3>DPI:</h3>
                   </div>
-                  <div *ngIf="doctorView.DPI" class="box">
+                  <div class="box">
                     <p>{{ doctorView.DPI }}</p>
                   </div>
                   <div *ngIf="!doctorView.DPI" class="box">
@@ -146,7 +146,7 @@
                   <div class="box">
                     <h3>Edad</h3>
                   </div>
-                  <div *ngIf="doctorView.age" class="box">
+                  <div class="box">
                     <p>{{ doctorView.age }}</p>
                   </div>
                   <div *ngIf="!doctorView.age" class="box">
@@ -162,6 +162,17 @@
                   <div *ngIf="doctorView.gender == 'FEMALE'" class="box">
                     <p>Femenino</p>
                   </div>
+                  
+                  <div class="box">
+                    <h3>Especialidad</h3>
+                  </div>
+                  <div *ngIf="doctorView.speciality" class="box">
+                    <p>{{ doctorView.speciality.name }}</p>
+                  </div>
+                  <div *ngIf="!doctorView.speciality" class="box">
+                    <p>-Medico General-</p>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -246,13 +257,13 @@
                   <input autocomplete="off" [(ngModel)]="doctor.collegiateNumber" name="collegiateNumber" matInput />
                 </mat-form-field>
               </div>
-              <hr />
               <div class="text-inside">
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Especialidad</mat-label>
-                  <mat-select [(ngModel)]="doctor.gender" name="gender">
-                    <mat-option value="MALE">MASCULINO</mat-option>
-                    <mat-option value="FEMALE">FEMENINO</mat-option>
+                  <mat-select [(ngModel)]="doctor.speciality" name="speciality">
+                      <mat-option *ngFor="let speciality of specialities" 
+                        value={{speciality._id}}>{{speciality.name}}
+                      </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -336,7 +347,16 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <hr />
+            <div class="text-inside">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Especialidad</mat-label>
+                <mat-select [(ngModel)]="doctorUpdate.speciality._id" name="speciality">
+                    <mat-option *ngFor="let speciality of specialities" 
+                      value={{speciality._id}}>{{speciality.name}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <div class="modal-footer justify-content-center">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                 <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
@@ -517,7 +537,7 @@
                   <th>Tel</th>
                   <th>Edad</th>
                   <th>Genero</th>
-                  <th>Rol</th>
+                  <th>Especialidad</th>
                 </tr>
               </thead>
               <tbody>
@@ -552,15 +572,11 @@
                   </td>
                   <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.age }}
                   </td>
-                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.gender
-                    }}
-                  </td>
-                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser" align="center">
-                    <div *ngIf="doctor.role === 'DOCTOR'" data-bs-toggle="modal" data-bs-target="#viewUser"
-                      class="badge col-yellow">
-                      {{ doctor.role }}
-                    </div>
-                  </td>
+                  <td *ngIf="doctor.gender === 'MALE'" (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">Masculino</td>
+                  <td *ngIf="doctor.gender === 'FEMALE'" (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">Femenino</td>
+                  <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.speciality.name
+                  }}
+                </td>
                 </tr>
                 <tr rowspan="11" *ngIf="notFound === true">
                   <td colspan="11" class="text-center">Doctor no Encontrado</td>
