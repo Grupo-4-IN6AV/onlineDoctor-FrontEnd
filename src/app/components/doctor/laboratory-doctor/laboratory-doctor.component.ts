@@ -31,6 +31,7 @@ export class LaboratoryDoctorComponent implements OnInit {
   laboratory: LaboratoryModel;
   searchLaboratory: any;
   laboratoryView: any;
+  AddlaboratoryView: any;
   laboratoryUpdate: any;
   laboratoryDelete: any;
   showTableLaboratory: boolean = false;
@@ -48,6 +49,7 @@ export class LaboratoryDoctorComponent implements OnInit {
   calendarOptions:CalendarOptions = {initialView: 'dayGridMonth', events: []};
   namePacient: any;
   showCalendarLaboratories:any;
+  example:any = 'Text example';
 
   //Variables de usuarios
   users:any;
@@ -55,6 +57,7 @@ export class LaboratoryDoctorComponent implements OnInit {
   showUsers: boolean = true;
   searchUser:any;
   updateLaboratory: any;
+  fullNamePacient: any;
 
 
   
@@ -105,7 +108,7 @@ export class LaboratoryDoctorComponent implements OnInit {
 
   getUsersDoctor() {
     this.userRest.getUsersDoctor().subscribe({
-      next: (res: any) => {this.users = res.users, console.log(this.users)},
+      next: (res: any) => {this.users = res.users},
       error: (err) => console.log(err)
     })
   }
@@ -166,6 +169,9 @@ export class LaboratoryDoctorComponent implements OnInit {
       next: (res: any) => {
         this.laboratoryId = id;
         this.laboratoryView = res.laboratory;
+        this.AddlaboratoryView = res.laboratory;
+        console.log(this.AddlaboratoryView)
+        this.fullNamePacient = res.laboratory.pacient.name + ' ' + res.laboratory.pacient.surname
         this.laboratoryUpdate = res.laboratory;
         this.laboratoryDelete = res.laboratory;
 

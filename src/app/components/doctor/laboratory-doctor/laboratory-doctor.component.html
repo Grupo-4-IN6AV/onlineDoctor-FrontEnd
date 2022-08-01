@@ -52,7 +52,7 @@
             Ver por Cartas
             <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
         </button>
-        <button (click)="showCalendar()" type="button" class="ms-3 btn btn-event btn-primary">
+        <button (click)="showCalendar()" type="button" class="btn ms-3 pretty-button-event">
             Ver Calendario
             <span class="btn-icon-end"><i class="fa-solid fa-microscope"></i> </span>
         </button>
@@ -78,6 +78,11 @@
                     <button (click)="deleteLaboratoryDoctor(laboratory._id)" class="btn btn-danger">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                         Eliminar
+                    </button>
+                    <button (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
+                        data-bs-target="#addResultLaboratory" class="btn  ms-2 pretty-button">
+                        <i class="fa-solid fa-plus"></i>
+                        Agregar Resultado
                     </button>
                     <button (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
                         data-bs-target="#viewLaboratory" class="btn btn-secondary ms-2">
@@ -160,69 +165,248 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!--ADD Laboratories-->
-        <div class="modal fade" id="addLaboratory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="modal-basic-title">
-                            <i class="fa-solid fa-microscope"></i>
-                            &nbsp;Agregar Laboratorio
-                        </h3>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form (ngSubmit)="saveLaboratoryDoctor(addLaboratoryForm)" #addLaboratoryForm="ngForm">
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Paciente</mat-label>
-                                    <input disabled autocomplete="off" [(ngModel)]="namePacient" name="pacient"
-                                        matInput />
+    <!--ADD Laboratories-->
+    <div class="modal fade" id="addLaboratory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-basic-title">
+                        <i class="fa-solid fa-microscope"></i>
+                        &nbsp;Agregar Laboratorio
+                    </h3>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="saveLaboratoryDoctor(addLaboratoryForm)" #addLaboratoryForm="ngForm">
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Paciente</mat-label>
+                                <input disabled autocomplete="off" [(ngModel)]="namePacient" name="pacient" matInput />
 
-                                </mat-form-field>
-                            </div>
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Tipo de Laboratorio</mat-label>
-                                    <mat-select [(ngModel)]="laboratory.typeLaboratory " name="typeLaboratory">
-                                        <div *ngFor="let typeLaboratory of typesLaboratory">
-                                            <mat-option value={{typeLaboratory._id}}>{{typeLaboratory.name}}
-                                            </mat-option>
-                                        </div>
+                            </mat-form-field>
+                        </div>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Tipo de Laboratorio</mat-label>
+                                <mat-select [(ngModel)]="laboratory.typeLaboratory " name="typeLaboratory">
+                                    <div *ngFor="let typeLaboratory of typesLaboratory">
+                                        <mat-option value={{typeLaboratory._id}}>{{typeLaboratory.name}}
+                                        </mat-option>
+                                    </div>
 
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Fecha</mat-label>
-                                    <input [(ngModel)]="laboratory.date" [min]="actualDate" name="date" matInput
-                                        [matDatepicker]="picker">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-                                </mat-form-field>
-                            </div>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Fecha</mat-label>
+                                <input [(ngModel)]="laboratory.date" [min]="actualDate" name="date" matInput
+                                    [matDatepicker]="picker">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
 
-                            <div class="text-inside">
-                                <mat-form-field class="example-full-width" appearance="outline">
-                                    <mat-label>Especificaciones</mat-label>
-                                    <input autocomplete="off" [(ngModel)]="laboratory.specifications"
-                                        name="specifications" matInput />
-                                </mat-form-field>
+                        <div class="text-inside">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Especificaciones</mat-label>
+                                <input autocomplete="off" [(ngModel)]="laboratory.specifications" name="specifications"
+                                    matInput />
+                            </mat-form-field>
+                        </div>
+                        <hr />
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
+                            </button>
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--ADD Result Laboratories-->
+    <div class="modal fade" id="addResultLaboratory" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content" *ngIf="AddlaboratoryView">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-basic-title">
+                        <i class="fa-solid fa-microscope"></i>
+                        &nbsp;Agregar Resultado De Laboratorio
+                    </h3>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="saveLaboratoryDoctor(addLaboratoryForm)" #addLaboratoryForm="ngForm">
+                        <div class="content d-flex"
+                            style="justify-content: center; align-items: center; flex-wrap: wrap;">
+                            <div class="receta">
+                                <h5 style="margin-bottom: 0px; color: rgba(34, 34, 34, 0.7);;">Datos del Paciente</h5>
+                                <hr style="margin: 0.7rem 0 !important;">
+
+                                <div class="text-inside m-0">
+                                    <div class="text-inside">
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Nombre</mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                [(ngModel)]="fullNamePacient" name="specifications" matInput disabled />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="input-group d-flex" style="margin-top: -1rem;">
+
+                                    <div class="text-inside">
+                                        <mat-form-field class=" m-1" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Edad</mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                value="{{AddlaboratoryView.pacient.name}}" name="specifications"
+                                                matInput disabled />
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="text-inside">
+                                        <mat-form-field class=" m-2" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">DPI</mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                value="{{AddlaboratoryView.pacient.DPI}}" name="specifications" matInput
+                                                disabled />
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="text-inside">
+                                        <mat-form-field class=" m-2" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Nombre</mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);"
+                                                *ngIf="AddlaboratoryView.pacient.gender === 'MALE'" autocomplete="off"
+                                                value="Hombre" name="gender" matInput disabled />
+                                            <input style="color: rgba(34, 34, 34, 0.7);"
+                                                *ngIf="AddlaboratoryView.pacient.gender === 'FEMALE'" autocomplete="off"
+                                                value="Mujer" name="gender" matInput disabled />
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+                                <h5 style="margin-bottom: 0px; margin-top: -2.5rem !important ;color: rgba(34, 34, 34, 0.7);;">Datos del Doctor</h5>
+                                <hr style="margin: 0.7rem 0 !important;">
+
+                                <div class="input-group d-flex" style="margin-top: 1rem;">
+
+                                    <div class="text-inside">
+                                        <mat-form-field class=" m-1" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Name</mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                value="{{AddlaboratoryView.pacient.name}}" name="specifications"
+                                                matInput disabled />
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="text-inside">
+                                        <mat-form-field class=" m-2" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Surname</mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                value="{{AddlaboratoryView.pacient.DPI}}" name="specifications" matInput
+                                                disabled />
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="text-inside">
+                                        <mat-form-field class=" m-2" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Phone</mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);"
+                                                autocomplete="off" value="Hombre" name="gender" matInput disabled />
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+                                <div class="input-group mb-3">
+
+                                    <span class="input-group-text" id="basic-addon1"
+                                        style="color: #fff; background-color: #1974e0; border-radius: .5rem 0 0 .5rem;">NIT:
+                                    </span>
+                                    <input type="text" class="form-control me-2" aria-describedby="basic-addon1"
+                                        disabled>
+
+                                    <span class="input-group-text ms-2" id="basic-addon1"
+                                        style="color: #fff; background-color: #1974e0; border-radius: .5rem 0 0 .5rem;">Teléfono:
+                                    </span>
+                                    <input type="text" class="form-control me-2" aria-describedby="basic-addon1"
+                                        disabled>
+
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"
+                                        style="color: #fff; background-color: #1974e0; border-radius: .5rem 0 0 .5rem;">Diagnóstico:
+                                    </span>
+                                    <input type="text" class="form-control me-2" aria-describedby="basic-addon1"
+                                        disabled>
+                                </div>
+
+                                <!-------------------------------------------------------------------------------------------->
+
+                                <div class="input-group container mb-3 d-flex"
+                                    style="justify-content:center; align-items: center;">
+                                    <div class="col me-2">
+                                        <span class="input-group justify-content-center"
+                                            style="color: #fff; background-color: #1974e0;">
+                                            Medicamentos
+                                        </span>
+                                    </div>
+
+                                    <div class="col ms-2">
+                                        <span class="input-group justify-content-center"
+                                            style="color: #fff; background-color: #1974e0;">Laboratorio </span>
+                                        <input class="form-control" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="input-group container mb-3 d-flex"
+                                    style="justify-content:center; align-items: center;">
+                                    <div class="col me-2">
+                                        <span class="input-group justify-content-center"
+                                            style="color: #fff; background-color: #1974e0;">Otros Medicamentos </span>
+                                        <input class="form-control" disabled />
+                                    </div>
+
+                                    <div class="col ms-2">
+                                        <span class="input-group justify-content-center"
+                                            style="color: #fff; background-color: #1974e0;">
+                                            Otros Laboratorios </span>
+                                        <input class="form-control" disabled />
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"
+                                        style="color: #fff; background-color: #1974e0; border-radius: .5rem 0 0 .5rem;">Diagnóstico:
+                                    </span>
+                                    <input type="text" class="form-control me-2" aria-describedby="basic-addon1"
+                                        disabled>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"
+                                        style="color: #fff; background-color: #1974e0; border-radius: .5rem 0 0 .5rem;">Diagnóstico:
+                                    </span>
+                                    <input type="textarea" class="form-control me-2" aria-describedby="basic-addon1"
+                                        disabled />
+                                </div>
+
                             </div>
-                            <hr />
-                            <div class="modal-footer justify-content-center">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
-                                </button>
-                                <button type="submit" class="btn btn-success" data-bs-dismiss="modal">
-                                    <i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
