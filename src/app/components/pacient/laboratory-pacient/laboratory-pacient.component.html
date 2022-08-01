@@ -1,6 +1,6 @@
 <section class="content">
     <h1 style="margin-top: 4rem">
-        &nbsp;<i class="fa-solid fa-file-laboratory"></i>
+        &nbsp;<i class="fa-solid fa-microscope"></i>
         Laboratory
     </h1>
     <hr />
@@ -139,10 +139,10 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let laboratory of laboratories">
-                                    <td (click)="getLaboratoryDoctor(laboratory._id)">
+                                    <td (click)="getLaboratoryPacient(laboratory._id)">
                                         <mat-checkbox *ngIf="laboratory.checked==true || controloClick==0"
                                             #check="matCheckbox"
-                                            (click)="showButtonActions(laboratory._id, check); getLaboratoryDoctor(laboratory._id)"
+                                            (click)="showButtonActions(laboratory._id, check); getLaboratoryPacient(laboratory._id)"
                                             class="example-margin" color="primary">
                                         </mat-checkbox>
                                         <mat-checkbox disabled="" *ngIf="laboratory.checked==false"
@@ -150,26 +150,27 @@
                                         </mat-checkbox>
                                         {{ laboratories.indexOf(laboratory) + 1 }}
                                     </td>
-                                    <td (click)="getLaboratoryDoctor(laboratory._id)" class="table-img">
+                                    <td (click)="getLaboratoryPacient(laboratory._id)" class="table-img">
                                         <img src="assets/images/user/user8.jpg" alt="" />
                                     </td>
-                                    <td (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
+                                    <td (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewLaboratory">{{ laboratory.pacient.name }}</td>
-                                    <td (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
+                                    <td (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewLaboratory">{{ laboratory.typeLaboratory.name }}</td>
                     
-                                    <td *ngIf="!laboratory.date" (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
+                                    <td *ngIf="!laboratory.date" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewLaboratory">No hay descripcion</td>
-                                    <td *ngIf="laboratory.date" (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
+                                    <td *ngIf="laboratory.date" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewlaboratory">{{laboratory.date}}
                                     </td>
                                     <!-- OTRO Laboratory -->
-                                    <td *ngIf="!laboratory.specifications" (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
+                                    <td *ngIf="!laboratory.specifications" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
                                     data-bs-target="#viewLaboratory">No hay otros Laboratorios</td>
-                                    <td *ngIf="laboratory.specifications" (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
+                                    <td *ngIf="laboratory.specifications" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewLaboratory">{{ laboratory.specifications }}</td>
-                                    <td (click)="getLaboratoryDoctor(laboratory._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewLaboratory"><center><i type="button" class="fa fa-eye"  aria-hidden="true"></i></center></td>
+                                    <td class="text-center" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal" data-bs-target="#viewLaboratory">
+                                        <i type="button" class="fa fa-eye"  aria-hidden="true"></i>
+                                    </td>
                                 </tr>
                                 <tr rowspan="9" *ngIf="notFound === true">
                                     <td colspan="9" class="text-center">Laboratorio no encontrado</td>

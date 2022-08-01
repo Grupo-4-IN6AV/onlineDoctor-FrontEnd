@@ -81,4 +81,8 @@ export class LaboratoryRestService {
     return this.http.get(environment.baseURI + 'laboratory/getLaboratoriesPaciente', { headers: this.httpOptions });
   }
 
+  getLaboratoryPacient(id:string)
+  {
+    return this.http.get(environment.baseURI + 'laboratory/getLaboratoryPacient/' + id, { headers: this.httpOptions });
+  }
 }
