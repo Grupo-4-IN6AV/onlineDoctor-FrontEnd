@@ -5,99 +5,220 @@
     </h1>
     <hr/>
 
-    <div>
-        <div class="modal fade" id="viewPrescription" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="addContainer">
-                        <div class="contact-details">
-                            <div class="modalHeader">
-                                <div class="editRowModal">
-                                    <div *ngIf="prescriptionView" class="modalHeader clearfix">
-                                        <div class="modal-about contact-header">
-                                            <div class="contact-details-img">
-                                                <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
-                                            </div>
-                                            <div class="contact-details-heading">
-                                                <div class="contact-details-name mb-2">
-                                                    {{ prescriptionView.pacient.name }}
-                                                </div>
-                                                <div class="badge col-yellow">
-                                                    PACIENTE
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
-                                    <mat-icon>close</mat-icon>
-                                </button>
-                            </div>
-                            <hr />
-                            <div *ngIf="prescriptionView" class="descripcion">
-                                <div class="count-container">
-                                    <div class="box">
-                                        <h3>Paciente:</h3>
-                                    </div>
+    <div class="modal fade" id="viewPrescription" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content" *ngIf="AddPrescriptionView">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-basic-title">
+                        <i class="fa-solid fa-microscope"></i>
+                        &nbsp;Ver Resultado De la Receta
+                    </h3>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="content d-flex" style="justify-content: center; align-items: center; flex-wrap: wrap;">
+                        <div class="receta">
+                            <h5 style="margin-bottom: 0px; color: rgba(34, 34, 34, 0.7);;">Datos del Paciente</h5>
+                            <hr style="margin: 0.7rem 0 !important;">
 
-                                    <div class="box">
-                                        <p>{{ prescriptionView.pacient.name }}</p>
-                                    </div>
-
-                                    <div class="box">
-                                        <h3>Doctor:</h3>
-                                    </div>
-
-                                    <div class="box">
-                                        <p>{{ prescriptionView.doctor.name }}</p>
-                                    </div>
-
-                                    <div class="count-container"
-                                        *ngFor="let medicament of medicaments; let i = index">
-                                        <div class="box">
-                                            <h3>Medicamento {{i+1}}</h3>
-                                        </div>
-                                        <div class="box">
-                                            <p>{{medicament.name}}</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="count-container"
-                                        *ngFor="let laboratory of laboratories; let i = index">
-                                        <div class="box">
-                                            <h3>Laboratorio: {{i+1}}</h3>
-                                        </div>
-                                        <div class="box">
-                                            <p>{{laboratory.name}}</p>
-                                        </div>
-                                    </div>
-
-                                    <div *ngIf="prescriptionView.description" class="box">
-                                        <h3>Descripcion:</h3>
-                                    </div>
-
-                                    <div *ngIf="prescriptionView.description" class="box">
-                                        <p>{{ prescriptionView.description }}</p>
-                                    </div>
-
-                                    <div *ngIf="prescriptionView.AnotherMedicaments" class="box">
-                                        <h3>Otros medicamentos:</h3>
-                                    </div>
-
-                                    <div *ngIf="prescriptionView.AnotherMedicaments" class="box">
-                                        <p>{{ prescriptionView.AnotherMedicaments }}</p>
-                                    </div>
-
-                                    <div *ngIf="prescriptionView.AnotherLaboratories" class="box">
-                                        <h3>Otros Laboratorios:</h3>
-                                    </div>
-
-                                    <div *ngIf="prescriptionView.AnotherLaboratories" class="box">
-                                        <p>{{ prescriptionView.AnotherLaboratories }}</p>
-                                    </div>
+                            <div class="text-inside m-0">
+                                <div class="text-inside">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Nombre Completo</mat-label>
+                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                            [(ngModel)]="fullNamePacient" name="namePacient" matInput disabled />
+                                    </mat-form-field>
                                 </div>
                             </div>
+
+                            <div class="input-group d-flex" style="margin-top: -1rem;">
+
+                                <div class="text-inside">
+                                    <mat-form-field class=" m-1" appearance="outline">
+                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Edad</mat-label>
+                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                            value="{{AddPrescriptionView.pacient.age}}" name="specifications" matInput
+                                            disabled />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="text-inside">
+                                    <mat-form-field class=" m-2" appearance="outline">
+                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">DPI</mat-label>
+                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                            value="{{AddPrescriptionView.pacient.DPI}}" name="specifications" matInput
+                                            disabled />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="text-inside">
+                                    <mat-form-field class=" m-2" appearance="outline">
+                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Sexo</mat-label>
+                                        <input style="color: rgba(34, 34, 34, 0.7);"
+                                            *ngIf="AddPrescriptionView.pacient.gender === 'MALE'" autocomplete="off"
+                                            value="Hombre" name="gender" matInput disabled />
+                                        <input style="color: rgba(34, 34, 34, 0.7);"
+                                            *ngIf="AddPrescriptionView.pacient.gender === 'FEMALE'" autocomplete="off"
+                                            value="Mujer" name="gender" matInput disabled />
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <h5
+                                style="margin-bottom: 0px; margin-top: -2.5rem !important ;color: rgba(34, 34, 34, 0.7);;">
+                                Datos del Doctor</h5>
+                            <hr style="margin: 0.7rem 0 !important;">
+
+                                <div class="text-inside m-0">
+                                    <div class="text-inside">
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Nombre Completo</mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                [(ngModel)]="fullNameDoctor" name="nameDoctorXD" matInput disabled />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+    
+                                <div class="input-group d-flex" style="margin-top: -1rem;">
+    
+                                    <div class="text-inside">
+                                        <mat-form-field class="ful m-1" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Numero de Colegiado
+                                            </mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                value="{{collegiateNumberDoctor}}" name="specifications" matInput
+                                                disabled />
+                                        </mat-form-field>
+                                    </div>
+    
+                                    <div class="text-inside">
+                                        <mat-form-field class=" m-2" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Telefono</mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                value="{{phoneDoctor}}" name="specifications" matInput
+                                                disabled />
+                                        </mat-form-field>
+                                    </div>
+    
+                                    <div class="text-inside">
+                                        <mat-form-field class=" m-2" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Correo Electronico
+                                            </mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                value="{{emailDoctor}}" name="specifications" matInput
+                                                disabled />
+                                        </mat-form-field>
+                                    </div>
+    
+                                </div>
+
+                                <h5
+                                style="margin-bottom: 0px; margin-top: -2.5rem !important ;color: rgba(34, 34, 34, 0.7);;">
+                                Medicamentos</h5>
+                            <hr style="margin: 0.7rem 0 !important;">
+                                <div *ngFor="let medicament of medicaments">
+                                    <div *ngFor="let medicamentInPrescription of medicamentsInPrescription">
+                                        <div *ngIf="medicamentInPrescription._id == medicament._id">
+                                            <div class="text-inside m-0">
+                                                <div class="text-inside">
+                                                    <mat-form-field class="example-full-width" appearance="outline">
+                                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Nombre</mat-label>
+                                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                            [(ngModel)]="medicament.name" name="nameDoctorXD" matInput disabled />
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                
+                                            <div class="input-group d-flex" style="margin-top: -1rem;">
+                
+                                                <div class="text-inside">
+                                                    <mat-form-field class="ful m-1" appearance="outline">
+                                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Descripcion
+                                                        </mat-label>
+                                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                            value="{{medicament.description}}" name="specifications" matInput
+                                                            disabled />
+                                                    </mat-form-field>
+                                                </div>
+                
+                                                <div class="text-inside">
+                                                    <mat-form-field class=" m-2" appearance="outline">
+                                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Precio</mat-label>
+                                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                            value="{{medicament.price}}" name="specifications" matInput
+                                                            disabled />
+                                                    </mat-form-field>
+                                                </div>
+                
+                                                <div class="text-inside">
+                                                    <mat-form-field class=" m-2" appearance="outline">
+                                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Cantidad
+                                                        </mat-label>
+                                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                            value="{{medicament.stock}}" name="specifications" matInput
+                                                            disabled />
+                                                    </mat-form-field>
+                                                </div>
+                
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <h5
+                                    style="margin-bottom: 0px; margin-top: -2.5rem !important ;color: rgba(34, 34, 34, 0.7);;">
+                                    Laboratorios</h5>
+                                <hr style="margin: 0.7rem 0 !important;">
+                                    <div *ngFor="let laboratory of laboratories">
+                                        <div *ngFor="let laboratoryInPrescription of laboratorysInPrescription">
+                                            <div *ngIf="laboratoryInPrescription._id == laboratory._id">
+                                                <div class="text-inside m-0">
+                                                    <div class="text-inside">
+                                                        <mat-form-field class="example-full-width" appearance="outline">
+                                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Nombre</mat-label>
+                                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                                [(ngModel)]="laboratory.typeLaboratory.name" name="nameDoctorXD" matInput disabled />
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                    
+                                                <div class="input-group d-flex" style="margin-top: -1rem;">
+                    
+                                                    <div class="text-inside">
+                                                        <mat-form-field class="ful m-1" appearance="outline">
+                                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Descripcion
+                                                            </mat-label>
+                                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                                value="{{laboratory.description}}" name="specifications" matInput
+                                                                disabled />
+                                                        </mat-form-field>
+                                                    </div>
+                    
+                                                    <div class="text-inside">
+                                                        <mat-form-field class=" m-2" appearance="outline">
+                                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Precio</mat-label>
+                                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                                value="{{laboratory.specifications}}" name="specifications" matInput
+                                                                disabled />
+                                                        </mat-form-field>
+                                                    </div>                    
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                            
+                            <form #addResultLaboratory="ngForm">
+                                <hr style="margin: 0.7rem 0 !important;">
+                                
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                        <i class="fa fa-times-circle" aria-hidden="true"></i> Cerrar
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
