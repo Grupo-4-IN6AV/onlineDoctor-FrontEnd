@@ -356,10 +356,10 @@
                             <hr>
                             <section class="medicament" id="mySkills">
                                 <div class="box-medicaments"
-                                    *ngFor="let typeLaboratory of typesLaboratories">
+                                    *ngFor="let typeLaboratory of typesLaboratories | searchLaboratoryPrescription:laboratorysPrescription">
                                     <div *ngFor="let laboratoryOutPrescription of laboratorysOutPrescription">
                                         <div class="box-medicament"
-                                            *ngIf="laboratoryOutPrescription.typeLaboratory == typeLaboratory._id">
+                                            *ngIf="laboratoryOutPrescription._id == typeLaboratory._id">
                                             <a (click)="addLaboratory(typeLaboratory._id)">
                                                 <div class="productMedicament">
                                                     <img class="img-Medicament" src="assets\images\home-pacient\64.png"
@@ -374,8 +374,8 @@
                                     </div>
                                     <div *ngFor="let laboratoryInPrescription of laboratorysInPrescription">
                                         <div class="box-medicament"
-                                            *ngIf="laboratoryInPrescription.typeLaboratory == typeLaboratory._id">
-                                            <a (click)="deleteLaboratory(laboratory._id)">
+                                            *ngIf="laboratoryInPrescription._id == typeLaboratory._id">
+                                            <a (click)="deleteLaboratory(typeLaboratory._id)">
                                                 <div class="productMedicament">
                                                     <img class="img-Medicament" src="assets\images\home-pacient\64.png"
                                                         alt="">
