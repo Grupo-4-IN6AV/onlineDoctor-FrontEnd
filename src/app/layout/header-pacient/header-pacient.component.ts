@@ -14,6 +14,7 @@ const document: any = window.document;
 import { environment } from 'src/environments/environment';
 import { CredentialsRestService } from 'src/app/services/credentialsRest/credentials-rest.service';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
+import { ShoppingCartRestService } from 'src/app/services/shoppingCartRest/shopping-cart-rest.service';
 @Component({
   selector: 'app-header-pacient',
   templateUrl: './header-pacient.component.html',
@@ -29,12 +30,18 @@ export class HeaderPacientComponent implements OnInit, DoCheck
   uri: any
   token:string;
 
+  //ShoppingCart//
+  shoppingCart:any;
+  itemsShoppingCart: number = 0;
+  medicaments:any;
+
   public config: any = {};
   isNavbarCollapsed = true;
   isOpenSidebar: boolean;
 
   constructor(
     private userRest: UserRestService,
+    private shoppingCartRest: ShoppingCartRestService,
     private credentialRest: CredentialsRestService,
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
@@ -42,51 +49,10 @@ export class HeaderPacientComponent implements OnInit, DoCheck
     private rightSidebarService: RightSidebarService,
     private configService: ConfigService
   ) { }
-  notifications: any[] = [
-    {
-      userImg: 'assets/images/user/user1.jpg',
-      userName: 'Sarah Smith',
-      time: '14 mins ago',
-      message: 'Please check your mail',
-    },
-    {
-      userImg: 'assets/images/user/user2.jpg',
-      userName: 'Airi Satou',
-      time: '22 mins ago',
-      message: 'Work Completed !!!',
-    },
-    {
-      userImg: 'assets/images/user/user3.jpg',
-      userName: 'John Doe',
-      time: '3 hours ago',
-      message: 'kindly help me for code.',
-    },
-    {
-      userImg: 'assets/images/user/user4.jpg',
-      userName: 'Ashton Cox',
-      time: '5 hours ago',
-      message: 'Lets break for lunch...',
-    },
-    {
-      userImg: 'assets/images/user/user5.jpg',
-      userName: 'Sarah Smith',
-      time: '14 mins ago',
-      message: 'Please check your mail',
-    },
-    {
-      userImg: 'assets/images/user/user6.jpg',
-      userName: 'Airi Satou',
-      time: '22 mins ago',
-      message: 'Work Completed !!!',
-    },
-    {
-      userImg: 'assets/images/user/user7.jpg',
-      userName: 'John Doe',
-      time: '3 hours ago',
-      message: 'kindly help me for code.',
-    },
-  ];
-  ngOnInit() {
+
+  ngOnInit()
+  {
+    this.getShoppingCart();
     this.config = this.configService.configData;
   }
   ngAfterViewInit() {
@@ -193,6 +159,8 @@ export class HeaderPacientComponent implements OnInit, DoCheck
     );
   }
 
+
+
   userLogin()
   {
     this.userRest.getUser(this.credentialRest.getIdentity()._id).subscribe({
@@ -209,6 +177,19 @@ export class HeaderPacientComponent implements OnInit, DoCheck
   {
       this.userImage = this.credentialRest.getIdentity().image;
       this.uri = environment.baseURI + 'user/getImageUser/' + this.userImage;
+  }
+
+  getShoppingCart()
+  {
+    this.shoppingCartRest.getShoppingCart().subscribe({
+      next: (res: any) =>
+      {
+        this.shoppingCart = res.shoppingCart;
+        this.itemsShoppingCart = this.shoppingCart.medicaments.length
+        this.medicaments = res.shoppingCart.medicaments
+      },
+      error: (err) => {alert(err.error.message)}
+    })
   }
 
   logOut()
