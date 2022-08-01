@@ -104,17 +104,16 @@
 
                                     <!-- End Quantity -->
                                     <div class="product-buttons ml-0 ml-md-3 mt-4 mt-md-0 text-md-left text-center">
-                                        <a class="btn btn-rounded btn-soft-primary mr-2" href="wishlist.html"> <i
+                                        <a (click)="pedirLogin()" class="btn btn-rounded btn-soft-primary mr-2"> <i
                                                 class="fa fa-heart"></i> Add To Wishlist</a>
-                                        <a class="btn btn-rounded btn-primary" href="cart.html"> <i
+                                        <a (click)="pedirLogin()" class="btn btn-rounded btn-primary"> <i
                                                 class="fa fa-shopping-cart"></i> Add To Cart</a>
                                     </div>
 
                                 </div>
                                 <div class="mb-4 mt-4">
-                                    <a href="checkout.html"
-                                        class="btn btn-block btn-primary btn-pill transition-3d-hover">Buy
-                                        Now</a>
+                                    <a (click)="pedirLogin()"
+                                        class="btn btn-block btn-primary btn-pill transition-3d-hover">Comprar ahora</a>
                                 </div>
                             </div>
                         </div>
