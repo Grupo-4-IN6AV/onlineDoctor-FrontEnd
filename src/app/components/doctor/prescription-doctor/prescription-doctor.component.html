@@ -1,11 +1,11 @@
 <section class="content">
     <h1 style="margin-top: 4rem">
-        &nbsp;<i class="fa-solid fa-file-prescription"></i>
+        &nbsp;<i class="fa-solid fa-file-medical"></i>
         Receta
     </h1>
     <hr />
 
-    <div *ngIf="showUsers">
+    <div *ngIf="showUsers" class="mt-4">
         <div *ngIf="!showTablePrescription" class="row d-flex justify-content-center align-items-center">
             <div class="form">
                 <i class="fa fa-search ms-2"></i>
@@ -15,6 +15,8 @@
         </div>
         <br>
     </div>
+    <hr style="margin-top: -0.15rem;" *ngIf="showUsers">
+
     <!--| searchUserBar: searchPrescription para la pipe-->
     <!--CARDS DE USUARIOS-->
     <div *ngIf="showUsers">
@@ -52,6 +54,10 @@
             Ver por Cartas
             <span class="btn-icon-end"><i class="fas fa-arrow-left"></i> </span>
         </button>
+        <button (click)="backUsers()" type="button" class="ms-3 btn btn-event btn-regresar">
+          Regresar
+          <span class="btn-icon-end"><i class="fas fa-users"></i> </span>
+      </button>
         <button routerLink="/doctor/home" type="button" class="ms-3 btn btn-event btn-dark">
             Inicio
             <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
@@ -59,8 +65,7 @@
     </div>
     <hr *ngIf="showButtons">
 
-    <!--CARDS DE USERS-->
-    <div *ngIf="!showTablePrescription">
+    <div *ngIf="!showTablePrescription && !showUsers">
         <div class="container">
             <div class="products-container">
                 <div *ngFor="let prescription of prescriptions" class="product" data-name="p-1">
@@ -577,7 +582,4 @@
             </div>
         </div>
     </div>
-    <h1 *ngIf="notFound === true && showTablePrescription === false" class="text-center">
-        Receta no encontrado
-    </h1>
 </section>

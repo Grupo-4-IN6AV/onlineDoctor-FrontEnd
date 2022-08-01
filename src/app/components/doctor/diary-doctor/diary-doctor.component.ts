@@ -19,7 +19,7 @@ import {
 export class DiaryDoctorComponent implements OnInit {
 
   actualDate: any;
-  
+
   //Opciones de Calendarios
   calendarOptions: CalendarOptions = { initialView: 'dayGridMonth', events: [] };
   showCalendarAppointments: any;
@@ -42,10 +42,10 @@ export class DiaryDoctorComponent implements OnInit {
     this.appointmentRest.getAppointmentsUser().subscribe({
       next: (res: any) => {
         var calendarArray = [];
-        
+
         for (let appointment of res.appointmentsExist) {
           var appointmentID = appointment._id;
-          var nameAppointment = 'Apointment ' + '  |  ' + appointment.pacient.name;
+          var nameAppointment = 'Cita ' + '  |  ' + appointment.pacient.name;
           var actualDate = appointment.date.split('T');
           calendarArray.push({
             title: nameAppointment,
