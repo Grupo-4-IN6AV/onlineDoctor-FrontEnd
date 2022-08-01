@@ -38,7 +38,6 @@ export class LaboratoryPacientComponent implements OnInit {
   namePacient: any;
 
   doctors:any;
-  medicaments:any;
   doctorId: any;
   nameDoctor:any;
   actualUserId: any;
@@ -102,13 +101,13 @@ export class LaboratoryPacientComponent implements OnInit {
     })
   }
 
-  getLaboratoryDoctor(id: string) {
-    this.laboratoryRest.getLaboratory(id).subscribe({
+  getLaboratoryPacient(id:string) {
+    this.laboratoryRest.getLaboratoryPacient(id).subscribe({
       next: (res: any) => {
         this.laboratoryId = id;
         this.laboratoryView = res.laboratory;
-        this.laboratoriesUser = res.laboratories;
-        console.log(this.laboratoriesUser)
+        this.laboratories = res.laboratories;
+        console.log(this.laboratories)
       },
       error: (err) => {
         Swal.fire({
