@@ -574,3 +574,162 @@ th
 .pretty-button:hover{
    background-color: #005F9F;
 }
+
+.medicament .box-medicaments .box-medicament {
+  max-height: 175px;
+  max-width: 150px;
+  min-height: 175px;
+  min-width: 150px;
+  text-align: center;
+  padding: 0.7rem;
+  background: #fff;
+  border: 3px #3D75F0 solid;
+  border-radius: .5rem;
+  font-family: Poppins;
+  cursor: pointer;
+}
+
+.medicament .box-medicaments .box-medicament:hover {
+  transform: translateY(-7.5px);
+  box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+
+.medicament .box-medicaments .box-medicament .img-Medicament {
+  padding-bottom: 10px;
+  max-height: 70px;
+}
+
+.medicament .box-medicaments .box-medicament h3 {
+  color: #444;
+  font-size: 0.9rem;
+  font-family: Poppins, medium;
+}
+
+.medicament .box-medicaments .box-medicament .button-card-Medicament {
+  color: #fff;
+  background-color: green;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font-size: 0.2rem;
+  margin-top: 5px;
+  border: none;
+}
+
+.medicament .box-medicaments .box-medicament .button-card-Medicament-Eliminar {
+  color: #fff;
+  background-color: red;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font-size: 0.2rem;
+  margin-top: 5px;
+  border: none;
+}
+
+.card-title-Medicament{
+  margin: 3px;
+}
+
+#mySkills{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.box-medicaments{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 4rem;
+  
+}
+
+.form{
+
+  position: relative;
+}
+
+.form .fa-search
+{
+  position: absolute;
+  top:20px;
+  left: 20px;
+  color: #9ca3af;
+}
+
+.form span
+{
+  position: absolute;
+  right: 17px;
+  top: 13px;
+  padding: 2px;
+  border-left: 1px solid #d1d5db;
+}
+
+.left-pan
+{
+  padding-left: 7px;
+}
+
+.left-pan i
+{
+ padding-left: 10px;
+}
+
+.form-input
+{
+  height: 55px;
+  text-indent: 33px;
+  border-radius: 10px;
+}
+
+.form-input:focus{
+
+  box-shadow: none;
+  border:none;
+}
+
+.btn-regresar {
+  color: #FFFFFF;
+  background-color: #FFA500;
+  border-color: #FFA500;
+}
+
+.btn-regresar:hover,
+.btn-regresar:focus,
+.btn-regresar:active,
+.btn-regresar.active,
+.open .dropdown-toggle.btn-regresar {
+  color: #FFFFFF;
+  background-color: #FF9D00;
+  border-color: #FFA500;
+}
+
+.btn-regresar:active,
+.btn-regresar.active,
+.open .dropdown-toggle.btn-regresar {
+  background-image: none;
+}
+
+.btn-regresar.disabled,
+.btn-regresar[disabled],
+fieldset[disabled] .btn-regresar,
+.btn-regresar.disabled:hover,
+.btn-regresar[disabled]:hover,
+fieldset[disabled] .btn-regresar:hover,
+.btn-regresar.disabled:focus,
+.btn-regresar[disabled]:focus,
+fieldset[disabled] .btn-regresar:focus,
+.btn-regresar.disabled:active,
+.btn-regresar[disabled]:active,
+fieldset[disabled] .btn-regresar:active,
+.btn-regresar.disabled.active,
+.btn-regresar[disabled].active,
+fieldset[disabled] .btn-regresar.active {
+  background-color: #FFA500;
+  border-color: #FFA500;
+}
+
+.btn-regresar .badge {
+  color: #FFA500;
+  background-color: #FFFFFF;
+}

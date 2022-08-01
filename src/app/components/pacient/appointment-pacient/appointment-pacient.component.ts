@@ -38,12 +38,17 @@ export class AppointmentPacientComponent implements OnInit {
   users: any;
   user:any;
   doctors: any;
+  doctor: any;
+  doctorId:any;
   notFound: boolean = false;
   buttonActions: boolean = false;
   checked: boolean = true;
   controloClick: number = 0;
   actualDate: any;
   setDate: any;
+  showDate: boolean = false;
+  showDoctors: boolean = true;
+  searchDoctor:any
 
   OnlyOneDate: any;
   actualUserId: any;
@@ -125,10 +130,16 @@ export class AppointmentPacientComponent implements OnInit {
     })
   }
 
+  getDoctor(id:string) {
+    this.doctorId = id;
+    this.showDate = true;
+    this.showDoctors = false;
+  }
+
   saveAppointment(addAppointmentForm: any) {
     let params = {
       pacient: this.actualUserId,
-      doctor: this.appointment.doctor,
+      doctor: this.doctorId,
       date: this.appointment.date,
       modality: this.appointment.modality,
     }
