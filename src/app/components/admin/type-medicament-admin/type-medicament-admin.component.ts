@@ -108,11 +108,11 @@ export class TypeMedicamentAdminComponent implements OnInit {
 
   deleteTypeMedicament(id: string) {
     Swal.fire({
-      title: 'Do you want to delete this Type Medicament?',
+      title: 'Quieres eliminar este Tipo de Medicamento?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -137,7 +137,7 @@ export class TypeMedicamentAdminComponent implements OnInit {
         })
         this.getTypeMedicaments();
       } else if (result.isDenied) {
-        Swal.fire('Type Medicament Not Deleted', '', 'info')
+        Swal.fire('Tipo de Medicamento No Eliminado', '', 'info')
       }
     })
   }

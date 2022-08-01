@@ -97,10 +97,8 @@ export class DoctorAdminComponent implements OnInit {
       next: (res: any) => {
         this.doctorView = res.doctor;
         this.doctorUpdate = res.doctor;
-        console.log(this.doctorUpdate)
         this.doctorDelete = res.doctor;
         this.doctorDeleteModal = res.doctor;
-        console.log (this.doctorView)
       },
       error: (err) => { console.log(err.error.message) }
     })
@@ -132,11 +130,11 @@ export class DoctorAdminComponent implements OnInit {
 
   deleteDoctor(id: string, password: string) {
     Swal.fire({
-      title: 'Do you want to delete this Doctor?',
+      title: 'Quires eliminar este doctor?',
       showDenyButton: true,
       showCancelButton: true,
-      confirmButtonText: 'Delete',
-      denyButtonText: `Don't delete`,
+      confirmButtonText: 'Eliminar',
+      denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
@@ -169,6 +167,7 @@ export class DoctorAdminComponent implements OnInit {
             if (this.showTableDoctors === true) {
               this.showButtonActions(this.doctorUpdate._id, false)
             };
+            this.getDoctors();
           }
 
         })
@@ -176,6 +175,7 @@ export class DoctorAdminComponent implements OnInit {
       } else if (result.isDenied) {
         Swal.fire('User Not Deleted', '', 'info')
         this.doctorDeletePassword = "";
+        this.getDoctors();
       }
     })
     this.doctorDeletePassword = "";

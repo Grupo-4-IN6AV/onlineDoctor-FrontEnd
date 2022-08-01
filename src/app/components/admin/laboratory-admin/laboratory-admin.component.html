@@ -8,7 +8,8 @@
     <div *ngIf="!showTableLaboratory" class="row d-flex justify-content-center align-items-center">
         <div class="form">
             <i class="fa fa-search ms-2"></i>
-            <input [(ngModel)]="searchLaboratory" type="text" class="form-control form-input" placeholder="Buscar Laboratorio...">
+            <input [(ngModel)]="searchLaboratory" type="text" class="form-control form-input"
+                placeholder="Buscar Por Tipo de Laboratorio...">
         </div>
     </div>
 
@@ -39,7 +40,8 @@
     <div *ngIf="!showTableLaboratory">
         <div class="container">
             <div class="products-container">
-                <div *ngFor="let laboratory of laboratories | searchLaboratoryName:searchLaboratory" class="product" data-name="p-1">
+                <div *ngFor="let laboratory of laboratories | searchLaboratoryName:searchLaboratory" class="product"
+                    data-name="p-1">
                     <h5 class="card-title">{{ laboratory.pacient.name }} | {{ laboratory.typeLaboratory.name }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{newDate[laboratories.indexOf(laboratory)]}}</h6>
                     <button (click)="getLaboratory(laboratory._id); getUsers(); getTypesLaboratory()"
@@ -47,7 +49,7 @@
                         class="btn btn-warning m-2">
                         <i class="fa fa-pencil" aria-hidden="true"> </i> Editar
                     </button>
-                    <button (click)="deleteLaboratory(laboratory._id)" class="btn btn-danger">
+                    <button (click)="deleteLaboratory(laboratory._id, laboratory.pacient._id)" class="btn btn-danger">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                         Eliminar
                     </button>
@@ -78,7 +80,10 @@
                                             </div>
                                             <div class="contact-details-heading">
                                                 <div class="contact-details-name mb-2">
-                                                    {{ laboratoryView.pacient.name }}
+                                                    {{ laboratoryView.pacient.name }} | {{ OnlyOneDate }}
+                                                </div>
+                                                <div class="badge col-yellow">
+                                                    Laboratorio
                                                 </div>
                                             </div>
                                         </div>
@@ -92,15 +97,15 @@
                             <div *ngIf="laboratoryView" class="descripcion">
                                 <div class="count-container">
                                     <div class="box">
-                                        <h3>Pacientes:</h3>
+                                        <h3>Paciente:</h3>
                                     </div>
 
                                     <div class="box">
-                                        <p>{{ laboratoryView.pacient.name }}</p>
+                                        <p>{{ laboratoryView.pacient.name }} {{ laboratoryView.pacient.surname }}</p>
                                     </div>
 
                                     <div class="box">
-                                        <h3>Tipo de Laboratorio</h3>
+                                        <h3>Tipo de Laboratorio:</h3>
                                     </div>
 
                                     <div class="box">
@@ -119,8 +124,11 @@
                                         <h3>Especificaciones:</h3>
                                     </div>
 
-                                    <div class="box">
+                                    <div *ngIf="laboratoryView.specifications" class="box">
                                         <p>{{ laboratoryView.specifications }}</p>
+                                    </div>
+                                    <div *ngIf="!laboratoryView.specifications" class="box">
+                                        <p>-Sin Especificaciones-</p>
                                     </div>
                                 </div>
                             </div>
@@ -170,10 +178,11 @@
                             </div>
                             <div class="text-inside">
                                 <mat-form-field class="example-full-width" appearance="outline">
-                                  <mat-label>Fecha</mat-label>
-                                  <input [(ngModel)]="laboratory.date" [min]="actualDate" name="date" matInput [matDatepicker]="picker">
-                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                  <mat-datepicker #picker></mat-datepicker>
+                                    <mat-label>Fecha</mat-label>
+                                    <input [(ngModel)]="laboratory.date" [min]="actualDate" name="date" matInput
+                                        [matDatepicker]="picker">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
                                 </mat-form-field>
                             </div>
 
@@ -241,8 +250,10 @@
                         <div class="text-inside">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Fecha</mat-label>
-                                <input autocomplete="off" type="date" [(ngModel)]="laboratoryUpdate.date" name="date"
-                                    matInput />
+                                <input [(ngModel)]="laboratoryUpdate.date" [min]="actualDate" name="date" matInput
+                                    [matDatepicker]="picker">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
                         </div>
                         <div class="text-inside">
@@ -284,12 +295,12 @@
                                     <label for="search-input">
                                         <i class="material-icons search-icon">search</i>
                                     </label>
-                                    <input [(ngModel)]="searchLaboratory" placeholder="Buscar Laboratorio.." type="text" #filter
-                                        class="browser-default search-field" aria-label="Search box" />
+                                    <input [(ngModel)]="searchLaboratory" placeholder="Buscar Laboratorio.." type="text"
+                                        #filter class="browser-default search-field" aria-label="Search box" />
                                 </li>
                                 <li *ngIf="buttonActions">
                                     <div class="icon-button-demo m-l-10">
-                                        <button (click)="deleteLaboratory(laboratoryDelete._id)" mat-mini-fab
+                                        <button (click)="deleteLaboratory(laboratoryDelete._id, laboratoryDelete.pacient._id)" mat-mini-fab
                                             color="warn">
                                             <mat-icon class="col-white">delete
                                             </mat-icon>
@@ -345,7 +356,8 @@
                                     <td (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewLaboratory">{{ laboratory.typeLaboratory.name }}</td>
                                     <td (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewLaboratory">{{newDate[laboratories.indexOf(laboratory)]}}</td>
+                                        data-bs-target="#viewLaboratory">{{newDate[laboratories.indexOf(laboratory)]}}
+                                    </td>
                                     <td (click)="getLaboratory(laboratory._id)" data-bs-toggle="modal"
                                         data-bs-target="#viewLaboratory">{{ laboratory.specifications }}</td>
                                 </tr>
