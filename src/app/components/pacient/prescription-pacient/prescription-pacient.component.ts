@@ -38,11 +38,7 @@ export class PrescriptionPacientComponent implements OnInit {
       },
       error: (err) =>
       {
-        Swal.fire({
-          icon: 'error',
-          title: err.error.message || err.error,
-          confirmButtonColor: '#E74C3C'
-        });
+        console.log(err);
       }
     })
   }

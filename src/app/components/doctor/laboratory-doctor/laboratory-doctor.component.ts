@@ -159,7 +159,6 @@ export class LaboratoryDoctorComponent implements OnInit {
           confirmButtonColor: '#28B463'
         });
         this.actualDoctor();
-        this.getUserDoctor(this.userId);
         addResultLaboratory.reset();
       },
       error: (err) =>{
@@ -168,7 +167,6 @@ export class LaboratoryDoctorComponent implements OnInit {
           title: err.error.message || err.error,
           confirmButtonColor: '#E74C3C'
         });
-        this.getUserDoctor(this.userId);
         addResultLaboratory.reset();
       }
     })
@@ -193,7 +191,6 @@ export class LaboratoryDoctorComponent implements OnInit {
               confirmButtonColor: '#28B463'
             });
           this.getLaboratoriesDoctor();
-          this.getUserDoctor(this.userId);
           addLaboratoryForm.reset();
         },
         error: (err: any) => {
@@ -202,7 +199,6 @@ export class LaboratoryDoctorComponent implements OnInit {
             title: err.error.message || err.error,
             confirmButtonColor: '#E74C3C'
           });
-          this.getUserDoctor(this.userId);
           addLaboratoryForm.reset();
         },
       })
@@ -248,7 +244,6 @@ export class LaboratoryDoctorComponent implements OnInit {
           confirmButtonColor: '#28B463'
         });
         this.getLaboratoriesDoctor();
-        this.getUserDoctor(this.userId);
         this.showButtonActions(this.laboratoryUpdate._id, false)
       },
       error: (err) => {
@@ -257,7 +252,6 @@ export class LaboratoryDoctorComponent implements OnInit {
           title: err.error.message || err.error,
           confirmButtonColor: '#E74C3C'
         });
-        this.getUserDoctor(this.userId);
       },
     })
   }
