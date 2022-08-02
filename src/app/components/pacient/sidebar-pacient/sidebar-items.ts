@@ -71,17 +71,5 @@ export const ROUTES: RouteInfo[] = [
     badge: '',
     badgeClass: '',
     submenu: [],
-  },
-  {
-    path: 'shopping-cart',
-    title: 'Carrito',
-    moduleName: 'pacient',
-    iconType: 'material-icons-two-tone',
-    icon: 'shopping_cart',
-    class: '',
-    groupTitle: false,
-    badge: '',
-    badgeClass: '',
-    submenu: [],
-  },
+  }
 ];

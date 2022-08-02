@@ -78,6 +78,7 @@ export class HomeAdminComponent implements OnInit
     this.getMedicaments();
     this.getAppoiments();
     this.getUsersAndDoctors();
+    this.graficBar();
   }
 
   getAppoiments(){
@@ -153,7 +154,6 @@ export class HomeAdminComponent implements OnInit
       next: (res: any)=>{
         this.doctors = res.doctors
         this.totalDoctors = res.doctors.length
-
       },
       error: (err)=>console.log(err)
     })
@@ -172,7 +172,66 @@ export class HomeAdminComponent implements OnInit
     })
   }
 
+  graficBar()
+  {
+    this.medicamentRest.getMedicaments().subscribe({
+      next: (res: any) =>
+      {
+        this.medicaments = res.medicaments;
+        const setDataSetsXAxis = []
+        const setDataNumber = [];
+        for (var key=0; key < this.medicaments.length; key ++)
+        {
+          var data =  this.medicaments[key];
+          setDataSetsXAxis.push(data.name)
+          setDataNumber.push(data.sales)
+        }
+        this.bar_chart =
+        {
+          grid: {
+            top: '6',
+            right: '0',
+            bottom: '17',
+            left: '25',
+          },
+          xAxis: {
+            data: setDataSetsXAxis,
 
+            axisLabel: {
+              fontSize: 10,
+              color: '#9aa0ac',
+            },
+          },
+          tooltip: {
+            show: true,
+            showContent: true,
+            alwaysShowContent: false,
+            triggerOn: 'mousemove',
+            trigger: 'axis',
+          },
+          yAxis: {
+            axisLabel: {
+              fontSize: 10,
+              color: '#9aa0ac',
+            },
+          },
+          series: [
+            {
+              name: 'sales',
+              type: 'bar',
+              data: setDataNumber,
+            },
+          ],
+          color: ['#A10FE1',],
+        };
+
+      },
+      error: (err) => {console.log(err)}
+    })
+
+  }
+
+  bar_chart: EChartsOption
   donut_chart: EChartsOption
 
   @ViewChild('chart') chart: ChartComponent;

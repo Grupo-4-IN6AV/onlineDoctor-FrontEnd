@@ -66,7 +66,7 @@
         <div class="card card-statistic-2">
           <div class="clearfix">
             <div class="card-icon shadow-primary float-start bg-purple">
-              <i class="fa-solid fa-users"></i>
+              <i class="fa-solid fa-calendar-day"></i>
             </div>
             <div class="float-end m-4">
               <div>
@@ -117,20 +117,9 @@
           <div class="header">
             <h2>
               Grafica de Ventas</h2>
-            <button mat-button [matMenuTriggerFor]="menu" class="header-dropdown">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item>Action</button>
-              <button mat-menu-item>Another action</button>
-              <button mat-menu-item>Something else here</button>
-            </mat-menu>
           </div>
           <div class="body">
-            <apx-chart [series]="areaChartOptions.series" [chart]="areaChartOptions.chart"
-              [xaxis]="areaChartOptions.xaxis" [yaxis]="areaChartOptions.yaxis" [colors]="areaChartOptions.colors"
-              [stroke]="areaChartOptions.stroke" [legend]="areaChartOptions.legend" [tooltip]="areaChartOptions.tooltip"
-              [dataLabels]="areaChartOptions.dataLabels"></apx-chart>
+            <div echarts [options]="bar_chart" class="echart-height"></div>
           </div>
         </div>
       </div>
