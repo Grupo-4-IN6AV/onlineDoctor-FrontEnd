@@ -72,6 +72,18 @@ export class DoctorRestService {
     return this.http.get(environment.baseURI + 'speciality/getSpecialities', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
+  //FUNCIONES DOCTOR 
+  updateDoctorProfile(id:string, params:{})
+  {
+    return this.http.put(environment.baseURI + 'doctor/updateDoctor/' + id, params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
+  }
+
+  deleteDoctorProfile(id:string, params:{})
+  {
+    return this.http.post(environment.baseURI + 'doctor/deleteDoctor/' + id, params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
+  }
+
+
   //Implementación de Imágenes//
   requestFiles(
     doctorID: string,

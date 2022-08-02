@@ -36,7 +36,9 @@ export class ProfileDoctorComponent implements OnInit {
   newPassword:any;
   reset:any;
 
-  hotel:any;
+  userDelete: any;
+  userDeleteModal: any;
+  userDeletePassword: any;
 
   ngOnInit(): void
   {
@@ -54,7 +56,9 @@ export class ProfileDoctorComponent implements OnInit {
     this.doctorRest.getDoctor(this.credentialRest.getIdentity()._id).subscribe({
       next: (res: any) => {
         this.doctor = res.doctor;
-        this.updateUser = res.doctor
+        this.updateUser = res.doctor;
+        this.userDelete = res.doctor;
+        this.userDeleteModal = res.doctor;
         this.doctorImage = this.doctor.image;
         this.uri = environment.baseURI + 'doctor/getImageDoctor/' + this.doctorImage;
       },
@@ -98,5 +102,79 @@ export class ProfileDoctorComponent implements OnInit {
           });
         })
     }
+
+    updateAccount()
+    {
+      this.doctor.password = undefined;
+      this.doctor.role = undefined;
+      this.doctorRest.updateDoctorProfile(this.updateUser._id, this.updateUser).subscribe({
+        next: (res: any) => {
+          Swal.fire({
+            icon: 'success',
+            title: res.message,
+            confirmButtonColor: '#28B463'
+          });
+          this.userLogin();
+          localStorage.setItem('identity',JSON.stringify(res.doctorUpdate))
+        },
+        error: (err) => {
+          Swal.fire({
+            icon: 'error',
+            title: err.error.message || err.error,
+            confirmButtonColor: '#E74C3C'
+          });
+        },
+      })
+    }
+
+
+  deleteAccount(id: string, password:string)
+  {
+    Swal.fire({
+      title: 'Do you want to delete your Account?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      denyButtonText: `Don't delete`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+          const params = {
+            password: password
+          }
+        this.doctorRest.deleteDoctorProfile(id,params).subscribe({
+          next: (res: any) => {
+            Swal.fire({
+              title: res.message,
+              icon: 'success',
+              position: 'center',
+              showConfirmButton: false,
+              timer: 2000
+            });
+            localStorage.clear()
+            this.router.navigate(['/']);
+            this.userDeletePassword = '';
+          },
+          error: (err) => Swal.fire({
+            title: err.error.message || err.message,
+            icon: 'error',
+            position: 'center',
+            timer: 3000
+          })
+        })
+        this.userDeletePassword = "";
+      } else if (result.isDenied)
+      {
+        Swal.fire('Account Not Deleted','', 'info')
+        this.userDeletePassword = "";
+      }
+    })
+    this.userDeletePassword = "";
+  }
+
+  showPassword(){
+    this.userDeletePassword = "";
+  }
+
 
 }
