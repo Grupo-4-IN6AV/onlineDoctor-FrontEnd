@@ -90,15 +90,15 @@ export class PharmacyPacientComponent implements OnInit {
       quantity: this.medicamentQuantity
     }
     this.shoppingCartRest.createShoppingCart(params).subscribe({
-      next: (res: any) => {
+      next: (res: any) =>
+      {
+        localStorage.setItem('shoppingCart', JSON.stringify(res));
         Swal.fire
           ({
             icon: 'success',
-            title: res.message,
+            title: 'Producto Añadido',
             confirmButtonColor: '#28B463'
           });
-
-        // this.product = res.medicaments
       },
       error: (err) => {
         Swal.fire({

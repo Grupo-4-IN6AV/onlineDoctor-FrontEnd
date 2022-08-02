@@ -31,13 +31,13 @@
             <div class="noti-list" style="position: relative; max-width: 600px; max-height: 250px;" [perfectScrollbar]>
               <ul class="menu">
                 <li>
-                  <a href="#" *ngFor="let medicament of medicaments" routerLink="/paciente/shopping-cart">
+                  <a href="#" *ngFor="let medicament of shoppingCart.medicaments" routerLink="/paciente/shopping-cart">
                     <span class="table-img msg-user">
-                      <img *ngIf="medicament.medicament.image === undefined" src="../../../assets/images/user/usrbig3.jpg" alt="">
-                      <img *ngIf="medicament.medicament.image !== undefined" src="{{uriMedicament+medicament.medicament.image}}" crossorigin="anonymous" alt="">
+                      <img *ngIf="medicament.image === undefined" src="../../../assets/images/user/usrbig3.jpg" alt="">
+                      <img *ngIf="medicament.image !== undefined" src="{{uriMedicament+medicament.medicament.image}}" crossorigin="anonymous" alt="">
                     </span>
                     <span class="menu-info">
-                      <span class="menu-title">{{medicament.medicament.name}}</span>
+                      <span class="menu-title">{{medicament.name}}</span>
                       <span class="menu-desc">
                         <i class="material-icons">all_inbox</i>  {{medicament.quantity}} unidades
                       </span>

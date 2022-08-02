@@ -6,6 +6,7 @@ import { DoctorRestService } from 'src/app/services/doctorRest/doctor-rest.servi
 import { SpecialityRestService } from 'src/app/services/specialityRest/speciality-rest.service';
 import Swal from 'sweetalert2';
 import { DoctorModel } from 'src/app/models/doctor.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-doctor-admin',
@@ -15,7 +16,7 @@ import { DoctorModel } from 'src/app/models/doctor.model';
 export class DoctorAdminComponent implements OnInit {
   specialityView: any;
 
-  
+
 
   constructor(
     public dialog: MatDialog,
@@ -23,7 +24,7 @@ export class DoctorAdminComponent implements OnInit {
     private doctorRest: DoctorRestService,
     private specialityRest: SpecialityRestService
   ) {
-    this.doctor = new DoctorModel('', '', '', '', '', '', '', '', '', '', '', 'DOCTOR', true, '', '');
+    this.doctor = new DoctorModel('', '', '', '', '', '', '', '', '', '', '', 'DOCTOR', true, '','')
   }
 
   public ngOnInit(): void {
@@ -41,7 +42,11 @@ export class DoctorAdminComponent implements OnInit {
   doctorDeleteModal: any;
   doctorDeletePassword: any;
   showTableDoctors: boolean = false;
-  
+
+  uriDoctor:any;
+  uri: any;
+  doctorImage: any;
+
   doctorNameUp: any;
   doctorNameDown: any;
   reset: any;
@@ -53,9 +58,14 @@ export class DoctorAdminComponent implements OnInit {
   controloClick: number = 0
 
   //METÓDOS DEL CRUD DE DOCTORS//
-  getDoctors() {
+  getDoctors()
+  {
     this.doctorRest.getDoctors().subscribe({
-      next: (res: any) => this.doctors = res.doctors,
+      next: (res: any) =>
+      {
+        this.doctors = res.doctors,
+        this.uriDoctor = environment.baseURI+'doctor/getImageDoctor/'
+      },
       error: (err) => console.log(err)
     })
   }
@@ -95,6 +105,8 @@ export class DoctorAdminComponent implements OnInit {
   getDoctor(id: string) {
     this.doctorRest.getDoctor(id).subscribe({
       next: (res: any) => {
+        this.doctorImage = res.doctor.image
+        this.uri = environment.baseURI + 'doctor/getImageDoctor/' + this.doctorImage;
         this.doctorView = res.doctor;
         this.doctorUpdate = res.doctor;
         this.doctorDelete = res.doctor;
