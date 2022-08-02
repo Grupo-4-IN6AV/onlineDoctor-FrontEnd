@@ -37,7 +37,7 @@ export class SearchLaboratoryPrescriptionPipe implements PipeTransform {
           },
           error: (err) => {alert(err.error.message)}
         })
-        return laboratory.typeLaboratory.name.toLowerCase().includes(search.toLowerCase());
+        return laboratory.name.toLowerCase().includes(search.toLowerCase());
       })
     }
   }

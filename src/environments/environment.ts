@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  baseURI: 'http://localhost:3200/',
+  baseURI: 'https://onlinedoctorin6av.herokuapp.com/',
   // https://onlinedoctorin6av.herokuapp.com/
-  apiUrl: 'http://localhost:4200',
+  apiUrl: 'http://localhost:4200/',
 };
 
 /*

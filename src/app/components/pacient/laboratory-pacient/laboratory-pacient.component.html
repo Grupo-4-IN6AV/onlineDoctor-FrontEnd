@@ -5,90 +5,148 @@
     </h1>
     <hr />
 
-    <!--View Laboratories-->
-    <div>
-        <div class="modal fade" id="viewLaboratory" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="addContainer">
-                        <div class="contact-details">
-                            <div class="modalHeader">
-                                <div class="editRowModal">
-                                    <div *ngIf="laboratoryView" class="modalHeader clearfix">
-                                        <div class="modal-about contact-header">
-                                            <div class="contact-details-img">
-                                                <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
-                                            </div>
-                                            <div class="contact-details-heading">
-                                                <div class="contact-details-name mb-2">
-                                                    {{ laboratoryView.pacient.name }}
-                                                </div>
-                                                <div class="badge col-yellow">
-                                                    PACIENTE
-                                                </div>
-                                            </div>
-                                        </div>
+    <div class="modal fade" id="viewLaboratory" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content" *ngIf="AddlaboratoryView">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-basic-title">
+                        <i class="fa-solid fa-microscope"></i>
+                        &nbsp;Ver Resultado De Laboratorio
+                    </h3>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="content d-flex" style="justify-content: center; align-items: center; flex-wrap: wrap;">
+                        <div class="receta">
+                            <h5 style="margin-bottom: 0px; color: rgba(34, 34, 34, 0.7);;">Datos del Paciente</h5>
+                            <hr style="margin: 0.7rem 0 !important;">
+
+                            <div class="text-inside m-0">
+                                <div class="text-inside">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Nombre Completo</mat-label>
+                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                            [(ngModel)]="fullNamePacient" name="namePacient" matInput disabled />
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="input-group d-flex" style="margin-top: -1rem;">
+
+                                <div class="text-inside">
+                                    <mat-form-field class=" m-1" appearance="outline">
+                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Edad</mat-label>
+                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                            value="{{AddlaboratoryView.pacient.age}}" name="specifications" matInput
+                                            disabled />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="text-inside">
+                                    <mat-form-field class=" m-2" appearance="outline">
+                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">DPI</mat-label>
+                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                            value="{{AddlaboratoryView.pacient.DPI}}" name="specifications" matInput
+                                            disabled />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="text-inside">
+                                    <mat-form-field class=" m-2" appearance="outline">
+                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Sexo</mat-label>
+                                        <input style="color: rgba(34, 34, 34, 0.7);"
+                                            *ngIf="AddlaboratoryView.pacient.gender === 'MALE'" autocomplete="off"
+                                            value="Hombre" name="gender" matInput disabled />
+                                        <input style="color: rgba(34, 34, 34, 0.7);"
+                                            *ngIf="AddlaboratoryView.pacient.gender === 'FEMALE'" autocomplete="off"
+                                            value="Mujer" name="gender" matInput disabled />
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <h5
+                                style="margin-bottom: 0px; margin-top: -2.5rem !important ;color: rgba(34, 34, 34, 0.7);;">
+                                Datos del Doctor</h5>
+                            <hr style="margin: 0.7rem 0 !important;">
+
+                                <div class="text-inside m-0">
+                                    <div class="text-inside">
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Nombre Completo</mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                [(ngModel)]="fullNameDoctor" name="nameDoctorXD" matInput disabled />
+                                        </mat-form-field>
                                     </div>
                                 </div>
-                                <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
-                                    <mat-icon>close</mat-icon>
+    
+                                <div class="input-group d-flex" style="margin-top: -1rem;">
+    
+                                    <div class="text-inside">
+                                        <mat-form-field class="ful m-1" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Numero de Colegiado
+                                            </mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                value="{{collegiateNumberDoctor}}" name="specifications" matInput
+                                                disabled />
+                                        </mat-form-field>
+                                    </div>
+    
+                                    <div class="text-inside">
+                                        <mat-form-field class=" m-2" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Telefono</mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                value="{{phoneDoctor}}" name="specifications" matInput
+                                                disabled />
+                                        </mat-form-field>
+                                    </div>
+    
+                                    <div class="text-inside">
+                                        <mat-form-field class=" m-2" appearance="outline">
+                                            <mat-label style="color: rgba(34, 34, 34, 0.7);">Correo Electronico
+                                            </mat-label>
+                                            <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                                value="{{emailDoctor}}" name="specifications" matInput
+                                                disabled />
+                                        </mat-form-field>
+                                    </div>
+    
+                                </div>
+                            
+                            <form>
+                                <h5
+                                    style="margin-bottom: 0px; margin-top: -2.5rem !important ;color: rgba(34, 34, 34, 0.7);;">
+                                    Resultados</h5>
+                                <hr style="margin: 0.7rem 0 !important;">
+
+                                <div class="text-inside m-0">
+                                    <mat-form-field class=" m-2" appearance="outline">
+                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Resultado
+                                        </mat-label>
+                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
+                                            value="{{dataLaboratoryComent}}" name="specifications" matInput
+                                            disabled />
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="text-inside m-0">
+                                    <mat-form-field class=" m-2" appearance="outline">
+                                        <mat-label style="color: rgba(34, 34, 34, 0.7);">Diagnostico
+                                        </mat-label>
+                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off" 
+                                            value="{{dataLaboratoryDiagnostic}}" name="specifications" matInput
+                                            disabled />
+                                    </mat-form-field>
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Cerrar
                                 </button>
                             </div>
-                            <hr />
-                            <div *ngIf="laboratoryView" class="descripcion">
-                                <div class="count-container">
-                                    <div class="box">
-                                        <h3>Paciente:</h3>
-                                    </div>
-
-                                    <div class="box">
-                                        <p>{{ laboratoryView.pacient.name }}</p>
-                                    </div>
-
-                                    <div class="box">
-                                        <h3>Doctor:</h3>
-                                    </div>
-
-                                    <div class="box">
-                                        <p>{{ laboratoryView.doctor.name }}</p>
-                                    </div>
-
-                                    <div class="count-container"
-                                        *ngFor="let laboratory of laboratoriesUser; let i = index">
-                                        <div class="box">
-                                            <h3>Laboratorio: {{i+1}}</h3>
-                                        </div>
-                                        <div class="box">
-                                            <p>{{laboratory.name}}</p>
-                                        </div>
-                                    </div>
-
-                                    <div *ngIf="laboratoryView.description" class="box">
-                                        <h3>Descripcion:</h3>
-                                    </div>
-
-                                    <div *ngIf="laboratoryView.description" class="box">
-                                        <p>{{ laboratoryView.description }}</p>
-                                    </div>
-
-                                    <div *ngIf="laboratoryView.AnotherMedicaments" class="box">
-                                        <h3>Otros medicamentos:</h3>
-                                    </div>
-
-                                    <div *ngIf="laboratoryView.AnotherMedicaments" class="box">
-                                        <p>{{ laboratoryView.AnotherMedicaments }}</p>
-                                    </div>
-
-                                    <div *ngIf="laboratoryView.AnotherLaboratories" class="box">
-                                        <h3>Otros Laboratorios:</h3>
-                                    </div>
-
-                                    <div *ngIf="laboratoryView.AnotherLaboratories" class="box">
-                                        <p>{{ laboratoryView.AnotherLaboratories }}</p>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -97,7 +155,7 @@
     </div>
 
     <!--TABLE Laboratories-->
-    <div *ngIf="!showTableLaboratory" class="row clearfix mt-5">
+    <div class="row clearfix mt-5">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="card">
                 <div class="materialTableHeader mb-3">
@@ -123,8 +181,6 @@
                 </div>
                 <div class="tableBody">
                     <div class="table-responsive">
-                        <i *ngIf="" (click)="cleanTable()" class="fa fa-times-circle closeFilter" aria-hidden="true">
-                        </i>
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -139,41 +195,28 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let laboratory of laboratories">
-                                    <td (click)="getLaboratoryPacient(laboratory._id)">
-                                        <mat-checkbox *ngIf="laboratory.checked==true || controloClick==0"
-                                            #check="matCheckbox"
-                                            (click)="showButtonActions(laboratory._id, check); getLaboratoryPacient(laboratory._id)"
-                                            class="example-margin" color="primary">
-                                        </mat-checkbox>
-                                        <mat-checkbox disabled="" *ngIf="laboratory.checked==false"
-                                            class="example-margin" color="primary">
-                                        </mat-checkbox>
+                                    <td class="text-center">
                                         {{ laboratories.indexOf(laboratory) + 1 }}
                                     </td>
-                                    <td (click)="getLaboratoryPacient(laboratory._id)" class="table-img">
+                                    <td class="table-img">
                                         <img src="assets/images/user/user8.jpg" alt="" />
                                     </td>
-                                    <td (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewLaboratory">{{ laboratory.pacient.name }}</td>
-                                    <td (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewLaboratory">{{ laboratory.typeLaboratory.name }}</td>
+                                    <td>{{ laboratory.pacient.name }}</td>
+                                    <td>{{ laboratory.typeLaboratory.name }}</td>
                     
-                                    <td *ngIf="!laboratory.date" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewLaboratory">No hay descripcion</td>
-                                    <td *ngIf="laboratory.date" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewlaboratory">{{laboratory.date}}
+                                    <td *ngIf="!laboratory.date">No hay fecha</td>
+                                    <td *ngIf="laboratory.date">{{newDate[laboratories.indexOf(laboratory)]}}
                                     </td>
                                     <!-- OTRO Laboratory -->
-                                    <td *ngIf="!laboratory.specifications" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
-                                    data-bs-target="#viewLaboratory">No hay otros Laboratorios</td>
-                                    <td *ngIf="laboratory.specifications" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewLaboratory">{{ laboratory.specifications }}</td>
-                                    <td class="text-center" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal" data-bs-target="#viewLaboratory">
-                                        <i type="button" class="fa fa-eye"  aria-hidden="true"></i>
+                                    <td *ngIf="!laboratory.specifications">No hay otras Especificaciones</td>
+                                    <td *ngIf="laboratory.specifications" >{{ laboratory.specifications }}</td>
+
+                                    <td *ngIf="laboratory.doctor" class="text-center" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal" data-bs-target="#viewLaboratory">
+                                        <i style="font-size: 1.5rem; cursor:pointer" class="fas fa-eye me-2"></i>
                                     </td>
-                                </tr>
-                                <tr rowspan="9" *ngIf="notFound === true">
-                                    <td colspan="9" class="text-center">Laboratorio no encontrado</td>
+                                    <td *ngIf="!laboratory.doctor" class="text-center" >
+                                        --Pendiente--
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -182,7 +225,4 @@
             </div>
         </div>
     </div>
-    <h1 *ngIf="notFound === true && showTableLaboratory === false" class="text-center">
-        Laboratorio no encontrado
-    </h1>
 </section>
