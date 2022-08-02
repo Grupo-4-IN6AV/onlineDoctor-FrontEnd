@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PrescriptionRestService } from 'src/app/services/prescriptionRest/prescription-rest.service';
 import { PrescriptionModel } from 'src/app/models/prescription.model';
+import { CredentialsRestService } from '../../../services/credentialsRest/credentials-rest.service';
 import Swal from 'sweetalert2';
 
 
@@ -16,11 +17,35 @@ export class PrescriptionPacientComponent implements OnInit {
   prescriptionView: any;
   laboratories: any;
   medicaments: any;
+  prescriptionId: any;
+
+
+  AddPrescriptionView: any;
+
+  fullNamePacient: any;
+  actualPacientData: any;
+
+  fullNameDoctor: any;
+  collegiateNumberDoctor: any;
+  phoneDoctor: any;
+  emailDoctor: any;
+
+  nameMedicament:any;
+
+  dataPrescripcionComent:any;
+  dataPrescripcionDiagnostic:any;
+
+  medicamentsInPrescription: any;
+  medicamentsOutPrescription: any;
+
+  laboratorysInPrescription: any;
+  laboratorysOutPrescription: any;
 
 
   constructor(
     public dialog: MatDialog,
     private prescriptionRest: PrescriptionRestService,
+    private credentialRest: CredentialsRestService,
   )
   {
   }
@@ -28,6 +53,12 @@ export class PrescriptionPacientComponent implements OnInit {
   ngOnInit(): void
   {
     this.getPrescriptionUser();
+    this.actualPacient();
+  }
+
+  actualPacient(){
+    this.actualPacientData = this.credentialRest.getIdentity();
+    this.fullNamePacient = this.actualPacientData.name + " " + this.actualPacientData.surname
   }
 
   getPrescriptionUser()
@@ -47,9 +78,21 @@ export class PrescriptionPacientComponent implements OnInit {
   {
     this.prescriptionRest.getPrescription(id).subscribe({
       next: (res: any) => {
+        console.log(res.laboratories)
+        this.prescriptionId = id;
+        this.AddPrescriptionView = res.prescription;
+        this.fullNameDoctor = res.prescription.doctor.name + ' ' + res.prescription.doctor.surname;
+        this.collegiateNumberDoctor = res.prescription.doctor.collegiateNumber;
+        this.phoneDoctor = res.prescription.doctor.phone;
+        this.emailDoctor = res.prescription.doctor.email;
+
         this.prescriptionView = res.prescription;
-        this.laboratories = res.laboratories
-        this.medicaments = res.medicaments
+        this.laboratories = res.laboratories;
+        this.medicaments = res.medicaments;
+
+        this.getMedicamentsOutList();
+        this.getLaboratorysOutPrescription();
+
       },
       error: (err) =>
       {
@@ -61,6 +104,27 @@ export class PrescriptionPacientComponent implements OnInit {
       }
     })
   }
+
+  getMedicamentsOutList() {
+    this.prescriptionRest.getMedicamentsOutPrescription(this.prescriptionId).subscribe({
+      next: (res: any) => {
+        this.medicamentsOutPrescription = res.medicamentsOutPrescription,
+          this.medicamentsInPrescription = res.medicamentsInPrescription
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
+  getLaboratorysOutPrescription() {
+    this.prescriptionRest.getLaboratorysOutPrescription(this.prescriptionId).subscribe({
+      next: (res: any) => {
+        this.laboratorysOutPrescription = res.laboratorysOutPrescription,
+          this.laboratorysInPrescription = res.laboratorysInPrescription,
+          console.log(res.laboratorysInPrescription)
+      },
+      error: (err) => console.log(err)}
+    )}
+
 
   getPrescriptionPDF(id:string)
   {
@@ -79,5 +143,6 @@ export class PrescriptionPacientComponent implements OnInit {
       }
     })
   }
-
 }
+
+

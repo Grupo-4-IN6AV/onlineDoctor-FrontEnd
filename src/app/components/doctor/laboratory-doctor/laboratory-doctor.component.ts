@@ -148,7 +148,8 @@ export class LaboratoryDoctorComponent implements OnInit {
   saveResultLaboratory(addResultLaboratory: any) {
     var params = {
       result: this.dataLaboratoryComent,
-      diagnosis: this.dataLaboratoryDiagnostic
+      diagnosis: this.dataLaboratoryDiagnostic,
+      doctor: this.actualDoctorData._id
     };
     this.laboratoryRest.saveResult(this.laboratoryId, params).subscribe({
       next: (res: any) => {

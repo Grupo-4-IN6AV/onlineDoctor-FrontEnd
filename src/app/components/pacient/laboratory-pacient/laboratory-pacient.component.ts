@@ -20,6 +20,7 @@ export class LaboratoryPacientComponent implements OnInit {
   laboratory: LaboratoryModel;
   searchLaboratory: any;
   laboratoryView: any;
+  AddlaboratoryView:any;
   showTableLaboratory: boolean = false;
   reset: any;
   notFound: boolean = false;
@@ -45,6 +46,19 @@ export class LaboratoryPacientComponent implements OnInit {
   laboratoriesUser:any;
   laboratorysUser:any;
 
+  fullNamePacient: any;
+  actualPacientData: any;
+
+  fullNameDoctor: any;
+  collegiateNumberDoctor: any;
+  phoneDoctor: any;
+  emailDoctor: any;
+
+  newDate: any;
+
+  dataLaboratoryComent:any;
+  dataLaboratoryDiagnostic:any;
+
   
   constructor(
     public dialog: MatDialog,
@@ -61,15 +75,28 @@ export class LaboratoryPacientComponent implements OnInit {
     this.actualUserId = this.credentialReset.getIdentity()._id;
     this.getUserDoctor();
     this.getLaboratoriesDoctor();
+    this.actualPacient();
+    this.getDoctors();
   }
 
   getLaboratoriesDoctor() {
     this.laboratoryRest.getLaboratoriesDoctor(this.actualUserId).subscribe({
       next: (res: any) => {
-        this.laboratories = res.laboratories;
+        this.laboratories = res.laboratories, console.log(this.laboratories);
+        var arrayDate = [];
+        for(let date of res.laboratories){
+          const newDate = date.date.split('T');
+          arrayDate.push(newDate[0])
+        }
+        this.newDate = arrayDate;
       },
       error: (err) => console.log(err)
     })
+  }
+
+  actualPacient(){
+    this.actualPacientData = this.credentialReset.getIdentity();
+    this.fullNamePacient = this.actualPacientData.name + " " + this.actualPacientData.surname
   }
 
   getUsersDoctor() {
@@ -100,14 +127,23 @@ export class LaboratoryPacientComponent implements OnInit {
       error: (err) => console.log(err)
     })
   }
+  
 
   getLaboratoryPacient(id:string) {
     this.laboratoryRest.getLaboratoryPacient(id).subscribe({
       next: (res: any) => {
+        
         this.laboratoryId = id;
         this.laboratoryView = res.laboratory;
+        this.AddlaboratoryView = res.laboratory;
+        this.dataLaboratoryComent = res.laboratory.resultado;
+        this.dataLaboratoryDiagnostic = res.laboratory.diagnosis;
+        this.fullNameDoctor = res.laboratory.doctor.name + ' ' + res.laboratory.doctor.surname;
+        this.collegiateNumberDoctor = res.laboratory.doctor.collegiateNumber;
+        this.phoneDoctor = res.laboratory.doctor.phone;
+        this.emailDoctor = res.laboratory.doctor.email;
         this.laboratories = res.laboratories;
-        console.log(this.laboratories)
+        
       },
       error: (err) => {
         Swal.fire({
