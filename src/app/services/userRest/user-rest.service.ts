@@ -79,6 +79,18 @@ export class UserRestService
     return this.http.get(environment.baseURI + 'user/getUsersAndDoctors', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
+  //paciente//
+  updateAccount(id:string, params:{})
+  {
+    return this.http.put(environment.baseURI + 'user/updateAccount/' + id, params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
+  }
+
+  deleteAccount(id:string, params:{})
+  {
+    return this.http.post(environment.baseURI + 'user/deleteAccount/' + id, params, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
+  }
+  
+
   //Implementación de Imágenes//
   requestFiles(
     userID: string,
