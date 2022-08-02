@@ -55,7 +55,8 @@ export class PharmacyPacientComponent implements OnInit {
   getMedicament(id: string)
   {
     this.pharmacyRest.getMedicament(id).subscribe({
-      next: (res: any) => {
+      next: (res: any) =>
+      {
         this.medicamentView = res.medicament;
         this.uri = environment.baseURI + 'medicament/getImageMedicament/' + res.medicament.image;
       },

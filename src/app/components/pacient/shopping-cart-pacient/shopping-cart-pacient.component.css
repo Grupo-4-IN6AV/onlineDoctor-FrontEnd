@@ -924,3 +924,30 @@ fieldset[disabled] .btn-sample.active {
     font-weight: 300;
     color: #fff;
 }
+
+
+.btn-event.btn-primary,
+.btn-event.btn-secondary,
+.btn-event.btn-dark,
+.btn-event.btn-success
+{
+    padding: .625rem 1rem;
+    font-size: .813rem;
+    border-radius: .5rem;
+    font-weight: 400;
+    margin-top: 1rem;
+}
+
+.btn-icon-end
+{
+    border-left: .0750rem solid #eee;
+    display: inline-block;
+    margin: -1rem -.25rem -1rem 1rem;
+    padding: 1rem 0 1rem 1.25rem
+}
+
+.btn-icon-end i
+{
+  font-size: medium;
+  margin-left: -5px;
+}

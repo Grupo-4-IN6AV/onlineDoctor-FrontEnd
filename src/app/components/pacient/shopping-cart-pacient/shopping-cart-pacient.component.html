@@ -1,15 +1,24 @@
 <section class="content">
   <!--TÍTULO DEL COMPONENTE-->
-  <div class="head-title">
+  <div *ngIf="!invoiceShow" class="head-title">
     <div class="left">
       <h1>
-        &nbsp;<i class="fa fa-file" aria-hidden="true"></i> Details Sale
+        &nbsp;<i class="fa fa-shopping-cart" aria-hidden="true"></i> Detalles del Carrito
       </h1>
       <hr>
     </div>
   </div>
 
-  <div class="container py-5 h-100">
+  <div *ngIf="invoiceShow" class="head-title">
+    <div class="left">
+      <h1>
+        &nbsp;<i class="fa fa-file" aria-hidden="true"></i> Tu Factura
+      </h1>
+      <hr>
+    </div>
+  </div>
+
+  <div *ngIf="!invoiceShow" class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
         <div class="card">
@@ -62,7 +71,9 @@
                   <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                       <h5 class="mb-0">Detalles de tu Compra</h5>
-                      <img src="../../../../assets/images/usrbig.jpg" class="img-fluid rounded-3" style="width: 45px;"
+                      <img *ngIf="!userImage" src="../../../../assets/images/usrbig.jpg" class="img-fluid rounded-3" style="width: 45px;"
+                        alt="Avatar">
+                        <img *ngIf="userImage" src="{{uriUser}}" class="img-fluid rounded-3" style="width: 45px;" crossorigin="anonymous"
                         alt="Avatar">
                     </div>
 
@@ -106,12 +117,123 @@
                     </div>
 
                     <div class="d-flex" style="justify-content: center">
-                      <button style="background-color: orange" class="btn btn-icon-split">
+                      <button (click)="payShoppingCart()" style="background-color: orange" class="btn btn-icon-split">
                         <span class="icon">
                           <i class="fa fa-file" aria-hidden="true"></i>
                         </span>
-                        <span class="text">Generate Bill</span>
+                        <span class="text">Finalizar Compra</span>
                       </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="invoiceShow" class="text-center mt-2 mb-2">
+    <button routerLink="/paciente/pharmacy" type="button"
+        class="ms-3 btn btn-event btn-secondary">
+        Regresar a Farmacia
+        <span class="btn-icon-end"><i class="fa-solid fa-prescription-bottle-medical"></i> </span>
+    </button>
+    <button routerLink="/paciente/home" type="button" class="ms-3 btn btn-event btn-dark">
+        Inicio
+        <span class="btn-icon-end"><i class="fas fa-home"></i> </span>
+    </button>
+</div>
+<hr *ngIf="invoiceShow" />
+  <div *ngIf="invoiceShow" class="container-fluid">
+    <div class="row clearfix">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="white-box">
+                  <h3>
+                    <b>Factura</b>
+                    <span class="float-end">#{{invoice.numberBill+1000}}</span>
+                  </h3>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="float-start">
+                        <address>
+                          <p class="font-bold">Remitente :</p>
+                          <p class="text-muted">
+                            Online Doctor,
+                            <br> Guatemala,
+                            <br> Ciudad de Guatemala,
+                            <br> Año 2022.
+                          </p>
+                        </address>
+                      </div>
+                      <div class="float-end text-end">
+                        <address>
+                          <p class="addr-font-h3 font-bold">Receptor :</p>
+                          <p class="font-bold addr-font-h4">Rodrigo Cárdenas</p>
+                          <p class="text-muted m-l-30">
+                            <br> 18 años,
+                            <br> 55798278,
+                            <br> rcardenas
+                          </p>
+                          <p class="m-t-30">
+                            <b>Fecha :</b>
+                            <i class="fa fa-calendar"></i> {{setDate}}
+                          </p>
+                          <p>
+                            <b>Estado :</b> &nbsp;
+                            <span class="label label-success">Facturada</span>
+                          </p>
+                        </address>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="table-responsive m-t-40">
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <th class="text-center">#</th>
+                              <th class="text-center">Medicamento</th>
+                              <th class="text-center">Cantidad</th>
+                              <th class="text-center">Costo Unitario</th>
+                              <th class="text-end">SubTotal</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let medicament of invoice.medicaments">
+                              <td class="text-center">{{invoice.medicaments.indexOf(medicament)+1}}</td>
+                              <td class="text-center">{{medicament.name}}</td>
+                              <td class="text-center" *ngIf="medicament.quantity === 1">
+                                {{medicament.quantity}} unidad
+                              </td>
+                              <td class="text-center" *ngIf="medicament.quantity !== 1">
+                                {{medicament.quantity}} unidades
+                              </td>
+                              <td class="text-center">Q.{{medicament.price.toFixed(2)}}</td>
+                              <td class="text-end">Q.{{medicament.subTotalMedicament.toFixed(2)}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="float-end m-t-30 text-end">
+                        <p>SubTotal: Q.{{invoice.subTotal.toFixed(2)}}</p>
+                        <p>IVA (12%): Q.{{invoice.IVA.toFixed(2)}}</p>
+                        <hr>
+                        <h3>
+                          <b>Total :</b> Q.{{invoice.total.toFixed(2)}}</h3>
+                      </div>
+                      <div class="clearfix"></div>
+                      <hr>
+                      <div class="text-end">
+                        <button (click)="imprimir()" mat-raised-button color="primary"><i class="fas fa-print msr-2"></i>Imprimir</button>
+                      </div>
                     </div>
                   </div>
                 </div>
