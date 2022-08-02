@@ -89,7 +89,7 @@
               </div>
               <div class="body">
                 <div class="example-container">
-                  <form>
+                  <form (ngSubmit)="updateAccount()">
                     <mat-form-field class="example-full-width" appearance="fill">
                       <mat-label>Nombre</mat-label>
                       <input [(ngModel)]="updateUser.name" name="name" matInput>
@@ -117,15 +117,11 @@
                     <div class="d-flex justify-content-center">
                       <button type="submit" class="btn btn-success ms-2">
                         <i class="fa fa-refresh" aria-hidden="true"></i>
-                        &nbsp; Actualizar Cuenta
+                        &nbsp; Actualizar cuenta
                       </button>
-                      <button type="button" class="btn btn-danger ms-2">
+                      <button data-bs-toggle="modal" data-bs-target="#deleteAccount" type="button" class="btn btn-danger ms-2">
                         <i class="fa fa-trash" aria-hidden="true"></i>
-                        &nbsp; Eliminar Cuenta
-                      </button>
-                      <button data-bs-toggle="modal" data-bs-target="#changePassword" type="button" class="btn btn-dark ms-2">
-                        <i class="fa fa-key" aria-hidden="true"></i>
-                        &nbsp; Cambiar Contraseña
+                         Eliminar Cuenta
                       </button>
                     </div>
                   </form>
@@ -218,6 +214,88 @@
                 <i class="fa fa-floppy-o" aria-hidden="true"></i> Change Password
               </button>
             </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Eliminar User -->
+  <div class="modal fade" id="deleteAccount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="addContainer">
+          <div class="contact-details">
+            <div class="modalHeader">
+              <div class="editRowModal">
+                <div *ngIf="userDeleteModal" class="modalHeader clearfix">
+                  <div class="modal-about contact-header">
+                    <div class="contact-details-img">
+                      <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
+                    </div>
+                    <div class="contact-details-heading">
+                      <div class="contact-details-name mb-2">
+                        {{ userDeleteModal.name }}
+                      </div>
+                      <div class="badge col-yellow">
+                        PACIENTE
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <hr />
+            <div *ngIf="userDeleteModal" class="descripcion">
+              <div class="count-container">
+
+                <div class="box">
+                  <h3>Nombre:</h3>
+                </div>
+                <div class="box">
+                  <p>{{ userDeleteModal.name }}</p>
+                </div>
+
+                <div class="box">
+                  <h3>Apellido:</h3>
+                </div>
+                <div *ngIf="userDeleteModal.surname" class="box">
+                  <p>{{ userDelete.surname }}</p>
+                </div>
+                <div *ngIf="!userDeleteModal.surname" class="box">
+                  <p>-Sin apellido-</p>
+                </div>
+
+                <div class="box">
+                  <h3>Usuario:</h3>
+                </div>
+                <div class="box">
+                  <p>{{ userDeleteModal.username }}</p>
+                </div>
+
+                <form style="width:100%">
+                  <div class="text-inside">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Tu Contraseña</mat-label>
+                      <input type="password" autocomplete="off" [(ngModel)]="userDeletePassword" name="password"
+                        matInput />
+                    </mat-form-field>
+                  </div>
+                  <div class="modal-footer justify-content-center">
+                    <button (click)="showPassword()" type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                      <i class="fa fa-times-circle" aria-hidden="true"></i> Descartar
+                    </button>
+                    <button (click)="deleteAccount(userDeleteModal._id, userDeletePassword)" type="submit"
+                      class="btn btn-success" data-bs-dismiss="modal">
+                      <i class="fa fa-floppy-o" aria-hidden="true"></i> Eliminar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
