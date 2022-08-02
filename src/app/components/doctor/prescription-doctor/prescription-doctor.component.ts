@@ -10,6 +10,7 @@ import { PrescriptionModel } from 'src/app/models/prescription.model';
 import { CredentialsRestService } from '../../../services/credentialsRest/credentials-rest.service';
 
 import Swal from 'sweetalert2';
+import { TypeLaboratoryRestService } from 'src/app/services/typeLaboratoryRest/type-laboratory-rest.service';
 
 @Component({
   selector: 'app-prescription-doctor',
@@ -59,6 +60,8 @@ export class PrescriptionDoctorComponent implements OnInit {
   laboratoriesUser: any;
   laboratorysUser: any;
 
+  typesLaboratories: any;
+
   medicamentPrescription: any;
   laboratorysPrescription: any;
 
@@ -70,6 +73,7 @@ export class PrescriptionDoctorComponent implements OnInit {
     private medicamentRest: MedicamentRestService,
     private laboratoryRest: LaboratoryRestService,
     private prescriptionRest: PrescriptionRestService,
+    private typeLaboratory: TypeLaboratoryRestService,
     private credentialReset: CredentialsRestService,
   ) {
     this.prescription = new PrescriptionModel('', '', '', '', '', '', '', '', true)
@@ -124,8 +128,8 @@ export class PrescriptionDoctorComponent implements OnInit {
   }
 
   getLaboratories() {
-    this.laboratoryRest.getLaboratoriesDoctor(this.userId).subscribe({
-      next: (res: any) => this.laboratories = res.laboratories,
+    this.typeLaboratory.getTypesLaboratory().subscribe({
+      next: (res: any) => {this.typesLaboratories = res.typesLaboratory, console.log(res.typesLaboratory)},
       error: (err) => console.log(err)
     })
   }
@@ -144,7 +148,8 @@ export class PrescriptionDoctorComponent implements OnInit {
     this.prescriptionRest.getLaboratorysOutPrescription(this.prescriptionId).subscribe({
       next: (res: any) => {
         this.laboratorysOutPrescription = res.laboratorysOutPrescription,
-          this.laboratorysInPrescription = res.laboratorysInPrescription
+        this.laboratorysInPrescription = res.laboratorysInPrescription
+        console.log(this.laboratorysOutPrescription, this.laboratorysInPrescription)
       },
       error: (err) => console.log(err)
     })

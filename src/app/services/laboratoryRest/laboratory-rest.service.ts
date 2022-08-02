@@ -85,4 +85,11 @@ export class LaboratoryRestService {
   {
     return this.http.get(environment.baseURI + 'laboratory/getLaboratoryPacient/' + id, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
+
+  getLaboratorysUser(id:string)
+  {
+    return this.http.get(environment.baseURI + 'laboratory/getLaboratoysUser/' + id, { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
+  }
+
+
 }
