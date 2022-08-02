@@ -21,7 +21,7 @@
     color: #fff;
     padding: 9px 15px;
     border-bottom: 1px solid #eee;
-    background-color: #1974ed0;
+    background-color: #1974e0;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
@@ -63,7 +63,7 @@
 }
 
 .container .products-container .product:hover {
-    outline: .2rem solid #1974ed0;
+    outline: .2rem solid #1974e0;
     outline-offset: 0;
 }
 
@@ -243,7 +243,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #1974ed0;
+    background: #1974e0;
     color: white;
     font-size: 18px;
     border: none;
@@ -263,7 +263,7 @@ hr {
     margin-top: 4rem;
     height: auto;
     padding: 0 20px;
-    background-color: #1974ed0;
+    background-color: #1974e0;
     border-radius: 4px;
 }
 
@@ -271,13 +271,13 @@ hr {
     display: flex;
     width: 800px;
     height: auto;
-    background-color: #1974ed0;
+    background-color: #1974e0;
     border-radius: 2px;
 }
 
 .descripcion {
     text-align: center;
-    background-color: #1974ed0;
+    background-color: #1974e0;
 }
 
 .encabezado,
@@ -810,7 +810,7 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #1974ed0;
+    background: #1974e0;
     color: white;
     font-size: 18px;
     border: none;
@@ -820,13 +820,13 @@ hr {
 }
 
 .colorTable {
-    color: #1974ed0;
+    color: #1974e0;
 }
 
 .drop {
     border-radius: 36px 0 0 36px;
     height: 100%;
-    background-color: #1974ed0;
+    background-color: #1974e0;
     color: white;
 }
 
@@ -834,12 +834,12 @@ hr {
     border-radius: 36px 0 0 36px;
     height: 100%;
     background-color: #006f73;
-    border-color: #1974ed0;
+    border-color: #1974e0;
     box-shadow: 0 0 0 0.2rem rgba(0, 90, 93, 1);
 }
 
 .drop:active {
-    border-color: #1974ed0;
+    border-color: #1974e0;
     box-shadow: 0 0 0 0.2rem rgba(0, 90, 93, 1);
 }
 
@@ -874,8 +874,8 @@ th {
 
 .btn-sample {
     color: #FFFFFF;
-    background-color: #1974ed0;
-    border-color: #1974ed0;
+    background-color: #1974e0;
+    border-color: #1974e0;
 }
 
 .btn-sample:hover,
@@ -885,7 +885,7 @@ th {
 .open .dropdown-toggle.btn-sample {
     color: #FFFFFF;
     background-color: #17A589;
-    border-color: #1974ed0;
+    border-color: #1974e0;
 }
 
 .btn-sample:active,
@@ -909,12 +909,12 @@ fieldset[disabled] .btn-sample:active,
 .btn-sample.disabled.active,
 .btn-sample[disabled].active,
 fieldset[disabled] .btn-sample.active {
-    background-color: #1974ed0;
-    border-color: #1974ed0;
+    background-color: #1974e0;
+    border-color: #1974e0;
 }
 
 .btn-sample .badge {
-    color: #1974ed0;
+    color: #1974e0;
     background-color: #FFFFFF;
 }
 

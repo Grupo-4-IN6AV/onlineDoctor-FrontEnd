@@ -1,137 +1,139 @@
 <section class="content" style="background: #fff; min-height: 90vh;">
-        <h1 style="padding-top: 1.3rem;">
-            &nbsp;<i class="fa-solid fa-house-medical"></i>
-            Farmacia
-        </h1>
-        <hr>
-        <section>
-        <div class="container">
-            <div class="form-input">
-                <input [(ngModel)]="searchMedicament" name="name" placeholder="Search...">
-                <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
-            </div>
-            <div class="row justify-content-between">
-                <div class="col-md-13 order-md-2">
-                    <div class="row">
-                        <div *ngFor="let medicament of medicaments " class="col-md-4 col-sm-6 col-12 mt-4">
-                            <div class="product" (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
-                                data-bs-target="#viewMedicament">
+  <h1 style="padding-top: 1.3rem;">
+    &nbsp;<i class="fa-solid fa-house-medical"></i>
+    Farmacia
+  </h1>
+  <hr>
+  <section>
+    <div class="container">
+      <div class="form-input">
+        <input [(ngModel)]="searchMedicament" name="name" placeholder="Buscar Medicamento...">
+        <button type="submit" class="search-btn"><i class='fa fa-search'></i></button>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-md-13 order-md-2">
+          <div class="row">
+            <div *ngFor="let medicament of medicaments | searchMedicamentBar:searchMedicament"
+              class="col-md-4 col-sm-6 col-12 mt-4">
+              <div class="product" (click)="getMedicament(medicament._id)" data-bs-toggle="modal"
+                data-bs-target="#viewMedicament">
 
-                                <div class="product-img">
-                                    <img src="../../../../assets/pharmacy/assets/img/principal.png" class="" alt="">
-                                </div>
-
-
-                                <div class="product-info">
-                                    <div class="product-rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-o"></i>
-                                        <i class="fa fa-star-o"></i>
-                                    </div>
-                                    <h3>
-                                        {{medicament.name}}
-                                    </h3>
-                                    <div class="product-value">
-                                        <div class="d-flex">
-                                            <small class="regular-price">{{medicament.description}}</small>
-                                        </div>
-                                        <div class="current-price">Q.{{medicament.price.toFixed(2)}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <h1 *ngIf="notFound === true" class="text-center">Medicaments Not Found</h1>
+                <div class="product-img">
+                  <img src="../../../../assets/pharmacy/assets/img/principal.png" class="" alt="">
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="modal fade" style="z-index: 1100;" id="viewMedicament" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="addContainer">
-                    <div class="contact-details">
-                        <div class="modalHeader">
-                            <div class="editRowModal">
-                                <div *ngIf="medicamentView" class="modalHeader clearfix">
-                                    <div class="modal-about contact-header">
-                                        <div class="contact-details-img">
-                                            <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
-                                        </div>
-                                        <div class="contact-details-heading">
-                                            <div class="contact-details-name mb-2">
-                                                {{ medicamentView.name }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                        </div>
-                        <hr />
-                        <div *ngIf="medicamentView" class="descripcion">
-                            <div class="count-container">
-                                <div class="box">
-                                    <h3>Nombre:</h3>
-                                </div>
-
-                                <div class="box">
-                                    <p>{{ medicamentView.name }}</p>
-                                </div>
-
-                                <div class="box">
-                                    <h3>Descripción:</h3>
-                                </div>
-
-                                <div class="box">
-                                    <p>{{ medicamentView.description }}</p>
-                                </div>
-
-                                <div class="box">
-                                    <h3>Tipo de Medicamento</h3>
-                                </div>
-
-                                <div class="box">
-                                    <p>{{ medicamentView.typeMedicament.name }}</p>
-                                </div>
-
-                                <div class="box">
-                                    <h3>Precio</h3>
-                                </div>
-
-                                <div class="box">
-                                    <p>{{ medicamentView.price }}</p>
-                                </div>
-
-                                <div class="box">
-                                    <h3>Disponibilidad</h3>
-                                </div>
-
-                                <div class="box">
-                                    <p *ngIf="medicamentView.availibility === true">Disponible</p>
-                                    <p *ngIf="medicamentView.availibility === false">No Disponible</p>
-                                </div>
 
 
-                            </div>
-                            <div class="content d-flex justify-content-center">
-                                <button (click)="addToCart(params)" data-bs-dismiss="modal" type="button" class="ms-3 btn btn-event btn-success">
-                                    Agregar al carrito
-                                    <span class="btn-icon-end">
-                                        <i class="fa-solid fa-cart-arrow-down"></i>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
+                <div class="product-info">
+                  <div class="product-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <i class="fa fa-star-o"></i>
+                  </div>
+                  <h3>
+                    {{medicament.name}}
+                  </h3>
+                  <h3 class="mt-2">
+                    <b style="color:green" *ngIf="medicament.stock!==0">Disponible</b>
+                    <b style="color:red" *ngIf="medicament.stock===0">Agotado</b>
+                  </h3>
+                  <div class="product-value">
+                    <div class="d-flex">
+                      <small class="regular-price">{{medicament.description}}</small>
                     </div>
+                    <div class="current-price">Q.{{medicament.price.toFixed(2)}}</div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+          <h1 *ngIf="notFound === true" class="text-center">Medicaments Not Found</h1>
         </div>
+      </div>
     </div>
+  </section>
+
+  <div class="modal fade" style="z-index: 1100;" id="viewMedicament" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="addContainer">
+          <div class="contact-details">
+            <div class="modalHeader">
+              <div class="editRowModal">
+                <div *ngIf="medicamentView" class="modalHeader clearfix">
+                  <div class="modal-about contact-header">
+                    <div class="contact-details-img">
+                      <img *ngIf="!medicamentView.image" src="../../../../assets/images/user/usrbig2.jpg"
+                        alt="avatar" />
+                      <img style="object-fit: cover;" *ngIf="medicamentView.image" src="{{uri}}" crossorigin="anonymous"
+                        alt="avatar" />
+                    </div>
+                    <div class="contact-details-heading">
+                      <div class="contact-details-name mb-2">
+                        {{ medicamentView.name }}
+                      </div>
+                      <div style="font-size: 1rem;" *ngIf="medicamentView.stock === 0" class="badge col-red">
+                        Agotado
+                      </div>
+                      <div style="font-size: 1rem;" *ngIf="medicamentView.stock !== 0" class="badge col-green">
+                        Disponible
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button mat-icon-button data-bs-dismiss="modal" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <hr />
+            <div *ngIf="medicamentView" class="descripcion">
+              <div class="card rounded-3 mb-4">
+                <div class="card-body p-4">
+                  <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-md-2 col-lg-2 col-xl-2">
+                      <img *ngIf="!medicamentView.image" src="../../../../assets/images/user/usrbig2.jpg" alt="avatar"
+                        class="img-fluid rounded-3" />
+                        <img *ngIf="medicamentView.image" src="{{uri}}" crossorigin="anonymous" alt="avatar"
+                        class="img-fluid rounded-3" />
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                      <p class="lead fw-normal mb-2">{{medicamentView.name}}</p>
+                      <p><span class="text-muted">
+                          Tipo Medicamento:
+                        </span>{{medicamentView.typeMedicament.name}}</p>
+                      <p><span class="text-muted">
+                          Precio Unitario:
+                        </span>Q.{{medicamentView.price.toFixed(2)}}</p>
+                    </div>
+
+                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+
+                      <input id="form1" min="0" name="quantity" [(ngModel)]="medicamentQuantity" style="width: 5rem;"
+                        type="number" class="form-control form-control-sm ms-1 me-1" />
+
+                    </div>
+                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                      <h6>Sub Total</h6>
+                      <h5 class="mb-0">Q.{{calcPrice(medicamentView.price, medicamentQuantity).toFixed(2)}}</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="content d-flex justify-content-center">
+                <button (click)="addToCart()" data-bs-dismiss="modal" type="button" class="ms-3 btn btn-event btn-success">
+                    Agregar al carrito
+                    <span class="btn-icon-end">
+                        <i class="fa-solid fa-cart-arrow-down"></i>
+                    </span>
+                </button>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

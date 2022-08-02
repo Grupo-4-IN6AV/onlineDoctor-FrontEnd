@@ -5,7 +5,7 @@ import {ScriptsPharmasyGlobalService} from '../../../services/cargarScripts/scri
 import Swal from 'sweetalert2';
 import { ShoppingCartRestService } from 'src/app/services/shoppingCartRest/shopping-cart-rest.service';
 import { ShoppingCartModel } from 'src/app/models/shoppingCart.model';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-pharmacy-pacient',
   templateUrl: './pharmacy-pacient.component.html',
@@ -22,6 +22,11 @@ export class PharmacyPacientComponent implements OnInit {
 
   notFound: boolean = false;
 
+  priceMedicament : number = 0;
+  medicamentQuantity : number = 0;
+
+  uri: any;
+
   constructor(
     private _ScriptsPharmacyGlobal: ScriptsPharmasyGlobalService,
     private _ScriptsPharmacy: ScriptsPharmacyService,
@@ -37,7 +42,7 @@ export class PharmacyPacientComponent implements OnInit {
   ngOnInit(): void {
     this.getMedicaments();
   }
-  
+
   getMedicaments() {
     this.pharmacyRest.getMedicaments().subscribe({
       next: (res: any) => {this.medicaments = res.medicaments,
@@ -47,10 +52,12 @@ export class PharmacyPacientComponent implements OnInit {
     })
   }
 
-  getMedicament(id: string) {
+  getMedicament(id: string)
+  {
     this.pharmacyRest.getMedicament(id).subscribe({
       next: (res: any) => {
         this.medicamentView = res.medicament;
+        this.uri = environment.baseURI + 'medicament/getImageMedicament/' + res.medicament.image;
       },
       error: (err) => {
         Swal.fire({
@@ -62,11 +69,25 @@ export class PharmacyPacientComponent implements OnInit {
     })
   }
 
-  addToCart() {
+  calcPrice(price:any, quantity:any)
+  {
+    if(quantity<0)
+    {
+      this.priceMedicament = 0
+    }
+    else
+    {
+      this.priceMedicament = price *quantity
+    }
+    return this.priceMedicament
+  }
+
+  addToCart()
+  {
     let params =
     {
-      products: this.medicamentView._id,
-      quantity: 1
+      medicaments: this.medicamentView._id,
+      quantity: this.medicamentQuantity
     }
     this.shoppingCartRest.createShoppingCart(params).subscribe({
       next: (res: any) => {

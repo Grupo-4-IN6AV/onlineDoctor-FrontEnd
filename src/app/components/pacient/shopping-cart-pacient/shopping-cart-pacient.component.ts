@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CredentialsRestService } from 'src/app/services/credentialsRest/credentials-rest.service';
 import { ShoppingCartRestService } from 'src/app/services/shoppingCartRest/shopping-cart-rest.service';
 import Swal from 'sweetalert2';
-
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-shopping-cart-pacient',
@@ -13,8 +14,8 @@ export class ShoppingCartPacientComponent implements OnInit {
 
   constructor
   (
-    private shoppingRest: ShoppingCartRestService,
-    private router: Router,
+    private shoppingCartRest: ShoppingCartRestService,
+    private credentialRest: CredentialsRestService,
   )
   {
   }
@@ -23,56 +24,33 @@ export class ShoppingCartPacientComponent implements OnInit {
   quantityMedicaments : any;
   medicaments: any;
   dataClient: any;
+  items:any;
+  medicamentsCart:any
+  userCart:any;
+  dataBuy: any;
 
-  fileName : any;
-  pdf : any;
+  uriMedicament : any;
 
-  ngOnInit(): void 
+  ngOnInit(): void
   {
     this.getShoppingCart();
+    this.uriMedicament = environment.baseURI+'medicament/getImageMedicament/'
   }
 
   getShoppingCart()
   {
-    this.shoppingRest.getShoppingCart().subscribe({
-      next: (res: any) => {
-        this.shoppingCart = res.shoppingCarts;
-        for(let shop of this.shoppingCart)
-        {
-          this.dataClient = shop;
-          this.medicaments = shop.medicaments
-          this.quantityMedicaments = shop.medicaments.length
-        }
+    this.shoppingCartRest.getShoppingCart().subscribe({
+      next: (res: any) =>
+      {
+        this.items = res.shoppingCart.medicaments.length
+        this.medicamentsCart = res.shoppingCart.medicaments
+        this.userCart = res.shoppingCart.user
+        this.dataBuy = res.shoppingCart;
       },
-      error: (err) => { alert(err.error.message) }
+      error: (err) => {alert(err.error.message)}
     })
   }
 
 
-  /*
-  generatePDF()
-  {
-    Swal.fire({
-      icon: 'success',
-      title: 'Bill create Successfully.',
-      confirmButtonColor: '#28B463',
-      timer: 5000,
-    }).then((result) => {
-      if (result.isConfirmed)
-      {
-        let dpi = this.dataClient.dpi
-        let params = {dpi}
-        this.shoppingRest.generatePdf(params).subscribe({
-          next: (res: any) =>
-          {
-            window.open("http://localhost:3000/Bill" + res.updateBill.numberBill);
-            this.router.navigate(['/companies/salesProducts'])
-          },
-          error: (err) => { alert(err.error.message) }
-        })
-      }
-    });
-  }
-*/
 
 }
