@@ -181,8 +181,6 @@
                 </div>
                 <div class="tableBody">
                     <div class="table-responsive">
-                        <i *ngIf="" (click)="cleanTable()" class="fa fa-times-circle closeFilter" aria-hidden="true">
-                        </i>
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -197,31 +195,28 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let laboratory of laboratories">
-                                    <td class="text-center" (click)="getLaboratoryPacient(laboratory._id)">
+                                    <td class="text-center">
                                         {{ laboratories.indexOf(laboratory) + 1 }}
                                     </td>
-                                    <td (click)="getLaboratoryPacient(laboratory._id)" class="table-img">
+                                    <td class="table-img">
                                         <img src="assets/images/user/user8.jpg" alt="" />
                                     </td>
-                                    <td (click)="getLaboratoryPacient(laboratory._id)">{{ laboratory.pacient.name }}</td>
-                                    <td (click)="getLaboratoryPacient(laboratory._id)">{{ laboratory.typeLaboratory.name }}</td>
+                                    <td>{{ laboratory.pacient.name }}</td>
+                                    <td>{{ laboratory.typeLaboratory.name }}</td>
                     
-                                    <td *ngIf="!laboratory.date" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal"
-                                        data-bs-target="#viewLaboratory">No hay fecha</td>
-                                    <td *ngIf="laboratory.date" (click)="getLaboratoryPacient(laboratory._id)">{{newDate[laboratories.indexOf(laboratory)]}}
+                                    <td *ngIf="!laboratory.date">No hay fecha</td>
+                                    <td *ngIf="laboratory.date">{{newDate[laboratories.indexOf(laboratory)]}}
                                     </td>
                                     <!-- OTRO Laboratory -->
-                                    <td *ngIf="!laboratory.specifications" (click)="getLaboratoryPacient(laboratory._id)">No hay otras Especificaciones</td>
-                                    <td *ngIf="laboratory.specifications" (click)="getLaboratoryPacient(laboratory._id)" >{{ laboratory.specifications }}</td>
+                                    <td *ngIf="!laboratory.specifications">No hay otras Especificaciones</td>
+                                    <td *ngIf="laboratory.specifications" >{{ laboratory.specifications }}</td>
+
                                     <td *ngIf="laboratory.doctor" class="text-center" (click)="getLaboratoryPacient(laboratory._id)" data-bs-toggle="modal" data-bs-target="#viewLaboratory">
-                                        <i type="button" class="fa fa-eye"  aria-hidden="true"></i>
+                                        <i style="font-size: 1.5rem; cursor:pointer" class="fas fa-eye me-2"></i>
                                     </td>
-                                    <td *ngIf="!laboratory.doctor" class="text-center">
+                                    <td *ngIf="!laboratory.doctor" class="text-center" >
                                         --Pendiente--
                                     </td>
-                                </tr>
-                                <tr rowspan="9" *ngIf="notFound === true">
-                                    <td colspan="9" class="text-center">Laboratorio no encontrado</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -230,7 +225,4 @@
             </div>
         </div>
     </div>
-    <h1 *ngIf="notFound === true && showTableLaboratory === false" class="text-center">
-        Laboratorio no encontrado
-    </h1>
 </section>

@@ -134,7 +134,6 @@ export class LaboratoryPacientComponent implements OnInit {
       next: (res: any) => {
         
         this.laboratoryId = id;
-        this.laboratoryView = res.laboratory;
         this.AddlaboratoryView = res.laboratory;
         this.dataLaboratoryComent = res.laboratory.resultado;
         this.dataLaboratoryDiagnostic = res.laboratory.diagnosis;
@@ -142,52 +141,11 @@ export class LaboratoryPacientComponent implements OnInit {
         this.collegiateNumberDoctor = res.laboratory.doctor.collegiateNumber;
         this.phoneDoctor = res.laboratory.doctor.phone;
         this.emailDoctor = res.laboratory.doctor.email;
-        this.laboratories = res.laboratories;
-        
       },
       error: (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: err.error.message || err.error,
-          confirmButtonColor: '#E74C3C'
-        });
+        console.log(err)
       }
     })
-  }
-
-  showTable() {
-    this.showTableLaboratory = !this.showTableLaboratory;
-    for (let laboratory of this.laboratories) {
-      laboratory.checked = true
-    }
-  }
-
-  cleanTable() {
-    this.getLaboratoriesDoctor();
-    this.searchLaboratory = this.reset;
-  }
-
-  showButtonActions(laboratoryID: any, check: any) {
-    this.controloClick += 1
-    let controlCheck = !check.checked
-    if (this.controloClick == 1) {
-      for (let laboratory of this.laboratories) {
-        if (laboratoryID != laboratory._id) {
-          laboratory.checked = !controlCheck
-        }
-        else if (laboratoryID == laboratory._id) {
-          laboratory.checked = controlCheck
-        }
-      }
-    }
-    else if (this.controloClick == 2) {
-      for (let laboratory of this.laboratories) {
-        laboratory.checked = true;
-      }
-      this.controloClick = 0;
-    }
-    this.buttonActions = !this.buttonActions;
-    console.log(this.controloClick)
   }
 
   closeDialog(): void {
