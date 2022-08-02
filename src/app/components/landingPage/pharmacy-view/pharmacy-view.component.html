@@ -96,7 +96,11 @@
                                     <span class="d-block text-muted mb-2"><strong></strong>{{medicament.description}}</span>
                                     <span class="d-block text-muted mb-2"><strong>Tipo de medicamento:</strong> {{medicament.typeMedicament.name}}</span>
 
-                                    <span class="d-block text-muted mb-2"><strong>Availability: </strong> {{avality}} </span>
+                                    <span class="d-block text-muted mb-2"><strong>Disponibilidad: </strong> 
+                                        <span *ngIf="medicament.stock !== 0" style="color: green;" >Disponible </span> 
+
+                                        <span *ngIf="medicament.stock === 0" style="color: red;" >Agotado</span>
+                                    </span>
                                 </div>
 
 
@@ -105,27 +109,27 @@
                                     <!-- End Quantity -->
                                     <div class="product-buttons ml-0 ml-md-3 mt-4 mt-md-0 text-md-left text-center">
                                         <a (click)="pedirLogin()" class="btn btn-rounded btn-soft-primary mr-2"> <i
-                                                class="fa fa-heart"></i> Add To Wishlist</a>
-                                        <a (click)="pedirLogin()" class="btn btn-rounded btn-primary"> <i
-                                                class="fa fa-shopping-cart"></i> Add To Cart</a>
+                                                class="fa fa-heart"></i> Agregar a favoritos </a>
+                                        <a (click)="pedirLogin()" class="btn btn-rounded btn-primary" style="color: #fff;"> <i
+                                                class="fa fa-shopping-cart" style="color: #fff;"></i> Agregar al carrito</a>
                                     </div>
 
                                 </div>
                                 <div class="mb-4 mt-4">
                                     <a (click)="pedirLogin()"
-                                        class="btn btn-block btn-primary btn-pill transition-3d-hover">Comprar ahora</a>
+                                        class="btn btn-block btn-primary btn-pill transition-3d-hover" style="color: #fff;">Comprar ahora</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-5 mt-4 mt-lg-0">
                             <div class="bg-light p-3">
-                                <h6>Delivery Options</h6>
+                                <h6>Opciones de Envio</h6>
                                 <div class="media align-items-center">
                                     <span class="mr-2">
                                         <i class="ti-check text-primary small"></i>
                                     </span>
                                     <div class="media-body text-body small">
-                                        <span class="font-weight-bold mr-1">Free Shipping</span>
+                                        <span class="font-weight-bold mr-1">Envío gratis</span>
                                     </div>
                                 </div>
                                 <div class="media align-items-center">
@@ -133,7 +137,7 @@
                                         <i class="ti-check text-primary small"></i>
                                     </span>
                                     <div class="media-body text-body small">
-                                        <span class="font-weight-bold mr-1"> Cash on Delivery Available</span>
+                                        <span class="font-weight-bold mr-1">Envío seguro</span>
                                     </div>
                                 </div>
                                 <div class="media align-items-center">
@@ -141,7 +145,15 @@
                                         <i class="ti-check text-primary small"></i>
                                     </span>
                                     <div class="media-body text-body small">
-                                        <span class="font-weight-bold mr-1"> 14 days Return</span>
+                                        <span class="font-weight-bold mr-1"> Reembolso disponible</span>
+                                    </div>
+                                </div>
+                                <div class="media align-items-center">
+                                    <span class="mr-2">
+                                        <i class="ti-check text-primary small"></i>
+                                    </span>
+                                    <div class="media-body text-body small">
+                                        <span class="font-weight-bold mr-1"> 14 días de Devolución</span>
                                     </div>
                                 </div>
                             </div>
