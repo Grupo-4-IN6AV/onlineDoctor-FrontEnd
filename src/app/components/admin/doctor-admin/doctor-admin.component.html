@@ -71,8 +71,9 @@
                   <div *ngIf="doctorView" class="modalHeader clearfix">
                     <div class="modal-about contact-header">
                       <div class="contact-details-img">
-                        <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
-                      </div>
+                        <img *ngIf="!doctorImage" src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
+                        <img style="object-fit: cover;" *ngIf="doctorImage" src="{{uri}}" crossorigin="anonymous"
+                          alt="avatar" />                      </div>
                       <div class="contact-details-heading">
                         <div class="contact-details-name mb-2">
                           {{ doctorView.name }} {{doctorView.surname}}
