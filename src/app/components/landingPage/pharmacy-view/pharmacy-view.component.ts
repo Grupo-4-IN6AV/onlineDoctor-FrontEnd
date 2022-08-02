@@ -46,11 +46,6 @@ export class PharmacyViewComponent implements OnInit, DoCheck{
       next: (res: any) => 
       {
         this.medicament = res.medicament
-        if(this.medicament.availibility === true){
-          this.avality = 'En Stock'
-        }else{
-          this.avality = 'No disponible'
-        }
       },
       error: (err) => console.log(err)
     })

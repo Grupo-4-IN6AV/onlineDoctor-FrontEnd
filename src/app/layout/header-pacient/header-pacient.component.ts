@@ -34,6 +34,7 @@ export class HeaderPacientComponent implements OnInit, DoCheck
   shoppingCart:any;
   itemsShoppingCart: number = 0;
   medicaments:any;
+  uriMedicament: any;
 
   public config: any = {};
   isNavbarCollapsed = true;
@@ -54,6 +55,7 @@ export class HeaderPacientComponent implements OnInit, DoCheck
   {
     this.getShoppingCart();
     this.config = this.configService.configData;
+    this.uriMedicament = environment.baseURI+'medicament/getImageMedicament/'
   }
   ngAfterViewInit() {
     // set theme on startup
@@ -175,6 +177,7 @@ export class HeaderPacientComponent implements OnInit, DoCheck
 
   ngDoCheck(): void
   {
+      this.getShoppingCart();
       this.userImage = this.credentialRest.getIdentity().image;
       this.uri = environment.baseURI + 'user/getImageUser/' + this.userImage;
   }

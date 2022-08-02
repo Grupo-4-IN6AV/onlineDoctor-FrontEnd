@@ -20,11 +20,12 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <!-- #START# Notifications-->
-        <li class="nav-item" ngbDropdown>
+        <li *ngIf="itemsShoppingCart!==0" class="nav-item" ngbDropdown>
 
           <button mat-icon-button ngbDropdownToggle class="nav-notification-icons">
               <mat-icon matBadge="{{itemsShoppingCart}}" matBadgeColor="warn">shopping_cart</mat-icon>
-          </button>
+              <mat-icon *ngIf="shoppingCart.length===0" matBadge="0" matBadgeColor="warn">shopping_cart</mat-icon>
+            </button>
 
           <div ngbDropdownMenu class="notification-dropdown pullDown">
             <div class="noti-list" style="position: relative; max-width: 600px; max-height: 250px;" [perfectScrollbar]>
@@ -32,7 +33,8 @@
                 <li>
                   <a href="#" *ngFor="let medicament of medicaments" routerLink="/paciente/shopping-cart">
                     <span class="table-img msg-user">
-                      <img src="" alt="">
+                      <img *ngIf="medicament.medicament.image === undefined" src="../../../assets/images/user/usrbig3.jpg" alt="">
+                      <img *ngIf="medicament.medicament.image !== undefined" src="{{uriMedicament+medicament.medicament.image}}" crossorigin="anonymous" alt="">
                     </span>
                     <span class="menu-info">
                       <span class="menu-title">{{medicament.medicament.name}}</span>
@@ -42,7 +44,7 @@
                       <span class="menu-desc"><!--{{notification.message}}--></span>
                     </span>
                   </a>
-                  <h6 class="text-center" *ngIf="itemsShoppingCart===0"> Carrito de compras vacio.</h6>
+                  <h6 class="text-center mt-2" *ngIf="itemsShoppingCart===0"> Carrito de compras vacio.</h6>
                 </li>
               </ul>
             </div>
@@ -73,12 +75,12 @@
                   <ul class="user_dw_menu">
                     <li>
                       <a routerLink="profile" onClick="return false;">
-                        <mat-icon aria-hidden="false" class="msr-2">person</mat-icon>Profile
+                        <mat-icon aria-hidden="false" class="msr-2">person</mat-icon>Mi Perfil
                       </a>
                     </li>
                     <li>
                       <a (click)="logOut()">
-                        <mat-icon aria-hidden="false" class="msr-2">power_settings_new</mat-icon>Logout
+                        <mat-icon aria-hidden="false" class="msr-2">power_settings_new</mat-icon>Cerrar Sesión
                       </a>
                     </li>
                   </ul>
