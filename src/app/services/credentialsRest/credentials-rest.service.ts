@@ -48,4 +48,16 @@ export class CredentialsRestService
     }
     return identity;
   }
+
+
+  getShoppingCart(){
+    let globalShoppingCart = localStorage.getItem('shoppingCart');
+    let shoppingCart;
+    if(globalShoppingCart != undefined){
+      shoppingCart =  JSON.parse(globalShoppingCart);
+    }else{
+      shoppingCart = '';
+    }
+    return shoppingCart;
+  }
 }

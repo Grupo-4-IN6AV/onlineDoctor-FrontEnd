@@ -27,7 +27,4 @@ export class ShoppingCartRestService {
     return this.http.get(environment.baseURI + 'shoppingCart/getShoppingCart', { headers: this.httpOptions.set('Authorization', this.credentialReset.getToken()) });
   }
 
-  generatePdf(params:{}){
-
-  }
 }

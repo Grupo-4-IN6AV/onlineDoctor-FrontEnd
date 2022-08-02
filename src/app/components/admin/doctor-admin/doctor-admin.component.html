@@ -162,7 +162,7 @@
                   <div *ngIf="doctorView.gender == 'FEMALE'" class="box">
                     <p>Femenino</p>
                   </div>
-                  
+
                   <div class="box">
                     <h3>Especialidad</h3>
                   </div>
@@ -261,7 +261,7 @@
                 <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Especialidad</mat-label>
                   <mat-select [(ngModel)]="doctor.speciality" name="speciality">
-                      <mat-option *ngFor="let speciality of specialities" 
+                      <mat-option *ngFor="let speciality of specialities"
                         value={{speciality._id}}>{{speciality.name}}
                       </mat-option>
                   </mat-select>
@@ -351,7 +351,7 @@
               <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Especialidad</mat-label>
                 <mat-select [(ngModel)]="doctorUpdate.speciality._id" name="speciality">
-                    <mat-option *ngFor="let speciality of specialities" 
+                    <mat-option *ngFor="let speciality of specialities"
                       value={{speciality._id}}>{{speciality.name}}
                     </mat-option>
                 </mat-select>
@@ -382,8 +382,10 @@
                 <div *ngIf="doctorDeleteModal" class="modalHeader clearfix">
                   <div class="modal-about contact-header">
                     <div class="contact-details-img">
-                      <img src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
-                    </div>
+                      <img *ngIf="!doctorImage" src="../../../../assets/images/user/usrbig2.jpg" alt="avatar" />
+                      <img style="object-fit: cover;" *ngIf="doctorImage" src="{{uri}}" crossorigin="anonymous"
+                        alt="avatar" />
+                      </div>
                     <div class="contact-details-heading">
                       <div class="contact-details-name mb-2">
                         {{ doctorDeleteModal.name }}
@@ -552,7 +554,10 @@
                     {{ doctors.indexOf(doctor) + 1 }}
                   </td>
                   <td (click)="getDoctor(doctor._id)" class="table-img">
-                    <img src="assets/images/user/user8.jpg" alt="" />
+                    <img *ngIf="doctor.image===undefined" style="object-fit: cover;" src="assets/images/user/user8.jpg"
+                      crossorigin="anonymous" alt="" />
+                    <img *ngIf="doctor.image!==undefined" style="object-fit: cover;" src="{{uriDoctor+doctor.image}}"
+                      crossorigin="anonymous" alt="" />
                   </td>
                   <td (click)="getDoctor(doctor._id)" data-bs-toggle="modal" data-bs-target="#viewUser">{{ doctor.name
                     }}</td>

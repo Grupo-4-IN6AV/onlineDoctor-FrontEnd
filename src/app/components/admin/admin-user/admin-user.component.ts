@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UserRestService } from 'src/app/services/userRest/user-rest.service';
 import Swal from 'sweetalert2';
 import { UserModel } from 'src/app/models/user.model';
-import { User } from 'src/app/core/models/user';
+import { environment } from 'src/environments/environment';
 interface Food {
   value: string;
   viewValue: string;
@@ -55,11 +55,18 @@ export class AdminUserComponent implements OnInit {
   userCheck: any;
   controloClick: number = 0
 
+  uri:any;
+  uriUser: any;
+  userImage: any;
 
   //METÓDOS DEL CRUD DE USERS//
   getUsers() {
     this.userRest.getUsers().subscribe({
-      next: (res: any) => this.users = res.users,
+      next: (res: any) =>
+      {
+        this.uriUser = environment.baseURI+'user/getImageUser/'
+        this.users = res.users
+      },
       error: (err) => console.log(err)
     })
   }
@@ -96,6 +103,8 @@ export class AdminUserComponent implements OnInit {
         this.userUpdate = res.user;
         this.userDelete = res.user;
         this.userDeleteModal = res.user;
+        this.userImage = res.user.image
+        this.uri = environment.baseURI + 'user/getImageUser/' + this.userImage;
         console.log(this.userView)
       },
       error: (err) => { alert(err.error.message) }

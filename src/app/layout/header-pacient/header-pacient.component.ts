@@ -177,7 +177,8 @@ export class HeaderPacientComponent implements OnInit, DoCheck
 
   ngDoCheck(): void
   {
-      this.getShoppingCart();
+      this.itemsShoppingCart = this.credentialRest.getShoppingCart().medicaments.length
+      this.shoppingCart = this.credentialRest.getShoppingCart()
       this.userImage = this.credentialRest.getIdentity().image;
       this.uri = environment.baseURI + 'user/getImageUser/' + this.userImage;
   }
