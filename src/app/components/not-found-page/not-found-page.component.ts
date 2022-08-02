@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {ScriptsError404Service} from '../../services/cargarScripts/scripts-error404.service'
 
 @Component({
   selector: 'app-not-found-page',
@@ -9,7 +8,7 @@ import {ScriptsError404Service} from '../../services/cargarScripts/scripts-error
 export class NotFoundPageComponent implements OnInit {
 
   constructor(
-  ) { 
+  ) {
   }
 
   ngOnInit(): void {
