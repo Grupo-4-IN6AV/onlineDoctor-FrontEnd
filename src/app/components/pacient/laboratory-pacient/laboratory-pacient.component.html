@@ -81,9 +81,9 @@
                                         </mat-form-field>
                                     </div>
                                 </div>
-    
+
                                 <div class="input-group d-flex" style="margin-top: -1rem;">
-    
+
                                     <div class="text-inside">
                                         <mat-form-field class="ful m-1" appearance="outline">
                                             <mat-label style="color: rgba(34, 34, 34, 0.7);">Numero de Colegiado
@@ -93,7 +93,7 @@
                                                 disabled />
                                         </mat-form-field>
                                     </div>
-    
+
                                     <div class="text-inside">
                                         <mat-form-field class=" m-2" appearance="outline">
                                             <mat-label style="color: rgba(34, 34, 34, 0.7);">Telefono</mat-label>
@@ -102,7 +102,7 @@
                                                 disabled />
                                         </mat-form-field>
                                     </div>
-    
+
                                     <div class="text-inside">
                                         <mat-form-field class=" m-2" appearance="outline">
                                             <mat-label style="color: rgba(34, 34, 34, 0.7);">Correo Electronico
@@ -112,9 +112,9 @@
                                                 disabled />
                                         </mat-form-field>
                                     </div>
-    
+
                                 </div>
-                            
+
                             <form>
                                 <h5
                                     style="margin-bottom: 0px; margin-top: -2.5rem !important ;color: rgba(34, 34, 34, 0.7);;">
@@ -135,7 +135,7 @@
                                     <mat-form-field class=" m-2" appearance="outline">
                                         <mat-label style="color: rgba(34, 34, 34, 0.7);">Diagnostico
                                         </mat-label>
-                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off" 
+                                        <input style="color: rgba(34, 34, 34, 0.7);" autocomplete="off"
                                             value="{{dataLaboratoryDiagnostic}}" name="specifications" matInput
                                             disabled />
                                     </mat-form-field>
@@ -146,7 +146,7 @@
                                 </button>
                             </div>
                             </form>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -164,17 +164,17 @@
                             <ul class="header-buttons-left ml-0">
                                 <li class="dropdown">
                                     <div class="header">
-                                        <h2>Tabla de Recetas</h2>
+                                        <h2>Tabla de Laboratorios</h2>
                                     </div>
                                 </li>
                                 <li class="dropdown m-l-20">
                                     <label for="search-input">
                                         <i class="material-icons search-icon">search</i>
                                     </label>
-                                    <input [(ngModel)]="searchLaboratory" placeholder="Search.." type="text" #filter
+                                    <input [(ngModel)]="searchLaboratory" placeholder="Buscar Laboratorio.." type="text" #filter
                                         class="browser-default search-field" aria-label="Search box" />
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>
@@ -185,7 +185,6 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th>Foto</th>
                                     <th>Paciente</th>
                                     <th>Tipo de Laboratorio</th>
                                     <th>Fecha</th>
@@ -194,16 +193,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let laboratory of laboratories">
+                                <tr *ngFor="let laboratory of laboratories | searchLaboratoryTabla:searchLaboratory">
                                     <td class="text-center">
                                         {{ laboratories.indexOf(laboratory) + 1 }}
                                     </td>
-                                    <td class="table-img">
-                                        <img src="assets/images/user/user8.jpg" alt="" />
-                                    </td>
                                     <td>{{ laboratory.pacient.name }}</td>
                                     <td>{{ laboratory.typeLaboratory.name }}</td>
-                    
+
                                     <td *ngIf="!laboratory.date">No hay fecha</td>
                                     <td *ngIf="laboratory.date">{{newDate[laboratories.indexOf(laboratory)]}}
                                     </td>
@@ -217,6 +213,9 @@
                                     <td *ngIf="!laboratory.doctor" class="text-center" >
                                         --Pendiente--
                                     </td>
+                                </tr>
+                                <tr rowspan="11" *ngIf="notFound === true">
+                                  <td colspan="11" class="text-center">Laboratorio no Encontrado</td>
                                 </tr>
                             </tbody>
                         </table>

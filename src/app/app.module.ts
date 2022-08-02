@@ -122,6 +122,8 @@ import { ProfileDoctorComponent } from './components/doctor/profile-doctor/profi
 import { SearchMedicamentNamePipe } from './pipes/searchMedicamentName/search-medicament-name.pipe';
 import { SearchLaboratoryNamePipe } from './pipes/searchLaboratoryName/search-laboratory-name.pipe';
 import { SearchLaboratoryPrescriptionPipe } from './pipes/searchLaboratoyPrescription/search-laboratory-prescription.pipe';
+import { SearchPharmacyPipe } from './pipes/searchPharmacy/search-pharmacy.pipe';
+import { SearchLaboratoryTablaPipe } from './pipes/searchLaboratoryTabla/search-laboratory-tabla.pipe';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -199,6 +201,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SearchMedicamentNamePipe,
     SearchLaboratoryNamePipe,
     SearchLaboratoryPrescriptionPipe,
+    SearchPharmacyPipe,
+    SearchLaboratoryTablaPipe,
   ],
   imports: [
     FormsModule,

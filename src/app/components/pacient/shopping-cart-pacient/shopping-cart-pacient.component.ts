@@ -29,10 +29,28 @@ export class ShoppingCartPacientComponent implements OnInit {
   userCart:any;
   dataBuy: any;
 
+  invoiceShow: boolean = false
+
+  invoice :  any;
+
   uriMedicament : any;
+
+  date : any;
+  setDate : any;
+
+  uriUser: any;
+  userImage:any
+
+  imprimir()
+  {
+    window.print()
+  }
 
   ngOnInit(): void
   {
+    this.date = new Date().toLocaleString();
+    let splitDate = this.date.split(',')
+    this.setDate = splitDate[0]
     this.getShoppingCart();
     this.uriMedicament = environment.baseURI+'medicament/getImageMedicament/'
   }
@@ -42,10 +60,36 @@ export class ShoppingCartPacientComponent implements OnInit {
     this.shoppingCartRest.getShoppingCart().subscribe({
       next: (res: any) =>
       {
+        this.userImage = res.shoppingCart.user.image
+        this.uriUser = environment.baseURI + 'user/getImageUser/' + this.userImage;
         this.items = res.shoppingCart.medicaments.length
         this.medicamentsCart = res.shoppingCart.medicaments
         this.userCart = res.shoppingCart.user
         this.dataBuy = res.shoppingCart;
+      },
+      error: (err) => {alert(err.error.message)}
+    })
+  }
+
+  showButton()
+  {
+    this.invoiceShow = false
+  }
+
+  payShoppingCart()
+  {
+    this.shoppingCartRest.payShoppingCart().subscribe({
+      next: (res: any) =>
+      {
+        this.invoice = res.invoice;
+        localStorage.removeItem('shoppingCart');
+        this.invoiceShow = true
+        Swal.fire
+            ({
+              icon: 'success',
+              title: res.message,
+              confirmButtonColor: '#28B463'
+            });
       },
       error: (err) => {alert(err.error.message)}
     })

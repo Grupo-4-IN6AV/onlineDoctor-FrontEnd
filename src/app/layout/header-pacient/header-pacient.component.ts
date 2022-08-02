@@ -177,7 +177,6 @@ export class HeaderPacientComponent implements OnInit, DoCheck
 
   ngDoCheck(): void
   {
-      this.itemsShoppingCart = this.credentialRest.getShoppingCart().medicaments.length
       this.shoppingCart = this.credentialRest.getShoppingCart()
       this.userImage = this.credentialRest.getIdentity().image;
       this.uri = environment.baseURI + 'user/getImageUser/' + this.userImage;
@@ -199,6 +198,7 @@ export class HeaderPacientComponent implements OnInit, DoCheck
   logOut()
   {
     localStorage.removeItem('token');
+    localStorage.removeItem('shoppingCart');
     window.location.replace('/')
   }
 

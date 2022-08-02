@@ -20,10 +20,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <!-- #START# Notifications-->
-        <li *ngIf="itemsShoppingCart!==0" class="nav-item" ngbDropdown>
+        <li *ngIf="shoppingCart" class="nav-item" ngbDropdown>
 
           <button mat-icon-button ngbDropdownToggle class="nav-notification-icons">
-              <mat-icon matBadge="{{itemsShoppingCart}}" matBadgeColor="warn">shopping_cart</mat-icon>
+              <mat-icon matBadge="{{shoppingCart.medicaments.length}}" matBadgeColor="warn">shopping_cart</mat-icon>
               <mat-icon *ngIf="shoppingCart.length===0" matBadge="0" matBadgeColor="warn">shopping_cart</mat-icon>
             </button>
 
@@ -34,7 +34,7 @@
                   <a href="#" *ngFor="let medicament of shoppingCart.medicaments" routerLink="/paciente/shopping-cart">
                     <span class="table-img msg-user">
                       <img *ngIf="medicament.image === undefined" src="../../../assets/images/user/usrbig3.jpg" alt="">
-                      <img *ngIf="medicament.image !== undefined" src="{{uriMedicament+medicament.medicament.image}}" crossorigin="anonymous" alt="">
+                      <img *ngIf="medicament.image !== undefined" src="{{uriMedicament+medicament.image}}" crossorigin="anonymous" alt="">
                     </span>
                     <span class="menu-info">
                       <span class="menu-title">{{medicament.name}}</span>
@@ -44,11 +44,11 @@
                       <span class="menu-desc"><!--{{notification.message}}--></span>
                     </span>
                   </a>
-                  <h6 class="text-center mt-2" *ngIf="itemsShoppingCart===0"> Carrito de compras vacio.</h6>
+                  <h6 class="text-center mt-2" *ngIf="shoppingCart.medicaments.length===0"> Carrito de compras vacio.</h6>
                 </li>
               </ul>
             </div>
-            <a *ngIf="itemsShoppingCart!==0" class="text-center d-block border-top py-1" routerLink="/paciente/shopping-cart">Todos los detalles...
+            <a *ngIf="shoppingCart.medicaments.lenth!==0" class="text-center d-block border-top py-1" routerLink="shopping-cart">Todos los detalles...
             </a>
           </div>
         </li>
