@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           title: res.message,
-          html: 'Welcome <b>' + res.userExist.username + '</b>',
+          html: 'Bienvenido <b>' + res.userExist.username + '</b>',
           confirmButtonColor: '#28B463'
         })
 

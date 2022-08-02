@@ -47,7 +47,7 @@ DRIBBBLE: https://dribbble.com/shots/4330167-404-Page-Lost-In-Space
 }
 
 .spin-earth-on-hover{
-    
+
     transition: ease 200s !important;
     transform: rotate(-3600deg) !important;
 }
@@ -71,7 +71,7 @@ html, body{
     background-position: left top;
     height: 100%;
     overflow: hidden;
-    
+
 }
 
 .custom-navbar{
@@ -86,11 +86,10 @@ html, body{
 
 .navbar-links{
     display: inline-block;
-    float: right;
     margin-right: 15px;
     text-transform: uppercase;
-    
-    
+
+
 }
 
 ul {
@@ -98,8 +97,8 @@ ul {
     margin: 0;
     padding: 0;
 /*    overflow: hidden;*/
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
 }
 
 li {
@@ -114,7 +113,7 @@ li a {
     text-decoration: none;
     letter-spacing : 2px;
     font-size: 12px;
-    
+
     -webkit-transition: all 0.3s ease-in;
     -moz-transition: all 0.3s ease-in;
     -ms-transition: all 0.3s ease-in;
@@ -154,7 +153,7 @@ li a:hover {
     text-decoration: none;
     letter-spacing : 2px;
     font-size: 11px;
-    
+
     -webkit-transition: all 0.3s ease-in;
     -moz-transition: all 0.3s ease-in;
     -ms-transition: all 0.3s ease-in;
@@ -276,19 +275,19 @@ li a:hover {
     .navbar-links{
         display: none;
     }
-    
+
     .custom-navbar{
         text-align: center;
     }
-    
+
     .brand-logo img{
         width: 120px;
     }
-    
+
     .box_astronaut{
         top: 70%;
     }
-    
+
     .central-body{
         padding-top: 25%;
     }

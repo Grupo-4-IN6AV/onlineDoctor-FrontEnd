@@ -1,6 +1,6 @@
 <section class="content">
-    <!--TÍTULO DEL COMPONENTE-->
-<div class="head-title">
+  <!--TÍTULO DEL COMPONENTE-->
+  <div class="head-title">
     <div class="left">
       <h1>
         &nbsp;<i class="fa fa-file" aria-hidden="true"></i> Details Sale
@@ -8,30 +8,39 @@
       <hr>
     </div>
   </div>
-  
+
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
         <div class="card">
           <div class="card-body p-4">
-  
+
             <div class="row">
-  
+
               <div class="col-lg-7">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <div>
-                    <p class="mb-1">Shopping cart</p>
-                    <p class="mb-0">You have {{quantityMedicaments}} items in your cart</p>
+                    <p class="mb-1">Carrito de Compras</p>
+                    <p class="mb-0">Tienes {{items}} medicamentos en tu carrito.</p>
                   </div>
                 </div>
-  
-                <div *ngFor="let medicament of medicaments" class="card mb-3">
+
+                <div style="background-color: #e5e5e5e5;" *ngFor="let medicament of medicamentsCart" class="card mb-3">
                   <div class="card-body">
                     <div class="d-flex justify-content-between">
                       <div class="d-flex flex-row align-items-center">
+                        <div>
+                          <img *ngIf="medicament.medicament.image===undefined"
+                            src="../../../../assets/images/usrbig.jpg" class="img-fluid rounded-3" alt="Shopping item"
+                            style="width: 65px;">
+                          <img *ngIf="medicament.medicament.image!==undefined"
+                            src="{{uriMedicament+medicament.medicament.image}}" class="img-fluid rounded-3"
+                            alt="Shopping item" style="width: 65px;  height: 65px; object-fit: cover;"
+                            crossorigin="anonymous">
+                        </div>
                         <div class="ms-3">
-                          <h5>{{medicaments.medicament.name}}</h5>
-                          <p class="small mb-0">{{medicaments.medicament.description}}</p>
+                          <h5>{{medicament.medicament.name}}</h5>
+                          <p class="small mb-0">{{medicament.quantity}} unidades.</p>
                         </div>
                       </div>
                       <div class="d-flex flex-row align-items-center">
@@ -39,64 +48,71 @@
                           <h5 class="fw-normal mb-0">{{medicament.quantity}}</h5>
                         </div>
                         <div style="width: 80px;">
-                          <h5 class="mb-0">Q.{{medicament.price}}</h5>
+                          <h5 class="mb-0">Q.{{medicament.price.toFixed(2)}}</h5>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-  
+
               <div class="col-lg-5">
-  
+
                 <div class="card colorDetails text-white rounded-3">
                   <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                      <h5 class="mb-0">Sale Details</h5>
-                      <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" class="img-fluid rounded-3"
-                        style="width: 45px;" alt="Avatar">
+                      <h5 class="mb-0">Detalles de tu Compra</h5>
+                      <img src="../../../../assets/images/usrbig.jpg" class="img-fluid rounded-3" style="width: 45px;"
+                        alt="Avatar">
                     </div>
-  
+
                     <form class="mt-4">
                       <div class="form-outline form-white mb-4">
-                        <input [(ngModel)]="dataClient.patient" name="clientName" disabled type="text" id="typeName" class="form-control form-control-lg" siez="17">
-                        <label class="form-label" for="typeName">Client Name:</label>
+                        <input [(ngModel)]="userCart.name" name="clientName" disabled type="text" id="typeName"
+                          class="form-control form-control-lg" siez="17">
+                        <label class="form-label" for="typeName">Nombre:</label>
                       </div>
-  
+
                       <div class="form-outline form-white mb-4">
-                        <input [(ngModel)]="dataClient.dpi" name="clientDPI" disabled type="text" id="typeName" class="form-control form-control-lg" siez="17">
+                        <input *ngIf="!userCart.DPI" value="-Sin DPI-" name="clientDPI" disabled type="text"
+                          id="typeName" class="form-control form-control-lg" siez="17">
+                        <input *ngIf="userCart.DPI" [(ngModel)]="userCart.DPI" name="clientDPI" disabled type="text"
+                          id="typeName" class="form-control form-control-lg" siez="17">
                         <label class="form-label" for="typeText">DPI:</label>
                       </div>
-  
+
                       <div class="form-outline form-white mb-4">
-                        <input [(ngModel)]="dataClient.NIT" name="clientNIT" disabled type="text" id="typeName" class="form-control form-control-lg" siez="17">
+                        <input [(ngModel)]="userCart.NIT" name="clientNIT" disabled type="text" id="typeName"
+                          class="form-control form-control-lg" siez="17">
                         <label class="form-label" for="typeText">NIT:</label>
                       </div>
                     </form>
-  
+
                     <hr class="my-4">
-  
+
                     <div class="d-flex justify-content-between">
                       <p class="mb-2">SubTotal</p>
-                      <p class="mb-2">Q.{{dataClient.subTotal.toFixed(2)}}</p>
+                      <p class="mb-2">Q.{{dataBuy.subTotal.toFixed(2)}}</p>
                     </div>
-  
+
                     <div class="d-flex justify-content-between">
                       <p class="mb-2">IVA</p>
-                      <p class="mb-2">Q.{{dataClient.IVA.toFixed(2)}}</p>
+                      <p class="mb-2">Q.{{dataBuy.IVA.toFixed(2)}}</p>
                     </div>
-  
+
                     <div class="d-flex justify-content-between mb-4">
-                      <p class="mb-2">Total</p>
-                      <p class="mb-2">Q.{{dataClient.total.toFixed(2)}}</p>
+                      <p class="mb-2"><b>Total</b></p>
+                      <p class="mb-2"><b>Q.{{dataBuy.total.toFixed(2)}}</b></p>
                     </div>
-  
-                    <button class="btn btn-primary btn-icon-split">
-                      <span class="icon">
-                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                      </span>
-                      <span class="text">Generate Bill</span>
-                  </button>
+
+                    <div class="d-flex" style="justify-content: center">
+                      <button style="background-color: orange" class="btn btn-icon-split">
+                        <span class="icon">
+                          <i class="fa fa-file" aria-hidden="true"></i>
+                        </span>
+                        <span class="text">Generate Bill</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
